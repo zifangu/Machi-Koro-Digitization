@@ -4,5 +4,9 @@ package edu.wofford.machiwoco;
 ////            "color": "blue",
 ////            "icon": "wheat",
 public class Card {
+     String name;
+     int cost;
+     public enum color {BLUE, GREEN, PURPLE, RED};
+     enum icon {WHEAT, COW, BREAD};
 
 }
