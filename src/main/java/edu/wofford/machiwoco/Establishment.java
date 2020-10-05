@@ -2,17 +2,19 @@ package edu.wofford.machiwoco;
 
 //      "name": "Wheat Field",
 //            "cost": 1,
-//            "color": "blue",
-//            "icon": "wheat",
+//            "color": "blue", green purple red
+//            "icon": "wheat", cow bread
 //            "activation": "1",
 //            "effect": {
-//                "type": "receive",
-//                "target": "bank",
+//                "type": "receive", "exchange"
+//                "target": "bank", "active" "others" "choice" "exchange"
 //                "amount": 1,
-//                "modifierType": "none",
-//                "modifier": "none"
+//                "modifierType": "none", "icon"
+//                "modifier": "none"  wheat gear cow
 //
-public abstract class Establishment implements Card {
+public class Establishment extends Card {
+
+
     public Establishment() {
        System.out.println("Team Beast");
     }

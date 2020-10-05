@@ -3,6 +3,6 @@ package edu.wofford.machiwoco;
 ////            "cost": 1,
 ////            "color": "blue",
 ////            "icon": "wheat",
-public interface Card {
+public class Card {
 
 }
