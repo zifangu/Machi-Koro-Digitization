@@ -14,7 +14,7 @@ package edu.wofford.machiwoco;
 //
 public class Establishment extends Card {
 
-
+//
     public Establishment() {
        System.out.println("Team Beast");
     }
