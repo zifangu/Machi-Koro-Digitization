@@ -1,0 +1,101 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:6.0.0'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'jacoco'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+
+repositories {
+    jcenter()
+}
+
+project.ext {
+    javaVersion = '1.8'
+    junitVersion = '4.13'
+    cucumberVersion = '6.3.0'
+}
+
+compileJava {
+    targetCompatibility = javaVersion
+    sourceCompatibility = javaVersion
+}
+
+dependencies {
+    implementation 'org.glassfish:javax.json:1.1.2'
+    compileOnly 'org.apache.logging.log4j:log4j-api:2.11.0'
+    compileOnly 'org.apache.logging.log4j:log4j-core:2.11.0'
+    implementation 'info.picocli:picocli:4.5.0'
+    testImplementation 'junit:junit:' + junitVersion
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation 'org.mockito:mockito-core:1.+'
+    testImplementation 'io.cucumber:cucumber-java:' + cucumberVersion
+    testImplementation 'io.cucumber:cucumber-junit:' + cucumberVersion
+}
+
+jacocoTestReport {
+    reports {
+        html {
+            enabled true
+        }
+    }
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--plugin', 'html:build/reports/cucumber/index.html', '--glue', 'gradle.cucumber', 'src/test/resources']
+        }
+    }
+}
+
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ['-proc:none', '-Xlint:unchecked', '-Xlint:deprecation']
+}
+
+mainClassName = "edu.wofford.machiwoco.MachiWoCo"
+
+jar {
+    archiveBaseName = "machiwoco"
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
+
+shadowJar {
+   archiveBaseName = 'machiwoco'
+   classifier = ''
+   archiveVersion = ''
+}
+
+javadoc {
+    options.with {
+        links 'https://docs.oracle.com/javase/8/docs/api/'
+    }
+}
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
