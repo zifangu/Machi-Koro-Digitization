@@ -8,7 +8,7 @@ public class Card {
      int cost;
      public enum Color {BLUE, GREEN, PURPLE, RED, NONE};
      public enum Color_ab {B, G, P, R, N};
-     enum Icon {WHEAT, COW, BREAD};
+     enum Icon {WHEAT, COW, BREAD, GEAR, FACTORY, FRUITO, CUPU, TOWER};
      enum Icon_ab{W, B, C, G, F, O, U, T};
      String description;
 

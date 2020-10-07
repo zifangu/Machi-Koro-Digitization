@@ -24,10 +24,12 @@ public class Establishment extends Card {
 
     @Override
     public String toString() {
-        return "Establishment{" +
-                "is_constructed=" + is_constructed +
-                ", color=" + color +
-                ", icon=" + icon +
+        return ".-----------------------.\n"+
+                "| <" + color + ">   LANDMARK    {" +
+                icon + "} |" +
+                ", name='" + name + '\'' +
+                ", cost=" + cost +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
