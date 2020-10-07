@@ -6,7 +6,8 @@ package edu.wofford.machiwoco;
 public class Card {
      String name;
      int cost;
-     public enum color {BLUE, GREEN, PURPLE, RED};
-     enum icon {WHEAT, COW, BREAD};
+     public enum Color {BLUE, GREEN, PURPLE, RED, NONE};
+     enum Icon {WHEAT, COW, BREAD};
+     String description;
 
 }
