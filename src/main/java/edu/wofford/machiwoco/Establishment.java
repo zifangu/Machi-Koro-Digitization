@@ -13,10 +13,21 @@ package edu.wofford.machiwoco;
 //                "modifier": "none"  wheat gear cow
 //
 public class Establishment extends Card {
-
 //
     public Establishment() {
-       System.out.println("Team Beast");
+       super();
+        System.out.println("Team Beast");
     }
+    protected boolean is_constructed;
+    protected Color color;
+    protected Icon icon;
 
+    @Override
+    public String toString() {
+        return "Establishment{" +
+                "is_constructed=" + is_constructed +
+                ", color=" + color +
+                ", icon=" + icon +
+                '}';
+    }
 }
