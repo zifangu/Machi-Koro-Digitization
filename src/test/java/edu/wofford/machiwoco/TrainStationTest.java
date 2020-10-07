@@ -22,6 +22,21 @@ public class TrainStationTest {
     @Test
     public void  testTrainStation() {
         assertThat(t.name, is("Train Station"));
+        assertThat(t.cost, is(4));
+    }
+
+
+    @Test
+    public void  testToString() {
+        assertThat(t.toString(), is(".-----------------------.\n" +
+                "| <N>   LANDMARK    {T} |\n" +
+                "|     Train Station     |\n" +
+                "|                       |\n" +
+                "|  You may roll 1 or 2  |\n" +
+                "|         dice.         |\n" +
+                "|                       |\n" +
+                "| (4)               [ ] |\n" +
+                "|_______________________|"));
     }
 
 }
