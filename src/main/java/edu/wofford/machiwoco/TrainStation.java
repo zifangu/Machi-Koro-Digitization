@@ -8,10 +8,13 @@ public class TrainStation extends Landmark {
         cost = 4;
         description = "You may roll 1 or 2 dice.";
         is_constructed = false;
-        color = Color.NONE;
+        color_ab = Color_ab.N;
+        icon_ab = Icon_ab.T;
 
     }
     public static void main(String[] args) {
+        System.out.println("Hi");
+
         TrainStation t = new TrainStation();
         System.out.println(t.toString());
     }
