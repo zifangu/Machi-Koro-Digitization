@@ -18,7 +18,7 @@ public class LandmarkTest {
 
     @Before
     public void before() {
-        l = new Landmark();
+        l = new Landmark("Test", 1, Card.Color.BLUE, Card.Icon.FRUITO, "Test");
     }
 
     @Test
