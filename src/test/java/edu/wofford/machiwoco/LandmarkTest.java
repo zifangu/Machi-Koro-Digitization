@@ -9,8 +9,8 @@ import static org.hamcrest.Matchers.is;
 
 public class LandmarkTest {
 
-
     Landmark l;
+    Landmark trainStation;
     @Test
     public void testSomething() {
         assertThat(1, is(1));
@@ -19,6 +19,13 @@ public class LandmarkTest {
     @Before
     public void before() {
         l = new Landmark("Test", 1, Card.Color.BLUE, Card.Icon.FRUITO, "Test");
+
+        // trainStation creation
+        trainStation = new Landmark("Train Station", 4, Card.Color.NONE, Card.Icon.TOWER,
+                "|  You may roll 1 or 2  |\n" +
+                "|         dice.         |\n");
+        trainStation.color_ab = Card.Color_ab.N;
+        trainStation.icon_ab = Card.Icon_ab.T;
     }
 
     @Test
@@ -28,11 +35,27 @@ public class LandmarkTest {
     }
 
     @Test
-    public void testGenerateBlocks() {
-        String[] s = new String[2];
-        s[0] = "You may roll 1 or 2";
-        s[1] = "dice.";
-        assertThat(l.generate_blocks("You may roll 1 or 2 "),
-                is(s));
+    public void testTrainStationToString() {
+        assertThat(trainStation.toString(), is(".-----------------------.\n" +
+                "| <N>   LANDMARK    {T} |\n" +
+                "|     Train Station     |\n" +
+                "|                       |\n" +
+                "|  You may roll 1 or 2  |\n" +
+                "|         dice.         |\n" +
+                "|                       |\n" +
+                "| (4)               [ ] |\n" +
+                "|_______________________|"));
     }
+
+
+
+
+//    @Test
+//    public void testGenerateBlocks() {
+//        String[] s = new String[2];
+//        s[0] = "You may roll 1 or 2";
+//        s[1] = "dice.";
+//        assertThat(l.generate_blocks("You may roll 1 or 2 "),
+//                is(s));
+//    }
 }

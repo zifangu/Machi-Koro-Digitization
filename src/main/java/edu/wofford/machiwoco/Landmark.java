@@ -102,23 +102,37 @@ public class Landmark extends Card{
         String right_align = "%";
         */
     }
+    public String isConstructed(boolean is_constructed) {
+        if (is_constructed) {return "X";}
+        return " ";
+    }
+
     @Override
     public String toString() {
         // need to replace with string format method
 
-
         return ".-----------------------.\n"+
-                "| <" + color_ab + ">   LANDMARK    {" +
-                icon_ab + "} |\n" +
-                generateLine(name) +
-                generateLine(" ") + name + '\'' +
-                ", cost=" + cost +
-                ", description='" + description + '\'' +
-                '}';
+                "| <" + color_ab + ">   LANDMARK    {" + icon_ab + "} |\n" +
+                generate_single_line(name) +
+                generate_single_line(" ") +
+                description +
+                generate_single_line(" ") +
+                "| (" + cost + ")               [" + isConstructed(is_constructed) + "] |\n" +
+                "|_______________________|";
     }
 
     public static void main(String[] args) {
-        Landmark l = new Landmark("Test", 1, Card.Color.BLUE, Card.Icon.FRUITO, "Test");
-        System.out.println(l.toString());
+//        Landmark l = new Landmark("Test", 1, Card.Color.BLUE, Card.Icon.FRUITO, "Test");
+//        System.out.println(l.toString());
+
+        //**********Landmark train station creation************//
+        Landmark trainStation;
+        trainStation = new Landmark("Train Station", 4, Card.Color.NONE, Card.Icon.TOWER,
+                "|  You may roll 1 or 2  |\n" +
+                        "|         dice.         |\n");
+        trainStation.color_ab = Card.Color_ab.N;
+        trainStation.icon_ab = Card.Icon_ab.T;
+        System.out.println(trainStation.toString());
+
     }
 }
