@@ -4,22 +4,25 @@ package edu.wofford.machiwoco;
 ////            "color": "blue",
 ////            "icon": "wheat",
 public class Card {
+     //Initial Enums For Color and Icons
      protected enum Color {BLUE, GREEN, PURPLE, RED, NONE};
      protected enum Color_ab {B, G, P, R, N};
      protected enum Icon {WHEAT, COW, BREAD, GEAR, FACTORY, FRUITO, CUPU, TOWER};
      protected enum Icon_ab{W, B, C, G, F, O, U, T};
 
-     protected String description;
+     //Default Variables for Each Card
      protected String name;
      protected Color color;
      protected int cost;
      protected Icon icon;
+     protected String description;
 
-     public Card(String name, Color color, int cost, Icon icon) {
+     public Card(String name, int cost, Color color, Icon icon, String description) {
           this.name = name;
           this.color = color;
           this.cost = cost;
           this.icon = icon;
+          this.description = description;
      }
 
      public String getName() {

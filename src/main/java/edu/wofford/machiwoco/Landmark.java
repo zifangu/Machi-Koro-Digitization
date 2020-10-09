@@ -6,8 +6,8 @@ import java.lang.*;
 import java.io.*;
 
 public class Landmark extends Card{
-    public Landmark() {
-        super();
+    public Landmark(String name, int cost, Color color, Icon icon, String description) {
+        super(name,cost, color, icon, description);
         System.out.println("Team Beast");
     }
 
@@ -118,7 +118,7 @@ public class Landmark extends Card{
     }
 
     public static void main(String[] args) {
-        Landmark l = new Landmark();
+        Landmark l = new Landmark("Test", 1, Card.Color.BLUE, Card.Icon.FRUITO, "Test");
         System.out.println(l.toString());
     }
 }
