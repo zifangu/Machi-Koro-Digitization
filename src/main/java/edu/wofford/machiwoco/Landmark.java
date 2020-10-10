@@ -41,12 +41,13 @@ public class Landmark extends Card{
         this.icon_ab = icon_ab;
     }
 
-    //  return strings to be used in generateLine()
+    //  return strings to be used in toString()
     public String generate_single_line(String s) {
         String str = StringUtils.center(s, 21, " ");
         return "| " + str + " |\n";
     }
 
+    // ************ Saved for later. Do NOT delete. **************** //
     public String[] generate_blocks(String s) {
         int len = s.length();
         System.out.println("slen: " + len);
@@ -71,54 +72,37 @@ public class Landmark extends Card{
         return stringsToProcess;
     }
 
-    //  return strings to be used in toString()
-    public String generateLine(String s) {
-        int len = s.length();
-        System.out.println("slen: " + len);
-
-        // determines how many lines to print out
-        // if s is longer than 23 char
-        int new_lines = len / 23 + 1;
-        for (int i = 0; i < new_lines; i++) {
-//            this will be a multiline string
-            if (new_lines > 1) {
-                for (int j = 20; j > 0; j--) {
-// TODO
-                        if (s.charAt(j) == ' ') {
-
-                        }
-                    int k = 0;
-                }
-            } else {
-                System.out.println("ppp");
-            }
-        }
-        return "";
-
-        /*
-        int len = s.length();
-        int left_space = s.length() / 2;
-        String left_align = "|%-" + Integer.toString(left_space / 2) + "s";
-        String right_align = "%";
-        */
+    public String isConstructed(boolean is_constructed) {
+        if (is_constructed) {return "X";}
+        return " ";
     }
+
     @Override
     public String toString() {
         // need to replace with string format method
 
-
         return ".-----------------------.\n"+
-                "| <" + color_ab + ">   LANDMARK    {" +
-                icon_ab + "} |\n" +
-                generateLine(name) +
-                generateLine(" ") + name + '\'' +
-                ", cost=" + cost +
-                ", description='" + description + '\'' +
-                '}';
+                "| <" + color_ab + ">   LANDMARK    {" + icon_ab + "} |\n" +
+                generate_single_line(name) +
+                generate_single_line(" ") +
+                description +
+                generate_single_line(" ") +
+                "| (" + cost + ")               [" + isConstructed(is_constructed) + "] |\n" +
+                "|_______________________|";
     }
 
     public static void main(String[] args) {
-        Landmark l = new Landmark("Test", 1, Card.Color.BLUE, Card.Icon.FRUITO, "Test");
-        System.out.println(l.toString());
+//        Landmark l = new Landmark("Test", 1, Card.Color.BLUE, Card.Icon.FRUITO, "Test");
+//        System.out.println(l.toString());
+
+        //**********Landmark train station creation************//
+        Landmark trainStation;
+        trainStation = new Landmark("Train Station", 4, Card.Color.NONE, Card.Icon.TOWER,
+                "|  You may roll 1 or 2  |\n" +
+                        "|         dice.         |\n");
+        trainStation.color_ab = Card.Color_ab.N;
+        trainStation.icon_ab = Card.Icon_ab.T;
+        System.out.println(trainStation.toString());
+
     }
 }
