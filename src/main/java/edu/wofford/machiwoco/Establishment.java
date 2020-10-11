@@ -1,5 +1,7 @@
 package edu.wofford.machiwoco;
 
+import org.apache.commons.lang3.StringUtils;
+
 //      "name": "Wheat Field",
 //            "cost": 1,
 //            "color": "blue", green purple red
@@ -106,15 +108,26 @@ public class Establishment extends Card {
 
     protected boolean is_constructed;
 
+    public String generateActivationString() {
+            String act = "[" + activation + "]";
+            return StringUtils.center(act, 15, " ");
+    }
+
+    public String generateCostString() {
+        String act = "(" + Integer.toString(cost) + ")";
+        return StringUtils.rightPad(act, 22, " ");
+    }
+
     @Override
     public String toString() {
-        return ".-----------------------.\n"+
-                "| <" + color + ">   LANDMARK    {" +
-                icon + "} |" +
-                ", name='" + name + '\'' +
-                ", cost=" + cost +
-                ", description='" + description + '\'' +
-                '}';
+       return ".-----------------------.\n"+
+        "| <" + color_ab + ">" + generateActivationString() + "{" + icon_ab + "} |\n" +
+        generate_single_line(name) +
+        generate_single_line(" ") +
+        description +
+        generate_single_line(" ") +
+        "| " + generateCostString() + "|\n" +
+               "|_______________________|";
     }
 
 
@@ -137,7 +150,7 @@ public class Establishment extends Card {
         Establishment bakery = new Establishment("Bakery", 1, Color.GREEN, Icon.BREAD,
                 "|  Get 1 coin from the  |\n" +
                           "|         bank.         |\n" +
-                          "|   (your turn only)    |",
+                          "|   (your turn only)    |\n",
                 "2-3", "receive", "bank", 1, "none", "none");
 
 
@@ -169,7 +182,7 @@ public class Establishment extends Card {
                 6, Color.PURPLE, Icon.TOWER,
                 "|   Take 2 coins from   |\n" +
                           "|    each opponent.     |\n" +
-                          "|   (your turn only)    |",
+                          "|   (your turn only)    |\n",
                 "6", "receive", "others", 2, "none", "none");
 
         Establishment tv = new Establishment("TV Station",
@@ -229,6 +242,7 @@ public class Establishment extends Card {
                           "|   (your turn only)    |",
                 "11-12", "receive", "bank", 2, "icon", "wheat");
 
+        /*
         System.out.println(wheat.getDescription() + "\n");
         System.out.println(ranch.getDescription()+ "\n");
         System.out.println(bakery.getDescription()+ "\n");
@@ -244,6 +258,17 @@ public class Establishment extends Card {
         System.out.println(restaurant.getDescription()+ "\n");
         System.out.println(orchard.getDescription()+ "\n");
         System.out.println(market.getDescription()+ "\n");
+
+         */
+        bakery.color_ab = Card.Color_ab.G;
+        bakery.icon_ab = Card.Icon_ab.B;
+        System.out.println(bakery.toString()+ "\n");
+
+        stadium.color_ab = Card.Color_ab.P;
+        stadium.icon_ab = Card.Icon_ab.T;
+        System.out.println(stadium.toString()+ "\n");
+
+
 
 
     }

@@ -14,8 +14,7 @@ public class Landmark extends Card{
 //    used by landmark sub classes to determine if a landmark is constructed or not
     protected boolean is_constructed;
     protected  Color color;
-    protected Color_ab color_ab;
-    protected  Icon_ab icon_ab;
+
 
     public Color getColor() {
         return color;
@@ -41,11 +40,7 @@ public class Landmark extends Card{
         this.icon_ab = icon_ab;
     }
 
-    //  return strings to be used in toString()
-    public String generate_single_line(String s) {
-        String str = StringUtils.center(s, 21, " ");
-        return "| " + str + " |\n";
-    }
+
 
     // ************ Saved for later. Do NOT delete. **************** //
     public String[] generate_blocks(String s) {

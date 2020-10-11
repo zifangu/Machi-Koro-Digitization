@@ -1,4 +1,7 @@
 package edu.wofford.machiwoco;
+
+import org.apache.commons.lang3.StringUtils;
+
 //"name": "Wheat Field",
 ////            "cost": 1,
 ////            "color": "blue",
@@ -16,6 +19,8 @@ public class Card {
      protected int cost;
      protected Icon icon;
      protected String description;
+     protected Color_ab color_ab;
+     protected  Icon_ab icon_ab;
 
      public Card(String name, int cost, Color color, Icon icon, String description) {
           this.name = name;
@@ -55,6 +60,12 @@ public class Card {
 
      public void setDescription(String description) {
           this.description = description;
+     }
+
+     //  return strings to be used in toString()
+     public String generate_single_line(String s) {
+          String str = StringUtils.center(s, 21, " ");
+          return "| " + str + " |\n";
      }
 
 
