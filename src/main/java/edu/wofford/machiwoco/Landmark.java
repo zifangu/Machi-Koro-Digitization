@@ -8,7 +8,7 @@ import java.io.*;
 public class Landmark extends Card{
     public Landmark(String name, int cost, Color color, Icon icon, String description) {
         super(name,cost, color, icon, description);
-        System.out.println("Team Beast");
+        //System.out.println("Team Beast");
     }
 
 //    used by landmark sub classes to determine if a landmark is constructed or not
@@ -81,14 +81,25 @@ public class Landmark extends Card{
     public String toString() {
         // need to replace with string format method
 
-        return ".-----------------------.\n"+
-                "| <" + color_ab + ">   LANDMARK    {" + icon_ab + "} |\n" +
-                generate_single_line(name) +
-                generate_single_line(" ") +
-                description +
-                generate_single_line(" ") +
-                "| (" + cost + ")               [" + isConstructed(is_constructed) + "] |\n" +
-                "|_______________________|";
+        if (cost < 10) {
+            return ".-----------------------.\n"+
+                    "| <" + color_ab + ">   LANDMARK    {" + icon_ab + "} |\n" +
+                    generate_single_line(name) +
+                    generate_single_line(" ") +
+                    description +
+                    generate_single_line(" ") +
+                    "| (" + cost + ")               [" + isConstructed(is_constructed) + "] |\n" +
+                    "|_______________________|";
+        } else {
+            return ".-----------------------.\n"+
+                    "| <" + color_ab + ">   LANDMARK    {" + icon_ab + "} |\n" +
+                    generate_single_line(name) +
+                    generate_single_line(" ") +
+                    description +
+                    generate_single_line(" ") +
+                    "| (" + cost + ")              [" + isConstructed(is_constructed) + "] |\n" +
+                    "|_______________________|";
+        }
     }
 
     public static void main(String[] args) {
@@ -103,6 +114,36 @@ public class Landmark extends Card{
         trainStation.color_ab = Card.Color_ab.N;
         trainStation.icon_ab = Card.Icon_ab.T;
         System.out.println(trainStation.toString());
+
+        //**********Landmark shopping mall creation************//
+        Landmark shoppingMall;
+        shoppingMall = new Landmark("Shopping Mall", 10, Card.Color.NONE, Card.Icon.TOWER,
+                "|   Your {U} and {B}    |\n" +
+                        "|  establishments earn  |\n" + 
+                            "|     +1 coin when      |\n" +
+                                "|      activated.       |\n");
+        shoppingMall.color_ab = Card.Color_ab.N;
+        shoppingMall.icon_ab = Card.Icon_ab.T;
+        System.out.println(shoppingMall.toString());
+
+        //**********Landmark amusement park creation************//
+        Landmark amusementPark;
+        amusementPark = new Landmark("Amusement Park", 16, Card.Color.NONE, Card.Icon.TOWER,
+                "| If you roll doubles,  |\n" +
+                        "|   take another turn   |\n" + 
+                            "|    after this one.    |\n");
+        amusementPark.color_ab = Card.Color_ab.N;
+        amusementPark.icon_ab = Card.Icon_ab.T;
+        System.out.println(amusementPark.toString());
+
+        //**********Landmark radio tower creation************//
+        Landmark radioTower;
+        radioTower = new Landmark("Radio Tower", 22, Card.Color.NONE, Card.Icon.TOWER,
+                "|  Once per turn, you   |\n" +
+                        "| may reroll the dice.  |\n");
+        radioTower.color_ab = Card.Color_ab.N;
+        radioTower.icon_ab = Card.Icon_ab.T;
+        System.out.println(radioTower.toString());
 
     }
 }
