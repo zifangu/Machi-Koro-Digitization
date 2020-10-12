@@ -14,21 +14,50 @@ import org.apache.commons.lang3.StringUtils;
 //                "modifierType": "none", "icon"
 //                "modifier": "none"  wheat gear cow
 //
+
+/** 
+ * This is a class built to represent all establishment cards.
+ * 
+ * @author Eric Craft
+ * @author Ivan Gu
+ * @author Bennett Joyce
+ */
+
 public class Establishment extends Card {
 
     private Color_ab color_ab;
+
+    /**
+      * Gets the establishment card's abbreviated color value
+      * @return an <code> enumeration value </code> specifying the card's abbreviated color value
+      */
 
     public Color_ab getColor_ab() {
         return color_ab;
     }
 
+    /**
+      * Sets the establishment card's color abbreviation
+      * @param color_ab the card's color abbreviation
+      */
+
     public void setColor_ab(Color_ab color_ab) {
         this.color_ab = color_ab;
     }
 
+    /**
+      * Gets the establishment card's abbreviated icon value
+      * @return an <code> enumeration value </code> specifying the card's abbreviated icon value
+      */
+
     public Icon_ab getIcon_ab() {
         return icon_ab;
     }
+
+    /**
+      * Sets the establishment card's icon abbreviation
+      * @param icon_ab the card's icon abbreviation
+      */
 
     public void setIcon_ab(Icon_ab icon_ab) {
         this.icon_ab = icon_ab;
@@ -42,7 +71,16 @@ public class Establishment extends Card {
     private String modifierType;
     private String modifier;
 
-    //Default Constructor
+    /**
+     * Establishment card constructor utilizing the extension of the Card class
+     * @param name is the name of the establishment card itself
+     * @param cost is a 1-2 digit number representing the cost of the card
+     * @param color is the color of the card in enumeration form
+     * @param icon is the icon on the card in enumeration form
+     * @param description is the action description of the card
+     * @param activation is the activtion range of the card
+     */
+
     public Establishment(String name,
                          int cost,
                          Color color,
@@ -52,6 +90,23 @@ public class Establishment extends Card {
         super(name, cost, color, icon, description);
         this.activation = activation;
     }
+
+    /** 
+     * Establishment card constructor
+     * @param name is the name of the establishment card itself
+     * @param cost is a 1-2 digit number representing the cost of the card
+     * @param color is the color of the card in enumeration form
+     * @param color_ab is the abbreviated version of the card's color in enumeration form
+     * @param icon is the icon on the card in enumeration form
+     * @param icon_ab is the abbreviated version of the card's icon in enumeration form
+     * @param description is the action description of the card
+     * @param activation is the activtion range of the card
+     * @param type ?
+     * @param target ?
+     * @param amount ?
+     * @param modifierType ?
+     * @param modifier ?
+     */
 
     //Robust Constructor (all Variable must be passed in)
     public Establishment(String name,
@@ -79,29 +134,66 @@ public class Establishment extends Card {
         this.modifier = modifier;
     }
 
+    /**
+      * Gets the card's activation range
+      * @return a <code> string </code> specifying the card's activation range
+      */
+
     public String getActivation() {
         return activation;
     }
+
+    /**
+      * Sets the card's activation range
+      * @param activation the card's activation range
+      */
 
     public void setActivation(String activation) {
         this.activation = activation;
     }
 
+    /**
+      * Gets the card's type
+      * @return a <code> string </code> specifying the card's type
+      */
+
     public String getType() {
         return type;
     }
+
+    /**
+      * Sets the card's type
+      * @param type the card's type
+      */
 
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+      * Gets the card's target
+      * @return a <code> string </code> specifying the card's target
+      */
+
     public String getTarget() {
         return target;
     }
 
+    /**
+      * Sets the card's target
+      * @param target the card's target
+      */
+
     public void setTarget(String target) {
         this.target = target;
     }
+
+    // ************** finish below this line for API *****************
+
+    /**
+      * Gets the 
+      * @return an <code> integer </code> specifying the 
+      */
 
     public int getAmount() {
         return amount;
