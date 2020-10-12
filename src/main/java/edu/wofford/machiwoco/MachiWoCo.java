@@ -1,9 +1,6 @@
 package edu.wofford.machiwoco;
 
 
-import com.sun.org.apache.bcel.internal.generic.LAND;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,37 +70,38 @@ public class MachiWoCo {
     private Player[] players;
     final int NUMBER_OF_PLAYERS = 2;
     final int NUMBER_OF_LANDMARKS = 1;
+
+    private int dice1;
+    private int dice2;
+    private int diceSum;
+
+    private boolean isGameOver;
+
     Establishment wheat;
     Establishment ranch;
     Establishment forest;
 
     public MachiWoCo() {
         //List of Establishments
-        wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Icon.WHEAT,
+        wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
                 "|  Get 1 coin from the  |\n" +
                         "|         bank.         |\n" +
                         "|    (anyone's turn)    |\n",
                 "1", "receive", "bank", 1, "none", "none");
 
         //**********Establishment ranch creation************//
-        ranch = new Establishment("Ranch", 1, Card.Color.BLUE, Card.Icon.COW,
+        ranch = new Establishment("Ranch", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.COW, Card.Icon_ab.C,
                 "|  Get 1 coin from the  |\n" +
                         "|         bank.         |\n" +
                         "|    (anyone's turn)    |\n",
                 "2", "receive", "bank", 1, "none", "none");
 
 
-        forest = new Establishment("Forest", 3, Card.Color.BLUE, Card.Icon.GEAR,
+        forest = new Establishment("Forest", 3, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.GEAR, Card.Icon_ab.G,
                 "|  Get 1 coin from the  |\n" +
                         "|         bank.         |\n" +
                         "|    (anyone's turn)    |\n",
                 "5", "receive", "bank", 1, "none", "none");
-
-
-
-        int dice1;
-        //    int dice2;
-        //    int sum= dice1 + dice2;
 
         //MARKET PLACE FOR ESTABLISHMENTS
         // Establishment[] market = new Establishment[18];
@@ -112,7 +110,6 @@ public class MachiWoCo {
         market.put(wheat, 6);
         market.put(ranch,6);
         market.put(forest,6);
-        market.get(wheat);
 
         est = new HashMap<>();
         est.put(wheat,1);
@@ -135,6 +132,11 @@ public class MachiWoCo {
                 "------------------------------------------\n";
     }
 
+    private void startGame() {
+        System.out.println( "The game has started. Player 1 will go first.");
+    }
+
+
     private void printTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
@@ -143,19 +145,30 @@ public class MachiWoCo {
         }
     }
 
-    private Player getTurn() {
+    private void roll() {
+        dice1 = (int) (Math.random() * 6 + 1);
+        dice2 = 0; //(int) (Math.random() * 6 + 1);
+        diceSum = dice1 +dice2;
+        System.out.println("Player "  + getTurn() + " rolled ["+dice1+"] =" + diceSum + ".");
+        //System.out.println("Player "  + getTurn() + " rolled ["+dice1+"]["+dice2+"] =" + diceSum + ".");
+    }
+
+
+    private int getTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
-                return players[i];
+                return i + 1;
             }
         }
-        return null;
+        return 0;
     }
 
     private void isGameOver() {
         if(allLandmarksConstructed()) {
-       //     System.out.println("The game is over. Player " + get + " is the winner.")
+           System.out.println("The game is over. Player " + getTurn() + " is the winner.");
+           isGameOver = true;
         }
+        isGameOver = false;
     }
     private boolean allLandmarksConstructed() {
         Landmark[] l;
@@ -174,22 +187,26 @@ public class MachiWoCo {
         return false;
     }
 
+            //Activationn
 
 
-    public static void main(String[] args) {
+//    private void printActivations() {
+//        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+//            players[i].
+//        }
+//    }
 
-        //"The game has started. Player N will go
-        //first." (where N is the starting player number).
-     //   while(!gameIsOver()) {
-            int dice1 = (int) (Math.random() * 6 + 1);
-            // startTurn(player1.getTurn()) {}
-            //dice2 = (int)(Math.random()*6+1);
-            //sum = dice1 + dice2;
+    public void playGame() {
+        startGame();
+        while(isGameOver) {
+            printTurn();
+            //CURRENT GAME STATE (THANKS IVAN!)
+            roll();
 
 
-         //   getTurn();
+            //   getTurn();
 
-           // print() Turn                    "Turn started for Player N."
+            // print() Turn                    "Turn started for Player N."
 
             //print() Current Game State
 
@@ -200,9 +217,9 @@ public class MachiWoCo {
 
             // MENU TO BUY
             //Establishment Purchase or Landmark Construction
-                //EST: "Player N purchased the Furniture Factory."
-                //LAND: "Player N constructed the Shopping Mall."
-                //"Player N chose not to make improvements."
+            //EST: "Player N purchased the Furniture Factory."
+            //LAND: "Player N constructed the Shopping Mall."
+            //"Player N chose not to make improvements."
 
 
 //            if(isActivated(dice1)) {
@@ -221,4 +238,12 @@ public class MachiWoCo {
             //changeTurn();
         }
     }
+
+
+    public static void main(String[] args) {
+
+        MachiWoCo m = new MachiWoCo();
+        m.playGame();
+    }
+}
 

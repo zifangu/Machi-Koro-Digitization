@@ -16,9 +16,12 @@ public class Player {
       turn = false;
     }
 
+
 //    public int getActivationNumbers (){
 //        for(int i = 0; i < estOwned.length(); )
 //    }
+
+
 
     public boolean isTurn() { return turn; }
 
