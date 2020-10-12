@@ -140,5 +140,14 @@ public class Landmark extends Card{
         radioTower.icon_ab = Card.Icon_ab.T;
         System.out.println(radioTower.toString());
 
+        //**********Landmark city hall creation************//
+        Landmark cityHall;
+        cityHall = new Landmark("City Hall", 7, Card.Color.NONE, Card.Icon.TOWER,
+                "|      You have a       |\n" +
+                        "|      city hall.       |\n");
+        cityHall.color_ab = Card.Color_ab.N;
+        cityHall.icon_ab = Card.Icon_ab.T;
+        System.out.println(cityHall.toString());
+
     }
 }
