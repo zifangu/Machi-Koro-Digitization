@@ -1,7 +1,6 @@
 package edu.wofford.machiwoco;
 
 
-import com.sun.xml.internal.bind.v2.TODO;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -155,7 +154,7 @@ public class MachiWoCo {
     }
     public String generateActivation(String s) {
         String act = "[" + s + "]";
-        return StringUtils.center(act, 7, " ");
+        return StringUtils.rightPad(act, 7, " ");
     }
     protected String generateSingleMarketItem(Establishment e, int count) {
         return StringUtils.rightPad(e.getName(), 18, " ") + " " +
@@ -173,6 +172,16 @@ public class MachiWoCo {
         return generateStaticMarket() + s;
     }
 
+    protected String generatePlayerLine(Player p, int num, boolean active) {
+        String player;
+        if (active) {
+            player = "Player " + num + "* [YOU]";
+        } else {
+            player = "Player " + num;
+        }
+        return StringUtils.center(player, 42, " ");
+    }
+
     //**********GAME STEP 1: START GAME************//
     private void startGame() { System.out.println( "The game has started. Player 1 will go first."); }
 
@@ -180,7 +189,7 @@ public class MachiWoCo {
     private void printTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
-                System.out.println("Turn started for Player " + i + 1 + ".");
+                System.out.println("Turn started for Player " + (i + 1) + ".");
             }
         }
     }
