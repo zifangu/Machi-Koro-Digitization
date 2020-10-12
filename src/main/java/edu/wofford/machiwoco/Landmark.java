@@ -5,8 +5,24 @@ import org.apache.commons.lang3.StringUtils;
 import java.lang.*;
 import java.io.*;
 
+/** 
+ * This is a class built to represent all landmark cards.
+ * 
+ * @author Eric Craft
+ * @author Ivan Gu
+ * @author Bennett Joyce
+ */
+
 public class Landmark extends Card{
 
+    /**
+     * Landmark card constructor utilizing the extension of the Card class
+     * @param name is the name of the landmark card
+     * @param cost is a 1-2 digit number representing the cost of the card
+     * @param color is the color of the card in enumeration form
+     * @param icon is the icon on the card in enumeration form
+     * @param description is the action description of the card
+     */
 
     public Landmark(String name, int cost, Color color, Icon icon, String description) {
         super(name,cost, color, icon, description);
@@ -17,32 +33,65 @@ public class Landmark extends Card{
     protected boolean is_constructed;
     protected  Color color;
 
+    /**
+      * Gets the card's color
+      * @return an <code> enumeration value </code> specifying the card's color
+      */
 
     public Color getColor() {
         return color;
     }
 
+    /**
+      * Sets the card's color
+      * @param color the card's color
+      */
+
     public void setColor(Color color) {
         this.color = color;
     }
+
+    /**
+      * Gets the landmark card's abbreviated color value
+      * @return an <code> enumeration value </code> specifying the card's abbreviated color value
+      */
 
     public Color_ab getColor_ab() {
         return color_ab;
     }
 
+    /**
+      * Sets the landmark card's color abbreviation
+      * @param color_ab the card's color abbreviation
+      */
+
     public void setColor_ab(Color_ab color_ab) {
         this.color_ab = color_ab;
     }
+
+    /**
+      * Gets the landmark card's abbreviated icon value
+      * @return an <code> enumeration value </code> specifying the card's abbreviated icon value
+      */
 
     public Icon_ab getIcon_ab() {
         return icon_ab;
     }
 
+    /**
+      * Sets the landmark card's icon abbreviation
+      * @param icon_ab the card's icon abbreviation
+      */
+
     public void setIcon_ab(Icon_ab icon_ab) {
         this.icon_ab = icon_ab;
     }
 
-
+    /**
+     * Generates the framework for displaying the landmark card
+     * @param s ?
+     * @return an <code> array of strings </code> ?
+     */
 
     // ************ Saved for later. Do NOT delete. **************** //
     public String[] generate_blocks(String s) {
@@ -68,6 +117,12 @@ public class Landmark extends Card{
         }
         return stringsToProcess;
     }
+
+    /**
+     * Returns the <code> string </code> displayed on the Landmark card representing its construction
+     * @param is_constructed a boolean representing whether the landmark has been constructed
+     * @return a <code> string </code> that will represent the landmark's construction upon the card's display 
+     */
 
     public String isConstructed(boolean is_constructed) {
         if (is_constructed) {return "X";}
