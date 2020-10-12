@@ -26,9 +26,9 @@ public class Player {
         return coinCount;
     }
 
-    public Establishment[] getEstOwned() {
-        return estOwned;
-    }
+   // public Establishment[] getEstOwned() {
+      //  return estOwned;
+   // }
 
     public Landmark[] getLandmarks() {
         return landmarks;
