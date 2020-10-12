@@ -101,11 +101,11 @@ public class Establishment extends Card {
      * @param icon_ab is the abbreviated version of the card's icon in enumeration form
      * @param description is the action description of the card
      * @param activation is the activtion range of the card
-     * @param type ?
-     * @param target ?
-     * @param amount ?
-     * @param modifierType ?
-     * @param modifier ?
+     * @param type is the action performed by the card
+     * @param target is the target of the action being performed
+     * @param amount is the number of coins being given or received
+     * @param modifierType is what's being modified
+     * @param modifier is the icon that represents the ability to modify
      */
 
     //Robust Constructor (all Variable must be passed in)
@@ -188,49 +188,87 @@ public class Establishment extends Card {
         this.target = target;
     }
 
-    // ************** finish below this line for API *****************
-
     /**
-      * Gets the 
-      * @return an <code> integer </code> specifying the 
+      * Gets the amount of coins being given or received
+      * @return an <code> integer </code> specifying the number of coins at play
       */
 
     public int getAmount() {
         return amount;
     }
 
+    /**
+      * Sets the amount of coins being given or received
+      * @param amount the amount of coins being given or received
+      */
+
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    /**
+      * Gets the modifier type of the card
+      * @return a <code> string </code> specifying the modifier type
+      */
 
     public String getModifierType() {
         return modifierType;
     }
 
+    /**
+      * Sets the modifier type of the card
+      * @param modifierType the modifier type being applied
+      */
+
     public void setModifierType(String modifierType) {
         this.modifierType = modifierType;
     }
+
+    /**
+      * Gets the modifier of the card
+      * @return a <code> string </code> specifying the modifier
+      */
 
     public String getModifier() {
         return modifier;
     }
 
+    /**
+      * Sets the modifier of the card
+      * @param modifierType the modifier being applied
+      */
+
     public void setModifier(String modifier) {
         this.modifier = modifier;
     }
-    //
+
 
     protected boolean is_constructed;
+
+    /**
+     * Generates the activation string to be displayed as part of the card
+     * @return a <code> string </code> that displays the activation range of the card
+     */
 
     public String generateActivationString() {
             String act = "[" + activation + "]";
             return StringUtils.center(act, 15, " ");
     }
 
+    /**
+     * Generates the cost string to be displayed as part of the card
+     * @return a <code> string </code> that displays the cost of the card
+     */
+
     public String generateCostString() {
         String act = "(" + Integer.toString(cost) + ")";
         return StringUtils.rightPad(act, 22, " ");
     }
+
+    /**
+     * Generates the current establishment card as a <code> string </code>
+     * @return a <code> string </code> that displays the establishment card
+     */
 
     @Override
     public String toString() {
