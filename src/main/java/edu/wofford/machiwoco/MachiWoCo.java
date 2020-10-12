@@ -187,7 +187,7 @@ public class MachiWoCo {
         return false;
     }
 
-            //Activationn
+
 
 
 //    private void printActivations() {
@@ -198,44 +198,42 @@ public class MachiWoCo {
 
     public void playGame() {
         startGame();
-        while(isGameOver) {
-            printTurn();
+        while(!isGameOver) {
+
+           // (1) PRINT TURN
+            printTurn(); //"Turn started for Player N."
+
+            // (2) PRINT CURRENT GAME STATE
             //CURRENT GAME STATE (THANKS IVAN!)
-            roll();
+                    //MARKET ToSTRING
+
+                    //Player 1 EST
+                    //Player 1 LAND
+
+                    //Player 2 EST
+                    //Player 2 LAND
 
 
-            //   getTurn();
+            // (3) ROLL THE DICE
+            roll(); //"Player N rolled [3] = 3."
 
-            // print() Turn                    "Turn started for Player N."
-
-            //print() Current Game State
-
-            // print() Roll(dice1)             "Player N rolled [3] = 3."
-
-            // print() Activation             "Forest activated for Player N."
+            // (4) ACTIVATE / ACTIONS
+            //ACTIVATE  "Forest activated for Player N."
 
 
-            // MENU TO BUY
-            //Establishment Purchase or Landmark Construction
-            //EST: "Player N purchased the Furniture Factory."
-            //LAND: "Player N constructed the Shopping Mall."
-            //"Player N chose not to make improvements."
+            // (5) SHOW BUY MENU
+            //if(somethingToShow/Buy) {
+                //BUY MENU()
+            //}
+                    // MENU TO BUY
+                    //Establishment Purchase or Landmark Construction
+                    //EST: "Player N purchased the Furniture Factory."
+                    //LAND: "Player N constructed the Shopping Mall."
+                    //"Player N chose not to make improvements."
 
 
-//            if(isActivated(dice1)) {
-//                exchange/recieve money .action();
-//            }
-
-            //MARKET ToSTRING
-
-            //Player 1 EST
-            //Player 1 LAND
-
-            //Player 2 EST
-            //Player 2 LAND
-
-
-            //changeTurn();
+            // (6) endTurn()
+            //  "Turn ended for Player N."
         }
     }
 

@@ -2,6 +2,7 @@ package edu.wofford.machiwoco;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 public class Player {
     private int coinCount;
@@ -17,9 +18,14 @@ public class Player {
     }
 
 
-//    public int getActivationNumbers (){
-//        for(int i = 0; i < estOwned.length(); )
-//    }
+
+    public void getActivationNumbers (){
+        Set<Establishment> keys = estOwned.keySet();
+        for(Establishment est: keys){
+            int activation = Integer.parseInt(est.getActivation());
+            estOwned.get(est);
+        }
+    }
 
 
 
