@@ -17,16 +17,27 @@ public class Player {
       turn = false;
     }
 
-
-
-    public void getActivationNumbers (){
+    public void getActivationNumbers(int diceRoll){
         Set<Establishment> keys = estOwned.keySet();
         for(Establishment est: keys){
             int activation = Integer.parseInt(est.getActivation());
-            estOwned.get(est);
+            int numberOwned = estOwned.get(est);
+            if(diceRoll == activation) {
+                performAction(est,numberOwned);
+            }
         }
     }
-
+    private void performAction(Establishment e, int numberOwned) {
+        String type = e.getType();
+        int amount = e.getAmount();
+        String target = e.getTarget();
+        if(type.equals("receive") && target.equals("bank")) {
+            addCoins(amount * numberOwned);
+        }
+    }
+    private void addCoins(int coinCount) {
+        this.coinCount += coinCount;
+    }
     protected void setTurn(boolean setter) {
         turn = setter;
     }

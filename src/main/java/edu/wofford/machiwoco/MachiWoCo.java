@@ -14,7 +14,7 @@ public class MachiWoCo {
     private Player player2;
     private Player[] players;
     Map<Establishment,Integer> market;
-    Map<Establishment,Integer> est;
+    Map<Establishment,Integer> startingEstablishments;
     final int NUMBER_OF_PLAYERS = 2;
     final int NUMBER_OF_LANDMARKS = 1;
 
@@ -119,20 +119,19 @@ public class MachiWoCo {
         market.put(ranch,6);
         market.put(forest,6);
 
-        est = new HashMap<>();
-        est.put(wheat,1);
+        startingEstablishments = new HashMap<>();
+        startingEstablishments.put(wheat,1);
 
         Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Icon.TOWER,
                 "|  This is a city hall |\n");
-        Landmark[] n = new Landmark[1];
-        n[0] = city;
+        Landmark[] startingLandmarks = new Landmark[1];
+        startingLandmarks[0] = city;
 
-        player1 = new Player(est,n, 4);
-        player2 = new Player(est,n, 4);
+        player1 = new Player(startingEstablishments, startingLandmarks, 4);
+        player2 = new Player(startingEstablishments, startingLandmarks, 4);
         players = new Player[NUMBER_OF_PLAYERS];
         players[0] = player1;
         players[1] = player2;
-
         EST_ORDER = new Establishment[] {wheat, ranch, forest};
     }
 
@@ -207,6 +206,17 @@ public class MachiWoCo {
         }
         return 0;
     }
+    //**********GAME STEP 5: Activation************//
+    //Pass in dice to Player function
+    private void activationTest() {
+        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            players[i].getActivationNumbers(dice1);
+        }
+    }
+
+    //Loop through player hands
+    //
+
 
     //**********GAME STEP 6: END TURN************//
     private void endTurn() {
@@ -276,6 +286,7 @@ public class MachiWoCo {
             roll(); //"Player N rolled [3] = 3."
 
             // (4) ACTIVATE / ACTIONS
+            activationTest();
             //ACTIVATE  "Forest activated for Player N."
 
 
