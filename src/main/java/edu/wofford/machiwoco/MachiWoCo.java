@@ -12,6 +12,63 @@ public class MachiWoCo {
     Map<Establishment,Integer> est;
 
     private Player player1;
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
+    public Establishment getWheat() {
+        return wheat;
+    }
+
+    public void setWheat(Establishment wheat) {
+        this.wheat = wheat;
+    }
+
+    public Establishment getRanch() {
+        return ranch;
+    }
+
+    public Map<Establishment, Integer> getMarket() {
+        return market;
+    }
+
+    public void setMarket(Map<Establishment, Integer> market) {
+        this.market = market;
+    }
+
+    public void setRanch(Establishment ranch) {
+        this.ranch = ranch;
+    }
+
+    public Establishment getForest() {
+        return forest;
+    }
+
+    public void setForest(Establishment forest) {
+        this.forest = forest;
+    }
+
     private Player player2;
     private Player[] players;
     final int NUMBER_OF_PLAYERS = 2;
@@ -72,6 +129,12 @@ public class MachiWoCo {
         players[1] = player2;
     }
 
+    protected String generateStaticMarket() {
+        return "******************************************\n" +
+                "                  MARKET                  \n" +
+                "------------------------------------------\n";
+    }
+
     private void printTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
@@ -110,6 +173,8 @@ public class MachiWoCo {
         }
         return false;
     }
+
+
 
     public static void main(String[] args) {
 
