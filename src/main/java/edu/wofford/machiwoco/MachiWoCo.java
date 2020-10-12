@@ -189,7 +189,7 @@ public class MachiWoCo {
     private void printTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
-                System.out.println("Turn started for Player " + i + 1 + ".");
+                System.out.println("Turn started for Player " + (i + 1) + ".");
             }
         }
     }
