@@ -1,12 +1,15 @@
 package edu.wofford.machiwoco;
 
 
+import com.sun.org.apache.bcel.internal.generic.LAND;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MachiWoCo {
-    Map<Establishment,Integer> market;
-    Map<Establishment,Integer> est;
+
 
     private Player player1;
 
@@ -68,6 +71,8 @@ public class MachiWoCo {
 
     private Player player2;
     private Player[] players;
+    Map<Establishment,Integer> market;
+    Map<Establishment,Integer> est;
     final int NUMBER_OF_PLAYERS = 2;
     final int NUMBER_OF_LANDMARKS = 1;
 
@@ -80,6 +85,8 @@ public class MachiWoCo {
     Establishment wheat;
     Establishment ranch;
     Establishment forest;
+    Establishment[] EST_ORDER;
+
 
     public MachiWoCo() {
         //List of Establishments
@@ -124,12 +131,28 @@ public class MachiWoCo {
         players = new Player[NUMBER_OF_PLAYERS];
         players[0] = player1;
         players[1] = player2;
+
+        EST_ORDER = new Establishment[] {wheat, ranch, forest};
+    }
+
+    //  return strings to be used in toString()
+    protected String generate_pure_padding(String s) {
+        return StringUtils.center("", 42, s) + "\n";
+    }
+
+    protected String generate_title(String s) {
+        return StringUtils.center(s, 42, " ") + "\n";
     }
 
     protected String generateStaticMarket() {
-        return "******************************************\n" +
-                "                  MARKET                  \n" +
-                "------------------------------------------\n";
+        return generate_pure_padding("*") +
+                generate_title("MARKET") +
+                generate_pure_padding("-");
+    }
+
+    protected String generateSingleMarketItem(Establishment e, int count) {
+        return StringUtils.rightPad(e.getName(), 18, " ") + " ";
+
     }
 
     private void startGame() {
