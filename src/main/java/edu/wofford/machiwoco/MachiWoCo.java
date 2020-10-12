@@ -1,31 +1,42 @@
 package edu.wofford.machiwoco;
 
 
+import com.sun.org.apache.bcel.internal.generic.LAND;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MachiWoCo {
+    Map<Establishment,Integer> market;
+    Map<Establishment,Integer> est;
 
+    private Player player1;
+    private Player player2;
+    private Player[] players;
+    final int NUMBER_OF_PLAYERS = 2;
+    final int NUMBER_OF_LANDMARKS = 1;
+    Establishment wheat;
+    Establishment ranch;
+    Establishment forest;
 
-    public static void main(String[] args) {
+    public MachiWoCo() {
         //List of Establishments
-        Establishment wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Icon.WHEAT,
+        wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Icon.WHEAT,
                 "|  Get 1 coin from the  |\n" +
                         "|         bank.         |\n" +
                         "|    (anyone's turn)    |\n",
                 "1", "receive", "bank", 1, "none", "none");
 
         //**********Establishment ranch creation************//
-        Establishment ranch = new Establishment("Ranch", 1, Card.Color.BLUE, Card.Icon.COW,
+        ranch = new Establishment("Ranch", 1, Card.Color.BLUE, Card.Icon.COW,
                 "|  Get 1 coin from the  |\n" +
                         "|         bank.         |\n" +
                         "|    (anyone's turn)    |\n",
                 "2", "receive", "bank", 1, "none", "none");
 
 
-        Establishment forest = new Establishment("Forest",
-                3, Card.Color.BLUE, Card.Icon.GEAR,
+        forest = new Establishment("Forest", 3, Card.Color.BLUE, Card.Icon.GEAR,
                 "|  Get 1 coin from the  |\n" +
                         "|         bank.         |\n" +
                         "|    (anyone's turn)    |\n",
@@ -38,13 +49,15 @@ public class MachiWoCo {
         //    int sum= dice1 + dice2;
 
         //MARKET PLACE FOR ESTABLISHMENTS
-       // Establishment[] market = new Establishment[18];
-        Map<Establishment,Integer> market = new HashMap<>();
+        // Establishment[] market = new Establishment[18];
+
+        market = new HashMap<>();
         market.put(wheat, 6);
         market.put(ranch,6);
         market.put(forest,6);
+        market.get(wheat);
 
-        Map<Establishment,Integer> est = new HashMap<>();
+        est = new HashMap<>();
         est.put(wheat,1);
 
         Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Icon.TOWER,
@@ -52,18 +65,64 @@ public class MachiWoCo {
         Landmark[] n = new Landmark[1];
         n[0] = city;
 
-        Player player1 = new Player(est,n, 4);
-        Player player2 = new Player(est,n, 4);
+        player1 = new Player(est,n, 4);
+        player2 = new Player(est,n, 4);
+        players = new Player[NUMBER_OF_PLAYERS];
+        players[0] = player1;
+        players[1] = player2;
+    }
+
+    private void printTurn() {
+        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if(players[i].isTurn()) {
+                System.out.println("Turn started for Player " + i + 1 + ".");
+            }
+        }
+    }
+
+    private Player getTurn() {
+        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if(players[i].isTurn()) {
+                return players[i];
+            }
+        }
+        return null;
+    }
+
+    private void isGameOver() {
+        if(allLandmarksConstructed()) {
+       //     System.out.println("The game is over. Player " + get + " is the winner.")
+        }
+    }
+    private boolean allLandmarksConstructed() {
+        Landmark[] l;
+        int count = 0;
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            l = players[i].getLandmarks();
+            for(int j = 0; j < NUMBER_OF_LANDMARKS; j++) {
+                if(l[j].is_constructed) {
+                    count++;
+                }
+            }
+            if(count==NUMBER_OF_LANDMARKS) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
 
         //"The game has started. Player N will go
         //first." (where N is the starting player number).
      //   while(!gameIsOver()) {
-            dice1 = (int) (Math.random() * 6 + 1);
+            int dice1 = (int) (Math.random() * 6 + 1);
             // startTurn(player1.getTurn()) {}
             //dice2 = (int)(Math.random()*6+1);
             //sum = dice1 + dice2;
 
 
+         //   getTurn();
 
            // print() Turn                    "Turn started for Player N."
 
@@ -96,40 +155,5 @@ public class MachiWoCo {
 
             //changeTurn();
         }
-
-
-
-
-//        for(int i = 0; i <6; i++) {
-//            market[i] = wheat;
-//            market[i+6] = ranch;
-//            market[i+12] = forest;
-//        }
-
-        // OR
-
-        // ADD PARAMETER to market "i.e. how many left"
-
-
-        //CREATE STARTING ESTABLISHMENT
-
-
-        //CREATE
-
-
-
-     //   System.out.println(player1.getCoinCount());
-
-
-
-
-
-
-     //   System.out.println("Let's play Machi WoCo!");
-//        if (args[0].equals("landmark")) {
-//        Landmark.main(args);
-//        } else if (args[0].equals("establishment")) {
-//        Establishment.main((args));
-//        }
     }
 
