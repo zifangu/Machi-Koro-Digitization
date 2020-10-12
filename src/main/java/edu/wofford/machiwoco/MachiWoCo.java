@@ -11,6 +11,26 @@ public class MachiWoCo {
 
     private Player player1;
 
+
+    private Player player2;
+    private Player[] players;
+    Map<Establishment,Integer> market;
+    Map<Establishment,Integer> est;
+    final int NUMBER_OF_PLAYERS = 2;
+    final int NUMBER_OF_LANDMARKS = 1;
+
+    private int dice1;
+    private int dice2;
+    private int diceSum;
+
+    private boolean is_GameOver;
+
+    Establishment wheat;
+    Establishment ranch;
+    Establishment forest;
+    Establishment[] EST_ORDER;
+
+
     public Player getPlayer1() {
         return player1;
     }
@@ -67,23 +87,6 @@ public class MachiWoCo {
         this.forest = forest;
     }
 
-    private Player player2;
-    private Player[] players;
-    Map<Establishment,Integer> market;
-    Map<Establishment,Integer> est;
-    final int NUMBER_OF_PLAYERS = 2;
-    final int NUMBER_OF_LANDMARKS = 1;
-
-    private int dice1;
-    private int dice2;
-    private int diceSum;
-
-    private boolean is_GameOver;
-
-    Establishment wheat;
-    Establishment ranch;
-    Establishment forest;
-    Establishment[] EST_ORDER;
 
 
     public MachiWoCo() {
@@ -238,6 +241,11 @@ public class MachiWoCo {
 //            players[i].
 //        }
 //    }
+
+    private void endTurn() {
+        int curPlayerIndex = getTurn() - 1;
+
+    }
 
     public void playGame() {
         startGame();
