@@ -20,23 +20,19 @@ public class EstablishmentTest {
     public void before() {
 
         // bakery creation
-         bakery = new Establishment("Bakery", 1, Card.Color.GREEN, Card.Icon.BREAD,
+         bakery = new Establishment("Bakery", 1, Card.Color.GREEN,Card.Color_ab.G, Card.Icon.BREAD,Card.Icon_ab.B,
                 "|  Get 1 coin from the  |\n" +
                         "|         bank.         |\n" +
                         "|   (your turn only)    |\n",
                 "2-3", "receive", "bank", 1, "none", "none");
-        bakery.color_ab = Card.Color_ab.G;
-        bakery.icon_ab = Card.Icon_ab.B;
 
         // stadium creation
          stadium = new Establishment("Stadium",
-                6, Card.Color.PURPLE, Card.Icon.TOWER,
+                6, Card.Color.PURPLE, Card.Color_ab.P, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|   Take 2 coins from   |\n" +
                         "|    each opponent.     |\n" +
                         "|   (your turn only)    |\n",
                 "6", "receive", "others", 2, "none", "none");
-        stadium.color_ab = Card.Color_ab.P;
-        stadium.icon_ab = Card.Icon_ab.T;
     }
 
     @Test

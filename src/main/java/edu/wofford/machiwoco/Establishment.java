@@ -16,6 +16,8 @@ import org.apache.commons.lang3.StringUtils;
 //
 public class Establishment extends Card {
 
+    private Color_ab color_ab;
+    private Icon_ab icon_ab;
     private String activation;
     private String type;
     private String target;
@@ -38,7 +40,9 @@ public class Establishment extends Card {
     public Establishment(String name,
                          int cost,
                          Color color,
+                         Color_ab color_ab,
                          Icon icon,
+                         Icon_ab icon_ab,
                          String description,
                          String activation,
                          String type,
@@ -47,6 +51,8 @@ public class Establishment extends Card {
                          String modifierType,
                          String modifier) {
         super(name,cost,color,icon,description);
+        this.color_ab = color_ab;
+        this.icon_ab = icon_ab;
 //       this.effect = effect;
         this.activation = activation;
         this.type = type;
@@ -103,7 +109,6 @@ public class Establishment extends Card {
     public void setModifier(String modifier) {
         this.modifier = modifier;
     }
-
     //
 
     protected boolean is_constructed;
@@ -134,35 +139,35 @@ public class Establishment extends Card {
 
     public static void main(String[] args) {
         //**********Establishment wheat field creation************//
-        Establishment wheat = new Establishment("Wheat Field", 1, Color.BLUE, Icon.WHEAT,
+        Establishment wheat = new Establishment("Wheat Field", 1, Color.BLUE, Color_ab.B,Icon.WHEAT, Icon_ab.W,
                 "|  Get 1 coin from the  |\n" +
                           "|         bank.         |\n" +
                           "|    (anyone's turn)    |\n",
                 "1", "receive", "bank", 1, "none", "none");
 
         //**********Establishment ranch creation************//
-        Establishment ranch = new Establishment("Ranch", 1, Color.BLUE, Icon.COW,
+        Establishment ranch = new Establishment("Ranch", 1, Color.BLUE, Color_ab.B, Icon.COW, Icon_ab.C,
                 "|  Get 1 coin from the  |\n" +
                           "|         bank.         |\n" +
                           "|    (anyone's turn)    |\n",
                 "2", "receive", "bank", 1, "none", "none");
 
         //**********Establishment bakery creation************//
-        Establishment bakery = new Establishment("Bakery", 1, Color.GREEN, Icon.BREAD,
+        Establishment bakery = new Establishment("Bakery", 1, Color.GREEN, Color_ab.G, Icon.BREAD,Icon_ab.B,
                 "|  Get 1 coin from the  |\n" +
                           "|         bank.         |\n" +
                           "|   (your turn only)    |\n",
                 "2-3", "receive", "bank", 1, "none", "none");
 
         //**********Establishment cafe creation************//
-        Establishment cafe = new Establishment("Cafe", 2, Color.RED, Icon.CUPU,
+        Establishment cafe = new Establishment("Cafe", 2, Color.RED,Color_ab.R, Icon.CUPU,Icon_ab.U,
                 "| Take 1 coin from the  |\n" +
                           "|    active player.     |\n" +
                           "|   (opponent's turn)   |\n",
                 "3", "receive", "active", 1, "none", "none");
 
         //**********Establishment convenience store creation************//
-        Establishment convenience = new Establishment("Convenience Store", 2, Color.GREEN, Icon.BREAD,
+        Establishment convenience = new Establishment("Convenience Store", 2, Color.GREEN,Color_ab.G, Icon.BREAD, Icon_ab.B,
                 "| Get 3 coins from the  |\n" +
                           "|         bank.         |\n" +
                           "|   (your turn only)    |\n",
@@ -170,7 +175,7 @@ public class Establishment extends Card {
 
         //**********Establishment forest creation************//
         Establishment forest = new Establishment("Forest",
-                3, Color.BLUE, Icon.GEAR,
+                3, Color.BLUE,Color_ab.B, Icon.GEAR,Icon_ab.G,
                 "|  Get 1 coin from the  |\n" +
                           "|         bank.         |\n" +
                           "|    (anyone's turn)    |\n",
@@ -178,7 +183,7 @@ public class Establishment extends Card {
 
         //**********Establishment stadium creation************//
         Establishment stadium = new Establishment("Stadium",
-                6, Color.PURPLE, Icon.TOWER,
+                6, Color.PURPLE, Color_ab.P,Icon.TOWER,Icon_ab.T,
                 "|   Take 2 coins from   |\n" +
                           "|    each opponent.     |\n" +
                           "|   (your turn only)    |\n",
@@ -186,14 +191,14 @@ public class Establishment extends Card {
 
         //**********Establishment TV Station creation************//
         Establishment tv = new Establishment("TV Station",
-                7, Color.PURPLE, Icon.TOWER,
+                7, Color.PURPLE,Color_ab.P, Icon.TOWER,Icon_ab.T,
                 "| Take 5 coins from an  |\n" +
                           "|       opponent.       |\n" +
                           "|   (your turn only)    |\n",
                 "6", "receive", "choice", 5, "none", "none");
 
         //**********Establishment Business Complex creation************//
-        Establishment business = new Establishment("Business Complex", 8, Color.PURPLE, Icon.TOWER,
+        Establishment business = new Establishment("Business Complex", 8, Color.PURPLE,Color_ab.P, Icon.TOWER,Icon_ab.T,
                 "| Exchange one of your  |\n" +
                           "|       non-tower       |\n" +
                           "| establishments for 1  |\n" +
@@ -202,7 +207,7 @@ public class Establishment extends Card {
                 "6", "exchange", "choice", 0, "none", "none");
 
         //**********Establishment Cheese Factory creation************//
-        Establishment cheese = new Establishment("Cheese Factory", 5, Color.GREEN, Icon.FACTORY,
+        Establishment cheese = new Establishment("Cheese Factory", 5, Color.GREEN,Color_ab.G, Icon.FACTORY,Icon_ab.F,
                 "| Get 3 coins from the  |\n" +
                           "|   bank for each {C}   |\n" +
                           "|   establishment you   |\n" +
@@ -211,7 +216,7 @@ public class Establishment extends Card {
                 "7", "receive", "bank", 3, "icon", "cow");
 
         //**********Establishment Furniture Factory creation************//
-        Establishment furniture = new Establishment("Furniture Factory", 3, Color.GREEN, Icon.FACTORY,
+        Establishment furniture = new Establishment("Furniture Factory", 3, Color.GREEN,Color_ab.G, Icon.FACTORY,Icon_ab.F,
                 "| Get 3 coins from the  |\n" +
                           "|   bank for each {G}   |\n" +
                           "|   establishment you   |\n" +
@@ -220,28 +225,28 @@ public class Establishment extends Card {
                 "8", "receive", "bank", 3, "icon", "gear");
 
         //**********Establishment mine creation************//
-        Establishment mine = new Establishment("Mine", 6, Color.BLUE, Icon.GEAR,
+        Establishment mine = new Establishment("Mine", 6, Color.BLUE,Color_ab.B, Icon.GEAR,Icon_ab.G,
                 "| Get 5 coins from the  |\n" +
                           "|         bank.         |\n" +
                           "|    (anyone's turn)    |\n",
                 "9", "receive", "bank", 5, "none", "none");
 
         //**********Establishment restaurant creation************//
-        Establishment restaurant = new Establishment("Family Restaurant", 3, Color.RED, Icon.CUPU,
+        Establishment restaurant = new Establishment("Family Restaurant", 3, Color.RED,Color_ab.R, Icon.CUPU,Icon_ab.U,
                 "| Take 2 coins from the |\n" +
                           "|    active player.     |\n" +
                           "|   (opponent's turn)   |\n",
                 "9-10", "receive", "active", 2, "none", "none");
 
         //**********Establishment orchard creation************//
-        Establishment orchard = new Establishment("Apple Orchard", 3, Color.BLUE, Icon.WHEAT,
+        Establishment orchard = new Establishment("Apple Orchard", 3, Color.BLUE,Color_ab.B, Icon.WHEAT,Icon_ab.W,
                 "| Get 3 coins from the  |\n" +
                           "|         bank.         |\n" +
                           "|    (anyone's turn)    |\n",
                 "10", "receive", "bank", 3, "none", "none");
 
         //**********Establishment market creation************//
-        Establishment market = new Establishment("Farmers Market", 2, Color.GREEN, Icon.FRUITO,
+        Establishment market = new Establishment("Farmers Market", 2, Color.GREEN,Color_ab.G, Icon.FRUITO,Icon_ab.O,
                 "| Get 2 coins from the  |\n" +
                           "|   bank for each {W}   |\n" +
                           "|   establishment you   |\n" +
