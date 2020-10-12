@@ -17,6 +17,23 @@ import org.apache.commons.lang3.StringUtils;
 public class Establishment extends Card {
 
     private Color_ab color_ab;
+
+    public Color_ab getColor_ab() {
+        return color_ab;
+    }
+
+    public void setColor_ab(Color_ab color_ab) {
+        this.color_ab = color_ab;
+    }
+
+    public Icon_ab getIcon_ab() {
+        return icon_ab;
+    }
+
+    public void setIcon_ab(Icon_ab icon_ab) {
+        this.icon_ab = icon_ab;
+    }
+
     private Icon_ab icon_ab;
     private String activation;
     private String type;

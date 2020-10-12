@@ -1,10 +1,8 @@
 package edu.wofford.machiwoco;
 
 
-import com.sun.org.apache.bcel.internal.generic.LAND;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,7 +78,7 @@ public class MachiWoCo {
     private int dice2;
     private int diceSum;
 
-    private boolean isGameOver;
+    private boolean is_GameOver;
 
     Establishment wheat;
     Establishment ranch;
@@ -150,9 +148,31 @@ public class MachiWoCo {
                 generate_pure_padding("-");
     }
 
-    protected String generateSingleMarketItem(Establishment e, int count) {
-        return StringUtils.rightPad(e.getName(), 18, " ") + " ";
+    protected String generateCost(int cost) {
+        String act = "(" + cost + ")";
+        return StringUtils.rightPad(act, 4, " ");
+    }
 
+    public String generateActivation(String s) {
+        String act = "[" + s + "]";
+        return StringUtils.center(act, 7, " ");
+    }
+
+    protected String generateSingleMarketItem(Establishment e, int count) {
+        return StringUtils.rightPad(e.getName(), 18, " ") + " " +
+                e.getColor_ab() + e.getIcon_ab() + " " +
+                generateCost(e.getCost()) + " " +
+                generateActivation(e.getActivation()) + " " +
+                " #" + Integer.toString(count) + "\n";
+    }
+
+    protected  String generateMarket() {
+        StringBuilder s = new StringBuilder();
+        for (Establishment e : EST_ORDER) {
+            s.append(generateSingleMarketItem(e, market.get(e)));
+        }
+//        System.out.print(s);
+        return generateStaticMarket() + s;
     }
 
     private void startGame() {
@@ -189,9 +209,9 @@ public class MachiWoCo {
     private void isGameOver() {
         if(allLandmarksConstructed()) {
            System.out.println("The game is over. Player " + getTurn() + " is the winner.");
-           isGameOver = true;
+           is_GameOver = true;
         }
-        isGameOver = false;
+        is_GameOver = false;
     }
     private boolean allLandmarksConstructed() {
         Landmark[] l;
@@ -221,7 +241,7 @@ public class MachiWoCo {
 
     public void playGame() {
         startGame();
-        while(!isGameOver) {
+        while(!is_GameOver) {
 
            // (1) PRINT TURN
             printTurn(); //"Turn started for Player N."
@@ -265,6 +285,8 @@ public class MachiWoCo {
 
         MachiWoCo m = new MachiWoCo();
         m.playGame();
+
+        System.out.println(m.generateMarket());
     }
 }
 
