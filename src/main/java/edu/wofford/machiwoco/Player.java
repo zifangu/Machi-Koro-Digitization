@@ -27,7 +27,7 @@ public class Player {
         }
     }
 
-    private void setTurn(boolean setter) {
+    protected void setTurn(boolean setter) {
         turn = setter;
     }
 

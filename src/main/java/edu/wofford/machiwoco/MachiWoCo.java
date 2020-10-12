@@ -1,6 +1,7 @@
 package edu.wofford.machiwoco;
 
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -8,10 +9,8 @@ import java.util.Map;
 
 public class MachiWoCo {
 
-
+    //**********DECLARATION************//
     private Player player1;
-
-
     private Player player2;
     private Player[] players;
     Map<Establishment,Integer> market;
@@ -31,6 +30,7 @@ public class MachiWoCo {
     Establishment[] EST_ORDER;
 
 
+    //**********GETTERS AND SETTERS************//
     public Player getPlayer1() {
         return player1;
     }
@@ -88,7 +88,7 @@ public class MachiWoCo {
     }
 
 
-
+    //**********CONSTRUCTOR************//
     public MachiWoCo() {
         //List of Establishments
         wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
@@ -136,7 +136,7 @@ public class MachiWoCo {
         EST_ORDER = new Establishment[] {wheat, ranch, forest};
     }
 
-    //  return strings to be used in toString()
+    //**********FUNCTIONS FOR ToSTRING()************//
     protected String generate_pure_padding(String s) {
         return StringUtils.center("", 42, s) + "\n";
     }
@@ -150,17 +150,14 @@ public class MachiWoCo {
                 generate_title("MARKET") +
                 generate_pure_padding("-");
     }
-
     protected String generateCost(int cost) {
         String act = "(" + cost + ")";
         return StringUtils.rightPad(act, 4, " ");
     }
-
     public String generateActivation(String s) {
         String act = "[" + s + "]";
         return StringUtils.center(act, 7, " ");
     }
-
     protected String generateSingleMarketItem(Establishment e, int count) {
         return StringUtils.rightPad(e.getName(), 18, " ") + " " +
                 e.getColor_ab() + e.getIcon_ab() + " " +
@@ -168,7 +165,6 @@ public class MachiWoCo {
                 generateActivation(e.getActivation()) + " " +
                 " #" + Integer.toString(count) + "\n";
     }
-
     protected  String generateMarket() {
         StringBuilder s = new StringBuilder();
         for (Establishment e : EST_ORDER) {
@@ -178,11 +174,10 @@ public class MachiWoCo {
         return generateStaticMarket() + s;
     }
 
-    private void startGame() {
-        System.out.println( "The game has started. Player 1 will go first.");
-    }
+    //**********GAME STEP 1: START GAME************//
+    private void startGame() { System.out.println( "The game has started. Player 1 will go first."); }
 
-
+    //**********GAME STEP 2: PRINT TURN************//
     private void printTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
@@ -191,6 +186,10 @@ public class MachiWoCo {
         }
     }
 
+    //**********GAME STEP 3: CURRENT GAME STATE************//
+    // TODO
+
+    //**********GAME STEP 4: ROLL THE DICE************//
     private void roll() {
         dice1 = (int) (Math.random() * 6 + 1);
         dice2 = 0; //(int) (Math.random() * 6 + 1);
@@ -209,6 +208,18 @@ public class MachiWoCo {
         return 0;
     }
 
+    //**********GAME STEP 6: END TURN************//
+    private void endTurn() {
+        int curPlayerIndex = getTurn() - 1;
+        System.out.println("Turn ended for Player " + getTurn() +".");
+        if(curPlayerIndex == NUMBER_OF_PLAYERS-1) {
+            players[0].setTurn(true);
+        } else {
+            players[curPlayerIndex].setTurn(false);
+            players[curPlayerIndex +1].setTurn(true);
+        }
+        isGameOver();
+    }
     private void isGameOver() {
         if(allLandmarksConstructed()) {
            System.out.println("The game is over. Player " + getTurn() + " is the winner.");
@@ -242,13 +253,9 @@ public class MachiWoCo {
 //        }
 //    }
 
-    private void endTurn() {
-        int curPlayerIndex = getTurn() - 1;
-
-    }
-
     public void playGame() {
         startGame();
+        players[0].setTurn(true);
         while(!is_GameOver) {
 
            // (1) PRINT TURN
@@ -282,9 +289,8 @@ public class MachiWoCo {
                     //LAND: "Player N constructed the Shopping Mall."
                     //"Player N chose not to make improvements."
 
-
-            // (6) endTurn()
-            //  "Turn ended for Player N."
+            //(6) End Game
+            endTurn();
         }
     }
 
