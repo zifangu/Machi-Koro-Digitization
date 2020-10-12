@@ -6,6 +6,8 @@ import java.lang.*;
 import java.io.*;
 
 public class Landmark extends Card{
+
+
     public Landmark(String name, int cost, Color color, Icon icon, String description) {
         super(name,cost, color, icon, description);
         //System.out.println("Team Beast");

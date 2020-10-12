@@ -48,6 +48,24 @@ public class Feature2Test {
                 "------------------------------------------\n"));
     }
 
+    @Test
+    public void testMartket() {
+        assertThat(m.generateMarket(), is("******************************************\n" +
+                "                  MARKET                  \n" +
+                "------------------------------------------\n" +
+                "Wheat Field        BW (1)  [1]      #6\n" +
+                "Ranch              BC (1)  [2]      #6\n" +
+                "Forest             BG (3)  [5]      #6\n"));
+    }
+
+    @Test
+    public void testActivePlayer1() {
+        Player p = m.getPlayer1();
+        assertThat(m.generatePlayerLine(p, 1, true), is("             Player 1* [YOU]              "));
+    }
+
+
+
 
 
 }
