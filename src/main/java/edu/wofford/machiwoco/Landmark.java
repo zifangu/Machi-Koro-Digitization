@@ -91,8 +91,8 @@ public class Landmark extends Card{
 
     /**
      * Generates the framework for displaying the landmark card
-     * @param s ?
-     * @return an <code> array of strings </code> ?
+     * @param s a <code> string </code> that is used to generate the String[]
+     * @return an <code> array of strings </code> that make up 
      */
 
     // ************ Saved for later. Do NOT delete. **************** //
@@ -130,6 +130,11 @@ public class Landmark extends Card{
         if (is_constructed) {return "X";}
         return " ";
     }
+
+    /**
+     * Returns the string form of the Landmark card
+     * @return a string representing the current Landmark card
+     */
 
     @Override
     public String toString() {
