@@ -61,8 +61,36 @@ public class Feature2Test {
     @Test
     public void testActivePlayer1() {
         Player p = m.getPlayer1();
-        assertThat(m.generatePlayerLine(p, 1, true), is("             Player 1* [YOU]              "));
+        assertThat(m.generatePlayerLine(p, 1, true), is("             Player 1* [YOU]              \n"));
     }
+
+//    @Test
+//    public void testActivePlayerEST() {
+//        Player p = m.getPlayer1();
+//        m.getPlayers()[0].setTurn(true);
+//
+//        assertThat(m.generatePlayer(p, m.getTurn(), true), is("             Player 1* [YOU]              \n" +
+//                "------------------------------------------\n" +
+//                "                (4 coins)                 \n" +
+//                "Wheat Field        BW (1)  [1]      #1\n"));
+//    }
+
+    @Test
+    public void testActivePlayerFull() {
+        Player p = m.getPlayer1();
+        m.getPlayers()[0].setTurn(true);
+
+        assertThat(m.generatePlayer(p, m.getTurn(), true), is("             Player 1* [YOU]              \n" +
+                "------------------------------------------\n" +
+                "                (4 coins)                 \n" +
+                "Wheat Field        BW (1)  [1]      #1\n"    +
+                "..........................................\n" +
+                "City Hall          NT (7)  [ ]\n"));
+    }
+
+
+
+
 
 
 

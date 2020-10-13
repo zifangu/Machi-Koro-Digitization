@@ -9,6 +9,23 @@ public class Player {
     private Map<Establishment,Integer> estOwned;
     private Landmark[] landmarks;
     private boolean turn;
+
+    public void setCoinCount(int coinCount) {
+        this.coinCount = coinCount;
+    }
+
+    public Map<Establishment, Integer> getEstOwned() {
+        return estOwned;
+    }
+
+    public void setEstOwned(Map<Establishment, Integer> estOwned) {
+        this.estOwned = estOwned;
+    }
+
+    public void setLandmarks(Landmark[] landmarks) {
+        this.landmarks = landmarks;
+    }
+
     private int playerNumber;
 
 

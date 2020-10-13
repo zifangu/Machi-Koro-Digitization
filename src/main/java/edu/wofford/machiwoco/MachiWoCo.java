@@ -121,7 +121,7 @@ public class MachiWoCo {
         startingEstablishments = new HashMap<>();
         startingEstablishments.put(wheat,1);
 
-        Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Icon.TOWER,
+        Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall |\n");
         Landmark[] startingLandmarks = new Landmark[1];
         startingLandmarks[0] = city;
@@ -172,6 +172,11 @@ public class MachiWoCo {
         return generateStaticMarket() + s;
     }
 
+    protected String generatePlayerCoin(Player p) {
+        String account = "(" + p.getCoinCount() + " coins)";
+        return StringUtils.center(account, 42, " ") + "\n";
+    }
+
     protected String generatePlayerLine(Player p, int num, boolean active) {
         String player;
         if (active) {
@@ -179,8 +184,50 @@ public class MachiWoCo {
         } else {
             player = "Player " + num;
         }
-        return StringUtils.center(player, 42, " ");
+        return StringUtils.center(player, 42, " ") + "\n";
     }
+
+
+    protected String generatePlayerEst(Player p) {
+        Map<Establishment,Integer> estOwned = p.getEstOwned();
+        StringBuilder s = new StringBuilder();
+        for (Establishment e : EST_ORDER) {
+            if (estOwned.containsKey(e)) {
+                s.append(generateSingleMarketItem(e, estOwned.get(e)));
+            }
+        }
+        return s + "";
+    }
+
+    protected String generateLandmark(Landmark l) {
+        String construct = "[" + l.isConstructed(l.is_constructed) + "]";
+        return StringUtils.rightPad(l.getName(), 18, " ") +
+                " " + l.getColor_ab() + l.getIcon_ab() + " " +
+                generateCost(l.getCost()) + " " +
+                construct + "\n";
+
+    }
+
+    protected String generatePlayerLandMark(Player p) {
+        StringBuilder s = new StringBuilder();
+        for (Landmark l : p.getLandmarks()) {
+            s.append(generateLandmark(l));
+        }
+        return s + "";
+    }
+
+
+    protected String generatePlayer(Player p, int num, boolean active) {
+        return generatePlayerLine(p, num, active) +
+                generate_pure_padding("-") +
+                generatePlayerCoin(p) +
+                generatePlayerEst(p) +
+                generate_pure_padding(".") +
+                generatePlayerLandMark(p);
+    }
+
+
+
 
     //**********GAME STEP 1: START GAME************//
     private void startGame() { System.out.println( "The game has started. Player 1 will go first."); }
@@ -195,7 +242,13 @@ public class MachiWoCo {
     }
 
     //**********GAME STEP 3: CURRENT GAME STATE************//
-    // TODO
+    protected String getCurrentGameState() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < players.length; i++) {
+            s.append(generatePlayer(players[i], i + 1, players[i].isTurn()));
+        }
+        return generateMarket() + s;
+    }
 
     //**********GAME STEP 4: ROLL THE DICE************//
     private void roll() {
@@ -207,7 +260,7 @@ public class MachiWoCo {
     }
 
 
-    private int getTurn() {
+    protected int getTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
                 return i + 1;
@@ -318,9 +371,11 @@ public class MachiWoCo {
     public static void main(String[] args) {
 
         MachiWoCo m = new MachiWoCo();
-        m.playGame();
+//        m.playGame();
 
-        System.out.println(m.generateMarket());
+        m.getPlayers()[0].setTurn(true);
+
+        System.out.println(m.getCurrentGameState());
     }
 }
 

@@ -18,10 +18,10 @@ public class LandmarkTest {
 
     @Before
     public void before() {
-        l = new Landmark("Test", 1, Card.Color.BLUE, Card.Icon.FRUITO, "Test");
+        l = new Landmark("Test", 1, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T, "Test");
 
         // trainStation creation
-        trainStation = new Landmark("Train Station", 4, Card.Color.NONE, Card.Icon.TOWER,
+        trainStation = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  You may roll 1 or 2  |\n" +
                 "|         dice.         |\n");
         trainStation.color_ab = Card.Color_ab.N;
