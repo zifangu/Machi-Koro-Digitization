@@ -85,7 +85,7 @@ public class Feature2Test {
                 "                (4 coins)                 \n" +
                 "Wheat Field        BW (1)  [1]      #1\n"    +
                 "..........................................\n" +
-                "City Hall          NT (7)  [ ]\n"));
+                "City Hall          NT (7)  [ ]\n\n"));
     }
 
 

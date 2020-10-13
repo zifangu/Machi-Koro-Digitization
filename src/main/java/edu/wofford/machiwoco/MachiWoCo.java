@@ -208,12 +208,12 @@ public class MachiWoCo {
 
     }
 
-    protected String generatePlayerLandMark(Player p) {
+    protected StringBuilder generatePlayerLandMark(Player p) {
         StringBuilder s = new StringBuilder();
         for (Landmark l : p.getLandmarks()) {
             s.append(generateLandmark(l));
         }
-        return s + "";
+        return s;
     }
 
 
@@ -223,7 +223,7 @@ public class MachiWoCo {
                 generatePlayerCoin(p) +
                 generatePlayerEst(p) +
                 generate_pure_padding(".") +
-                generatePlayerLandMark(p);
+                generatePlayerLandMark(p) + "\n";
     }
 
 
@@ -247,7 +247,7 @@ public class MachiWoCo {
         for (int i = 0; i < players.length; i++) {
             s.append(generatePlayer(players[i], i + 1, players[i].isTurn()));
         }
-        return generateMarket() + s;
+        return generateMarket() + "\n" + s + generate_pure_padding("*");
     }
 
     //**********GAME STEP 4: ROLL THE DICE************//
@@ -375,7 +375,7 @@ public class MachiWoCo {
 
         m.getPlayers()[0].setTurn(true);
 
-        System.out.println(m.getCurrentGameState());
+        System.out.print(m.getCurrentGameState());
     }
 }
 
