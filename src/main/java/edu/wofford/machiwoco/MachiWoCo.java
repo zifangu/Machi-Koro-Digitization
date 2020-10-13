@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.*;
 
 public class MachiWoCo {
 
@@ -122,7 +124,7 @@ public class MachiWoCo {
         startingEstablishments.put(wheat,1);
 
         Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
-                "|  This is a city hall |\n");
+                "|  This is a city hall  |\n");
         Landmark[] startingLandmarks = new Landmark[1];
         startingLandmarks[0] = city;
 
@@ -132,6 +134,26 @@ public class MachiWoCo {
         players[0] = player1;
         players[1] = player2;
         EST_ORDER = new Establishment[] {wheat, ranch, forest};
+    }
+
+    /**
+     * Returns an array of Landmarks that the Player can afford
+     * @return a Landmark array containing available and affordable Landmark cards
+     */
+    public ArrayList<Landmark> getAffordableLandmarks(Player player) {
+        // cycle through the Landmarks... if player's coin count is >= cost of Landmark, add Landmark to array
+        Landmark[] landmarkArr = player.getLandmarks();
+        ArrayList<Landmark> resultArr = new ArrayList<Landmark>();
+        for (int i = 0; i < landmarkArr.length; i++) {
+            if (player.getCoinCount() >= landmarkArr[i].getCost()) {
+                resultArr.add(landmarkArr[i]);
+            }
+        }
+
+        // sort the arrayList
+        Collections.sort(resultArr, new SortByCost());
+
+        return resultArr;
     }
 
     //**********FUNCTIONS FOR ToSTRING()************//

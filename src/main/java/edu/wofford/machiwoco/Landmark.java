@@ -92,7 +92,7 @@ public class Landmark extends Card{
     /**
      * Generates the framework for displaying the landmark card
      * @param s a <code> string </code> that is used to generate the String[]
-     * @return an <code> array of strings </code> that make up 
+     * @return an <code> array of strings </code> that will be used for the toString() method
      */
 
     // ************ Saved for later. Do NOT delete. **************** //
