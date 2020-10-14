@@ -126,7 +126,7 @@ public class Feature2Test {
         Player p = m.getPlayer1();
         m.getPlayers()[0].setTurn(true);
         p.setCoinCount(10);
-        assertThat(m.getAvailLandmark(1), is("---------       CONSTRUCT        --------- \n" +
+        assertThat(m.getAvailLandmark(1), is("---------       CONSTRUCT        ---------\n" +
                 " 1. City Hall          NT (7)  [ ]\n"));
     }
 
@@ -138,6 +138,26 @@ public class Feature2Test {
         assertThat(m.getAvailLandmark(1), is(""));
     }
 
+//    @Test
+//    public void testToStringIfCanBuy() {
+//        Player p = m.getPlayer1();
+//        m.getPlayers()[0].setTurn(true);
+//        p.setCoinCount(10);
+//        int count = 1;
+//        assertThat(m.getAvailEst(count), is("---------        PURCHASE        ---------\n" +
+//                " 1. Wheat Field        BW (1)  [1]      #6\n" +
+//                " 2. Ranch              BC (1)  [2]      #6\n" +
+//                " 3. Forest             BG (3)  [5]      #6\n"));
+//    }
+
+        @Test
+    public void testToStringCannotBuy() {
+        Player p = m.getPlayer1();
+        m.getPlayers()[0].setTurn(true);
+        p.setCoinCount(0);
+        int count = 1;
+        assertThat(m.getAvailEst(count), is(""));
+    }
 
 
 
