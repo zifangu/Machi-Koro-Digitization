@@ -121,14 +121,14 @@ public class Feature2Test {
                         "City Hall          NT (7)  [ ]\n\n" +
                         "******************************************"));
     }
-    @Test
-    public void testToStringIfCanConstructLandmark() {
-        Player p = m.getPlayer1();
-        m.getPlayers()[0].setTurn(true);
-        p.setCoinCount(10);
-        assertThat(m.getAvailLandmark(), is("---------       CONSTRUCT        --------- \n" +
-                " 1. City Hall          NT (7)  [ ]"));
-    }
+//    @Test
+//    public void testToStringIfCanConstructLandmark() {
+//        Player p = m.getPlayer1();
+//        m.getPlayers()[0].setTurn(true);
+//        p.setCoinCount(10);
+//        assertThat(m.getAvailLandmark(), is("---------       CONSTRUCT        --------- \n" +
+//                " 1. City Hall          NT (7)  [ ]"));
+//    }
 
 
 
