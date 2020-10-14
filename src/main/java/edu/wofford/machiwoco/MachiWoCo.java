@@ -237,7 +237,7 @@ public class MachiWoCo {
             s.append(generateSingleMarketItem(e, market.get(e)));
         }
 //        System.out.print(s);
-        return generateStaticMarket() + s;
+        return generateStaticMarket() + s + "\n";
     }
 
     /**
@@ -369,7 +369,7 @@ public class MachiWoCo {
         for (int i = 0; i < players.length; i++) {
             s.append(generatePlayer(players[i], i + 1, players[i].isTurn()));
         }
-        return generateMarket() + "\n" + s + generate_pure_padding("*");
+        return generateMarket() + s + StringUtils.center("", 42, "*");
     }
 
     //**********GAME STEP 4: ROLL THE DICE************//
@@ -413,6 +413,19 @@ public class MachiWoCo {
 
     //Loop through player hands
     //
+
+    //**********GAME STEP 5.5: PURCHASE AND CONSTRUCT************//
+    protected String getMenutStatic(String s) {
+        String name = StringUtils.center("", 9, "-") +
+                StringUtils.center(s, 24, " ") + StringUtils.center("", 9, "-");
+        return generate_pure_padding("=") + name + "\n";
+    }
+
+    protected String getAvailLandmark() {
+
+        return "";
+    }
+
 
 
     //**********GAME STEP 6: END TURN************//
