@@ -301,6 +301,19 @@ public class MachiWoCo {
     //Loop through player hands
     //
 
+    //**********GAME STEP 5.5: PURCHASE AND CONSTRUCT************//
+    protected String getMenutStatic(String s) {
+        String name = StringUtils.center("", 9, "-") +
+                StringUtils.center(s, 24, " ") + StringUtils.center("", 9, "-");
+        return generate_pure_padding("=") + name + "\n";
+    }
+
+    protected String getAvailLandmark() {
+
+        return "";
+    }
+
+
 
     //**********GAME STEP 6: END TURN************//
     private void endTurn() {
