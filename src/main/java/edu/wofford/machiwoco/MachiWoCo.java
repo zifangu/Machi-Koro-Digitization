@@ -493,13 +493,23 @@ public class MachiWoCo {
         }
     }
 
-    //Loop through player hands
-    //
+    /**
+     * The logic involved with buying Establishment cards
+     * @return an ArrayList of Establishments that are available to purchase
+     */
+    
     private ArrayList<Establishment> buyEstablishmentLogic() {
         int amountOwned = getCurrentPlayer().getCoinCount();
         ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
         return e;
     }
+
+    /**
+     * Provides a list of affordable establishments available to a given player
+     * @param player the player who's affordable establishments are being presented
+     * @param owned the amount of coins owned by the given player
+     * @return an ArrayList of Establishments that are available to purhcase by a given player
+     */
 
     public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
         Map<Establishment,Integer> e = player.getEstOwned();
