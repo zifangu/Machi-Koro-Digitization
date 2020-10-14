@@ -8,6 +8,14 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.*;
 
+/** 
+ * This is a class built to represent the MachiWoco game.
+ * 
+ * @author Eric Craft
+ * @author Ivan Gu
+ * @author Bennett Joyce
+ */
+
 public class MachiWoCo {
 
     //**********DECLARATION************//
