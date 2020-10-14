@@ -20,7 +20,9 @@ public class Landmark extends Card{
      * @param name is the name of the landmark card
      * @param cost is a 1-2 digit number representing the cost of the card
      * @param color is the color of the card in enumeration form
+     * @param color_ab is the abbreviation of the color of the card
      * @param icon is the icon on the card in enumeration form
+     * @param icon_ab is the abbreviation of the icon on the card
      * @param description is the action description of the card
      */
 
@@ -91,8 +93,8 @@ public class Landmark extends Card{
 
     /**
      * Generates the framework for displaying the landmark card
-     * @param s ?
-     * @return an <code> array of strings </code> ?
+     * @param s a <code> string </code> that is used to generate the String[]
+     * @return an <code> array of strings </code> that will be used for the toString() method
      */
 
     // ************ Saved for later. Do NOT delete. **************** //
@@ -130,6 +132,11 @@ public class Landmark extends Card{
         if (is_constructed) {return "X";}
         return " ";
     }
+
+    /**
+     * Returns the string form of the Landmark card
+     * @return a string representing the current Landmark card
+     */
 
     @Override
     public String toString() {

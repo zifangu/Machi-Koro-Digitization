@@ -288,12 +288,6 @@ public class MachiWoCo {
     //Loop through player hands
     //
 
-    //**************Buy/Sell**************//
-//    protected HashMap<Establishment,Integer> getAvailableMarket() {
-//        int coinAmount = getCurrPlayer().getCoinCount();
-//
-//    }
-
 
     //**********GAME STEP 6: END TURN************//
     private void endTurn() {

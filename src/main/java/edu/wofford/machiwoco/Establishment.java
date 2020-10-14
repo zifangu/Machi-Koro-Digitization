@@ -235,7 +235,7 @@ public class Establishment extends Card {
 
     /**
       * Sets the modifier of the card
-      * @param modifierType the modifier being applied
+      * @param modifier the modifier being applied
       */
 
     public void setModifier(String modifier) {
