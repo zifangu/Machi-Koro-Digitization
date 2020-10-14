@@ -513,8 +513,7 @@ public class MachiWoCo {
      */
 
     public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
-        Map<Establishment,Integer> e = player.getEstOwned();
-        Set<Establishment> setE = e.keySet();
+        Set<Establishment> setE = market.keySet();
         ArrayList<Establishment> eResult = new ArrayList<Establishment>();
         for(Establishment est: setE){
             int cost = est.getCost();
