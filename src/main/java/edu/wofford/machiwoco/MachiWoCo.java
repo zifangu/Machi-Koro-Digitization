@@ -250,6 +250,15 @@ public class MachiWoCo {
         return generateMarket() + s;
     }
 
+    protected Player getCurrPlayer() {
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if (players[i].isTurn()) {
+                return players[i];
+            }
+        }
+        return null;
+    }
+
     //**********GAME STEP 4: ROLL THE DICE************//
     private void roll() {
         dice1 = (int) (Math.random() * 6 + 1);
@@ -278,6 +287,12 @@ public class MachiWoCo {
 
     //Loop through player hands
     //
+
+    //**************Buy/Sell**************//
+//    protected HashMap<Establishment,Integer> getAvailableMarket() {
+//        int coinAmount = getCurrPlayer().getCoinCount();
+//
+//    }
 
 
     //**********GAME STEP 6: END TURN************//
