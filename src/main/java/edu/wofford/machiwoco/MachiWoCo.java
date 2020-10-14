@@ -500,6 +500,7 @@ public class MachiWoCo {
     
     private ArrayList<Establishment> buyEstablishmentLogic() {
         int amountOwned = getCurrentPlayer().getCoinCount();
+        System.out.println("AMOUNT: " + amountOwned);
         ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
         return e;
     }
@@ -512,8 +513,7 @@ public class MachiWoCo {
      */
 
     public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
-        Map<Establishment,Integer> e = player.getEstOwned();
-        Set<Establishment> setE = e.keySet();
+        Set<Establishment> setE = market.keySet();
         ArrayList<Establishment> eResult = new ArrayList<Establishment>();
         for(Establishment est: setE){
             int cost = est.getCost();
@@ -535,7 +535,7 @@ public class MachiWoCo {
     protected String getMenuStatic(String s) {
         String name = StringUtils.center("", 9, "-") +
                 StringUtils.center(s, 24, " ") + StringUtils.center("", 9, "-");
-        return name + " " + "\n";
+        return name + "\n";
     }
 
     /**
@@ -556,6 +556,24 @@ public class MachiWoCo {
             }
             return getMenuStatic("CONSTRUCT") + s;
         }
+        return "";
+    }
+
+    protected String getAvailEst(int i) {
+        ArrayList<Establishment> e = buyEstablishmentLogic();
+
+//        ArrayList<Establishment> e = new ArrayList<Establishment>(Arrays.asList(EST_ORDER));
+        StringBuilder s = new StringBuilder();
+        int count = i;
+        if (e.size() != 0) {
+            for (Establishment est : e) {
+                String order = count + ".";
+                s.append(StringUtils.leftPad(order, 3, " ")).append(" ").append(generateSingleMarketItem(est, market.get(est)));
+                count ++;
+            }
+            return getMenuStatic("PURCHASE") + s;
+        }
+
         return "";
     }
 
@@ -689,14 +707,17 @@ public class MachiWoCo {
         MachiWoCo m = new MachiWoCo();
 //        m.playGame();
 
-        m.getPlayers()[1].setTurn(true);
-
-        System.out.print(m.getCurrentGameState());
-
-        Player p = m.getPlayer1();
+//        m.getPlayers()[1].setTurn(true);
         m.getPlayers()[0].setTurn(true);
-        p.setCoinCount(10);
-        System.out.println("\n" + m.getAvailLandmark(10));
+
+//        System.out.print(m.getCurrentGameState());
+            m.getCurrentPlayer().setCoinCount(10);
+//        p.setCoinCount(3);
+//        System.out.println("\n" + m.getAvailLandmark(10));
+
+        int count = 1;
+        System.out.println("\n" + m.getAvailEst(count));
+
     }
 }
 
