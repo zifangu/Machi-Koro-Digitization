@@ -502,12 +502,31 @@ public class MachiWoCo {
     protected String getMenutStatic(String s) {
         String name = StringUtils.center("", 9, "-") +
                 StringUtils.center(s, 24, " ") + StringUtils.center("", 9, "-");
-        return generate_pure_padding("=") + name + "\n";
+        return name + " " + "\n";
     }
 
-    protected String getAvailLandmark() {
-
+    protected String getAvailLandmark(int i) {
+        ArrayList<Landmark> l = getAffordableLandmarks(getCurrentPlayer());
+        StringBuilder s = new StringBuilder();
+        int count = i;
+        if (l.size() != 0) {
+            for (Landmark land : l) {
+                String order = count + ".";
+                s.append(StringUtils.leftPad(order, 3, " ")).append(" ").append(generateLandmark(land));
+                count ++;
+            }
+            return getMenutStatic("CONSTRUCT") + s;
+        }
         return "";
+    }
+
+    protected Player getCurrentPlayer() {
+        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if(players[i].isTurn()) {
+                return players[i];
+            }
+        }
+        return null;
     }
 
 
@@ -625,9 +644,14 @@ public class MachiWoCo {
         MachiWoCo m = new MachiWoCo();
 //        m.playGame();
 
-        m.getPlayers()[0].setTurn(true);
+//        m.getPlayers()[0].setTurn(true);
 
         System.out.print(m.getCurrentGameState());
+
+        Player p = m.getPlayer1();
+        m.getPlayers()[0].setTurn(true);
+        p.setCoinCount(10);
+        System.out.println("\n" + m.getAvailLandmark(10));
     }
 }
 
