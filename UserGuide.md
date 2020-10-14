@@ -6,4 +6,4 @@ This is the user guide for playing Machi Woco.
   
 ## Game Objective
 -------------------
-For this version of the gam,e the objective is to be the first player to build City Hall.
+For this version of the game, the objective is to be the first player to build City Hall.
