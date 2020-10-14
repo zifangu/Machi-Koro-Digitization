@@ -31,8 +31,6 @@ public class MachiWoCo {
     private int dice2;
     private int diceSum;
 
-    private boolean is_GameOver;
-
     Establishment wheat;
     Establishment ranch;
     Establishment forest;
@@ -497,11 +495,12 @@ public class MachiWoCo {
 
     //Loop through player hands
     //
-    private void buyLogic() {
+    private ArrayList<Establishment> buyEstablishmentLogic() {
         int amountOwned = getCurrentPlayer().getCoinCount();
         ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
-        //SEND IVAN FUNCTION(e)
+        return e;
     }
+
     public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
         Map<Establishment,Integer> e = player.getEstOwned();
         Set<Establishment> setE = e.keySet();
@@ -555,7 +554,7 @@ public class MachiWoCo {
      * @return the current Player's instance
      */
 
-    protected Player getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
                 return players[i];
@@ -581,19 +580,19 @@ public class MachiWoCo {
             players[curPlayerIndex].setTurn(false);
             players[curPlayerIndex +1].setTurn(true);
         }
-        isGameOver();
+
     }
 
     /**
      * Checks to see if the game is over
      */
 
-    private void isGameOver() {
+    private boolean isGameOver() {
         if(allLandmarksConstructed()) {
            System.out.println("The game is over. Player " + getTurn() + " is the winner.");
-           is_GameOver = true;
+           return true;
         }
-        is_GameOver = false;
+        return false;
     }
 
     /**
@@ -634,7 +633,7 @@ public class MachiWoCo {
     public void playGame() {
         startGame();
         players[0].setTurn(true);
-        while(!is_GameOver) {
+        while(!isGameOver()) {
 
            // (1) PRINT TURN
             printTurn(); //"Turn started for Player N."
@@ -659,7 +658,7 @@ public class MachiWoCo {
 
 
             // (5) SHOW BUY MENU
-            buyLogic();
+            // buyLogic();
             //if(somethingToShow/Buy) {
                 //BUY MENU()
             //}
