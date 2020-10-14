@@ -16,11 +16,42 @@ import org.apache.commons.lang3.StringUtils;
  */
 
 public class Card {
-     //Initial Enums For Color and Icons
+     /** Available card colors */
      protected enum Color {BLUE, GREEN, PURPLE, RED, NONE};
-     protected enum Color_ab {B, G, P, R, N};
+     /** Abbreviated versions of card colors */
+     protected enum Color_ab { 
+          /** Blue */
+          B, 
+          /** Green */
+          G, 
+          /** Purple */
+          P, 
+          /** Red */
+          R, 
+          /** None */
+          N
+     };
+     /** Icons found on cards */
      protected enum Icon {WHEAT, COW, BREAD, GEAR, FACTORY, FRUITO, CUPU, TOWER};
-     protected enum Icon_ab{W, B, C, G, F, O, U, T};
+     /** Abbreviated versions of card icons */
+     protected enum Icon_ab{
+          /** Wheat */
+          W,
+          /** Bread */
+          B, 
+          /** Cow */
+          C, 
+          /** Gear */
+          G, 
+          /** Factory */
+          F, 
+          /** Fruit */
+          O, 
+          /** Cup */
+          U, 
+          /** Tower */
+          T
+     };
 
      //Default Variables for Each Card
      protected String name;
