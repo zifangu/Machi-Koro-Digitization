@@ -497,6 +497,23 @@ public class MachiWoCo {
 
     //Loop through player hands
     //
+    private void buyLogic() {
+        int amountOwned = getCurrentPlayer().getCoinCount();
+        ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
+        //SEND IVAN FUNCTION(e)
+    }
+    public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
+        Map<Establishment,Integer> e = player.getEstOwned();
+        Set<Establishment> setE = e.keySet();
+        ArrayList<Establishment> eResult = new ArrayList<Establishment>();
+        for(Establishment est: setE){
+            int cost = est.getCost();
+            if(owned >= cost) {
+                eResult.add(est);
+            }
+        }
+        return eResult;
+    }
 
     //**********GAME STEP 5.5: PURCHASE AND CONSTRUCT************//
 
@@ -506,7 +523,7 @@ public class MachiWoCo {
      * @return the static portion of the menu to be displayed
      */
 
-    protected String getMenutStatic(String s) {
+    protected String getMenuStatic(String s) {
         String name = StringUtils.center("", 9, "-") +
                 StringUtils.center(s, 24, " ") + StringUtils.center("", 9, "-");
         return name + " " + "\n";
@@ -528,7 +545,7 @@ public class MachiWoCo {
                 s.append(StringUtils.leftPad(order, 3, " ")).append(" ").append(generateLandmark(land));
                 count ++;
             }
-            return getMenutStatic("CONSTRUCT") + s;
+            return getMenuStatic("CONSTRUCT") + s;
         }
         return "";
     }
@@ -637,6 +654,7 @@ public class MachiWoCo {
 
 
             // (5) SHOW BUY MENU
+            buyLogic();
             //if(somethingToShow/Buy) {
                 //BUY MENU()
             //}
@@ -657,7 +675,7 @@ public class MachiWoCo {
         MachiWoCo m = new MachiWoCo();
 //        m.playGame();
 
-//        m.getPlayers()[0].setTurn(true);
+        m.getPlayers()[1].setTurn(true);
 
         System.out.print(m.getCurrentGameState());
 
