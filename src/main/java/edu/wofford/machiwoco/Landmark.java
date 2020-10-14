@@ -20,7 +20,9 @@ public class Landmark extends Card{
      * @param name is the name of the landmark card
      * @param cost is a 1-2 digit number representing the cost of the card
      * @param color is the color of the card in enumeration form
+     * @param color_ab is the abbreviation of the color of the card
      * @param icon is the icon on the card in enumeration form
+     * @param icon_ab is the abbreviation of the icon on the card
      * @param description is the action description of the card
      */
 
