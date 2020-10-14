@@ -559,6 +559,12 @@ public class MachiWoCo {
         return "";
     }
 
+    /**
+     * Constructs the available establishments in string format
+     * @param i the index to where the establishment is going to be placed
+     * @return the string that displays the available establishments
+     */
+
     protected String getAvailEst(int i) {
         ArrayList<Establishment> e = buyEstablishmentLogic();
 
