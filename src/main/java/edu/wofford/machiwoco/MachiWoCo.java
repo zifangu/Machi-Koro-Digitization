@@ -499,7 +499,7 @@ public class MachiWoCo {
     //
 
     //**********GAME STEP 5.5: PURCHASE AND CONSTRUCT************//
-    protected String getMenutStatic(String s) {
+    protected String getMenuStatic(String s) {
         String name = StringUtils.center("", 9, "-") +
                 StringUtils.center(s, 24, " ") + StringUtils.center("", 9, "-");
         return name + " " + "\n";
@@ -515,7 +515,7 @@ public class MachiWoCo {
                 s.append(StringUtils.leftPad(order, 3, " ")).append(" ").append(generateLandmark(land));
                 count ++;
             }
-            return getMenutStatic("CONSTRUCT") + s;
+            return getMenuStatic("CONSTRUCT") + s;
         }
         return "";
     }
@@ -644,7 +644,7 @@ public class MachiWoCo {
         MachiWoCo m = new MachiWoCo();
 //        m.playGame();
 
-//        m.getPlayers()[0].setTurn(true);
+        m.getPlayers()[1].setTurn(true);
 
         System.out.print(m.getCurrentGameState());
 
