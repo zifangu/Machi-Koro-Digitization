@@ -32,57 +32,128 @@ public class MachiWoCo {
 
 
     //**********GETTERS AND SETTERS************//
+
+    /**
+     * Gets player 1
+     * @return player1's instance
+     */
+
     public Player getPlayer1() {
         return player1;
     }
 
+    /**
+     * Sets the given player to be player1
+     * @param player1 the given player to be set to player1
+     */
+
     public void setPlayer1(Player player1) {
         this.player1 = player1;
     }
+    
+    /**
+     * Gets player 2
+     * @return player2's instance
+     */
 
     public Player getPlayer2() {
         return player2;
     }
 
+    /**
+     * Sets the given player to be player2
+     * @param player2 the given player to be set to player2
+     */
+
     public void setPlayer2(Player player2) {
         this.player2 = player2;
     }
+
+    /**
+     * Gets the full list of available players
+     * @return an array of Players to take part in the game
+     */
 
     public Player[] getPlayers() {
         return players;
     }
 
+    /**
+     * Sets the players to partake in the game
+     * @param players an array of Players to take part in the game
+     */
+
     public void setPlayers(Player[] players) {
         this.players = players;
     }
+
+    /**
+     * Gets the wheat establishment
+     * @return the wheat establishment
+     */
 
     public Establishment getWheat() {
         return wheat;
     }
 
+    /**
+     * Sets the given Establishment to represent the wheat establishment
+     * @param wheat the Establishment to represent the wheat establishment
+     */
+
     public void setWheat(Establishment wheat) {
         this.wheat = wheat;
     }
+
+    /**
+     * Gets the ranch establishment
+     * @return the ranch establishment
+     */
 
     public Establishment getRanch() {
         return ranch;
     }
 
+    /**
+     * Gets the current market
+     * @return the current market as a Map object
+     */
+
     public Map<Establishment, Integer> getMarket() {
         return market;
     }
+
+    /**
+     * Sets the market
+     * @param market a Map object to represent the current market
+     */
 
     public void setMarket(Map<Establishment, Integer> market) {
         this.market = market;
     }
 
+    /**
+     * Sets the given Establishment to represent the ranch establishment
+     * @param ranch the Establishment to represent the ranch establishment
+     */
+
     public void setRanch(Establishment ranch) {
         this.ranch = ranch;
     }
 
+    /**
+     * Gets the forest establishment
+     * @return the forest establishment
+     */
+
     public Establishment getForest() {
         return forest;
     }
+
+    /**
+     * Sets the given Establishment to represent the forest establishment
+     * @param forest the Establishment to represent the forest establishment
+     */
 
     public void setForest(Establishment forest) {
         this.forest = forest;
@@ -90,6 +161,11 @@ public class MachiWoCo {
 
 
     //**********CONSTRUCTOR************//
+
+    /**
+     * MachiWoco constructor serving as the infrastructure of the game
+     */
+
     public MachiWoCo() {
         //List of Establishments
         wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
