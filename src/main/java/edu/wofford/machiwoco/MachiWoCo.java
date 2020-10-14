@@ -497,6 +497,23 @@ public class MachiWoCo {
 
     //Loop through player hands
     //
+    private void buyLogic() {
+        int amountOwned = getCurrentPlayer().getCoinCount();
+        ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
+        //SEND IVAN FUNCTION(e)
+    }
+    public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
+        Map<Establishment,Integer> e = player.getEstOwned();
+        Set<Establishment> setE = e.keySet();
+        ArrayList<Establishment> eResult = new ArrayList<Establishment>();
+        for(Establishment est: setE){
+            int cost = est.getCost();
+            if(owned >= cost) {
+                eResult.add(est);
+            }
+        }
+        return eResult;
+    }
 
     //**********GAME STEP 5.5: PURCHASE AND CONSTRUCT************//
     protected String getMenuStatic(String s) {
@@ -624,6 +641,7 @@ public class MachiWoCo {
 
 
             // (5) SHOW BUY MENU
+            buyLogic();
             //if(somethingToShow/Buy) {
                 //BUY MENU()
             //}
