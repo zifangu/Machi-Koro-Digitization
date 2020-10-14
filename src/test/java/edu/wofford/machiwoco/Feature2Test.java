@@ -55,7 +55,7 @@ public class Feature2Test {
                 "------------------------------------------\n" +
                 "Wheat Field        BW (1)  [1]      #6\n" +
                 "Ranch              BC (1)  [2]      #6\n" +
-                "Forest             BG (3)  [5]      #6\n"));
+                "Forest             BG (3)  [5]      #6\n\n"));
     }
 
     @Test
@@ -63,6 +63,13 @@ public class Feature2Test {
         Player p = m.getPlayer1();
         assertThat(m.generatePlayerLine(p, 1, true), is("             Player 1* [YOU]              \n"));
     }
+
+    @Test
+    public void testNonActivePlayer1() {
+        Player p = m.getPlayer1();
+        assertThat(m.generatePlayerLine(p, 1, false), is("                 Player 1                 \n"));
+    }
+
 
 //    @Test
 //    public void testActivePlayerEST() {
@@ -86,6 +93,33 @@ public class Feature2Test {
                 "Wheat Field        BW (1)  [1]      #1\n"    +
                 "..........................................\n" +
                 "City Hall          NT (7)  [ ]\n\n"));
+    }
+
+
+    @Test
+    public void testCurrentGameState() {
+        Player p = m.getPlayer1();
+        m.getPlayers()[0].setTurn(true);
+
+        assertThat(m.getCurrentGameState(), is ("******************************************\n" +
+                        "                  MARKET                  \n" +
+                        "------------------------------------------\n" +
+                        "Wheat Field        BW (1)  [1]      #6\n" +
+                        "Ranch              BC (1)  [2]      #6\n" +
+                        "Forest             BG (3)  [5]      #6\n\n" +
+                        "             Player 1* [YOU]              \n" +
+                        "------------------------------------------\n" +
+                        "                (4 coins)                 \n" +
+                        "Wheat Field        BW (1)  [1]      #1\n"    +
+                        "..........................................\n" +
+                        "City Hall          NT (7)  [ ]\n\n" +
+                        "                 Player 2                 \n" +
+                        "------------------------------------------\n" +
+                        "                (4 coins)                 \n" +
+                        "Wheat Field        BW (1)  [1]      #1\n"    +
+                        "..........................................\n" +
+                        "City Hall          NT (7)  [ ]\n\n" +
+                        "******************************************"));
     }
 
 

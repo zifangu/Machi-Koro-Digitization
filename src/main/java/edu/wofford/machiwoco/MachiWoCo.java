@@ -191,7 +191,7 @@ public class MachiWoCo {
             s.append(generateSingleMarketItem(e, market.get(e)));
         }
 //        System.out.print(s);
-        return generateStaticMarket() + s;
+        return generateStaticMarket() + s + "\n";
     }
 
     protected String generatePlayerCoin(Player p) {
@@ -269,7 +269,7 @@ public class MachiWoCo {
         for (int i = 0; i < players.length; i++) {
             s.append(generatePlayer(players[i], i + 1, players[i].isTurn()));
         }
-        return generateMarket() + "\n" + s + generate_pure_padding("*");
+        return generateMarket() + s + StringUtils.center("", 42, "*");
     }
 
     //**********GAME STEP 4: ROLL THE DICE************//
