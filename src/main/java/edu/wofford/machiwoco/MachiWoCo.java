@@ -531,7 +531,7 @@ public class MachiWoCo {
 
     /**
      * Constructs the available landmarks in string format
-     * @param i count variable representing the number of landmarks to be displayed
+     * @param i the index to where the landmark is going to be placed
      * @return the string that displays the available landmarks
      */
 
@@ -549,6 +549,11 @@ public class MachiWoCo {
         }
         return "";
     }
+
+    /**
+     * Gets the current player
+     * @return the current Player's instance
+     */
 
     protected Player getCurrentPlayer() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
