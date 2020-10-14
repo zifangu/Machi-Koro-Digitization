@@ -499,11 +499,24 @@ public class MachiWoCo {
     //
 
     //**********GAME STEP 5.5: PURCHASE AND CONSTRUCT************//
+
+    /**
+     * Constructs the static portion of the menu to be displayed
+     * @param s the string representing the static portion of the menu
+     * @return the static portion of the menu to be displayed
+     */
+
     protected String getMenutStatic(String s) {
         String name = StringUtils.center("", 9, "-") +
                 StringUtils.center(s, 24, " ") + StringUtils.center("", 9, "-");
         return name + " " + "\n";
     }
+
+    /**
+     * Constructs the available landmarks in string format
+     * @param i count variable representing the number of landmarks to be displayed
+     * @return the string that displays the available landmarks
+     */
 
     protected String getAvailLandmark(int i) {
         ArrayList<Landmark> l = getAffordableLandmarks(getCurrentPlayer());
