@@ -465,7 +465,7 @@ public class MachiWoCo {
         dice1 = (int) (Math.random() * 6 + 1);
         dice2 = 0; //(int) (Math.random() * 6 + 1);
         diceSum = dice1 +dice2;
-        System.out.println("Player "  + getTurn() + " rolled ["+dice1+"] =" + diceSum + ".");
+        System.out.println("Player "  + getTurn() + " rolled ["+dice1+"] = " + diceSum + ".");
         //System.out.println("Player "  + getTurn() + " rolled ["+dice1+"]["+dice2+"] =" + diceSum + ".");
     }
 
@@ -546,7 +546,7 @@ public class MachiWoCo {
             getCurrentPlayer().buyCard(e);
             int numberLeft = market.get(e) - 1;
             market.put(e,numberLeft);
-            System.out.println("Player "  + getTurn() + " purchased the" + e.getName() + ".");
+            System.out.println("Player "  + getTurn() + " purchased the " + e.getName() + ".");
         } else if(index <= numberOfEstablishments + numberOfLandmarks) {
             Landmark l = listOfLandmarks.get(index-numberOfEstablishments-1);
             getCurrentPlayer().buyLandmark(l);
@@ -617,13 +617,13 @@ public class MachiWoCo {
     }
 
     protected String getMenu() {
-        int count = 0;
+        int count = 1;
         String s = generate_pure_padding("=") + getAvailEst(count);
         count = buyEstablishmentLogic().size() + 1;
-        return s + getAvailLandmark(count) + generate_pure_padding("=") +
+        return s + getAvailLandmark(count) +
                 getMenuStatic("CANCEL") +
                 "99. " + StringUtils.rightPad("Do nothing", (42-4), " ") + "\n" +
-                generate_pure_padding("=");
+                StringUtils.center("", 42, "=");
     }
 
 
@@ -707,6 +707,7 @@ public class MachiWoCo {
         startGame();
         players[0].setTurn(true);
         int count = 0;
+        Scanner sc = new Scanner(System.in);
         while(!isGameOver()) {
 
            // (1) PRINT TURN
@@ -733,8 +734,18 @@ public class MachiWoCo {
             //ACTIVATE  "Forest activated for Player N."
 
             // (5) SHOW BUY MENU
+            String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
+                    "\n" + " coins\n" + "(To view details of an item, type 'view'  \n" +
+                    "followed by the item number. For example, \n" +
+                    "to view item 6, type 'view 6'.)           \n";
+
+            System.out.print(s);
+
             System.out.println(getMenu()); //Ivan
-            getBuyInput(1); //CHANGE 1 WITH INPUT FROM USER
+            System.out.print("Choose a number to purchase or construct: ");
+            String input = sc.nextLine();
+            int i = Integer.parseInt(input);
+            getBuyInput(i); //CHANGE 1 WITH INPUT FROM USER
 
             //}
                     // MENU TO BUY
@@ -746,24 +757,31 @@ public class MachiWoCo {
             //(6) End Game
             endTurn();
 
-            count ++;
-            if (count == 1) {
-                break;
-            }
+//            count ++;
+//            if (count == 1) {
+//                break;
+//            }
         }
     }
 
 
     public static void main(String[] args) {
 
-        MachiWoCo m = new MachiWoCo();
-        m.playGame();
+
+
+        if (args[0].equals("phase0")) {
+            Establishment.main(args);
+        } else if (args[0].equals("phase1")) {
+            MachiWoCo m = new MachiWoCo();
+            m.playGame();
+        }
+
 
 //        m.getPlayers()[1].setTurn(true);
-        m.getPlayers()[0].setTurn(true);
+//        m.getPlayers()[0].setTurn(true);
 
 //        System.out.print(m.getCurrentGameState());
-            m.getCurrentPlayer().setCoinCount(69);
+//            m.getCurrentPlayer().setCoinCount(69);
 //        p.setCoinCount(3);
 //        System.out.println("\n" + m.getAvailLandmark(10));
         int count = 1;

@@ -401,31 +401,31 @@ public class Establishment extends Card {
                           "|   (your turn only)    |\n",
                 "11-12", "receive", "bank", 2, "icon", "wheat");
 
-        /*
-        System.out.println(wheat.getDescription() + "\n");
-        System.out.println(ranch.getDescription()+ "\n");
-        System.out.println(bakery.getDescription()+ "\n");
-        System.out.println(cafe.getDescription()+ "\n");
-        System.out.println(convenience.getDescription()+ "\n");
-        System.out.println(forest.getDescription()+ "\n");
-        System.out.println(stadium.getDescription()+ "\n");
-        System.out.println(tv.getDescription()+ "\n");
-        System.out.println(business.getDescription()+ "\n");
-        System.out.println(cheese.getDescription()+ "\n");
-        System.out.println(furniture.getDescription()+ "\n");
-        System.out.println(mine.getDescription()+ "\n");
-        System.out.println(restaurant.getDescription()+ "\n");
-        System.out.println(orchard.getDescription()+ "\n");
-        System.out.println(market.getDescription()+ "\n");
 
-         */
-        bakery.color_ab = Card.Color_ab.G;
-        bakery.icon_ab = Card.Icon_ab.B;
+        System.out.println(wheat.toString() + "\n");
+        System.out.println(ranch.toString()+ "\n");
         System.out.println(bakery.toString()+ "\n");
-
-        stadium.color_ab = Card.Color_ab.P;
-        stadium.icon_ab = Card.Icon_ab.T;
+        System.out.println(cafe.toString()+ "\n");
+        System.out.println(convenience.toString()+ "\n");
+        System.out.println(forest.toString()+ "\n");
         System.out.println(stadium.toString()+ "\n");
+        System.out.println(tv.toString()+ "\n");
+        System.out.println(business.toString()+ "\n");
+        System.out.println(cheese.toString()+ "\n");
+        System.out.println(furniture.toString()+ "\n");
+        System.out.println(mine.toString()+ "\n");
+        System.out.println(restaurant.toString()+ "\n");
+        System.out.println(orchard.toString()+ "\n");
+        System.out.println(market.toString()+ "\n");
+
+
+//        bakery.color_ab = Card.Color_ab.G;
+//        bakery.icon_ab = Card.Icon_ab.B;
+//        System.out.println(bakery.toString()+ "\n");
+//
+//        stadium.color_ab = Card.Color_ab.P;
+//        stadium.icon_ab = Card.Icon_ab.T;
+//        System.out.println(stadium.toString()+ "\n");
 
 
 
