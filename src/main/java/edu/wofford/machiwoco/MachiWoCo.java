@@ -813,8 +813,9 @@ public class MachiWoCo {
                     //"Player N chose not to make improvements."
 
             //(6) End Game
-            endTurn();
-
+            if(!allLandmarksConstructed()) {
+                endTurn();
+            }
 //            count ++;
 //            if (count == 1) {
 //                break;
