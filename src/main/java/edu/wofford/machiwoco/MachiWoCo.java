@@ -702,6 +702,7 @@ public class MachiWoCo {
     public void playGame() {
         startGame();
         players[0].setTurn(true);
+        int count = 0;
         while(!isGameOver()) {
 
            // (1) PRINT TURN
@@ -709,7 +710,7 @@ public class MachiWoCo {
 
             // (2) PRINT CURRENT GAME STATE
 
-            getCurrentGameState();
+            System.out.println(getCurrentGameState());
             //CURRENT GAME STATE (THANKS IVAN!)
                     //MARKET ToSTRING
 
@@ -728,7 +729,7 @@ public class MachiWoCo {
             //ACTIVATE  "Forest activated for Player N."
 
             // (5) SHOW BUY MENU
-            getMenu(); //Ivan
+            System.out.println(getMenu()); //Ivan
             getBuyInput(1); //CHANGE 1 WITH INPUT FROM USER
 
             //}
@@ -740,6 +741,11 @@ public class MachiWoCo {
 
             //(6) End Game
             endTurn();
+
+            count ++;
+            if (count == 1) {
+                break;
+            }
         }
     }
 
@@ -759,7 +765,7 @@ public class MachiWoCo {
         int count = 1;
 //        System.out.println("\n" + m.getAvailEst(count));
 
-        System.out.print(m.getMenu());
+//        System.out.print(m.getMenu());
 
     }
 }
