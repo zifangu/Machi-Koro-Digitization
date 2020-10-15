@@ -518,7 +518,8 @@ public class MachiWoCo {
         ArrayList<Establishment> eResult = new ArrayList<Establishment>();
         for(Establishment est: setE){
             int cost = est.getCost();
-            if(owned >= cost) {
+            int numberLeft = market.get(est);
+            if(owned >= cost && numberLeft!=0) {
                 eResult.add(est);
             }
         }
@@ -547,7 +548,7 @@ public class MachiWoCo {
             market.put(e,numberLeft);
             System.out.println("Player "  + getTurn() + " purchased the" + e.getName() + ".");
         } else if(index <= numberOfEstablishments + numberOfLandmarks) {
-            Landmark l = listOfLandmarks.get(index-numberOfEstablishments);
+            Landmark l = listOfLandmarks.get(index-numberOfEstablishments-1);
             getCurrentPlayer().buyLandmark(l);
             System.out.println("Player "  + getTurn() + " constructed the " +l.getName() + ".");
         } else {
