@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.is;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.*;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -322,12 +323,76 @@ public class Feature2Test {
 
     // game test
     @Test
-    public void testInput() {
+    public void testNoMoveInput() {
         m.getPlayers()[0].setTurn(true);
         m.getBuyInput(99);
         assertThat(outContent.toString(), is("Player 1 chose not to make improvements.\n"));
+        m.getBuyInput(98);
+        assertThat(outContent.toString(), containsString("Not a valid input\n"));
+
 
     }
+
+    @Test
+    public void testEstInput() {
+        m.getPlayers()[0].setTurn(true);
+        assertThat(m.getBuyInput(1), is(true));
+    }
+
+    @Test
+    public void testBuyInput() {
+        m.getPlayers()[0].setTurn(true);
+        assertThat(m.handleInput("1"), is(true));
+    }
+
+    @Test
+    public void testViewInput() {
+        m.getPlayers()[0].setTurn(true);
+        m.handleInput("view 1");
+        assertThat(outContent.toString(), containsString("Wheat Field"));
+        assertThat(m.handleInput("view 1"), is(false));
+    }
+
+    @Test
+    public void testInvalidInput() {
+        m.getPlayers()[0].setTurn(true);
+        m.handleInput("I love MachiWoco");
+        assertThat(outContent.toString(), containsString("Not a valid input"));
+    }
+
+
+    @Test
+    public void testGetMenu() {
+        m.getPlayers()[0].setTurn(true);
+        assertThat(m.getMenu(), containsString("PURCHASE"));
+        assertThat(m.getMenu(), containsString("CANCEL"));
+
+    }
+
+
+    @Test
+    public void testViewLandmarkInput() {
+        m.getPlayers()[0].setTurn(true);
+        m.getCurrentPlayer().setCoinCount(10);
+
+        m.handleInput("view 4");
+        assertThat(outContent.toString(), is(".-----------------------.\n" +
+                "| <N>   LANDMARK    {T} |\n" +
+                "|       City Hall       |\n" +
+                "|                       |\n" +
+                "|  This is a city hall  |\n" +
+                "|                       |\n" +
+                "| (7)               [ ] |\n" +
+                "|_______________________|\n"));
+    }
+
+    @Test
+    public void testLandInput() {
+        m.getPlayers()[0].setTurn(true);
+        m.getCurrentPlayer().setCoinCount(10);
+        assertThat(m.getBuyInput(4), is(true));
+    }
+
 
 
     @After
