@@ -806,7 +806,7 @@ public class MachiWoCo {
 //            System.out.print(getMenu()); //Ivan
 
             buyFinished = false;
-            while(!buyFinished) {
+            while(!buyFinished && canAffordCard(getCurrentPlayer())) {
 //                System.out.print("Choose a number to purchase or construct: ");
                 //System.out.print("Choose a number to purchase or construct");
                 String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
