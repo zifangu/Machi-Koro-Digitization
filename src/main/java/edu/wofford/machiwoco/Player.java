@@ -89,6 +89,41 @@ public class Player {
     }
 
     /**
+     * Constructs/Buys Landmark
+     * @param l The landmark needed to match another landmark in the player's landmarks array
+     */
+
+    public void buyLandmark(Landmark l) {
+        int cost = l.getCost();
+        int counter = 0;
+        for(Landmark loop: landmarks) {
+            if(loop.equals(l)) {
+                landmarks[counter].setIs_constructed(true);
+            }
+            counter++;
+        }
+        setCoinCount(getCoinCount()-cost);
+    }
+
+
+    /**
+     * Buying Card Action
+     * @param e the Establishment upon which an action is being performed
+     */
+
+    public void buyCard(Establishment e) {
+        int cost = e.getCost();
+        if(estOwned.containsKey(e)) {
+            int numberOwned = estOwned.get(e);
+            estOwned.put(e,numberOwned+1);
+            setCoinCount(getCoinCount() - cost);
+        } else {
+            estOwned.put(e,1);
+            setCoinCount(getCoinCount() - cost);
+        }
+    }
+
+    /**
      * Performs the action associated with the given Establishment
      * @param e the Establishment upon which an action is being performed
      * @param numberOwned an integer representing the amount of coins owned by the Player
@@ -168,7 +203,5 @@ public class Player {
     public Landmark[] getLandmarks() {
         return landmarks;
     }
-
-
 
 }

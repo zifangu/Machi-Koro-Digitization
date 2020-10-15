@@ -47,6 +47,12 @@ public class LandmarkTest {
                 "|_______________________|"));
     }
 
+    //TODO
+    @Test
+    public void testSetIs_constructed(boolean is_constructed) {
+        //assertThat()
+    }
+
 
 
 

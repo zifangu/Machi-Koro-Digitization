@@ -33,7 +33,15 @@ public class Landmark extends Card{
         //System.out.println("Team Beast");
     }
 
-//    used by landmark sub classes to determine if a landmark is constructed or not
+    /**
+     * Gets the card's color
+     * @return an <code> enumeration value </code> specifying the card's color
+     */
+    public void setIs_constructed(boolean is_constructed) {
+        this.is_constructed = is_constructed;
+    }
+
+    //    used by landmark sub classes to determine if a landmark is constructed or not
     protected boolean is_constructed;
     protected  Color color;
 

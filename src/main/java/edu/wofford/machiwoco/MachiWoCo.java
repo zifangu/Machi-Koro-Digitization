@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.*;
+import java.util.stream.Stream;
 
 /** 
  * This is a class built to represent the MachiWoco game.
@@ -511,7 +512,7 @@ public class MachiWoCo {
      * @param owned the amount of coins owned by the given player
      * @return an ArrayList of Establishments that are available to purhcase by a given player
      */
-
+    //!!!!NEED TO TEST!!!!//
     public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
         Set<Establishment> setE = market.keySet();
         ArrayList<Establishment> eResult = new ArrayList<Establishment>();
@@ -525,6 +526,35 @@ public class MachiWoCo {
     }
 
     //**********GAME STEP 5.5: PURCHASE AND CONSTRUCT************//
+
+    //!!!!NEED TO TEST!!!!//
+    /**
+     * Receives buy/construct input and calls buyCard() to buy Establishment
+     * or buyLandmark() to construct Landmark
+     * @param index the index of the Establishment/Landmark/Escape Key
+     */
+    public void getBuyInput(int index) {
+        ArrayList<Establishment> listOfEstablishments = getAffordableEstablishments(getCurrentPlayer(), getCurrentPlayer().getCoinCount());
+        ArrayList<Landmark> listOfLandmarks = getAffordableLandmarks(getCurrentPlayer());
+        int numberOfLandmarks = listOfLandmarks.size();
+        int numberOfEstablishments = listOfEstablishments.size();
+        Establishment e = listOfEstablishments.get(index);
+        Landmark l = listOfLandmarks.get(index-numberOfEstablishments);
+        if(index == 99) {
+            System.out.println("Player "  + getTurn() + " chose not to make improvements.");
+        } else if(index <= numberOfEstablishments) {
+            getCurrentPlayer().buyCard(e);
+            System.out.println("Player "  + getTurn() + " purchased the Furniture Factory.");
+        } else if(index <= numberOfEstablishments + numberOfLandmarks) {
+            getCurrentPlayer().buyLandmark(l);
+            System.out.println("Player "  + getTurn() + " constructed the Shopping Mall.");
+        } else {
+            System.out.println("Not a valid input");
+            //CALL ORIGINAL WINDOW FUNCTION
+        }
+    }
+
+
 
     /**
      * Constructs the static portion of the menu to be displayed
@@ -653,13 +683,6 @@ public class MachiWoCo {
 
 
 
-
-//    private void printActivations() {
-//        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-//            players[i].
-//        }
-//    }
-
     /**
      * Play the MachiWoCo game in its entirety
      */
@@ -673,6 +696,8 @@ public class MachiWoCo {
             printTurn(); //"Turn started for Player N."
 
             // (2) PRINT CURRENT GAME STATE
+
+            getCurrentGameState();
             //CURRENT GAME STATE (THANKS IVAN!)
                     //MARKET ToSTRING
 
@@ -690,11 +715,10 @@ public class MachiWoCo {
             activationTest();
             //ACTIVATE  "Forest activated for Player N."
 
-
             // (5) SHOW BUY MENU
-            // buyLogic();
-            //if(somethingToShow/Buy) {
-                //BUY MENU()
+           // getMenu(); //Ivan
+            getBuyInput(1); //CHANGE 1 WITH INPUT FROM USER
+
             //}
                     // MENU TO BUY
                     //Establishment Purchase or Landmark Construction
