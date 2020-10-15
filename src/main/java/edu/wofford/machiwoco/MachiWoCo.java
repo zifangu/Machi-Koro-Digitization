@@ -698,7 +698,6 @@ public class MachiWoCo {
     }
 
 
-
     /**
      * Play the MachiWoCo game in its entirety
      */
@@ -744,6 +743,7 @@ public class MachiWoCo {
             System.out.println(getMenu()); //Ivan
             System.out.print("Choose a number to purchase or construct: ");
             String input = sc.nextLine();
+
             int i = Integer.parseInt(input);
             getBuyInput(i); //CHANGE 1 WITH INPUT FROM USER
 
