@@ -539,15 +539,15 @@ public class MachiWoCo {
         int numberOfLandmarks = listOfLandmarks.size();
         int numberOfEstablishments = listOfEstablishments.size();
         Establishment e = listOfEstablishments.get(index);
-        Landmark l = listOfLandmarks.get(index-numberOfEstablishments);
         if(index == 99) {
             System.out.println("Player "  + getTurn() + " chose not to make improvements.");
         } else if(index <= numberOfEstablishments) {
             getCurrentPlayer().buyCard(e);
-            System.out.println("Player "  + getTurn() + " purchased the Furniture Factory.");
+            System.out.println("Player "  + getTurn() + " purchased the" + e.getName() + ".");
         } else if(index <= numberOfEstablishments + numberOfLandmarks) {
+            Landmark l = listOfLandmarks.get(index-numberOfEstablishments);
             getCurrentPlayer().buyLandmark(l);
-            System.out.println("Player "  + getTurn() + " constructed the Shopping Mall.");
+            System.out.println("Player "  + getTurn() + " constructed the " +l.getName() + ".");
         } else {
             System.out.println("Not a valid input");
             //CALL ORIGINAL WINDOW FUNCTION
