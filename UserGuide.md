@@ -15,11 +15,11 @@ This is the user guide for playing Machi Woco.
   
   
 ## Game Objective
--------------------
+
 For this version of the game, the objective is to be the first player to build City Hall.
 
 ## Game Play
--------------------
+
 ### Start Game
 In this version of the game, there will be two players: player 1 and player 2.
 When a new game starts, player 1 will go first.
@@ -60,7 +60,7 @@ Each market entry contains these information(in such order):
  
  
 
-Each player alsocontains similar information about the establishments they own and the landmarks status with the exception that in landmarks `[ ]` indicates whether that landmark has been constructed or not as opposed to the activation range in establishments, separated by `..........................................`
+Each player also contains similar information about the establishments and landmarks with the exception that in landmarks `[ ]` indicates whether that landmark has been constructed or not as opposed to the activation range in establishments, separated by `..........................................`
 
 
 
