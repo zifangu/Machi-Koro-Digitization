@@ -538,10 +538,10 @@ public class MachiWoCo {
         ArrayList<Landmark> listOfLandmarks = getAffordableLandmarks(getCurrentPlayer());
         int numberOfLandmarks = listOfLandmarks.size();
         int numberOfEstablishments = listOfEstablishments.size();
-        Establishment e = listOfEstablishments.get(index);
         if(index == 99) {
             System.out.println("Player "  + getTurn() + " chose not to make improvements.");
         } else if(index <= numberOfEstablishments) {
+            Establishment e = listOfEstablishments.get(index);
             getCurrentPlayer().buyCard(e);
             System.out.println("Player "  + getTurn() + " purchased the" + e.getName() + ".");
         } else if(index <= numberOfEstablishments + numberOfLandmarks) {
