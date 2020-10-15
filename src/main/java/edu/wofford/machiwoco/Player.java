@@ -97,12 +97,13 @@ public class Player {
         int cost = l.getCost();
         int counter = 0;
         for(Landmark loop: landmarks) {
-            if(loop.equals(l)) {
+            if(loop.equals(l) && coinCount >= cost) {
                 landmarks[counter].setIs_constructed(true);
+                coinCount = coinCount - cost;
             }
             counter++;
         }
-        setCoinCount(getCoinCount()-cost);
+        
     }
 
 

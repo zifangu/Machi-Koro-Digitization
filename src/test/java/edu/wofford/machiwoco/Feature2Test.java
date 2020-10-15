@@ -200,6 +200,7 @@ public class Feature2Test {
 
 
     // Player Tests
+    @Test
     public void testBuy() {
         //List of Establishments
         Establishment wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
@@ -222,6 +223,9 @@ public class Feature2Test {
                         "|    (anyone's turn)    |\n",
                 "5", "receive", "bank", 1, "none", "none");
 
+        Establishment testEst = new Establishment("X", 3, Card.Color.RED, Card.Color_ab.R, Card.Icon.GEAR, Card.Icon_ab.G,
+                "X", "8", "give", "nobody", 1, "none", "none");
+
         //MARKET PLACE FOR ESTABLISHMENTS
         // Establishment[] market = new Establishment[18];
 
@@ -235,21 +239,76 @@ public class Feature2Test {
 
         Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
+        Landmark testL = new Landmark("X", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+                "X");
         Landmark[] startingLandmarks = new Landmark[1];
         startingLandmarks[0] = city;
 
         Player player = new Player(startingEstablishments, startingLandmarks, 4,1);
 
         Map<Establishment, Integer> estOwnedTest = player.getEstOwned();
-        player.buyCard(ranch);
-        assertTrue(estOwnedTest.containsKey(ranch));
-        assertTrue(estOwnedTest.containsValue(1));
+
+        player.buyCard(wheat);
+        //assertTrue(estOwnedTest.containsKey(wheat));
+        assertTrue(estOwnedTest.containsValue(2));
         assertThat(player.getCoinCount(), is(3));
 
         player.buyCard(ranch);
-        assertTrue(estOwnedTest.containsKey(wheat));
-        assertTrue(estOwnedTest.containsValue(2));
+        assertTrue(estOwnedTest.containsKey(ranch));
+        //assertTrue(estOwnedTest.containsValue(1));
         assertThat(player.getCoinCount(), is(2));
+
+        // Test activation
+        player.getActivationNumbers(1);
+        assertThat(player.getCoinCount(), is(4));
+
+         // Test buy landmark fail because of nonexisting landmark
+         player.buyLandmark(testL);
+         assertThat(player.getCoinCount(), is(4));
+
+         // Test buy landmark fail because of cost
+         player.buyLandmark(city);
+         assertThat(player.getCoinCount(), is(4));
+ 
+         //Test buy landmark
+         Player player2 = new Player(startingEstablishments, startingLandmarks, 7,2);
+         player2.buyLandmark(city);
+         assertThat(player2.getCoinCount(), is(0));
+        
+        // test Player number
+        assertThat(player.getPlayerNumber(), is(1));
+
+        //test setEstOwned
+        Map<Establishment,Integer> startingEstablishments2 = new HashMap<>();
+        startingEstablishments2.put(testEst,1);
+        player.setEstOwned(startingEstablishments2);
+        assertThat(player.getEstOwned(), is(startingEstablishments2));
+        
+        // Test setLandmarks
+        Landmark[] startingLandmarks2 = new Landmark[1];
+        startingLandmarks2[0] = testL;
+        player.setLandmarks(startingLandmarks2);
+        assertThat(player.getLandmarks(), is(startingLandmarks2));
+
+
+        Establishment testEst2 = new Establishment("X", 3, Card.Color.RED, Card.Color_ab.R, Card.Icon.GEAR, Card.Icon_ab.G,
+                "X", "11", "receive", "nobody", 1, "none", "none");
+        Establishment testEst3 = new Establishment("X", 3, Card.Color.RED, Card.Color_ab.R, Card.Icon.GEAR, Card.Icon_ab.G,
+                "X", "12", "give", "bank", 1, "none", "none");
+        startingEstablishments2.put(testEst2,1);
+        startingEstablishments2.put(testEst3,1);
+        Player player3 = new Player(startingEstablishments2, startingLandmarks, 7,3);
+
+        // Test activation fail - no receive
+        player3.getActivationNumbers(12);
+        assertThat(player3.getCoinCount(), is(7));
+
+        // Test activation fail - target != bank
+        player3.getActivationNumbers(11);
+        assertThat(player3.getCoinCount(), is(7));
+
+
     }
+
 
 }
