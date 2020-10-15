@@ -746,6 +746,22 @@ public class MachiWoCo {
         }
     }
 
+    /**
+     * Check to see if the player can afford an available card
+     * @param player the Player who can or cannot afford a card
+     * @return a boolean holding true if the player can afford a card
+     */
+
+    private boolean canAffordCard(Player player) {
+        for (Establishment e : EST_ORDER) {
+            int cost = e.getCost();
+            if (player.getCoinCount() >= cost) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Play the MachiWoCo game in its entirety
