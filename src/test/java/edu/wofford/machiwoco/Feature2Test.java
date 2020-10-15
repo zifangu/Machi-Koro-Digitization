@@ -3,6 +3,9 @@ package edu.wofford.machiwoco;
 import io.cucumber.java.jv.Lan;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.*;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -10,10 +13,16 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class Feature2Test {
     MachiWoCo m;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final PrintStream originalErr = System.err;
 
     @Before
     public void before() {
         m = new MachiWoCo();
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
     }
 
     @Test
@@ -310,5 +319,21 @@ public class Feature2Test {
 
     }
 
+
+    // game test
+    @Test
+    public void testInput() {
+        m.getPlayers()[0].setTurn(true);
+        m.getBuyInput(99);
+        assertThat(outContent.toString(), is("Player 1 chose not to make improvements.\n"));
+
+    }
+
+
+    @After
+    public void restoreStreams() {
+        System.setOut(originalOut);
+        System.setErr(originalErr);
+    }
 
 }
