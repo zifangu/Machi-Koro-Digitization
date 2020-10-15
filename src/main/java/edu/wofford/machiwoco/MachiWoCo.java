@@ -654,6 +654,7 @@ public class MachiWoCo {
         System.out.println("Turn ended for Player " + getTurn() +".");
         if(curPlayerIndex == NUMBER_OF_PLAYERS-1) {
             players[0].setTurn(true);
+            players[curPlayerIndex].setTurn(false);
         } else {
             players[curPlayerIndex].setTurn(false);
             players[curPlayerIndex +1].setTurn(true);
