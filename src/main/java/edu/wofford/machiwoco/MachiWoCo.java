@@ -541,7 +541,7 @@ public class MachiWoCo {
         if(index == 99) {
             System.out.println("Player "  + getTurn() + " chose not to make improvements.");
         } else if(index <= numberOfEstablishments) {
-            Establishment e = listOfEstablishments.get(index);
+            Establishment e = listOfEstablishments.get(index-1);
             getCurrentPlayer().buyCard(e);
             int numberLeft = market.get(e) - 1;
             market.put(e,numberLeft);
