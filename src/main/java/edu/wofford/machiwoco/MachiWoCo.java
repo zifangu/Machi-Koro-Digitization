@@ -543,7 +543,7 @@ public class MachiWoCo {
         } else if(index <= numberOfEstablishments) {
             Establishment e = listOfEstablishments.get(index);
             getCurrentPlayer().buyCard(e);
-            int numberLeft = market.get(e);
+            int numberLeft = market.get(e) - 1;
             market.put(e,numberLeft);
             System.out.println("Player "  + getTurn() + " purchased the" + e.getName() + ".");
         } else if(index <= numberOfEstablishments + numberOfLandmarks) {
