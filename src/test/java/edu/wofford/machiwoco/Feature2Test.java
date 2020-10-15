@@ -140,9 +140,10 @@ public class Feature2Test {
 
 //    @Test
 //    public void testToStringIfCanBuy() {
-//        Player p = m.getPlayer1();
 //        m.getPlayers()[0].setTurn(true);
-//        p.setCoinCount(10);
+//
+//        m.getCurrentPlayer().setCoinCount(69);
+//
 //        int count = 1;
 //        assertThat(m.getAvailEst(count), is("---------        PURCHASE        ---------\n" +
 //                " 1. Wheat Field        BW (1)  [1]      #6\n" +

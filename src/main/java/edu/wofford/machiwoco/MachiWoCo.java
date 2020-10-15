@@ -501,7 +501,7 @@ public class MachiWoCo {
     
     private ArrayList<Establishment> buyEstablishmentLogic() {
         int amountOwned = getCurrentPlayer().getCoinCount();
-        System.out.println("AMOUNT: " + amountOwned);
+//        System.out.println("AMOUNT: " + amountOwned);
         ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
         return e;
     }
@@ -613,6 +613,18 @@ public class MachiWoCo {
         return "";
     }
 
+    protected String getMenu() {
+        int count = 0;
+        String s = generate_pure_padding("=") + getAvailEst(count);
+        count = buyEstablishmentLogic().size() + 1;
+        return s + getAvailLandmark(count) + generate_pure_padding("=") +
+                getMenuStatic("CANCEL") +
+                "99. " + StringUtils.rightPad("Do nothing", (42-4), " ") + "\n" +
+                generate_pure_padding("=");
+    }
+
+
+
     /**
      * Gets the current player
      * @return the current Player's instance
@@ -716,7 +728,7 @@ public class MachiWoCo {
             //ACTIVATE  "Forest activated for Player N."
 
             // (5) SHOW BUY MENU
-           // getMenu(); //Ivan
+            getMenu(); //Ivan
             getBuyInput(1); //CHANGE 1 WITH INPUT FROM USER
 
             //}
@@ -735,18 +747,19 @@ public class MachiWoCo {
     public static void main(String[] args) {
 
         MachiWoCo m = new MachiWoCo();
-//        m.playGame();
+        m.playGame();
 
 //        m.getPlayers()[1].setTurn(true);
         m.getPlayers()[0].setTurn(true);
 
 //        System.out.print(m.getCurrentGameState());
-            m.getCurrentPlayer().setCoinCount(10);
+            m.getCurrentPlayer().setCoinCount(69);
 //        p.setCoinCount(3);
 //        System.out.println("\n" + m.getAvailLandmark(10));
-
         int count = 1;
-        System.out.println("\n" + m.getAvailEst(count));
+//        System.out.println("\n" + m.getAvailEst(count));
+
+        System.out.print(m.getMenu());
 
     }
 }
