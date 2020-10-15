@@ -37,6 +37,7 @@ public class MachiWoCo {
     Establishment forest;
     Establishment[] EST_ORDER;
 
+    private boolean buyFinished;
 
     //**********GETTERS AND SETTERS************//
 
@@ -528,32 +529,36 @@ public class MachiWoCo {
 
     //**********GAME STEP 5.5: PURCHASE AND CONSTRUCT************//
 
-    //!!!!NEED TO TEST!!!!//
+    //!!!!NEED TO MAKE PRIVATE!!!!//
     /**
      * Receives buy/construct input and calls buyCard() to buy Establishment
      * or buyLandmark() to construct Landmark
      * @param index the index of the Establishment/Landmark/Escape Key
+     * @return boolean as to whether the buy input was valid
      */
-    public void getBuyInput(int index) {
+    protected boolean getBuyInput(int index) {
         ArrayList<Establishment> listOfEstablishments = getAffordableEstablishments(getCurrentPlayer(), getCurrentPlayer().getCoinCount());
         ArrayList<Landmark> listOfLandmarks = getAffordableLandmarks(getCurrentPlayer());
         int numberOfLandmarks = listOfLandmarks.size();
         int numberOfEstablishments = listOfEstablishments.size();
         if(index == 99) {
             System.out.println("Player "  + getTurn() + " chose not to make improvements.");
+            return true;
         } else if(index <= numberOfEstablishments) {
             Establishment e = listOfEstablishments.get(index-1);
             getCurrentPlayer().buyCard(e);
             int numberLeft = market.get(e) - 1;
             market.put(e,numberLeft);
             System.out.println("Player "  + getTurn() + " purchased the " + e.getName() + ".");
+            return true;
         } else if(index <= numberOfEstablishments + numberOfLandmarks) {
             Landmark l = listOfLandmarks.get(index-numberOfEstablishments-1);
             getCurrentPlayer().buyLandmark(l);
             System.out.println("Player "  + getTurn() + " constructed the " +l.getName() + ".");
+            return true;
         } else {
             System.out.println("Not a valid input");
-            //CALL ORIGINAL WINDOW FUNCTION
+            return false;
         }
     }
 
@@ -623,7 +628,7 @@ public class MachiWoCo {
         return s + getAvailLandmark(count) +
                 getMenuStatic("CANCEL") +
                 "99. " + StringUtils.rightPad("Do nothing", (42-4), " ") + "\n" +
-                StringUtils.center("", 42, "=");
+                StringUtils.center("", 42, "=") +"\n" +StringUtils.center("Choose a number to purchase or construct: ", 42, " ");
     }
 
 
@@ -669,7 +674,7 @@ public class MachiWoCo {
 
     private boolean isGameOver() {
         if(allLandmarksConstructed()) {
-           System.out.println("The game is over. Player " + getTurn() + " is the winner.");
+            System.out.println("The game is over. Player " + getTurn() + " is the winner.");
            return true;
         }
         return false;
@@ -696,6 +701,50 @@ public class MachiWoCo {
         }
         return false;
     }
+    private static boolean isNumeric(String string) {
+        if(string == null | string.length() == 0 ) { return false;}
+        try {
+            Integer.parseInt(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+
+    /**
+     * Checks to see if all Landmarks have been constructed
+     * @param input is the string input from the user.
+     * @return a boolean as to whether the turn has been completed
+     */
+    private boolean handleInput(String input) {
+        ArrayList<Establishment> listOfEstablishments = getAffordableEstablishments(getCurrentPlayer(), getCurrentPlayer().getCoinCount());
+        ArrayList<Landmark> listOfLandmarks = getAffordableLandmarks(getCurrentPlayer());
+        Establishment e;
+        Landmark l;
+        int numberOfLandmarks = listOfLandmarks.size();
+        int numberOfEstablishments = listOfEstablishments.size();
+
+       if(isNumeric(input)) {
+           return getBuyInput(Integer.parseInt(input));
+       } else if(input.substring(0,4).toLowerCase().trim().equals("view")) {
+            input = input.replaceAll("\\D+","");
+            int index = Integer.parseInt(input);
+            if(index <= numberOfEstablishments) {
+                e = listOfEstablishments.get(index-1);
+                System.out.println(e.toString());
+                return false;
+            } else if (index <= numberOfEstablishments + numberOfLandmarks) {
+                l = listOfLandmarks.get(index-numberOfEstablishments-1);
+                System.out.println(l.toString());
+                return false;
+            }
+            return false;
+        } else {
+            System.out.println("Not a valid input");
+            return false;
+        }
+    }
 
 
     /**
@@ -707,8 +756,8 @@ public class MachiWoCo {
         players[0].setTurn(true);
         int count = 0;
         Scanner sc = new Scanner(System.in);
-        while(!isGameOver()) {
 
+        while(!isGameOver()) {
            // (1) PRINT TURN
             printTurn(); //"Turn started for Player N."
 
@@ -733,19 +782,28 @@ public class MachiWoCo {
             //ACTIVATE  "Forest activated for Player N."
 
             // (5) SHOW BUY MENU
-            String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
-                    "\n" + " coins\n" + "(To view details of an item, type 'view'  \n" +
-                    "followed by the item number. For example, \n" +
-                    "to view item 6, type 'view 6'.)           \n";
+//            String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
+//                        "\n" + " coins\n" + "(To view details of an item, type 'view'  \n" +
+//                        "followed by the item number. For example, \n" +
+//                        "to view item 6, type 'view 6'.)           \n";
+//            System.out.print(s);
+//            System.out.print(getMenu()); //Ivan
 
-            System.out.print(s);
+            buyFinished = false;
+            while(!buyFinished) {
+//                System.out.print("Choose a number to purchase or construct: ");
+                //System.out.print("Choose a number to purchase or construct");
+                String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
+                        "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
+                        "followed by the item number. For example, \n" +
+                        "to view item 6, type 'view 6'.)           \n";
 
-            System.out.println(getMenu()); //Ivan
-            System.out.print("Choose a number to purchase or construct: ");
-            String input = sc.nextLine();
-
-            int i = Integer.parseInt(input);
-            getBuyInput(i); //CHANGE 1 WITH INPUT FROM USER
+                System.out.print(s);
+                System.out.print(getMenu()); //Ivan
+                String input = sc.nextLine();
+                buyFinished = handleInput(input);
+            }
+             //CHANGE 1 WITH INPUT FROM USER
 
             //}
                     // MENU TO BUY
@@ -766,8 +824,6 @@ public class MachiWoCo {
 
 
     public static void main(String[] args) {
-
-
 
         if (args[0].equals("phase0")) {
             Establishment.main(args);
