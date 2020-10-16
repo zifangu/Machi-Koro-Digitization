@@ -341,6 +341,49 @@ public class Feature2Test {
         assertThat(testPArr[0], is(player2));
     }
 
+    // Machi setters
+    @Test
+    public void testSetEstablishments() {
+        MachiWoCo machi = new MachiWoCo();
+
+        Establishment wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
+                "|  Get 1 coin from the  |\n" +
+                        "|         bank.         |\n" +
+                        "|    (anyone's turn)    |\n",
+                "4", "test", "test", 1, "none", "none");
+        
+        machi.setWheat(wheat);
+        assertThat(machi.getWheat(), is(wheat));
+
+        Establishment ranch = new Establishment("Ranch", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.COW, Card.Icon_ab.C,
+                "|  Get 1 coin from the  |\n" +
+                        "|         bank.         |\n" +
+                        "|    (anyone's turn)    |\n",
+                "2", "receive", "bank", 1, "none", "none");
+
+
+        Establishment forest = new Establishment("Forest", 3, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.GEAR, Card.Icon_ab.G,
+                "|  Get 1 coin from the  |\n" +
+                        "|         bank.         |\n" +
+                        "|    (anyone's turn)    |\n",
+                "5", "receive", "bank", 1, "none", "none");
+
+        machi.setRanch(ranch);
+        assertThat(machi.getRanch(), is(ranch));
+
+        machi.setForest(forest);
+        assertThat(machi.getForest(), is(forest));
+
+        Map<Establishment,Integer> market = new HashMap<>();
+        market.put(wheat, 6);
+        market.put(ranch,6);
+        market.put(forest,6);
+
+        machi.setMarket(market);
+        assertThat(machi.getMarket(), is(market));
+        
+    }
+
    /* @Test
     public void testPlayGame() {
         MachiWoCo machi = new MachiWoCo();
