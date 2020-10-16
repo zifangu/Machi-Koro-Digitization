@@ -25,6 +25,8 @@ public class MachiWoCo {
     private Player[] players;
     Map<Establishment,Integer> market;
     Map<Establishment,Integer> startingEstablishments;
+    Map<Establishment,Integer> startingEstablishments2;
+
     final int NUMBER_OF_PLAYERS = 2;
     final int NUMBER_OF_LANDMARKS = 1;
 
@@ -205,7 +207,11 @@ public class MachiWoCo {
         market.put(forest,6);
 
         startingEstablishments = new HashMap<>();
+        startingEstablishments2 = new HashMap<>();
+
         startingEstablishments.put(wheat,1);
+        startingEstablishments2.put(wheat,1);
+
 
         Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
@@ -213,7 +219,7 @@ public class MachiWoCo {
         startingLandmarks[0] = city;
 
         player1 = new Player(startingEstablishments, startingLandmarks, 4,1);
-        player2 = new Player(startingEstablishments, startingLandmarks, 4,2);
+        player2 = new Player(startingEstablishments2, startingLandmarks, 4,2);
         players = new Player[NUMBER_OF_PLAYERS];
         players[0] = player1;
         players[1] = player2;
@@ -576,9 +582,14 @@ public class MachiWoCo {
             return true;
         } else if(index <= numberOfEstablishments) {
             Establishment e = listOfEstablishments.get(index-1);
+            System.out.println("Player 1: round1" + player1.getEstOwned());
+            System.out.println("Player 2:" + player2.getEstOwned());
             getCurrentPlayer().buyCard(e);
             int numberLeft = market.get(e) - 1;
             market.put(e,numberLeft);
+            System.out.println("Player 1: jsdflkjskl" + player1.getEstOwned());
+            System.out.println("Player 2:" + player2.getEstOwned());
+
             System.out.println("Player "  + getTurn() + " purchased the " + e.getName() + ".");
             return true;
         } else if(index <= numberOfEstablishments + numberOfLandmarks) {
