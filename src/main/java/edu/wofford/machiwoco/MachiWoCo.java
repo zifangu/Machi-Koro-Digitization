@@ -621,6 +621,11 @@ public class MachiWoCo {
         return "";
     }
 
+    /**
+     * Gets the menu to display in String format
+     * @return the game menu in string format
+     */
+
     protected String getMenu() {
         int count = 1;
         String s = generate_pure_padding("=") + getAvailEst(count);
@@ -701,6 +706,13 @@ public class MachiWoCo {
         }
         return false;
     }
+
+    /**
+     * Checks to see if the given string is numeric
+     * @param string the string being checked
+     * @return a boolean holding true if the given string is numeric
+     */
+
     private static boolean isNumeric(String string) {
         if(string == null | string.length() == 0 ) { return false;}
         try {

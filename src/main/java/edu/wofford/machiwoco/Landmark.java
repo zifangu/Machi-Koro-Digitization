@@ -34,8 +34,8 @@ public class Landmark extends Card{
     }
 
     /**
-     * Gets the card's color
-     * @return an <code> enumeration value </code> specifying the card's color
+     * Sets the Landmark card's constructed state
+     * @param is_constructed a boolean holding true if the Landmark is constructed
      */
     public void setIs_constructed(boolean is_constructed) {
         this.is_constructed = is_constructed;
