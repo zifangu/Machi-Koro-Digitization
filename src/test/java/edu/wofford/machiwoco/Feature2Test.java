@@ -317,8 +317,50 @@ public class Feature2Test {
         player3.getActivationNumbers(11);
         assertThat(player3.getCoinCount(), is(7));
 
-
     }
+
+    // More Machi Tests
+    @Test
+    public void testSetters() {
+        MachiWoCo machi = new MachiWoCo();
+        Player player1 = machi.getPlayer1();
+        Player player2 = machi.getPlayer2();
+
+        machi.setPlayer1(machi.getPlayer2());
+        assertThat(machi.getPlayer1(), is(machi.getPlayer2()));
+
+        machi.setPlayer1(player1);
+        machi.setPlayer2(machi.getPlayer1());
+        assertThat(machi.getPlayer2(), is(machi.getPlayer1()));
+
+        machi.setPlayer1(player1);
+        machi.setPlayer2(player2);
+        Player[] playerArr = new Player[] {player2, player1};
+        machi.setPlayers(playerArr);
+        Player[] testPArr = machi.getPlayers();
+        assertThat(testPArr[0], is(player2));
+    }
+
+   /* @Test
+    public void testPlayGame() {
+        MachiWoCo machi = new MachiWoCo();
+        Player player1 = machi.getPlayer1();
+        Player player2 = machi.getPlayer2();
+
+        Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+                "|  This is a city hall  |\n");
+
+        Landmark[] p1L = player1.getLandmarks();
+        Landmark[] p2L = player2.getLandmarks();
+
+        machi.playGame();
+
+        player2.buyLandmark(city);
+
+        assertEquals("The game is over. Player 2 is the winner.", outContent.toString());
+
+    } */
+
 
 
     // game test
