@@ -425,7 +425,7 @@ public class MachiWoCo {
      * Prints a message to the console indicating the start of the game
      */
 
-    private void startGame() { System.out.println( "The game has started. Player 1 will go first."); }
+    protected void startGame() { System.out.println( "The game has started. Player 1 will go first."); }
 
     //**********GAME STEP 2: PRINT TURN************//
 
@@ -433,7 +433,7 @@ public class MachiWoCo {
      * Prints a message to the console indicating the current player's turn
      */
 
-    private void printTurn() {
+    protected void printTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
                 System.out.println("Turn started for Player " + (i + 1) + ".");
@@ -690,7 +690,7 @@ public class MachiWoCo {
      * @return a boolean holding true if all landmarks have been constructed
      */
 
-    private boolean allLandmarksConstructed() {
+    protected boolean allLandmarksConstructed() {
         Landmark[] l;
         int count = 0;
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
@@ -713,7 +713,7 @@ public class MachiWoCo {
      * @return a boolean holding true if the given string is numeric
      */
 
-    private static boolean isNumeric(String string) {
+    protected static boolean isNumeric(String string) {
         if(string == null | string.length() == 0 ) { return false;}
         try {
             Integer.parseInt(string);
@@ -764,7 +764,7 @@ public class MachiWoCo {
      * @return a boolean holding true if the player can afford a card
      */
 
-    private boolean canAffordCard(Player player) {
+    protected boolean canAffordCard(Player player) {
         for (Establishment e : EST_ORDER) {
             int cost = e.getCost();
             if (player.getCoinCount() >= cost) {
