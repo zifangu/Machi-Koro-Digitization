@@ -729,7 +729,7 @@ public class MachiWoCo {
      * @param input is the string input from the user.
      * @return a boolean as to whether the turn has been completed
      */
-    private boolean handleInput(String input) {
+    protected boolean handleInput(String input) {
         ArrayList<Establishment> listOfEstablishments = getAffordableEstablishments(getCurrentPlayer(), getCurrentPlayer().getCoinCount());
         ArrayList<Landmark> listOfLandmarks = getAffordableLandmarks(getCurrentPlayer());
         Establishment e;
