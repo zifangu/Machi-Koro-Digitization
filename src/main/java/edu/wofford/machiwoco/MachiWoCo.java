@@ -408,7 +408,7 @@ public class MachiWoCo {
      */
 
     protected String generatePlayer(Player p, int num, boolean active) {
-        System.out.println("PLAYER: "+ active);
+//        System.out.println("PLAYER: "+ active);
         return generatePlayerLine(p, num, active) +
                 generate_pure_padding("-") +
                 generatePlayerCoin(p) +
@@ -744,7 +744,7 @@ public class MachiWoCo {
      */
 
     protected static boolean isNumeric(String string) {
-        if(string == null | string.length() == 0 ) { return false;}
+        if(string.length() == 0 ) { return false;}
         try {
             Integer.parseInt(string);
             return true;

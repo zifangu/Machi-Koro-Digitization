@@ -107,6 +107,11 @@ public class Feature2Test {
                 "City Hall          NT (7)  [ ]\n\n"));
     }
 
+    @Test
+    public void testNoOneTurn() {
+        assertThat(m.getTurn(), is(0));
+    }
+
 
     @Test
     public void testCurrentGameState() {
@@ -165,11 +170,25 @@ public class Feature2Test {
 
         @Test
     public void testToStringCannotBuy() {
+        Player p = m.getPlayer2();
+        m.getPlayers()[1].setTurn(true);
+        p.setCoinCount(0);
+        int count = 1;
+        assertThat(m.getAvailEst(count), is(""));
+    }
+
+    @Test
+    public void testToStringCannotBuy2() {
         Player p = m.getPlayer1();
         m.getPlayers()[0].setTurn(true);
         p.setCoinCount(0);
         int count = 1;
         assertThat(m.getAvailEst(count), is(""));
+    }
+
+    @Test
+    public void testNoPlayer() {
+        assertThat(m.getCurrentPlayer(), is(nullValue()));
     }
 
 
@@ -515,6 +534,7 @@ public class Feature2Test {
     @Test
     public void testIsNumeric() {
         assertThat(m.isNumeric(""), is (false));
+
     }
 
 
