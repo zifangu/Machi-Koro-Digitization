@@ -30,6 +30,9 @@ public class MachiWoCo {
     final int NUMBER_OF_PLAYERS = 2;
     final int NUMBER_OF_LANDMARKS = 1;
 
+    Scanner sc;
+
+
     private int dice1;
     private int dice2;
     private int diceSum;
@@ -177,6 +180,8 @@ public class MachiWoCo {
      */
 
     public MachiWoCo() {
+        sc = new Scanner(System.in);
+
         //List of Establishments
         wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
                 "|  Get 1 coin from the  |\n" +
@@ -582,13 +587,13 @@ public class MachiWoCo {
             return true;
         } else if(index <= numberOfEstablishments) {
             Establishment e = listOfEstablishments.get(index-1);
-            System.out.println("Player 1: round1" + player1.getEstOwned());
-            System.out.println("Player 2:" + player2.getEstOwned());
+//            System.out.println("Player 1: round1" + player1.getEstOwned());
+//            System.out.println("Player 2:" + player2.getEstOwned());
             getCurrentPlayer().buyCard(e);
             int numberLeft = market.get(e) - 1;
             market.put(e,numberLeft);
-            System.out.println("Player 1: jsdflkjskl" + player1.getEstOwned());
-            System.out.println("Player 2:" + player2.getEstOwned());
+//            System.out.println("Player 1: jsdflkjskl" + player1.getEstOwned());
+//            System.out.println("Player 2:" + player2.getEstOwned());
 
             System.out.println("Player "  + getTurn() + " purchased the " + e.getName() + ".");
             return true;
@@ -824,7 +829,6 @@ public class MachiWoCo {
         startGame();
         players[0].setTurn(true);
         int count = 0;
-        Scanner sc = new Scanner(System.in);
 
         while(!isGameOver()) {
            // (1) PRINT TURN
