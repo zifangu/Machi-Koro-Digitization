@@ -408,6 +408,7 @@ public class MachiWoCo {
      */
 
     protected String generatePlayer(Player p, int num, boolean active) {
+        System.out.println("PLAYER: "+ active);
         return generatePlayerLine(p, num, active) +
                 generate_pure_padding("-") +
                 generatePlayerCoin(p) +
@@ -415,6 +416,32 @@ public class MachiWoCo {
                 generate_pure_padding(".") +
                 generatePlayerLandMark(p) + "\n";
     }
+
+    protected void testPlayer() {
+        Player[] player = getPlayers();
+        Player p1 = player[0];
+        Player p2 = player[1];
+        Map<Establishment,Integer> map1 = startingEstablishments;
+        Map<Establishment,Integer> map2;
+        Establishment RANCH = EST_ORDER[1];
+
+        map2 = new HashMap<>();
+//        map1.put(RANCH, 2);
+
+        map2.put(RANCH, 2);
+        p1.setEstOwned(map1);
+        p2.setEstOwned(map2);
+
+//        System.out.println(p1.getEstOwned());
+        System.out.println(p2.getEstOwned());
+
+        System.out.println(generatePlayer(p1, 1, true));
+        System.out.println(generatePlayer(p2, 2, false));
+
+
+    }
+
+
 
 
 
@@ -455,6 +482,9 @@ public class MachiWoCo {
         }
         return generateMarket() + s + StringUtils.center("", 42, "*");
     }
+
+
+
 
     //**********GAME STEP 4: ROLL THE DICE************//
 
@@ -858,6 +888,7 @@ public class MachiWoCo {
             Establishment.main(args);
         } else if (args[0].equals("phase1")) {
             MachiWoCo m = new MachiWoCo();
+//            m.testPlayer();
             m.playGame();
         }
 
