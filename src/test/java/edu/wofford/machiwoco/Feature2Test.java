@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 public class Feature2Test {
-    MachiWoCo m;
+    Feature2 feature2;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -21,31 +21,31 @@ public class Feature2Test {
 
     @Before
     public void before() {
-        m = new MachiWoCo();
+        feature2 = new Feature2();
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
 
     @Test
     public void testPlayerNum() {
-        assertThat(m.getPlayers().length, is(2));
+        assertThat(feature2.getPlayers().length, is(2));
     }
 
     @Test
     public void testInitialMarket() {
-        Establishment wheat = m.getWheat();
-        assertThat(m.getMarket().get(wheat), is(6));
+        Establishment wheat = feature2.getWheat();
+        assertThat(feature2.getMarket().get(wheat), is(6));
 
-        Establishment ranch = m.getRanch();
-        assertThat(m.getMarket().get(ranch), is(6));
+        Establishment ranch = feature2.getRanch();
+        assertThat(feature2.getMarket().get(ranch), is(6));
 
-        Establishment forest = m.getForest();
-        assertThat(m.getMarket().get(forest), is(6));
+        Establishment forest = feature2.getForest();
+        assertThat(feature2.getMarket().get(forest), is(6));
     }
 
     @Test
     public void testPlayerStats() {
-        Player[] players = m.getPlayers();
+        Player[] players = feature2.getPlayers();
         int count = 0;
         for (Player p : players) {
             count += p.getCoinCount();
@@ -55,14 +55,14 @@ public class Feature2Test {
 
     @Test
     public void testStaticMarketToString() {
-        assertThat(m.generateStaticMarket(), is("******************************************\n" +
+        assertThat(feature2.generateStaticMarket(), is("******************************************\n" +
                 "                  MARKET                  \n" +
                 "------------------------------------------\n"));
     }
 
     @Test
     public void testMartket() {
-        assertThat(m.generateMarket(), is("******************************************\n" +
+        assertThat(feature2.generateMarket(), is("******************************************\n" +
                 "                  MARKET                  \n" +
                 "------------------------------------------\n" +
                 "Wheat Field        BW (1)  [1]      #6\n" +
@@ -72,14 +72,14 @@ public class Feature2Test {
 
     @Test
     public void testActivePlayer1() {
-        Player p = m.getPlayer1();
-        assertThat(m.generatePlayerLine(p, 1, true), is("             Player 1* [YOU]              \n"));
+        Player p = feature2.getPlayer1();
+        assertThat(feature2.generatePlayerLine(p, 1, true), is("             Player 1* [YOU]              \n"));
     }
 
     @Test
     public void testNonActivePlayer1() {
-        Player p = m.getPlayer1();
-        assertThat(m.generatePlayerLine(p, 1, false), is("                 Player 1                 \n"));
+        Player p = feature2.getPlayer1();
+        assertThat(feature2.generatePlayerLine(p, 1, false), is("                 Player 1                 \n"));
     }
 
 
@@ -96,10 +96,10 @@ public class Feature2Test {
 
     @Test
     public void testActivePlayerFull() {
-        Player p = m.getPlayer1();
-        m.getPlayers()[0].setTurn(true);
+        Player p = feature2.getPlayer1();
+        feature2.getPlayers()[0].setTurn(true);
 
-        assertThat(m.generatePlayer(p, m.getTurn(), true), is("             Player 1* [YOU]              \n" +
+        assertThat(feature2.generatePlayer(p, feature2.getTurn(), true), is("             Player 1* [YOU]              \n" +
                 "------------------------------------------\n" +
                 "                (4 coins)                 \n" +
                 "Wheat Field        BW (1)  [1]      #1\n"    +
@@ -109,16 +109,16 @@ public class Feature2Test {
 
     @Test
     public void testNoOneTurn() {
-        assertThat(m.getTurn(), is(0));
+        assertThat(feature2.getTurn(), is(0));
     }
 
 
     @Test
     public void testCurrentGameState() {
-        Player p = m.getPlayer1();
-        m.getPlayers()[0].setTurn(true);
+        Player p = feature2.getPlayer1();
+        feature2.getPlayers()[0].setTurn(true);
 
-        assertThat(m.getCurrentGameState(), is ("******************************************\n" +
+        assertThat(feature2.getCurrentGameState(), is ("******************************************\n" +
                         "                  MARKET                  \n" +
                         "------------------------------------------\n" +
                         "Wheat Field        BW (1)  [1]      #6\n" +
@@ -140,19 +140,19 @@ public class Feature2Test {
     }
     @Test
     public void testToStringIfCanConstructLandmark() {
-        Player p = m.getPlayer1();
-        m.getPlayers()[0].setTurn(true);
+        Player p = feature2.getPlayer1();
+        feature2.getPlayers()[0].setTurn(true);
         p.setCoinCount(10);
-        assertThat(m.getAvailLandmark(1), is("---------       CONSTRUCT        ---------\n" +
+        assertThat(feature2.getAvailLandmark(1), is("---------       CONSTRUCT        ---------\n" +
                 " 1. City Hall          NT (7)  [ ]\n"));
     }
 
     @Test
     public void testToStringCannotConstructLandmark() {
-        Player p = m.getPlayer1();
-        m.getPlayers()[0].setTurn(true);
+        Player p = feature2.getPlayer1();
+        feature2.getPlayers()[0].setTurn(true);
         p.setCoinCount(3);
-        assertThat(m.getAvailLandmark(1), is(""));
+        assertThat(feature2.getAvailLandmark(1), is(""));
     }
 
 //    @Test
@@ -170,25 +170,25 @@ public class Feature2Test {
 
         @Test
     public void testToStringCannotBuy() {
-        Player p = m.getPlayer2();
-        m.getPlayers()[1].setTurn(true);
+        Player p = feature2.getPlayer2();
+        feature2.getPlayers()[1].setTurn(true);
         p.setCoinCount(0);
         int count = 1;
-        assertThat(m.getAvailEst(count), is(""));
+        assertThat(feature2.getAvailEst(count), is(""));
     }
 
     @Test
     public void testToStringCannotBuy2() {
-        Player p = m.getPlayer1();
-        m.getPlayers()[0].setTurn(true);
+        Player p = feature2.getPlayer1();
+        feature2.getPlayers()[0].setTurn(true);
         p.setCoinCount(0);
         int count = 1;
-        assertThat(m.getAvailEst(count), is(""));
+        assertThat(feature2.getAvailEst(count), is(""));
     }
 
     @Test
     public void testNoPlayer() {
-        assertThat(m.getCurrentPlayer(), is(nullValue()));
+        assertThat(feature2.getCurrentPlayer(), is(nullValue()));
     }
 
 
@@ -341,7 +341,7 @@ public class Feature2Test {
     // More Machi Tests
     @Test
     public void testSetters() {
-        MachiWoCo machi = new MachiWoCo();
+        Feature2 machi = new Feature2();
         Player player1 = machi.getPlayer1();
         Player player2 = machi.getPlayer2();
 
@@ -363,7 +363,7 @@ public class Feature2Test {
     // Machi setters
     @Test
     public void testSetEstablishments() {
-        MachiWoCo machi = new MachiWoCo();
+        Feature2 machi = new Feature2();
 
         Establishment wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
                 "|  Get 1 coin from the  |\n" +
@@ -428,10 +428,10 @@ public class Feature2Test {
     // game test
     @Test
     public void testNoMoveInput() {
-        m.getPlayers()[0].setTurn(true);
-        m.getBuyInput(99);
+        feature2.getPlayers()[0].setTurn(true);
+        feature2.getBuyInput(99);
         assertThat(outContent.toString(), is("Player 1 chose not to make improvements.\n"));
-        m.getBuyInput(98);
+        feature2.getBuyInput(98);
         assertThat(outContent.toString(), containsString("Not a valid input\n"));
 
 
@@ -439,49 +439,49 @@ public class Feature2Test {
 
     @Test
     public void testEstInput() {
-        m.getPlayers()[0].setTurn(true);
-        assertThat(m.getBuyInput(1), is(true));
+        feature2.getPlayers()[0].setTurn(true);
+        assertThat(feature2.getBuyInput(1), is(true));
     }
 
     @Test
     public void testBuyInput() {
-        m.getPlayers()[0].setTurn(true);
-        assertThat(m.handleInput("1"), is(true));
+        feature2.getPlayers()[0].setTurn(true);
+        assertThat(feature2.handleInput("1"), is(true));
     }
 
     @Test
     public void testViewInput() {
-        m.getPlayers()[0].setTurn(true);
-        m.handleInput("view 1");
+        feature2.getPlayers()[0].setTurn(true);
+        feature2.handleInput("view 1");
 //        assertThat(outContent.toString(), containsString("Wheat Field"));
-        assertThat(m.handleInput("view 1"), is(false));
-        assertThat(m.handleInput("view 90"), is(false));
+        assertThat(feature2.handleInput("view 1"), is(false));
+        assertThat(feature2.handleInput("view 90"), is(false));
 
     }
 
     @Test
     public void testInvalidInput() {
-        m.getPlayers()[0].setTurn(true);
-        m.handleInput("I love MachiWoco");
+        feature2.getPlayers()[0].setTurn(true);
+        feature2.handleInput("I love MachiWoco");
         assertThat(outContent.toString(), containsString("Not a valid input"));
     }
 
 
     @Test
     public void testGetMenu() {
-        m.getPlayers()[0].setTurn(true);
-        assertThat(m.getMenu(), containsString("PURCHASE"));
-        assertThat(m.getMenu(), containsString("CANCEL"));
+        feature2.getPlayers()[0].setTurn(true);
+        assertThat(feature2.getMenu(), containsString("PURCHASE"));
+        assertThat(feature2.getMenu(), containsString("CANCEL"));
 
     }
 
 
     @Test
     public void testViewLandmarkInput() {
-        m.getPlayers()[0].setTurn(true);
-        m.getCurrentPlayer().setCoinCount(10);
+        feature2.getPlayers()[0].setTurn(true);
+        feature2.getCurrentPlayer().setCoinCount(10);
 
-        m.handleInput("view 4");
+        feature2.handleInput("view 4");
         assertThat(outContent.toString(), is(".-----------------------.\n" +
                 "| <N>   LANDMARK    {T} |\n" +
                 "|       City Hall       |\n" +
@@ -494,71 +494,71 @@ public class Feature2Test {
 
     @Test
     public void testLandInput() {
-        m.getPlayers()[0].setTurn(true);
-        m.getCurrentPlayer().setCoinCount(10);
-        assertThat(m.getBuyInput(4), is(true));
+        feature2.getPlayers()[0].setTurn(true);
+        feature2.getCurrentPlayer().setCoinCount(10);
+        assertThat(feature2.getBuyInput(4), is(true));
     }
 
     @Test
     public void testAllLandmark() {
         Landmark[] l;
-        m.getPlayers()[0].setTurn(true);
-        m.getCurrentPlayer().setCoinCount(10);
+        feature2.getPlayers()[0].setTurn(true);
+        feature2.getCurrentPlayer().setCoinCount(10);
         int count = 0;
-        l = m.getCurrentPlayer().getLandmarks();
+        l = feature2.getCurrentPlayer().getLandmarks();
         l[0].is_constructed = true;
-        for (int j = 0; j < m.NUMBER_OF_LANDMARKS; j++) {
+        for (int j = 0; j < feature2.NUMBER_OF_LANDMARKS; j++) {
             if (l[j].is_constructed) {
                 count++;
             }
-            assertThat(m.allLandmarksConstructed(), is(true));
+            assertThat(feature2.allLandmarksConstructed(), is(true));
         }
     }
 
     @Test
     public void testNoLandmark() {
         Landmark[] l;
-        m.getPlayers()[0].setTurn(true);
-        m.getCurrentPlayer().setCoinCount(10);
+        feature2.getPlayers()[0].setTurn(true);
+        feature2.getCurrentPlayer().setCoinCount(10);
         int count = 0;
-        l = m.getCurrentPlayer().getLandmarks();
+        l = feature2.getCurrentPlayer().getLandmarks();
         l[0].is_constructed = false;
-        for (int j = 0; j < m.NUMBER_OF_LANDMARKS; j++) {
+        for (int j = 0; j < feature2.NUMBER_OF_LANDMARKS; j++) {
             if (l[j].is_constructed) {
                 count++;
             }
-            assertThat(m.allLandmarksConstructed(), is(false));
+            assertThat(feature2.allLandmarksConstructed(), is(false));
         }
     }
 
     @Test
     public void testIsNumeric() {
-        assertThat(m.isNumeric(""), is (false));
+        assertThat(feature2.isNumeric(""), is (false));
 
     }
 
 
     @Test
     public void testPrintTurn() {
-        m.getPlayers()[0].setTurn(true);
-        m.printTurn();
+        feature2.getPlayers()[0].setTurn(true);
+        feature2.printTurn();
         assertThat(outContent.toString(), containsString("Turn started for Player 1"));
     }
 
     @Test
     public void testStartGame() {
-        m.startGame();
+        feature2.startGame();
         assertThat(outContent.toString(), containsString("The game has started. Player 1 will go first."));
     }
 
     @Test
     public void testCanAfford() {
-        m.getPlayers()[0].setTurn(true);
-        m.getCurrentPlayer().setCoinCount(10);
-        Player p = m.getCurrentPlayer();
-        assertThat(m.canAffordCard(p), is(true));
-        m.getCurrentPlayer().setCoinCount(0);
-        assertThat(m.canAffordCard(p), is(false));
+        feature2.getPlayers()[0].setTurn(true);
+        feature2.getCurrentPlayer().setCoinCount(10);
+        Player p = feature2.getCurrentPlayer();
+        assertThat(feature2.canAffordCard(p), is(true));
+        feature2.getCurrentPlayer().setCoinCount(0);
+        assertThat(feature2.canAffordCard(p), is(false));
 
 
 

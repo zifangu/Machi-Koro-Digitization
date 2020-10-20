@@ -902,9 +902,12 @@ public class MachiWoCo {
         if (args[0].equals("phase0")) {
             Establishment.main(args);
         } else if (args[0].equals("phase1")) {
-            MachiWoCo m = new MachiWoCo();
-//            m.testPlayer();
-            m.playGame();
+//        ********Run this for old versions of the code***********
+            // m.testPlayer();
+
+//        ********Refactored code*************
+            Feature2.main(args);
+//            m.playGame();
         }
 
 
