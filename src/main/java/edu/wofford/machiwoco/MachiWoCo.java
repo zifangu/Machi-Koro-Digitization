@@ -904,10 +904,10 @@ public class MachiWoCo {
         } else if (args[0].equals("phase1")) {
 //        ********Run this for old versions of the code***********
             // m.testPlayer();
+            // m.playGame();
 
 //        ********Refactored code*************
             Feature2.main(args);
-//            m.playGame();
         }
 
 
