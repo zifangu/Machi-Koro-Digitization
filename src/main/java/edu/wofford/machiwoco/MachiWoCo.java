@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.*;
-import java.util.stream.Stream;
 
 /** 
  * This is a class built to represent the MachiWoco game.
@@ -907,7 +906,12 @@ public class MachiWoCo {
             // m.playGame();
 
 //        ********Refactored code*************
-            Feature2.main(args);
+
+            if (args.length > 1 && args[1].equals("--ai"))  {
+                Feature3.main(args);
+            } else {
+                Feature2.main(args);
+            }
         }
 
 
