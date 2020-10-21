@@ -17,6 +17,7 @@ public class Player {
     private Map<Establishment,Integer> estOwned;
     private Landmark[] landmarks;
     private boolean turn;
+    private boolean ai;
 
     /**
      * Sets the player's coin total
@@ -45,6 +46,14 @@ public class Player {
         this.estOwned = estOwned;
     }
 
+    public boolean isAi() {
+        return ai;
+    }
+
+    public void setAi(boolean ai) {
+        this.ai = ai;
+    }
+
     /**
      * Sets the Player's owned Landmarks
      * @param landmarks an array containing the game's Landmarks
@@ -64,12 +73,13 @@ public class Player {
      * @param playerNumber an integer representing the Player's number
      */
 
-    public Player(Map<Establishment,Integer> estOwned, Landmark[] landmarks, int coinCount, int playerNumber) {
+    public Player(Map<Establishment,Integer> estOwned, Landmark[] landmarks, int coinCount, int playerNumber, boolean ai) {
       this.estOwned = estOwned;
       this.landmarks = landmarks;
       this.coinCount = coinCount;
       this.playerNumber = playerNumber;
       turn = false;
+      this.ai = ai;
     }
 
     /**
