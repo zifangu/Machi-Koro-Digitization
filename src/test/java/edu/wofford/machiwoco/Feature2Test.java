@@ -273,7 +273,7 @@ public class Feature2Test {
         Landmark[] startingLandmarks = new Landmark[1];
         startingLandmarks[0] = city;
 
-        Player player = new Player(startingEstablishments, startingLandmarks, 4,1);
+        Player player = new Player(startingEstablishments, startingLandmarks, 4,1, false);
 
         Map<Establishment, Integer> estOwnedTest = player.getEstOwned();
 
@@ -300,7 +300,7 @@ public class Feature2Test {
          assertThat(player.getCoinCount(), is(4));
  
          //Test buy landmark
-         Player player2 = new Player(startingEstablishments, startingLandmarks, 7,2);
+         Player player2 = new Player(startingEstablishments, startingLandmarks, 7,2, false);
          player2.buyLandmark(city);
          assertThat(player2.getCoinCount(), is(0));
         
@@ -326,7 +326,7 @@ public class Feature2Test {
                 "X", "12", "give", "bank", 1, "none", "none");
         startingEstablishments2.put(testEst2,1);
         startingEstablishments2.put(testEst3,1);
-        Player player3 = new Player(startingEstablishments2, startingLandmarks, 7,3);
+        Player player3 = new Player(startingEstablishments2, startingLandmarks, 7,3, false);
 
         // Test activation fail - no receive
         player3.getActivationNumbers(12);

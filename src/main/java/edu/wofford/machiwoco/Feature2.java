@@ -22,9 +22,9 @@ public class Feature2 {
 
 
         //**********DECLARATION************//
-        private Player player1;
-        private Player player2;
-        private Player[] players;
+        protected Player player1;
+        protected Player player2;
+        protected Player[] players;
         Map<Establishment,Integer> market;
         Map<Establishment,Integer> startingEstablishments;
         Map<Establishment,Integer> startingEstablishments2;
@@ -35,16 +35,16 @@ public class Feature2 {
         Scanner sc;
 
 
-        private int dice1;
-        private int dice2;
-        private int diceSum;
+        protected int dice1;
+        protected int dice2;
+        protected int diceSum;
 
         Establishment wheat;
         Establishment ranch;
         Establishment forest;
         Establishment[] EST_ORDER;
 
-        private boolean buyFinished;
+        protected boolean buyFinished;
 
 
 
@@ -99,8 +99,8 @@ public class Feature2 {
             Landmark[] startingLandmarks = new Landmark[1];
             startingLandmarks[0] = city;
 
-            player1 = new Player(startingEstablishments, startingLandmarks, 3,1);
-            player2 = new Player(startingEstablishments2, startingLandmarks, 3,2);
+            player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
+            player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, true);
             players = new Player[NUMBER_OF_PLAYERS];
             players[0] = player1;
             players[1] = player2;
@@ -379,7 +379,7 @@ public class Feature2 {
          * Prints a message to the console displaying the current player's dice roll
          */
 
-        private void roll() {
+        protected void roll() {
             dice1 = (int) (Math.random() * 6 + 1);
             dice2 = 0; //(int) (Math.random() * 6 + 1);
             diceSum = dice1 +dice2;
@@ -406,7 +406,7 @@ public class Feature2 {
          * Passes in the dice to the Player function
          */
 
-        private void activationTest() {
+        protected void activationTest() {
             for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
                 players[i].getActivationNumbers(dice1);
             }
@@ -417,7 +417,7 @@ public class Feature2 {
          * @return an ArrayList of Establishments that are available to purchase
          */
 
-        private ArrayList<Establishment> buyEstablishmentLogic() {
+        protected ArrayList<Establishment> buyEstablishmentLogic() {
             int amountOwned = getCurrentPlayer().getCoinCount();
 //        System.out.println("AMOUNT: " + amountOwned);
             ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
@@ -582,7 +582,7 @@ public class Feature2 {
          * Ends the current player's turn and checks to see if the game has ended
          */
 
-        private void endTurn() {
+        protected void endTurn() {
             int curPlayerIndex = getTurn() - 1;
             System.out.println("Turn ended for Player " + getTurn() +".");
             if(curPlayerIndex == NUMBER_OF_PLAYERS-1) {
@@ -599,7 +599,7 @@ public class Feature2 {
          * Checks to see if the game is over
          */
 
-        private boolean isGameOver() {
+        protected boolean isGameOver() {
             if(allLandmarksConstructed()) {
                 System.out.println("The game is over. Player " + getTurn() + " is the winner.");
                 return true;

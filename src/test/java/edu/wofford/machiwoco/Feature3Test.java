@@ -31,4 +31,10 @@ public class Feature3Test  {
         assertThat(feature3.getPlayers().length, is(2));
     }
 
+    @After
+    public void restoreStreams() {
+        System.setOut(originalOut);
+        System.setErr(originalErr);
+    }
+
 }
