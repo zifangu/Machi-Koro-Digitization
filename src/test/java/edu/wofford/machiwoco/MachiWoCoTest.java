@@ -61,7 +61,7 @@ public class MachiWoCoTest {
         landmarkArr.add(city);
         startingLandmarks[0] = city;
 
-        Player player1 = new Player(startingEstablishments, startingLandmarks, 7,1);
+        Player player1 = new Player(startingEstablishments, startingLandmarks, 7,1, false);
         assertThat(machiwoco.getAffordableLandmarks(player1), is(landmarkArr));
 
     }
@@ -85,7 +85,7 @@ public class MachiWoCoTest {
         Landmark[] startingLandmarks = new Landmark[1];
         startingLandmarks[0] = city;
 
-        Player player1 = new Player(startingEstablishments, startingLandmarks, 6,1);
+        Player player1 = new Player(startingEstablishments, startingLandmarks, 6,1, false);
         assertThat(machiwoco.getAffordableLandmarks(player1), is(landmarkArr));
 
     }

@@ -222,8 +222,8 @@ public class MachiWoCo {
         Landmark[] startingLandmarks = new Landmark[1];
         startingLandmarks[0] = city;
 
-        player1 = new Player(startingEstablishments, startingLandmarks, 4,1);
-        player2 = new Player(startingEstablishments2, startingLandmarks, 4,2);
+        player1 = new Player(startingEstablishments, startingLandmarks, 4,1, false);
+        player2 = new Player(startingEstablishments2, startingLandmarks, 4,2, true);
         players = new Player[NUMBER_OF_PLAYERS];
         players[0] = player1;
         players[1] = player2;
