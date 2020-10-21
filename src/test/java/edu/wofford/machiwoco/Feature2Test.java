@@ -50,7 +50,7 @@ public class Feature2Test {
         for (Player p : players) {
             count += p.getCoinCount();
         }
-        assertThat(count, is(4*players.length));
+        assertThat(count, is(3*players.length));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class Feature2Test {
 
         assertThat(feature2.generatePlayer(p, feature2.getTurn(), true), is("             Player 1* [YOU]              \n" +
                 "------------------------------------------\n" +
-                "                (4 coins)                 \n" +
+                "                (3 coins)                 \n" +
                 "Wheat Field        BW (1)  [1]      #1\n"    +
                 "..........................................\n" +
                 "City Hall          NT (7)  [ ]\n\n"));
@@ -126,13 +126,13 @@ public class Feature2Test {
                         "Forest             BG (3)  [5]      #6\n\n" +
                         "             Player 1* [YOU]              \n" +
                         "------------------------------------------\n" +
-                        "                (4 coins)                 \n" +
+                        "                (3 coins)                 \n" +
                         "Wheat Field        BW (1)  [1]      #1\n"    +
                         "..........................................\n" +
                         "City Hall          NT (7)  [ ]\n\n" +
                         "                 Player 2                 \n" +
                         "------------------------------------------\n" +
-                        "                (4 coins)                 \n" +
+                        "                (3 coins)                 \n" +
                         "Wheat Field        BW (1)  [1]      #1\n"    +
                         "..........................................\n" +
                         "City Hall          NT (7)  [ ]\n\n" +
