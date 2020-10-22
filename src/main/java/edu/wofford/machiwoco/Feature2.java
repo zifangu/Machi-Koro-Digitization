@@ -448,7 +448,7 @@ public class Feature2 {
         public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
             Set<Establishment> setE = market.keySet();
             ArrayList<Establishment> eResult = new ArrayList<Establishment>();
-            for(Establishment est: setE){
+            for(Establishment est: EST_ORDER){
                 int cost = est.getCost();
                 int numberLeft = market.get(est);
                 if(owned >= cost && numberLeft!=0) {
