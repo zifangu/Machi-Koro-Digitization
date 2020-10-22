@@ -56,7 +56,7 @@ public class Feature2 {
          */
 
         public Feature2() {
-            sc = new Scanner(System.in);
+
 
             //List of Establishments
             wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
@@ -93,6 +93,8 @@ public class Feature2 {
             startingEstablishments.put(wheat,1);
             startingEstablishments2.put(wheat,1);
 
+
+            sc = new Scanner(System.in);
 
             Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                     "|  This is a city hall  |\n");
@@ -555,7 +557,7 @@ public class Feature2 {
             return s + getAvailLandmark(count) +
                     getMenuStatic("CANCEL") +
                     "99. " + StringUtils.rightPad("Do nothing", (42-4), " ") + "\n" +
-                    StringUtils.center("", 42, "=") +"\n" +StringUtils.center("Choose a number to purchase or construct: ", 42, " ");
+                    StringUtils.center("", 42, "=") +"\n";
         }
 
 
@@ -675,7 +677,6 @@ public class Feature2 {
                 }
                 return false;
             } else {
-                System.out.println("Not a valid input");
                 return false;
             }
         }
@@ -731,17 +732,8 @@ public class Feature2 {
                 //ACTIVATE  "Forest activated for Player N."
 
                 // (5) SHOW BUY MENU
-//            String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
-//                        "\n" + " coins\n" + "(To view details of an item, type 'view'  \n" +
-//                        "followed by the item number. For example, \n" +
-//                        "to view item 6, type 'view 6'.)           \n";
-//            System.out.print(s);
-//            System.out.print(getMenu()); //Ivan
-
                 buyFinished = false;
-                while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-//                System.out.print("Choose a number to purchase or construct: ");
-                    //System.out.print("Choose a number to purchase or construct");
+                if(canAffordCard(getCurrentPlayer())) {
                     String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
                             "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
                             "followed by the item number. For example, \n" +
@@ -749,9 +741,17 @@ public class Feature2 {
 
                     System.out.print(s);
                     System.out.print(getMenu()); //Ivan
+                }
+                while(!buyFinished && canAffordCard(getCurrentPlayer())) {
+//                System.out.print("Choose a number to purchase or construct: ");
+                    //System.out.print("Choose a number to purchase or construct");
+                    System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
                     String input = sc.nextLine();
+                   // int index = ConsoleMain.getInput();
                     buyFinished = handleInput(input);
                 }
+
+                //TODO WE NEED TO MOVE CHOOSE A NUMBER OUTSIDE OF GET MENU AND LEAVE JUST THAT IN THE FOR LOOP
                 //CHANGE 1 WITH INPUT FROM USER
 
                 //}
