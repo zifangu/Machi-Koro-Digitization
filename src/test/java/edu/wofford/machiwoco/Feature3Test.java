@@ -4,9 +4,7 @@ import io.cucumber.java.jv.Lan;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -30,6 +28,22 @@ public class Feature3Test  {
     public void testPlayerNum() {
         assertThat(feature3.getPlayers().length, is(2));
     }
+
+//    @Test
+//    public void testLogic() {
+//        InputStream sysInBackup = System.in; // backup System.in to restore it later
+//        ByteArrayInputStream in = new ByteArrayInputStream("99".getBytes());
+//        System.setIn(in);
+//
+//        // with or without this, we've tried many ways.
+//        feature3.sc = new Scanner(in);
+//        feature3.playGame();
+//
+////        feature3.handleInput("99");
+//        assertThat(outContent.toString(), containsString("chose not to make improvements."));
+//    }
+
+
 
     @After
     public void restoreStreams() {

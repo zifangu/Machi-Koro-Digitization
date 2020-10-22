@@ -459,12 +459,12 @@ public class Feature2Test {
 
     }
 
-    @Test
-    public void testInvalidInput() {
-        feature2.getPlayers()[0].setTurn(true);
-        feature2.handleInput("I love MachiWoco");
-        assertThat(outContent.toString(), containsString("Not a valid input"));
-    }
+//    @Test
+//    public void testInvalidInput() {
+//        feature2.getPlayers()[0].setTurn(true);
+//        feature2.handleInput("I love MachiWoco");
+//        assertThat(outContent.toString(), containsString("Not a valid input"));
+//    }
 
 
     @Test

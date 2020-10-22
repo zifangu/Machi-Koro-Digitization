@@ -84,17 +84,12 @@ public class Feature3 extends Feature2 {
                 handleInput(Integer.toString(ai_input));
 
             } else {
-                while (!buyFinished && canAffordCard(getCurrentPlayer())) {
+                while(!buyFinished && canAffordCard(getCurrentPlayer())) {
 //                System.out.print("Choose a number to purchase or construct: ");
                     //System.out.print("Choose a number to purchase or construct");
-                    String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
-                            "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
-                            "followed by the item number. For example, \n" +
-                            "to view item 6, type 'view 6'.)           \n";
-
-                    System.out.print(s);
-                    System.out.print(getMenu()); //Ivan
+                    System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
                     String input = sc.nextLine();
+                    // int index = ConsoleMain.getInput();
                     buyFinished = handleInput(input);
                 }
             }
