@@ -748,7 +748,7 @@ public class Feature2 {
                     System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
                     //String input = "";
                     //while (sc.hasNextLine()) {
-                        String input = sc.nextLine();
+                    String input = sc.nextLine();
                     //}
                    // int index = ConsoleMain.getInput();
                     buyFinished = handleInput(input);
