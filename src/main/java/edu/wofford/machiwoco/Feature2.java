@@ -3,12 +3,12 @@ package edu.wofford.machiwoco;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.*;
 import java.util.stream.Stream;
-import java.io.*;
 
 /**
  * This is a class built to represent the MachiWoco game.
@@ -754,22 +754,13 @@ public class Feature2 {
 
                     System.out.print(s);
                     System.out.print(getMenu()); //Ivan
+
                 }
                 while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-//                System.out.print("Choose a number to purchase or construct: ");
-                    //System.out.print("Choose a number to purchase or construct");
                     Console cnsl = System.console();
-
-               //     System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-                    //String input = "";
-                    //while (sc.hasNextLine()) {
-               //     String input = sc.nextLine();
-                    //}
-                   // int index = ConsoleMain.getInput();
-
-                   String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-                   cnsl.flush();
-                   buyFinished = handleInput(input);
+                    String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+                    cnsl.flush();
+                    buyFinished = handleInput(input);
                 }
 
                 //TODO WE NEED TO MOVE CHOOSE A NUMBER OUTSIDE OF GET MENU AND LEAVE JUST THAT IN THE FOR LOOP
