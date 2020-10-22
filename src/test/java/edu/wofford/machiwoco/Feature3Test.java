@@ -24,6 +24,7 @@ public class Feature3Test  {
         System.setErr(new PrintStream(errContent));
     }
 
+
     @Test
     public void testPlayerNum() {
         assertThat(feature3.getPlayers().length, is(2));

@@ -44,6 +44,8 @@ public class Feature2 {
         Establishment forest;
         Establishment[] EST_ORDER;
 
+        Landmark[] startingLandmarks;
+
         protected boolean buyFinished;
 
 
@@ -52,7 +54,7 @@ public class Feature2 {
         //**********CONSTRUCTOR************//
 
         /**
-         * MachiWoco constructor serving as the infrastructure of the game
+         * MachiWoco constructor serving as the infrastructure of the game. Both players are human in this class.
          */
 
         public Feature2() {
@@ -98,15 +100,25 @@ public class Feature2 {
 
             Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                     "|  This is a city hall  |\n");
-            Landmark[] startingLandmarks = new Landmark[1];
+            startingLandmarks = new Landmark[1];
             startingLandmarks[0] = city;
 
+
+            EST_ORDER = new Establishment[] {wheat, ranch, forest};
+
+            playerInit();
+        }
+
+    /**
+     * Separated from the constructor for sub-classes to override.
+     */
+
+    protected void playerInit() {
             player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
-            player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, true);
+            player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, false);
             players = new Player[NUMBER_OF_PLAYERS];
             players[0] = player1;
             players[1] = player2;
-            EST_ORDER = new Establishment[] {wheat, ranch, forest};
         }
 
         /**

@@ -20,10 +20,27 @@ public class Feature3 extends Feature2 {
 //    Constructor
     public Feature3() {
         super();
+        playerInit();
+    }
+
+    /**
+     * Second player is now an AI.
+     */
+
+    @Override
+    protected void playerInit() {
+        player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
+        player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, true);
+        players = new Player[NUMBER_OF_PLAYERS];
+        players[0] = player1;
+        players[1] = player2;
     }
 
 
 
+    /**
+     * The prompt is no longer applied to both players. AI choice are made randomly, and the prompt is redircted backed to player 1.
+     */
 
     @Override
     public void playGame() {
