@@ -1,6 +1,8 @@
 package edu.wofford.machiwoco;
 
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ import java.util.stream.Stream;
 
 
 public class Feature3 extends Feature2 {
-//    Constructor
+
     public Feature3() {
         super();
         playerInit();
@@ -56,30 +58,14 @@ public class Feature3 extends Feature2 {
             // (2) PRINT CURRENT GAME STATE
 
             System.out.println(getCurrentGameState());
-            //CURRENT GAME STATE (THANKS IVAN!)
-            //MARKET ToSTRING
-
-            //Player 1 EST
-            //Player 1 LAND
-
-            //Player 2 EST
-            //Player 2 LAND
-
 
             // (3) ROLL THE DICE
             roll(); //"Player N rolled [3] = 3."
 
             // (4) ACTIVATE / ACTIONS
             activationTest();
-            //ACTIVATE  "Forest activated for Player N."
 
             // (5) SHOW BUY MENU
-//            String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
-//                        "\n" + " coins\n" + "(To view details of an item, type 'view'  \n" +
-//                        "followed by the item number. For example, \n" +
-//                        "to view item 6, type 'view 6'.)           \n";
-//            System.out.print(s);
-//            System.out.print(getMenu()); //Ivan
 
             buyFinished = false;
 
@@ -90,7 +76,7 @@ public class Feature3 extends Feature2 {
                 int estSize = buyEstablishmentLogic().size();
                 int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
 
-                // last option is 99. Do Nothing
+                // add last option of "99. Do Nothing" to AI
                 int ai_choices = estSize + lmkSize + 1;
                 int ai_input = (int) (Math.random() * ai_choices + 1);
                 if (ai_input == ai_choices) {
@@ -101,38 +87,30 @@ public class Feature3 extends Feature2 {
                 handleInput(Integer.toString(ai_input));
 
             } else {
+
+                // human player input
+                if(canAffordCard(getCurrentPlayer())) {
+                    String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
+                            "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
+                            "followed by the item number. For example, \n" +
+                            "to view item 6, type 'view 6'.)           \n";
+
+                    System.out.print(s);
+                    System.out.print(getMenu()); //Ivan
+
+                }
                 while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-//                System.out.print("Choose a number to purchase or construct: ");
-                    //System.out.print("Choose a number to purchase or construct");
-                    System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-                    String input = sc.nextLine();
-                    // int index = ConsoleMain.getInput();
+                    Console cnsl = System.console();
+                    String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+                    cnsl.flush();
                     buyFinished = handleInput(input);
                 }
             }
-            //CHANGE 1 WITH INPUT FROM USER
-
-            //}
-            // MENU TO BUY
-            //Establishment Purchase or Landmark Construction
-            //EST: "Player N purchased the Furniture Factory."
-            //LAND: "Player N constructed the Shopping Mall."
-            //"Player N chose not to make improvements."
-
-
-
-
 
             //(6) End Game
             if(!allLandmarksConstructed()) {
                 endTurn();
             }
-//            count ++;
-//            if (count == 1) {
-//                break;
-//            }
-
-
         }
     }
 
