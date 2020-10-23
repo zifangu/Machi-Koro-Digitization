@@ -31,6 +31,10 @@ public class Feature2Test {
         assertThat(feature2.getPlayers().length, is(2));
     }
 
+
+//    test separately
+//    test market after buy
+
     @Test
     public void testInitialMarket() {
         Establishment wheat = feature2.getWheat();

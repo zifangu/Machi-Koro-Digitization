@@ -30,8 +30,8 @@ public class Feature2 {
         Map<Establishment,Integer> startingEstablishments;
         Map<Establishment,Integer> startingEstablishments2;
 
-        final int NUMBER_OF_PLAYERS = 2;
-        final int NUMBER_OF_LANDMARKS = 1;
+        int NUMBER_OF_PLAYERS;
+        int NUMBER_OF_LANDMARKS = 1;
 
         Scanner sc;
 
@@ -99,15 +99,19 @@ public class Feature2 {
 
             sc = new Scanner(System.in);
 
+            EST_ORDER = new Establishment[] {wheat, ranch, forest};
+
+            landmarkInit();
+            playerInit();
+
+
+        }
+
+        protected void landmarkInit() {
             Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                     "|  This is a city hall  |\n");
             startingLandmarks = new Landmark[1];
             startingLandmarks[0] = city;
-
-
-            EST_ORDER = new Establishment[] {wheat, ranch, forest};
-
-            playerInit();
         }
 
     /**
@@ -115,7 +119,8 @@ public class Feature2 {
      */
 
     protected void playerInit() {
-            player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
+        NUMBER_OF_PLAYERS = 2;
+        player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
             player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, false);
             players = new Player[NUMBER_OF_PLAYERS];
             players[0] = player1;
@@ -319,29 +324,6 @@ public class Feature2 {
                     generatePlayerLandMark(p) + "\n";
         }
 
-        protected void testPlayer() {
-            Player[] player = getPlayers();
-            Player p1 = player[0];
-            Player p2 = player[1];
-            Map<Establishment,Integer> map1 = startingEstablishments;
-            Map<Establishment,Integer> map2;
-            Establishment RANCH = EST_ORDER[1];
-
-            map2 = new HashMap<>();
-//        map1.put(RANCH, 2);
-
-            map2.put(RANCH, 2);
-            p1.setEstOwned(map1);
-            p2.setEstOwned(map2);
-
-//        System.out.println(p1.getEstOwned());
-            System.out.println(p2.getEstOwned());
-
-            System.out.println(generatePlayer(p1, 1, true));
-            System.out.println(generatePlayer(p2, 2, false));
-
-
-        }
 
 
 

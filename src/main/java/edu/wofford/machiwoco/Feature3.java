@@ -31,6 +31,7 @@ public class Feature3 extends Feature2 {
 
     @Override
     protected void playerInit() {
+        NUMBER_OF_PLAYERS = 2;
         player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
         player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, true);
         players = new Player[NUMBER_OF_PLAYERS];

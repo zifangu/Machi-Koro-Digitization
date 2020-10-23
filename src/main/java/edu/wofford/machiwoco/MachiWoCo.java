@@ -179,55 +179,7 @@ public class MachiWoCo {
      */
 
     public MachiWoCo() {
-        sc = new Scanner(System.in);
-
-        //List of Establishments
-        wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
-                "|  Get 1 coin from the  |\n" +
-                        "|         bank.         |\n" +
-                        "|    (anyone's turn)    |\n",
-                "1", "receive", "bank", 1, "none", "none");
-
-        //**********Establishment ranch creation************//
-        ranch = new Establishment("Ranch", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.COW, Card.Icon_ab.C,
-                "|  Get 1 coin from the  |\n" +
-                        "|         bank.         |\n" +
-                        "|    (anyone's turn)    |\n",
-                "2", "receive", "bank", 1, "none", "none");
-
-
-        forest = new Establishment("Forest", 3, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.GEAR, Card.Icon_ab.G,
-                "|  Get 1 coin from the  |\n" +
-                        "|         bank.         |\n" +
-                        "|    (anyone's turn)    |\n",
-                "5", "receive", "bank", 1, "none", "none");
-
-        //MARKET PLACE FOR ESTABLISHMENTS
-        // Establishment[] market = new Establishment[18];
-
-        market = new HashMap<>();
-        market.put(wheat, 6);
-        market.put(ranch,6);
-        market.put(forest,6);
-
-        startingEstablishments = new HashMap<>();
-        startingEstablishments2 = new HashMap<>();
-
-        startingEstablishments.put(wheat,1);
-        startingEstablishments2.put(wheat,1);
-
-
-        Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
-                "|  This is a city hall  |\n");
-        Landmark[] startingLandmarks = new Landmark[1];
-        startingLandmarks[0] = city;
-
-        player1 = new Player(startingEstablishments, startingLandmarks, 4,1, false);
-        player2 = new Player(startingEstablishments2, startingLandmarks, 4,2, true);
-        players = new Player[NUMBER_OF_PLAYERS];
-        players[0] = player1;
-        players[1] = player2;
-        EST_ORDER = new Establishment[] {wheat, ranch, forest};
+//        Feature3 feature3 = new Feature3();
     }
 
     /**
