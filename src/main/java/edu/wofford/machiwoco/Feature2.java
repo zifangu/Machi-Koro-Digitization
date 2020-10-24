@@ -376,11 +376,12 @@ public class Feature2 {
          * Prints a message to the console displaying the current player's dice roll
          */
 
-        protected void roll() {
+        protected int roll() {
             dice1 = (int) (Math.random() * 6 + 1);
             dice2 = 0; //(int) (Math.random() * 6 + 1);
             diceSum = dice1 +dice2;
-            System.out.println("Player "  + getTurn() + " rolled ["+dice1+"] = " + diceSum + ".");
+            return diceSum;
+//            System.out.println("Player "  + getTurn() + " rolled ["+dice1+"] = " + diceSum + ".");
             //System.out.println("Player "  + getTurn() + " rolled ["+dice1+"]["+dice2+"] =" + diceSum + ".");
         }
 
@@ -701,9 +702,15 @@ public class Feature2 {
             startGame();
             players[0].setTurn(true);
             int count = 0;
+            DiceSubject diceSubject = new DiceSubject(0, 0);
+            new DiceObserver(diceSubject);
 
             while(!isGameOver()) {
                 // (1) PRINT TURN
+//                observer pattern
+//                turnstarted()
+//                event listener
+//                action performed
                 printTurn(); //"Turn started for Player N."
 
                 // (2) PRINT CURRENT GAME STATE
@@ -720,7 +727,9 @@ public class Feature2 {
 
 
                 // (3) ROLL THE DICE
-                roll(); //"Player N rolled [3] = 3."
+                diceSubject.setPlayer(getTurn());
+                diceSubject.setDice(roll());
+                diceSubject.notifyObservers();
 
                 // (4) ACTIVATE / ACTIONS
                 activationTest();

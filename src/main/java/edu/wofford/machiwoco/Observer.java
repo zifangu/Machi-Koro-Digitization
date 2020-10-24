@@ -1,6 +1,6 @@
 package edu.wofford.machiwoco;
 
 public abstract class Observer {
-    protected Subject subject;
+    protected DiceSubject diceSubject;
     public abstract void update();
 }

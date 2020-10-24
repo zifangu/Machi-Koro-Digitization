@@ -590,6 +590,8 @@ public class MachiWoCo {
             } else {
                 Feature2.main(args);
             }
+        } else if (args[0].equals("obs")) {
+            ObserverPatternDemo.main(args);
         }
 
 

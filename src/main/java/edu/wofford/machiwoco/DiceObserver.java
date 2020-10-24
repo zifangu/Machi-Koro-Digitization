@@ -2,13 +2,13 @@ package edu.wofford.machiwoco;
 
 public class DiceObserver extends Observer{
 
-    public DiceObserver(Subject subject){
-        this.subject = subject;
-        this.subject.attach(this);
+    public DiceObserver(DiceSubject diceSubject){
+        this.diceSubject = diceSubject;
+        this.diceSubject.attach(this);
     }
 
     @Override
     public void update() {
-        System.out.println( "Player N rolled " + subject.getState());
+        System.out.println( "Player " + diceSubject.getPlayer() +" rolled ["+diceSubject.getDice()+"] = " + diceSubject.getDice() + ".");
     }
 }
