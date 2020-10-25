@@ -9,6 +9,6 @@ public class DiceObserver extends Observer{
 
     @Override
     public void update() {
-        System.out.println( "Player " + diceSubject.getPlayer() +" rolled ["+diceSubject.getDice()+"] = " + diceSubject.getDice() + ".");
+        System.out.println( "Player " + diceSubject.getActivePlayer().getPlayerNumber() +" rolled ["+diceSubject.getDice()+"] = " + diceSubject.getDice() + ".");
     }
 }

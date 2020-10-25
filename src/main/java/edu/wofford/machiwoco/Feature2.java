@@ -702,8 +702,9 @@ public class Feature2 {
             startGame();
             players[0].setTurn(true);
             int count = 0;
-            DiceSubject diceSubject = new DiceSubject(0, 0);
+            DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
             new DiceObserver(diceSubject);
+            new ActivationObserver(diceSubject);
 
             while(!isGameOver()) {
                 // (1) PRINT TURN
@@ -716,24 +717,11 @@ public class Feature2 {
                 // (2) PRINT CURRENT GAME STATE
 
                 System.out.println(getCurrentGameState());
-                //CURRENT GAME STATE (THANKS IVAN!)
-                //MARKET ToSTRING
 
-                //Player 1 EST
-                //Player 1 LAND
-
-                //Player 2 EST
-                //Player 2 LAND
-
-
-                // (3) ROLL THE DICE
-                diceSubject.setPlayer(getTurn());
+                // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
+                diceSubject.setActivePlayer(getCurrentPlayer());
                 diceSubject.setDice(roll());
                 diceSubject.notifyObservers();
-
-                // (4) ACTIVATE / ACTIONS
-                activationTest();
-                //ACTIVATE  "Forest activated for Player N."
 
                 // (5) SHOW BUY MENU
                 buyFinished = false;
@@ -746,7 +734,11 @@ public class Feature2 {
                     System.out.print(s);
                     System.out.print(getMenu()); //Ivan
 
+                } else {
+                    System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
+                            "improvements.");
                 }
+
                 while(!buyFinished && canAffordCard(getCurrentPlayer())) {
                     Console cnsl = System.console();
                     String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
@@ -754,6 +746,10 @@ public class Feature2 {
                     buyFinished = handleInput(input);
                 }
 
+
+
+               // inputSubject.getInput();
+               // inputSubject.notifyObservers();
                 //TODO WE NEED TO MOVE CHOOSE A NUMBER OUTSIDE OF GET MENU AND LEAVE JUST THAT IN THE FOR LOOP
                 //CHANGE 1 WITH INPUT FROM USER
 
