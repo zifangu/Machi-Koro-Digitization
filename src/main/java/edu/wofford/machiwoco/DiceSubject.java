@@ -6,20 +6,30 @@ import java.util.List;
 public class DiceSubject {
 
     private List<Observer> observers = new ArrayList<Observer>();
-    private int player;
+    private Player activePlayer;
+    private Player[] players;
     private int dice;
 
-    public DiceSubject(int player, int dice) {
-        this.player = player;
+    public DiceSubject(Player activePlayer, Player[] players, int dice) {
+        this.activePlayer = activePlayer;
+        this.players = players;
         this.dice = dice;
     }
 
-    public int getPlayer() {
-        return player;
+    public Player getActivePlayer() {
+        return activePlayer;
     }
 
-    public void setPlayer(int player) {
-        this.player = player;
+    public void setActivePlayer(Player activePlayer) {
+        this.activePlayer = activePlayer;
+    }
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
     }
 
     public int getDice() {
@@ -29,15 +39,6 @@ public class DiceSubject {
     public void setDice(int dice) {
         this.dice = dice;
     }
-//
-//    public int getState() {
-//        return dice;
-//    }
-//
-//    public void setState(int state) {
-//        this.dice = state;
-//        notifyObservers();
-//    }
 
     public void attach(Observer observer){
         observers.add(observer);
