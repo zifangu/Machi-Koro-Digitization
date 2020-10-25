@@ -748,6 +748,8 @@ public class Feature2 {
 
 
 
+               // inputSubject.getInput();
+               // inputSubject.notifyObservers();
                 //TODO WE NEED TO MOVE CHOOSE A NUMBER OUTSIDE OF GET MENU AND LEAVE JUST THAT IN THE FOR LOOP
                 //CHANGE 1 WITH INPUT FROM USER
 
