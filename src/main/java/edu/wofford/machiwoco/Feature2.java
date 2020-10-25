@@ -721,9 +721,6 @@ public class Feature2 {
                 // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
                 diceSubject.setActivePlayer(getCurrentPlayer());
                 diceSubject.setDice(roll());
-
-                // TODO
-//                The observer is not changing the coins player has
                 diceSubject.notifyObservers();
 
                 // (5) SHOW BUY MENU
@@ -738,9 +735,8 @@ public class Feature2 {
                     System.out.print(getMenu()); //Ivan
 
                 } else {
-                    Console cnsl = System.console();
-                    String input = cnsl.readLine(StringUtils.center("Rip no money and a bug", 42, " "));
-                    cnsl.flush();
+                    System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
+                            "improvements.");
                 }
 
                 while(!buyFinished && canAffordCard(getCurrentPlayer())) {

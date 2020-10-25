@@ -145,7 +145,7 @@ public class Player {
         int amount = e.getAmount();
         String target = e.getTarget();
         if(type.equals("receive") && target.equals("bank")) {
-            printCardAfterActivation(e);
+//            printCardAfterActivation(e);
             addCoins(amount * numberOwned);
         }
     }

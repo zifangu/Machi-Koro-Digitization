@@ -18,6 +18,10 @@ public class ActivationObserver extends Observer {
         Player[] players = diceSubject.getPlayers();
         StringBuilder s = new StringBuilder();
         for (Player player : players) {
+            // this changes the actual coin amounts in the player bank
+            player.getActivationNumbers(dice);
+
+            // this prints out the activations for user's information
             Set<Establishment> keys = player.getEstOwned().keySet();
             for(Establishment est: keys) {
                 int activation = Integer.parseInt(est.getActivation());
