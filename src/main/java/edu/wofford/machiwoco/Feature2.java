@@ -703,8 +703,10 @@ public class Feature2 {
             players[0].setTurn(true);
             int count = 0;
             DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
+            GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
             new DiceObserver(diceSubject);
             new ActivationObserver(diceSubject);
+            new GameStateObserver(gameSubject);
 
             while(!isGameOver()) {
                 // (1) PRINT TURN
@@ -716,7 +718,11 @@ public class Feature2 {
 
                 // (2) PRINT CURRENT GAME STATE
 
-                System.out.println(getCurrentGameState());
+                //System.out.println(getCurrentGameState());
+                //gameSubject.setEstOrder(EST_ORDER);
+                //gameSubject.setPlayers(getPlayers());
+                //gameSubject.setMarket(getMarket());
+                gameSubject.notifyObservers();
 
                 // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
                 diceSubject.setActivePlayer(getCurrentPlayer());
