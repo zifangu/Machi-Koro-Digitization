@@ -2,14 +2,14 @@ package edu.wofford.machiwoco;
 
 import java.util.*;
 
-public class gameStateSubject {
+public class GameStateSubject {
 
     private List<Observer> observers = new ArrayList<Observer>();
     Establishment[] EST_ORDER;
     Player[] players;
     Map<Establishment,Integer> market;
 
-    public gameStateSubject(Establishment[] EST_ORDER, Player[] players, Map<Establishment,Integer> market) {
+    public GameStateSubject(Establishment[] EST_ORDER, Player[] players, Map<Establishment,Integer> market) {
         this.EST_ORDER = EST_ORDER;
         this.players = players;
         this.market = market;

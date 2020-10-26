@@ -4,11 +4,11 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.*;
 import java.util.*;
 
-public class gameStateObserver extends Observer{
+public class GameStateObserver extends Observer{
 
-    private gameStateSubject gameSubject;
+    private GameStateSubject gameSubject;
 
-    public gameStateObserver(gameStateSubject gameSubject){
+    public GameStateObserver(GameStateSubject gameSubject){
         this.gameSubject = gameSubject;
         this.gameSubject.attach(this);
     }
