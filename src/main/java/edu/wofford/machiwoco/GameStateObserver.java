@@ -176,7 +176,7 @@ public class GameStateObserver extends Observer{
     }
 
     // Sub out players
-    public StringBuilder playerStringBuilder() {
+    protected StringBuilder playerStringBuilder() {
         StringBuilder s = new StringBuilder();
         Player[] playersArr = gameSubject.getPlayers();
         for (int i = 0; i < playersArr.length; i++) {
