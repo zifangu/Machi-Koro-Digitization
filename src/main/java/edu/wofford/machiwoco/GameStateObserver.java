@@ -117,13 +117,22 @@ public class GameStateObserver extends Observer{
         return StringUtils.rightPad(act, 4, " ");
     }
 
-    // Done
+    /**
+     * Provides the given activation range in string form
+     * @param s the activation range in string format
+     * @return the string representing the activation range of the card
+     */
     protected String generateActivation(String s) {
         String act = "[" + s + "]";
         return StringUtils.rightPad(act, 7, " ");
     }
 
-    // Done
+    /**
+     * Generates a given market item to be displayed to the player
+     * @param e an Establishment instance to be displayed within the market
+     * @param count the available number of a given Establishment instance
+     * @return a string representing the market item of an Establishment card
+     */
     protected String generateSingleMarketItem(Establishment e, int count) {
         return StringUtils.rightPad(e.getName(), 18, " ") + " " +
                 e.getColor_ab() + e.getIcon_ab() + " " +
@@ -132,19 +141,31 @@ public class GameStateObserver extends Observer{
                 " #" + Integer.toString(count) + "\n";
     }
 
-    // Done
+    /**
+     * Generates the static market in string form
+     * @return a string representing the static market
+     */
     protected String generateStaticMarket() {
         return generate_pure_padding("*") +
                 generate_title("MARKET") +
                 generate_pure_padding("-");
     }
 
-    // Done
+    /**
+     * Generates the title for the toString() of the class
+     * @param s the string to which the title is being added
+     * @return the resulting title string
+     */
+
     protected String generate_title(String s) {
         return StringUtils.center(s, 42, " ") + "\n";
     }
 
-    // Done
+    /**
+     * Generates the static market in string form
+     * @return a string representing the static market
+     */
+
     protected  String generateMarket() {
         StringBuilder s = new StringBuilder();
         for (Establishment e : gameSubject.getEstOrder()) {
