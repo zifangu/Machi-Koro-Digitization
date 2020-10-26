@@ -9,6 +9,6 @@ public class InputObserver extends Observer{
 
     @Override
     public void update() {
-        System.out.println( "Player " + inputSubject.getActivePlayer().getPlayerNumber());
+       // System.out.println( "Player " + inputSubject.getActivePlayer().getPlayerNumber());
     }
 }

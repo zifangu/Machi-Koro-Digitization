@@ -1,10 +1,14 @@
 package edu.wofford.machiwoco;
 
+import edu.wofford.machiwoco.Establishment;
+import edu.wofford.machiwoco.Observer;
+import edu.wofford.machiwoco.Player;
+
 import java.util.*;
 
 public class GameStateSubject {
 
-    private List<Observer> observers = new ArrayList<Observer>();
+    private List<edu.wofford.machiwoco.Observer> observers = new ArrayList<edu.wofford.machiwoco.Observer>();
     Establishment[] EST_ORDER;
     Player[] players;
     Map<Establishment,Integer> market;
@@ -39,7 +43,7 @@ public class GameStateSubject {
         this.market = market;
     }
 
-    public void attach(Observer observer){
+    public void attach(edu.wofford.machiwoco.Observer observer){
         observers.add(observer);
     }
 

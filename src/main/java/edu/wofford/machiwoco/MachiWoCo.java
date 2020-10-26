@@ -298,7 +298,7 @@ public class MachiWoCo {
     }
 
     /**
-     * Generates a string dispaying the current player
+     * Generates a string displaying the current player
      * @param p the player being observed
      * @param num the player's number
      * @param active a boolean that holds true if the given player is active
