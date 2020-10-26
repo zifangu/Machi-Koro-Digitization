@@ -1,6 +1,5 @@
 package edu.wofford.machiwoco;
 
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Console;
@@ -8,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * This is a class built to represent the MachiWoco game.
@@ -50,9 +48,7 @@ public class Feature2 {
         protected boolean buyFinished;
 
 
-
-
-        //**********CONSTRUCTOR************//
+    //**********CONSTRUCTOR************//
 
         /**
          * MachiWoco constructor serving as the infrastructure of the game. Both players are human in this class.
@@ -702,11 +698,17 @@ public class Feature2 {
             startGame();
             players[0].setTurn(true);
             int count = 0;
+
             DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
             GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
             new DiceObserver(diceSubject);
             new ActivationObserver(diceSubject);
             new GameStateObserver(gameSubject);
+
+            InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
+            new InputObserver(inputSubject);
+
+
 
             while(!isGameOver()) {
                 // (1) PRINT TURN
@@ -749,6 +751,10 @@ public class Feature2 {
                     Console cnsl = System.console();
                     String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
                     cnsl.flush();
+
+                    inputSubject.setActivePlayer(getCurrentPlayer());
+                    inputSubject.notifyObservers();
+
                     buyFinished = handleInput(input);
                 }
 
@@ -756,7 +762,6 @@ public class Feature2 {
 
                // inputSubject.getInput();
                // inputSubject.notifyObservers();
-                //TODO WE NEED TO MOVE CHOOSE A NUMBER OUTSIDE OF GET MENU AND LEAVE JUST THAT IN THE FOR LOOP
                 //CHANGE 1 WITH INPUT FROM USER
 
                 //}
