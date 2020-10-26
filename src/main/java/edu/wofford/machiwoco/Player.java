@@ -46,9 +46,19 @@ public class Player {
         this.estOwned = estOwned;
     }
 
+    /**
+     * Checks if the player is an AI
+     * @return a boolean holding true if the player is an AI
+     */
+
     public boolean isAi() {
         return ai;
     }
+
+    /**
+     * Sets the player's AI status
+     * @param ai a boolean holding true if the player is to be an AI
+     */
 
     public void setAi(boolean ai) {
         this.ai = ai;
