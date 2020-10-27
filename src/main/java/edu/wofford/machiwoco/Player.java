@@ -95,18 +95,28 @@ public class Player {
     /**
      * Calls the action to be performed based on the Player's dice roll
      * @param diceRoll an integer representing the result of the Player's dice roll
+     * @param isTurn  boolean representing whether the player's turn is active
      */
 
-    public void getActivationNumbers(int diceRoll){
+    public void getActivationNumbers(int diceRoll, boolean isTurn){
         Set<Establishment> keys = estOwned.keySet();
         for(Establishment est: keys){
-            int activation = Integer.parseInt(est.getActivation());
+            int activation = 0;
+            int activation2 = 0;
+            if(!est.getName().equals("Bakery")) {
+                activation = Integer.parseInt(est.getActivation());
+            } else if(est.getName().equals("Bakery")){
+                activation = 2;
+                activation2 = 3;
+            }
             int numberOwned = estOwned.get(est);
-            if(diceRoll == activation) {
-                if(est.getColor_ab() == Card.Color_ab.B) {
+            if(diceRoll == activation || diceRoll == activation2) {
+                if(est.getColor_ab().equals(Card.Color_ab.B)) {
                     performAction(est,numberOwned);
-                } else if (est.getColor_ab() == Card.Color_ab.G) {
-                    //New Function Something
+                } else if(est.getColor_ab().equals(Card.Color_ab.G)) {
+                    if(isTurn) {
+                        performAction(est, numberOwned);
+                    }
                 }
             }
         }
@@ -129,7 +139,6 @@ public class Player {
         }
         
     }
-
 
     /**
      * Buying Card Action
@@ -158,13 +167,8 @@ public class Player {
         String type = e.getType();
         int amount = e.getAmount();
         String target = e.getTarget();
-        Card.Color_ab a = e.getColor_ab();
-
-        if(type.equals("receive") && target.equals("bank") && a.equals(Card.Color_ab.B)) {
-//            printCardAfterActivation(e);
+        if(type.equals("receive") && target.equals("bank")) {
             addCoins(amount * numberOwned);
-        } else if (type.equals("receive") && target.equals("bank") && a.equals(Card.Color_ab.G)) {
-            //addCoinsYourTurn(amount * numberOwned);
         }
     }
 
@@ -219,10 +223,6 @@ public class Player {
     public int getCoinCount() {
         return coinCount;
     }
-
-   // public Establishment[] getEstOwned() {
-      //  return estOwned;
-   // }
 
    /**
     * Gets the Player's landmarks

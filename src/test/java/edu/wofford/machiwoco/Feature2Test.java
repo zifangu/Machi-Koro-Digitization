@@ -255,10 +255,10 @@ public class Feature2Test {
         estOwned.put(test, 1);
 
         player1.setEstOwned(estOwned);
-        player1.getActivationNumbers(2);
-        player1.getActivationNumbers(1);
+        player1.getActivationNumbers(2,true);
+        player1.getActivationNumbers(1,true);
         assertThat(player1.getCoinCount(), is(4));
-        player1.getActivationNumbers(8);
+        player1.getActivationNumbers(8,true);
         assertThat(player1.getCoinCount(), is(4));
     }
 

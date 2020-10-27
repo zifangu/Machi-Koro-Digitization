@@ -19,7 +19,7 @@ public class ActivationObserver extends Observer {
         StringBuilder s = new StringBuilder();
         for (Player player : players) {
             // this changes the actual coin amounts in the player bank
-            player.getActivationNumbers(dice);
+            player.getActivationNumbers(dice,player.isTurn());
 
             // this prints out the activations for user's information
             Set<Establishment> keys = player.getEstOwned().keySet();

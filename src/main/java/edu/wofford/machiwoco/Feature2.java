@@ -402,7 +402,7 @@ public class Feature2 {
 
         protected void activationTest() {
             for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-                players[i].getActivationNumbers(diceSum);
+                players[i].getActivationNumbers(diceSum,players[i].isTurn());
             }
         }
 
