@@ -1,5 +1,7 @@
 package edu.wofford.machiwoco;
 
+import java.util.ArrayList;
+
 public class InputObserver extends Observer{
 
     public InputObserver(InputSubject inputSubject){
@@ -9,6 +11,6 @@ public class InputObserver extends Observer{
 
     @Override
     public void update() {
-       // System.out.println( "Player " + inputSubject.getActivePlayer().getPlayerNumber());
+    //    handleInput()
     }
 }

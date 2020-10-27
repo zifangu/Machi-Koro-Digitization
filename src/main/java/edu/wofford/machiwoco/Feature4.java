@@ -155,7 +155,9 @@ public class Feature4 extends Feature3 {
         startingLandmarks[1] = trainStation;
     }
 
-
+    /**
+     * AI Logic for making a move
+     */
     private void aiLogic() {
         System.out.println(getMenu());
         int estSize = buyEstablishmentLogic().size();
@@ -170,6 +172,9 @@ public class Feature4 extends Feature3 {
         handleInput(Integer.toString(ai_input));
     }
 
+    /**
+     * Human Input makes moves for human
+     */
     private void humanInput() {
         // human player input
         if(canAffordCard(getCurrentPlayer())) {
@@ -186,6 +191,19 @@ public class Feature4 extends Feature3 {
             String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
             cnsl.flush();
             buyFinished = handleInput(input);
+        }
+    }
+
+    /**
+     * Driver for making the move
+     */
+    public void makeMove() {
+        buyFinished = false;
+//            Random AI Action
+        if (getCurrentPlayer().isAi()) {
+            aiLogic();
+        } else {
+            humanInput();
         }
     }
 
@@ -226,13 +244,7 @@ public class Feature4 extends Feature3 {
             diceSubject.setDice(roll());
             diceSubject.notifyObservers();
             // (5) SHOW BUY MENU
-            buyFinished = false;
-//            Random AI Action
-            if (getCurrentPlayer().isAi()) {
-                aiLogic();
-            } else {
-                humanInput();
-            }
+            makeMove();
             inputSubject.notifyObservers();
             //(6) End Game
             if(!allLandmarksConstructed()) {
