@@ -246,8 +246,6 @@ public class Feature4 extends Feature3 {
         }
     }
 
-
-
     public static void main(String[] args) {
         Feature4 feature4 = new Feature4(Integer.parseInt(args[1]));
         feature4.playGame();
