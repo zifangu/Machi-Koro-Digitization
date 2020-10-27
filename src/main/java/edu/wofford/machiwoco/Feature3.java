@@ -20,6 +20,10 @@ import java.util.stream.Stream;
 
 public class Feature3 extends Feature2 {
 
+    private GameStateSubject gameSubject;
+    private DiceSubject diceSubject;
+    private InputSubject inputSubject;
+
     public Feature3() {
         super();
         playerInit();
@@ -41,30 +45,45 @@ public class Feature3 extends Feature2 {
 
 
 
+    protected void gameInit() {
+        startGame();
+        players[0].setTurn(true);
+
+//        observer pattern
+        gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
+        diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
+        inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
+
+//      subscribe to subjects
+        new DiceObserver(diceSubject);
+        new ActivationObserver(diceSubject);
+        new GameStateObserver(gameSubject);
+        new InputObserver(inputSubject);
+    }
+
+
+
     /**
      * The prompt is no longer applied to both players. AI choice are made randomly, and the prompt is redircted backed to player 1.
      */
 
     @Override
     public void playGame() {
-        startGame();
-        players[0].setTurn(true);
-        int count = 0;
-        boolean ai;
+        gameInit();
 
+//        game driver
         while(!isGameOver()) {
             // (1) PRINT TURN
             printTurn(); //"Turn started for Player N."
 
             // (2) PRINT CURRENT GAME STATE
 
-            System.out.println(getCurrentGameState());
+            gameSubject.notifyObservers();
 
-            // (3) ROLL THE DICE
-            roll(); //"Player N rolled [3] = 3."
-
-            // (4) ACTIVATE / ACTIONS
-            activationTest();
+            // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
+            diceSubject.setActivePlayer(getCurrentPlayer());
+            diceSubject.setDice(roll());
+            diceSubject.notifyObservers();
 
             // (5) SHOW BUY MENU
 
@@ -72,18 +91,12 @@ public class Feature3 extends Feature2 {
 
 //            Random AI Action
             if (getCurrentPlayer().isAi()) {
-                System.out.println(getMenu());
-
                 int estSize = buyEstablishmentLogic().size();
                 int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
 
                 // add last option of "99. Do Nothing" to AI
                 int ai_choices = estSize + lmkSize + 1;
-                int ai_input = (int) (Math.random() * ai_choices + 1);
-                if (ai_input == ai_choices) {
-                    ai_input = 99;
-                }
-                System.out.println("AI CHOSE: " + ai_input);
+                int ai_input = getCurrentPlayer().random_ai_choice(ai_choices);
 
                 handleInput(Integer.toString(ai_input));
 
@@ -115,7 +128,19 @@ public class Feature3 extends Feature2 {
         }
     }
 
+    public GameStateSubject getGameSubject() {
+        return gameSubject;
+    }
 
+
+    public DiceSubject getDiceSubject() {
+        return diceSubject;
+    }
+
+
+    public InputSubject getInputSubject() {
+        return inputSubject;
+    }
 
     public static void main(String[] args) {
         Feature3 feature3 = new Feature3();
