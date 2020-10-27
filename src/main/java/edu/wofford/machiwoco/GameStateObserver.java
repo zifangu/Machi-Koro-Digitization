@@ -175,7 +175,11 @@ public class GameStateObserver extends Observer{
         return generateStaticMarket() + s + "\n";
     }
 
-    // Sub out players
+    /**
+     * Generates a StringBuilder representing player information
+     * @return the StringBuilder instance representing player information
+     */
+
     protected StringBuilder playerStringBuilder() {
         StringBuilder s = new StringBuilder();
         Player[] playersArr = gameSubject.getPlayers();
@@ -185,8 +189,25 @@ public class GameStateObserver extends Observer{
         return s;
     }
 
+    /**
+     * Generates a string used to display the current player's turn
+     * @return a string representing the current player's turn
+     */
+
+    protected String printTurn() {
+        String result = "";
+        for(int i = 0; i < gameSubject.getPlayers().length; i++) {
+            if(gameSubject.getPlayers()[i].isTurn()) {
+                result = "Turn started for Player " + (i + 1) + ".\n";
+                return result;
+            }
+        }
+        return result;
+    }
+
+
     @Override
     public void update() {
-        System.out.println(generateMarket() + playerStringBuilder() + StringUtils.center("", 42, "*"));
+        System.out.println(printTurn() + generateMarket() + playerStringBuilder() + StringUtils.center("", 42, "*"));
     }
 }

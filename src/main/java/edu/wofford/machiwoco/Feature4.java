@@ -169,6 +169,14 @@ public class Feature4 extends Feature3 {
         players[0].setTurn(true);
         int count = 0;
         boolean ai;
+        DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
+        GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
+        new DiceObserver(diceSubject);
+        new ActivationObserver(diceSubject);
+        new GameStateObserver(gameSubject);
+
+        InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
+        new InputObserver(inputSubject);
 
         while(!isGameOver()) {
             // (1) PRINT TURN
@@ -176,13 +184,18 @@ public class Feature4 extends Feature3 {
 
             // (2) PRINT CURRENT GAME STATE
 
-            System.out.println(getCurrentGameState());
+            //System.out.println(getCurrentGameState());
 
             // (3) ROLL THE DICE
-            roll(); //"Player N rolled [3] = 3."
+            //roll(); //"Player N rolled [3] = 3."
 
             // (4) ACTIVATE / ACTIONS
-            activationTest();
+            gameSubject.notifyObservers();
+
+            // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
+            diceSubject.setActivePlayer(getCurrentPlayer());
+            diceSubject.setDice(roll());
+            diceSubject.notifyObservers();
 
             // (5) SHOW BUY MENU
 

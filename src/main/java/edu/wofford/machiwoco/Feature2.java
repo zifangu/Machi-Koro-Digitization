@@ -716,7 +716,7 @@ public class Feature2 {
 //                turnstarted()
 //                event listener
 //                action performed
-                printTurn(); //"Turn started for Player N."
+                //printTurn(); //"Turn started for Player N."
 
                 // (2) PRINT CURRENT GAME STATE
 
