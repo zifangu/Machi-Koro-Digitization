@@ -37,13 +37,6 @@ public class MachiWoCo {
             Feature4.main(args);
         }
 
-
-//        m.getPlayers()[1].setTurn(true);
-//        m.getPlayers()[0].setTurn(true);
-
-//            m.getCurrentPlayer().setCoinCount(69);
-//        p.setCoinCount(3);
-
     }
 }
 

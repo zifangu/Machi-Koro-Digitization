@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * phase 1 of the game with 1(one) random AI
@@ -157,6 +156,38 @@ public class Feature4 extends Feature3 {
     }
 
 
+    private void aiLogic() {
+        System.out.println(getMenu());
+        int estSize = buyEstablishmentLogic().size();
+        int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
+        // add last option of "99. Do Nothing" to AI
+        int ai_choices = estSize + lmkSize + 1;
+        int ai_input = (int) (Math.random() * ai_choices + 1);
+        if (ai_input == ai_choices) {
+            ai_input = 99;
+        }
+        System.out.println("AI CHOSE: " + ai_input);
+        handleInput(Integer.toString(ai_input));
+    }
+
+    private void humanInput() {
+        // human player input
+        if(canAffordCard(getCurrentPlayer())) {
+            String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
+                    "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
+                    "followed by the item number. For example, \n" +
+                    "to view item 6, type 'view 6'.)           \n";
+            System.out.print(s);
+            System.out.print(getMenu()); //Ivan
+
+        }
+        while(!buyFinished && canAffordCard(getCurrentPlayer())) {
+            Console cnsl = System.console();
+            String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+            cnsl.flush();
+            buyFinished = handleInput(input);
+        }
+    }
 
 
     /**
@@ -183,7 +214,6 @@ public class Feature4 extends Feature3 {
             //printTurn(); //"Turn started for Player N."
 
             // (2) PRINT CURRENT GAME STATE
-
             //System.out.println(getCurrentGameState());
 
             // (3) ROLL THE DICE
@@ -191,54 +221,19 @@ public class Feature4 extends Feature3 {
 
             // (4) ACTIVATE / ACTIONS
             gameSubject.notifyObservers();
-
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
             diceSubject.setActivePlayer(getCurrentPlayer());
             diceSubject.setDice(roll());
             diceSubject.notifyObservers();
-
             // (5) SHOW BUY MENU
-
             buyFinished = false;
-
 //            Random AI Action
             if (getCurrentPlayer().isAi()) {
-                System.out.println(getMenu());
-
-                int estSize = buyEstablishmentLogic().size();
-                int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
-
-                // add last option of "99. Do Nothing" to AI
-                int ai_choices = estSize + lmkSize + 1;
-                int ai_input = (int) (Math.random() * ai_choices + 1);
-                if (ai_input == ai_choices) {
-                    ai_input = 99;
-                }
-                System.out.println("AI CHOSE: " + ai_input);
-
-                handleInput(Integer.toString(ai_input));
-
+                aiLogic();
             } else {
-
-                // human player input
-                if(canAffordCard(getCurrentPlayer())) {
-                    String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
-                            "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
-                            "followed by the item number. For example, \n" +
-                            "to view item 6, type 'view 6'.)           \n";
-
-                    System.out.print(s);
-                    System.out.print(getMenu()); //Ivan
-
-                }
-                while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-                    Console cnsl = System.console();
-                    String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-                    cnsl.flush();
-                    buyFinished = handleInput(input);
-                }
+                humanInput();
             }
-
+            inputSubject.notifyObservers();
             //(6) End Game
             if(!allLandmarksConstructed()) {
                 endTurn();
