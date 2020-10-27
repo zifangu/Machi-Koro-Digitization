@@ -149,8 +149,8 @@ public class Feature4 extends Feature3 {
         Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
         Landmark trainStation = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
- "|  You may roll 1 or 2  |\n" +
-       "|         dice.         |\n");
+                "|  You may roll 1 or 2  |\n" +
+                        "|         dice.         |\n");
         startingLandmarks = new Landmark[NUMBER_OF_LANDMARKS];
         startingLandmarks[0] = city;
         startingLandmarks[1] = trainStation;

@@ -19,59 +19,7 @@ public class Player {
     private boolean turn;
     private boolean ai;
 
-    /**
-     * Sets the player's coin total
-     * @param coinCount the amount of coins the current Player has in total
-     */
 
-    public void setCoinCount(int coinCount) {
-        this.coinCount = coinCount;
-    }
-
-    /**
-     * Gets the Player's owned establishments
-     * @return a Map object containing the Player's owned Establishments
-     */
-
-    public Map<Establishment, Integer> getEstOwned() {
-        return estOwned;
-    }
-
-    /**
-     * Sets the Player's owned establishments
-     * @param estOwned a Map object containing the Player's owned Establishments
-     */
-
-    public void setEstOwned(Map<Establishment, Integer> estOwned) {
-        this.estOwned = estOwned;
-    }
-
-    /**
-     * Checks if the player is an AI
-     * @return a boolean holding true if the player is an AI
-     */
-
-    public boolean isAi() {
-        return ai;
-    }
-
-    /**
-     * Sets the player's AI status
-     * @param ai a boolean holding true if the player is to be an AI
-     */
-
-    public void setAi(boolean ai) {
-        this.ai = ai;
-    }
-
-    /**
-     * Sets the Player's owned Landmarks
-     * @param landmarks an array containing the game's Landmarks
-     */
-
-    public void setLandmarks(Landmark[] landmarks) {
-        this.landmarks = landmarks;
-    }
 
     private int playerNumber;
 
@@ -90,6 +38,14 @@ public class Player {
       this.playerNumber = playerNumber;
       turn = false;
       this.ai = ai;
+    }
+
+    protected int random_ai_choice(int range) {
+        int ai_input = (int) (Math.random() * range + 1);
+        if (ai_input == range) {
+            ai_input = 99;
+        }
+        return ai_input;
     }
 
     /**
@@ -231,6 +187,60 @@ public class Player {
 
     public Landmark[] getLandmarks() {
         return landmarks;
+    }
+
+    /**
+     * Sets the player's coin total
+     * @param coinCount the amount of coins the current Player has in total
+     */
+
+    public void setCoinCount(int coinCount) {
+        this.coinCount = coinCount;
+    }
+
+    /**
+     * Gets the Player's owned establishments
+     * @return a Map object containing the Player's owned Establishments
+     */
+
+    public Map<Establishment, Integer> getEstOwned() {
+        return estOwned;
+    }
+
+    /**
+     * Sets the Player's owned establishments
+     * @param estOwned a Map object containing the Player's owned Establishments
+     */
+
+    public void setEstOwned(Map<Establishment, Integer> estOwned) {
+        this.estOwned = estOwned;
+    }
+
+    /**
+     * Checks if the player is an AI
+     * @return a boolean holding true if the player is an AI
+     */
+
+    public boolean isAi() {
+        return ai;
+    }
+
+    /**
+     * Sets the player's AI status
+     * @param ai a boolean holding true if the player is to be an AI
+     */
+
+    public void setAi(boolean ai) {
+        this.ai = ai;
+    }
+
+    /**
+     * Sets the Player's owned Landmarks
+     * @param landmarks an array containing the game's Landmarks
+     */
+
+    public void setLandmarks(Landmark[] landmarks) {
+        this.landmarks = landmarks;
     }
 
 }
