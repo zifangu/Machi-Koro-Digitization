@@ -180,7 +180,7 @@ public class Feature4 extends Feature3 {
 
         while(!isGameOver()) {
             // (1) PRINT TURN
-            printTurn(); //"Turn started for Player N."
+            //printTurn(); //"Turn started for Player N."
 
             // (2) PRINT CURRENT GAME STATE
 
