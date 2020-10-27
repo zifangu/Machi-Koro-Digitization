@@ -103,7 +103,11 @@ public class Player {
             int activation = Integer.parseInt(est.getActivation());
             int numberOwned = estOwned.get(est);
             if(diceRoll == activation) {
-                performAction(est,numberOwned);
+                if(est.getColor_ab() == Card.Color_ab.B) {
+                    performAction(est,numberOwned);
+                } else if (est.getColor_ab() == Card.Color_ab.G) {
+                    //New Function Something
+                }
             }
         }
     }
@@ -154,9 +158,13 @@ public class Player {
         String type = e.getType();
         int amount = e.getAmount();
         String target = e.getTarget();
-        if(type.equals("receive") && target.equals("bank")) {
+        Card.Color_ab a = e.getColor_ab();
+
+        if(type.equals("receive") && target.equals("bank") && a.equals(Card.Color_ab.B)) {
 //            printCardAfterActivation(e);
             addCoins(amount * numberOwned);
+        } else if (type.equals("receive") && target.equals("bank") && a.equals(Card.Color_ab.G)) {
+            //addCoinsYourTurn(amount * numberOwned);
         }
     }
 

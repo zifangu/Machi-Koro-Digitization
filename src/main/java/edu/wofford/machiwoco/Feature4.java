@@ -158,6 +158,7 @@ public class Feature4 extends Feature3 {
 
 
 
+
     /**
      * The prompt is no longer applied to both players. AI choice are made randomly, and the prompt is redircted backed to player 1.
      */
