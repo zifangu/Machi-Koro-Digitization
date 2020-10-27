@@ -101,9 +101,16 @@ public class Player {
     public void getActivationNumbers(int diceRoll, boolean isTurn){
         Set<Establishment> keys = estOwned.keySet();
         for(Establishment est: keys){
-            int activation = Integer.parseInt(est.getActivation());
+            int activation = 0;
+            int activation2 = 0;
+            if(!est.getName().equals("Bakery")) {
+                activation = Integer.parseInt(est.getActivation());
+            } else if(est.getName().equals("Bakery")){
+                activation = 2;
+                activation2 = 3;
+            }
             int numberOwned = estOwned.get(est);
-            if(diceRoll == activation) {
+            if(diceRoll == activation || diceRoll == activation2) {
                 if(est.getColor_ab().equals(Card.Color_ab.B)) {
                     performAction(est,numberOwned);
                 } else if(est.getColor_ab().equals(Card.Color_ab.G)) {
