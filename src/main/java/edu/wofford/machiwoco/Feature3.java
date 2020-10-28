@@ -93,7 +93,7 @@ public class Feature3 extends Feature2 {
                     "followed by the item number. For example, \n" +
                     "to view item 6, type 'view 6'.)           \n";
             System.out.print(s);
-            System.out.print(getMenu()); //Ivan
+            System.out.println(getMenu()); //Ivan
         }
         while(!buyFinished && canAffordCard(getCurrentPlayer())) {
             String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));

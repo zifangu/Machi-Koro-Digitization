@@ -55,8 +55,6 @@ public class Feature2 {
          */
 
         public Feature2() {
-
-
             //List of Establishments
             wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
                     "|  Get 1 coin from the  |\n" +
@@ -549,7 +547,7 @@ public class Feature2 {
             return s + getAvailLandmark(count) +
                     getMenuStatic("CANCEL") +
                     "99. " + StringUtils.rightPad("Do nothing", (42-4), " ") + "\n" +
-                    StringUtils.center("", 42, "=") +"\n";
+                    StringUtils.center("", 42, "=");
         }
 
 
@@ -734,19 +732,19 @@ public class Feature2 {
                             "to view item 6, type 'view 6'.)           \n";
 
                     System.out.print(s);
-                    System.out.print(getMenu()); //Ivan
+                    System.out.println(getMenu()); //Ivan
 
                 } else {
                     System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
                             "improvements.");
                 }
-
+                System.out.println("");
                 while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-                    Console cnsl = System.console();
-                    String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-                    cnsl.flush();
-                    //System.out.print(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-                    //String input = sc.next();
+//                    Console cnsl = System.console();
+//                    String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+//                    cnsl.flush();
+                    System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+                    String input = sc.next();
 
                     inputSubject.setActivePlayer(getCurrentPlayer());
                     inputSubject.setPlayers(getPlayers());
