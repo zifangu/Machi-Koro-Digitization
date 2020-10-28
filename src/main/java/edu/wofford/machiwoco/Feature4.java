@@ -38,7 +38,7 @@ public class Feature4 extends Feature3 {
     Establishment[] EST_ORDER;
 
     int NUMBER_OF_PLAYERS;
-    int NUMBER_OF_LANDMARKS = 2;
+    int NUMBER_OF_LANDMARKS;
 
 
     Landmark[] startingLandmarks;
@@ -121,21 +121,21 @@ public class Feature4 extends Feature3 {
         EST_ORDER = new Establishment[] {wheat, ranch, bakery,convenience, forest, mine, orchard};
 
         landmarkInit();
-        playerInit();
+        playerInitFeature4(numPlayers);
     }
 
     /**
      * Second player is now an AI.
      */
 
-    @Override
-    protected void playerInit() {
+    protected void playerInitFeature4(int player_num) {
+        NUMBER_OF_PLAYERS = player_num;
         player1 = new Player(P2startingEst, startingLandmarks, 3,1, false);
         player2 = new Player(P2startingEst2, startingLandmarks, 3,2, true);
         if(NUMBER_OF_PLAYERS == 3) {
             player3 = new Player(P2startingEst3, startingLandmarks, 3,3, true);
         }
-        players = new Player[NUMBER_OF_PLAYERS];
+        players = new Player[3];
         players[0] = player1;
         players[1] = player2;
         if(NUMBER_OF_PLAYERS == 3) {
@@ -145,18 +145,21 @@ public class Feature4 extends Feature3 {
 
     @Override
     protected void landmarkInit() {
+        NUMBER_OF_LANDMARKS = 2;
         Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
         Landmark trainStation = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  You may roll 1 or 2  |\n" +
                         "|         dice.         |\n");
-        startingLandmarks = new Landmark[NUMBER_OF_LANDMARKS];
+        startingLandmarks = new Landmark[2];
         startingLandmarks[0] = city;
         startingLandmarks[1] = trainStation;
     }
 
-
-    private void aiLogic() {
+    /**
+     * AI Logic for making a move
+     */
+    protected void aiLogic() {
         System.out.println(getMenu());
         int estSize = buyEstablishmentLogic().size();
         int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
@@ -170,6 +173,9 @@ public class Feature4 extends Feature3 {
         handleInput(Integer.toString(ai_input));
     }
 
+    /**
+     * Human Input makes moves for human
+     */
     private void humanInput() {
         // human player input
         if(canAffordCard(getCurrentPlayer())) {
@@ -186,6 +192,19 @@ public class Feature4 extends Feature3 {
             String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
             cnsl.flush();
             buyFinished = handleInput(input);
+        }
+    }
+
+    /**
+     * Driver for making the move
+     */
+    public void makeMove() {
+        buyFinished = false;
+//            Random AI Action
+        if (getCurrentPlayer().isAi()) {
+            aiLogic();
+        } else {
+            humanInput();
         }
     }
 
@@ -227,13 +246,7 @@ public class Feature4 extends Feature3 {
             diceSubject.setDice(roll());
             diceSubject.notifyObservers();
             // (5) SHOW BUY MENU
-            buyFinished = false;
-//            Random AI Action
-            if (getCurrentPlayer().isAi()) {
-                aiLogic();
-            } else {
-                humanInput();
-            }
+            makeMove();
             inputSubject.notifyObservers();
             //(6) End Game
             if(!allLandmarksConstructed()) {
