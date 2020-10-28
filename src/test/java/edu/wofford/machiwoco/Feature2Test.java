@@ -255,10 +255,10 @@ public class Feature2Test {
         estOwned.put(test, 1);
 
         player1.setEstOwned(estOwned);
-        player1.getActivationNumbers(2,true);
-        player1.getActivationNumbers(1,true);
+        player1.getActivationNumbers(2, true);
+        player1.getActivationNumbers(1, true);
         assertThat(player1.getCoinCount(), is(4));
-        player1.getActivationNumbers(8,true);
+        player1.getActivationNumbers(8, true);
         assertThat(player1.getCoinCount(), is(4));
     }
 
@@ -366,7 +366,7 @@ public class Feature2Test {
 
 
     // game test
-    @Test
+    /*@Test
     public void testNoMoveInput() {
         feature2.getPlayers()[0].setTurn(true);
         feature2.getBuyInput(99);
@@ -375,7 +375,7 @@ public class Feature2Test {
         assertThat(outContent.toString(), containsString("Not a valid input\n"));
 
 
-    }
+    }*/
 
     @Test
     public void testEstInput() {
@@ -416,7 +416,7 @@ public class Feature2Test {
     }
 
 
-    @Test
+    /*@Test
     public void testViewLandmarkInput() {
         feature2.getPlayers()[0].setTurn(true);
         feature2.getCurrentPlayer().setCoinCount(10);
@@ -430,7 +430,7 @@ public class Feature2Test {
                 "|                       |\n" +
                 "| (7)               [ ] |\n" +
                 "|_______________________|\n"));
-    }
+    }*/
 
     @Test
     public void testLandInput() {
