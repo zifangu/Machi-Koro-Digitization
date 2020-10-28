@@ -43,7 +43,7 @@ public class Feature4 extends Feature3 {
 
     Landmark[] startingLandmarks1;
     Landmark[] startingLandmarks2;
-    Landmark[] getStartingLandmarks3;
+    Landmark[] startingLandmarks3;
 
     public Feature4(int numPlayers) {
         super();
@@ -133,10 +133,10 @@ public class Feature4 extends Feature3 {
 
     protected void playerInitFeature4(int player_num) {
         NUMBER_OF_PLAYERS = player_num;
-        player1 = new Player(P2startingEst, startingLandmarks, 3,1, false);
-        player2 = new Player(P2startingEst2, startingLandmarks, 3,2, true);
+        player1 = new Player(P2startingEst, startingLandmarks1, 3,1, false);
+        player2 = new Player(P2startingEst2, startingLandmarks2, 3,2, true);
         if(NUMBER_OF_PLAYERS == 3) {
-            player3 = new Player(P2startingEst3, startingLandmarks, 3,3, true);
+            player3 = new Player(P2startingEst3, startingLandmarks3, 3,3, true);
         }
         players = new Player[NUMBER_OF_PLAYERS];
         players[0] = player1;
@@ -257,6 +257,38 @@ public class Feature4 extends Feature3 {
             String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
             cnsl.flush();
             buyFinished = handleInput(input);
+        }
+    }
+
+    @Override
+    protected boolean getBuyInput(int index) {
+        ArrayList<Establishment> listOfEstablishments = getAffordableEstablishments(getCurrentPlayer(), getCurrentPlayer().getCoinCount());
+        ArrayList<Landmark> listOfLandmarks = getAffordableLandmarks(getCurrentPlayer());
+        int numberOfLandmarks = listOfLandmarks.size();
+        int numberOfEstablishments = listOfEstablishments.size();
+        if(index == 99) {
+            System.out.println("Player "  + getTurn() + " chose not to make improvements.");
+            return true;
+        } else if(index <= numberOfEstablishments) {
+            Establishment e = listOfEstablishments.get(index-1);
+//            System.out.println("Player 1: round1" + player1.getEstOwned());
+//            System.out.println("Player 2:" + player2.getEstOwned());
+            getCurrentPlayer().buyCard(e);
+            int numberLeft = market.get(e) - 1;
+            market.put(e,numberLeft);
+//            System.out.println("Player 1: jsdflkjskl" + player1.getEstOwned());
+//            System.out.println("Player 2:" + player2.getEstOwned());
+
+            System.out.println("Player "  + getTurn() + " purchased the " + e.getName() + ".");
+            return true;
+        } else if(index <= numberOfEstablishments + numberOfLandmarks) {
+            Landmark l = listOfLandmarks.get(index-numberOfEstablishments-1);
+            getCurrentPlayer().buyLandmark(l);
+            System.out.println("Player "  + getTurn() + " constructed the " +l.getName() + ".");
+            return true;
+        } else {
+            System.out.println("Not a valid input");
+            return false;
         }
     }
 

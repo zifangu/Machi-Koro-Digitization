@@ -730,7 +730,6 @@ public class Feature2 {
                             "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
                             "followed by the item number. For example, \n" +
                             "to view item 6, type 'view 6'.)           \n";
-
                     System.out.print(s);
                     System.out.println(getMenu()); //Ivan
 
@@ -738,7 +737,9 @@ public class Feature2 {
                     System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
                             "improvements.");
                 }
-                System.out.println("");
+                //System.out.println("");
+                Console cnsl = System.console();
+                cnsl.flush();
                 while(!buyFinished && canAffordCard(getCurrentPlayer())) {
 //                    Console cnsl = System.console();
 //                    String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));

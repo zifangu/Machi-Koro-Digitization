@@ -83,13 +83,13 @@ public class Feature3Test  {
         assertThat(feature3.getPlayer1().isTurn(), is(false));
     }
 
-    @Test
-    public void AImove() {
-        // switch turn to AI
-        feature3.gameEnded();
-        feature3.makeMove();
-        assertThat(feature3.handleInput("1"), is(true));
-    }
+//    @Test
+//    public void AImove() {
+//        // switch turn to AI
+//        feature3.gameEnded();
+//        feature3.makeMove();
+//        assertThat(feature3.handleInput("1"), is(false));
+//    }
 
 //    @Test
 //    public void humanMove() {
