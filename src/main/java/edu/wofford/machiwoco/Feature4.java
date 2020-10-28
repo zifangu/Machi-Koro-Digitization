@@ -41,7 +41,9 @@ public class Feature4 extends Feature3 {
     int NUMBER_OF_LANDMARKS;
 
 
-    Landmark[] startingLandmarks;
+    Landmark[] startingLandmarks1;
+    Landmark[] startingLandmarks2;
+    Landmark[] getStartingLandmarks3;
 
     public Feature4(int numPlayers) {
         NUMBER_OF_PLAYERS = numPlayers;
@@ -154,6 +156,14 @@ public class Feature4 extends Feature3 {
         startingLandmarks = new Landmark[2];
         startingLandmarks[0] = city;
         startingLandmarks[1] = trainStation;
+
+        startingLandmarks1 = new Landmark[2];
+        startingLandmarks1[0] = city;
+        startingLandmarks1[1] = trainStation;
+
+        startingLandmarks2 = new Landmark[2];
+        startingLandmarks2[0] = city;
+        startingLandmarks2[1] = trainStation;
     }
 
     /**
@@ -209,6 +219,10 @@ public class Feature4 extends Feature3 {
     }
 
 
+    public Map<Establishment,Integer> getMarketP2() {
+        return market;
+    }
+
     /**
      * The prompt is no longer applied to both players. AI choice are made randomly, and the prompt is redircted backed to player 1.
      */
@@ -220,7 +234,7 @@ public class Feature4 extends Feature3 {
         int count = 0;
         boolean ai;
         DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
-        GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
+        GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarketP2());
         new DiceObserver(diceSubject);
         new ActivationObserver(diceSubject);
         new GameStateObserver(gameSubject);
@@ -239,7 +253,8 @@ public class Feature4 extends Feature3 {
             //roll(); //"Player N rolled [3] = 3."
 
             // (4) ACTIVATE / ACTIONS
-            gameSubject.setMarket(getMarket());
+            gameSubject.setPlayers(players);
+            gameSubject.setMarket(getMarketP2());
             gameSubject.notifyObservers();
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
             diceSubject.setActivePlayer(getCurrentPlayer());

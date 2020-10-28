@@ -15,6 +15,7 @@ public class ActivationObserver extends Observer {
 
     private StringBuilder checkActivation() {
         int dice = diceSubject.getDice();
+        int activation;
         Player[] players = diceSubject.getPlayers();
         StringBuilder s = new StringBuilder();
         for (Player player : players) {
@@ -24,7 +25,14 @@ public class ActivationObserver extends Observer {
             // this prints out the activations for user's information
             Set<Establishment> keys = player.getEstOwned().keySet();
             for(Establishment est: keys) {
-                int activation = Integer.parseInt(est.getActivation());
+                if(!est.getName().equals("Bakery")) {
+                    activation = Integer.parseInt(est.getActivation());
+                } else if(dice==2) {
+                    activation = 2;
+                } else {
+                    activation = 3;
+                }
+
                 if (dice == activation) {
                     s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
                 }

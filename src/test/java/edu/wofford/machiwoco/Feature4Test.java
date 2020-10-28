@@ -33,8 +33,7 @@ public class Feature4Test {
 //    public void testAILogic() {
 //        feature4.getPlayer2().setTurn(true);
 //        feature4.aiLogic();
-//        assertTrue(true,true);
-//        assertThat(outContent.toString(), Matchers.anyOf(Matchers.is(1),Matchers.is(2),Matchers.is(99)));
+//        assertThat(outContent.toString(), Matchers.anyOf(Matchers.is(1),Matchers.is(2),Matchers.is(3),Matchers.is(4),Matchers.is(5),Matchers.is(6),Matchers.is(99)));
 //    }
 
 }

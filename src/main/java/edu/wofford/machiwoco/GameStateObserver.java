@@ -168,7 +168,7 @@ public class GameStateObserver extends Observer{
 
     protected  String generateMarket() {
         StringBuilder s = new StringBuilder();
-        for (Establishment e : gameSubject.getEstOrder()) {
+        for (Establishment e : gameSubject.getEstOrder()) { ;
             s.append(generateSingleMarketItem(e, gameSubject.getMarket().get(e)));
         }
 //        System.out.print(s);
