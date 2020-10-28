@@ -750,6 +750,8 @@ public class Feature2 {
                     Console cnsl = System.console();
                     String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
                     cnsl.flush();
+                    //System.out.print(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+                    //String input = sc.next();
 
                     inputSubject.setActivePlayer(getCurrentPlayer());
                     inputSubject.setPlayers(getPlayers());
