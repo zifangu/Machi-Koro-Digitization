@@ -262,6 +262,14 @@ public class Feature2Test {
         assertThat(player1.getCoinCount(), is(4));
     }
 
+    @Test
+    public void testActivation() {
+        Player p = feature2.getPlayer1();
+        feature2.diceSum = 1;
+        feature2.activationTest();
+        assertThat(p.getCoinCount(), is(4));
+    }
+
     // Test get/set of ai
     @Test
     public void testAi() {

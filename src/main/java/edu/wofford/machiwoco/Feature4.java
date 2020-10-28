@@ -46,6 +46,7 @@ public class Feature4 extends Feature3 {
     Landmark[] getStartingLandmarks3;
 
     public Feature4(int numPlayers) {
+        super();
         NUMBER_OF_PLAYERS = numPlayers;
         //**********Establishment wheat field creation************//
         wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
@@ -183,6 +184,60 @@ public class Feature4 extends Feature3 {
         handleInput(Integer.toString(ai_input));
     }
 
+    @Override
+    public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
+        Set<Establishment> setE = market.keySet();
+        ArrayList<Establishment> eResult = new ArrayList<Establishment>();
+        for(Establishment est: EST_ORDER){
+            int cost = est.getCost();
+            int numberLeft = market.get(est);
+            if(owned >= cost && numberLeft!=0) {
+                eResult.add(est);
+            }
+        }
+        return eResult;
+    }
+
+    @Override
+    protected ArrayList<Establishment> buyEstablishmentLogic() {
+        int amountOwned = getCurrentPlayer().getCoinCount();
+//        System.out.println("AMOUNT: " + amountOwned);
+        ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
+        return e;
+    }
+
+
+    @Override
+    protected String getAvailEst(int i) {
+
+            ArrayList<Establishment> e = buyEstablishmentLogic();
+
+//        ArrayList<Establishment> e = new ArrayList<Establishment>(Arrays.asList(EST_ORDER));
+            StringBuilder s = new StringBuilder();
+            int count = i;
+            if (e.size() != 0) {
+                for (Establishment est : e) {
+                    String order = count + ".";
+                    s.append(StringUtils.leftPad(order, 3, " ")).append(" ").append(generateSingleMarketItem(est, market.get(est)));
+                    count ++;
+                }
+                return getMenuStatic("PURCHASE") + s;
+            }
+
+            return "";
+        }
+
+    @Override
+    protected String getMenu() {
+        int count = 1;
+        String s = generate_pure_padding("=") + getAvailEst(count);
+        count = buyEstablishmentLogic().size() + 1;
+        return s + getAvailLandmark(count) +
+                getMenuStatic("CANCEL") +
+                "99. " + StringUtils.rightPad("Do nothing", (42-4), " ") + "\n" +
+                StringUtils.center("", 42, "=") +"\n";
+    }
+
     /**
      * Human Input makes moves for human
      */
@@ -241,7 +296,7 @@ public class Feature4 extends Feature3 {
 
         InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
         new InputObserver(inputSubject);
-        gameSubject.setPlayers(players);
+//        gameSubject.setPlayers(players);
 
         while(!isGameOver()) {
             // (1) PRINT TURN

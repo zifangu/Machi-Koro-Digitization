@@ -717,12 +717,7 @@ public class Feature2 {
 //                action performed
                 //printTurn(); //"Turn started for Player N."
 
-                // (2) PRINT CURRENT GAME STATE
-
-                //System.out.println(getCurrentGameState());
-                //gameSubject.setEstOrder(EST_ORDER);
-                //gameSubject.setPlayers(getPlayers());
-                gameSubject.setMarket(getMarket());
+//               an update on the current game state
                 gameSubject.notifyObservers();
 
                 // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS

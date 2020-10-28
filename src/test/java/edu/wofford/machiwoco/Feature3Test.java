@@ -64,6 +64,44 @@ public class Feature3Test  {
         assertThat(p.random_ai_choice(2), Matchers.anyOf(Matchers.is(1),Matchers.is(2),Matchers.is(99)));
     }
 
+    @Test
+    public void testGameEnded() {
+        Player p = feature3.getCurrentPlayer();
+        p.setCoinCount(20);
+        ArrayList<Landmark> lmk = feature3.getAffordableLandmarks(p);
+        Landmark l = lmk.get(0);
+        p.buyLandmark(l);
+        feature3.gameEnded();
+        // active player should not lose their turn since game ended
+        assertThat(feature3.getCurrentPlayer().isTurn(), is(true));
+    }
+
+    @Test
+    public void gameNotEnded() {
+        feature3.gameEnded();
+        //  player 1 should lose their turn since game did not end
+        assertThat(feature3.getPlayer1().isTurn(), is(false));
+    }
+
+    @Test
+    public void AImove() {
+        // switch turn to AI
+        feature3.gameEnded();
+        feature3.makeMove();
+        assertThat(feature3.handleInput("1"), is(true));
+    }
+
+//    @Test
+//    public void humanMove() {
+//        gameSubject.notifyObservers();
+//
+//        // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
+//        diceSubject.setActivePlayer(feature3.getCurrentPlayer());
+//        diceSubject.setDice(feature3.roll());
+//        diceSubject.notifyObservers();
+//        feature3.makeMove();
+//        assertThat(outContent.toString(), containsString("Choose a number to purchase or construct:"));
+//    }
 
     @After
     public void restoreStreams() {
