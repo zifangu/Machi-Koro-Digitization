@@ -3,6 +3,8 @@ package edu.wofford.machiwoco;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Console;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class Feature2 {
         int NUMBER_OF_LANDMARKS = 1;
 
         Scanner sc;
+        Console cnsl;
 
 
         protected int dice1;
@@ -56,6 +59,8 @@ public class Feature2 {
 
         public Feature2() {
             //List of Establishments
+            cnsl = System.console();
+
             wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
                     "|  Get 1 coin from the  |\n" +
                             "|         bank.         |\n" +
@@ -453,7 +458,7 @@ public class Feature2 {
             if(index == 99) {
                 System.out.println("Player "  + getTurn() + " chose not to make improvements.");
                 return true;
-            } else if(index <= numberOfEstablishments) {
+            } else if(index <= numberOfEstablishments && index > 0) {
                 Establishment e = listOfEstablishments.get(index-1);
 //            System.out.println("Player 1: round1" + player1.getEstOwned());
 //            System.out.println("Player 2:" + player2.getEstOwned());
@@ -465,13 +470,13 @@ public class Feature2 {
 
                 System.out.println("Player "  + getTurn() + " purchased the " + e.getName() + ".");
                 return true;
-            } else if(index <= numberOfEstablishments + numberOfLandmarks) {
+            } else if(index <= numberOfEstablishments + numberOfLandmarks && index > 0) {
                 Landmark l = listOfLandmarks.get(index-numberOfEstablishments-1);
                 getCurrentPlayer().buyLandmark(l);
                 System.out.println("Player "  + getTurn() + " constructed the " +l.getName() + ".");
                 return true;
             } else {
-                System.out.println("Not a valid input");
+//                System.out.println("Not a valid input");
                 return false;
             }
         }
@@ -660,7 +665,7 @@ public class Feature2 {
                     e = listOfEstablishments.get(index-1);
                     System.out.println(e.toString());
                     return false;
-                } else if (index <= numberOfEstablishments + numberOfLandmarks) {
+                } else if (index <= numberOfEstablishments + numberOfLandmarks && index > 0) {
                     l = listOfLandmarks.get(index-numberOfEstablishments-1);
                     System.out.println(l.toString());
                     return false;
@@ -705,6 +710,7 @@ public class Feature2 {
             InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
             new InputObserver(inputSubject);
 
+            System.out.println("AGHHHH1");
 
 
             while(!isGameOver()) {
@@ -722,6 +728,7 @@ public class Feature2 {
                 diceSubject.setActivePlayer(getCurrentPlayer());
                 diceSubject.setDice(roll());
                 diceSubject.notifyObservers();
+                System.out.println("AGHHHH2");
 
                 // (5) SHOW BUY MENU
                 buyFinished = false;
@@ -729,31 +736,36 @@ public class Feature2 {
                     String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
                             "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
                             "followed by the item number. For example, \n" +
-                            "to view item 6, type 'view 6'.)           \n";
-                    System.out.print(s);
+                            "to view item 6, type 'view 6'.)           ";
+
+                    System.out.println(s);
                     System.out.println(getMenu()); //Ivan
+
+                    while (!buyFinished) {
+                        System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+                        String input = sc.nextLine();
+
+                        inputSubject.setActivePlayer(getCurrentPlayer());
+                        inputSubject.setPlayers(getPlayers());
+                        inputSubject.setInput(input);
+                        inputSubject.notifyObservers();
+
+                        buyFinished = handleInput(input);
+                    }
+                    System.out.println("AGHHHH3");
+
 
                 } else {
                     System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
                             "improvements.");
                 }
-                //System.out.println("");
-                Console cnsl = System.console();
-                cnsl.flush();
-                while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-//                    Console cnsl = System.console();
-//                    String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-//                    cnsl.flush();
-                    System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-                    String input = sc.next();
-
-                    inputSubject.setActivePlayer(getCurrentPlayer());
-                    inputSubject.setPlayers(getPlayers());
-                    inputSubject.setInput(input);
-                    inputSubject.notifyObservers();
-
-                    buyFinished = handleInput(input);
-                }
+                System.out.println("AGHHHH4");
+//                while(!buyFinished && canAffordCard(getCurrentPlayer())) {
+////                    Console cnsl = System.console();
+////                    String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+////                    cnsl.flush();
+//
+//                }
 
 
 

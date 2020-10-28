@@ -91,14 +91,25 @@ public class Feature3 extends Feature2 {
             String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
                     "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
                     "followed by the item number. For example, \n" +
-                    "to view item 6, type 'view 6'.)           \n";
-            System.out.print(s);
+                    "to view item 6, type 'view 6'.)           ";
+
+            System.out.println(s);
             System.out.println(getMenu()); //Ivan
-        }
-        while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-            String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-            cnsl.flush();
-            buyFinished = handleInput(input);
+
+            while (!buyFinished) {
+                System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+                String input = sc.nextLine();
+
+                inputSubject.setActivePlayer(getCurrentPlayer());
+                inputSubject.setPlayers(getPlayers());
+                inputSubject.setInput(input);
+                inputSubject.notifyObservers();
+
+                buyFinished = handleInput(input);
+            }
+        } else {
+            System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
+                    "improvements.");
         }
     }
 
