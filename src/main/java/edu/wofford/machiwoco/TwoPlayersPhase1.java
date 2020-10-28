@@ -2,9 +2,6 @@ package edu.wofford.machiwoco;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.Console;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -18,11 +15,10 @@ import java.util.*;
  * @author Bennett Joyce
  */
 
-public class Feature2 {
-
-
+public class TwoPlayersPhase1 {
 
         //**********DECLARATION************//
+
         protected Player player1;
         protected Player player2;
         protected Player[] players;
@@ -34,8 +30,6 @@ public class Feature2 {
         int NUMBER_OF_LANDMARKS = 1;
 
         Scanner sc;
-        Console cnsl;
-
 
         protected int dice1;
         protected int dice2;
@@ -50,6 +44,12 @@ public class Feature2 {
 
         protected boolean buyFinished;
 
+        private GameStateSubject gameSubject;
+        private DiceSubject diceSubject;
+        private InputSubject inputSubject;
+
+        private boolean ai;
+
 
     //**********CONSTRUCTOR************//
 
@@ -57,10 +57,11 @@ public class Feature2 {
          * MachiWoco constructor serving as the infrastructure of the game. Both players are human in this class.
          */
 
-        public Feature2() {
-            //List of Establishments
-            cnsl = System.console();
+        public TwoPlayersPhase1(boolean ai) {
 
+            this.ai = ai;
+
+            //List of Establishments
             wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
                     "|  Get 1 coin from the  |\n" +
                             "|         bank.         |\n" +
@@ -82,28 +83,24 @@ public class Feature2 {
                     "5", "receive", "bank", 1, "none", "none");
 
             //MARKET PLACE FOR ESTABLISHMENTS
-            // Establishment[] market = new Establishment[18];
-
             market = new HashMap<>();
             market.put(wheat, 6);
             market.put(ranch,6);
             market.put(forest,6);
 
+            // Starting Establishments
             startingEstablishments = new HashMap<>();
             startingEstablishments2 = new HashMap<>();
-
             startingEstablishments.put(wheat,1);
             startingEstablishments2.put(wheat,1);
 
-
+            // Scanner to read in data
             sc = new Scanner(System.in);
 
             EST_ORDER = new Establishment[] {wheat, ranch, forest};
 
             landmarkInit();
-            playerInit();
-
-
+            playerInit(ai);
         }
 
         protected void landmarkInit() {
@@ -113,11 +110,25 @@ public class Feature2 {
             startingLandmarks[0] = city;
         }
 
+        //********Player Init**********//
+
     /**
-     * Separated from the constructor for sub-classes to override.
+     * Creates either ai or human players
      */
 
-    protected void playerInit() {
+    protected void playerInit(boolean ai) {
+            if (ai) {
+                playerInitAI();
+            } else {
+                playerInitHuman();
+            }
+    }
+
+    /**
+     * Creates two human players.
+     */
+
+    protected void playerInitHuman() {
         NUMBER_OF_PLAYERS = 2;
         player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
             player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, false);
@@ -125,6 +136,19 @@ public class Feature2 {
             players[0] = player1;
             players[1] = player2;
         }
+
+    /**
+     * Creates one humand and one AI player.
+     */
+
+    protected void playerInitAI() {
+        NUMBER_OF_PLAYERS = 2;
+        player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
+        player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, true);
+        players = new Player[NUMBER_OF_PLAYERS];
+        players[0] = player1;
+        players[1] = player2;
+    }
 
         /**
          * Returns an ArrayList of Landmarks that the Player can afford
@@ -525,7 +549,6 @@ public class Feature2 {
         protected String getAvailEst(int i) {
             ArrayList<Establishment> e = buyEstablishmentLogic();
 
-//        ArrayList<Establishment> e = new ArrayList<Establishment>(Arrays.asList(EST_ORDER));
             StringBuilder s = new StringBuilder();
             int count = i;
             if (e.size() != 0) {
@@ -692,102 +715,119 @@ public class Feature2 {
             return false;
         }
 
+    /**
+     * Initialize game to be played
+     */
 
-        /**
-         * Play the MachiWoCo game in its entirety
+    protected void gameInit() {
+        startGame();
+        players[0].setTurn(true);
+
+//        observer pattern
+        gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
+        diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
+        inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
+
+//      subscribe to subjects
+        new DiceObserver(diceSubject);
+        new ActivationObserver(diceSubject);
+        new GameStateObserver(gameSubject);
+        new InputObserver(inputSubject);
+    }
+
+    /**
+     * AI Logic for making a move
+     */
+    protected void aiLogic() {
+        System.out.println(getMenu());
+        int estSize = buyEstablishmentLogic().size();
+        int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
+        // add last option of "99. Do Nothing" to AI
+        int ai_choices = estSize + lmkSize + 1;
+        int ai_input = (int) (Math.random() * ai_choices + 1);
+        if (ai_input == ai_choices) {
+            ai_input = 99;
+        }
+        handleInput(Integer.toString(ai_input));
+    }
+
+    /**
+     * Human Input makes moves for human
+     */
+    private void humanInput() {
+        // human player input
+        if(canAffordCard(getCurrentPlayer())) {
+            String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
+                    "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
+                    "followed by the item number. For example, \n" +
+                    "to view item 6, type 'view 6'.)           ";
+
+            System.out.println(s);
+            System.out.println(getMenu()); //Ivan
+
+            while (!buyFinished) {
+                System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+                String input = sc.nextLine();
+
+                inputSubject.setActivePlayer(getCurrentPlayer());
+                inputSubject.setPlayers(getPlayers());
+                inputSubject.setInput(input);
+                inputSubject.notifyObservers();
+
+                buyFinished = handleInput(input);
+            }
+        } else {
+            System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
+                    "improvements.");
+        }
+    }
+
+    /**
+     * Driver for making the move
+     */
+    public void makeMove() {
+        buyFinished = false;
+//            Random AI Action
+        if (getCurrentPlayer().isAi()) {
+            aiLogic();
+        } else {
+//            human input
+            humanInput();
+        }
+    }
+
+    /**
+     * Check if all landmarks are constructed. If so, game ends
+     */
+
+    protected void gameEnded() {
+        if(!allLandmarksConstructed()) {
+            endTurn();
+        }
+    }
+
+
+    /**
+     * Play the MachiWoCo game in its entirety
          */
 
         public void playGame() {
-            startGame();
-            players[0].setTurn(true);
+            gameInit();
 
-            DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
-            GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
-            new DiceObserver(diceSubject);
-            new ActivationObserver(diceSubject);
-            new GameStateObserver(gameSubject);
+            while (!isGameOver()) {
 
-            InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
-            new InputObserver(inputSubject);
-
-            System.out.println("AGHHHH1");
-
-
-            while(!isGameOver()) {
-                // (1) PRINT TURN
-//                observer pattern
-//                turnstarted()
-//                event listener
-//                action performed
-                //printTurn(); //"Turn started for Player N."
-
-//               an update on the current game state
                 gameSubject.notifyObservers();
 
                 // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
                 diceSubject.setActivePlayer(getCurrentPlayer());
                 diceSubject.setDice(roll());
                 diceSubject.notifyObservers();
-                System.out.println("AGHHHH2");
 
-                // (5) SHOW BUY MENU
-                buyFinished = false;
-                if(canAffordCard(getCurrentPlayer())) {
-                    String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +
-                            "\n" + "coins) \n" + "(To view details of an item, type 'view'  \n" +
-                            "followed by the item number. For example, \n" +
-                            "to view item 6, type 'view 6'.)           ";
+                // (3) either human or ai player make moves
+                makeMove();
 
-                    System.out.println(s);
-                    System.out.println(getMenu()); //Ivan
-
-                    while (!buyFinished) {
-                        System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-                        String input = sc.nextLine();
-
-                        inputSubject.setActivePlayer(getCurrentPlayer());
-                        inputSubject.setPlayers(getPlayers());
-                        inputSubject.setInput(input);
-                        inputSubject.notifyObservers();
-
-                        buyFinished = handleInput(input);
-                    }
-                    System.out.println("AGHHHH3");
-
-
-                } else {
-                    System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
-                            "improvements.");
-                }
-                System.out.println("AGHHHH4");
-//                while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-////                    Console cnsl = System.console();
-////                    String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-////                    cnsl.flush();
-//
-//                }
-
-
-
-               // inputSubject.getInput();
-               // inputSubject.notifyObservers();
-                //CHANGE 1 WITH INPUT FROM USER
-
-                //}
-                // MENU TO BUY
-                //Establishment Purchase or Landmark Construction
-                //EST: "Player N purchased the Furniture Factory."
-                //LAND: "Player N constructed the Shopping Mall."
-                //"Player N chose not to make improvements."
-
-                //(6) End Game
-                if(!allLandmarksConstructed()) {
-                    endTurn();
-                }
-//            count ++;
-//            if (count == 1) {
-//                break;
-//            }
+                // (4) check if Game has ended
+                gameEnded();
             }
         }
 
@@ -920,10 +960,25 @@ public class Feature2 {
         this.forest = forest;
     }
 
+    public GameStateSubject getGameSubject() {
+        return gameSubject;
+    }
+
+    public DiceSubject getDiceSubject() {
+        return diceSubject;
+    }
+
+    public InputSubject getInputSubject() {
+        return inputSubject;
+    }
 
     public static void main(String[] args) {
-            Feature2 f2 = new Feature2();
-            f2.playGame();
+        boolean ai_mode = false;
+        if (args.length > 1 && args[1].equals("--ai")) {
+            ai_mode = true;
+        }
+        TwoPlayersPhase1 f2 = new TwoPlayersPhase1(ai_mode);
+        f2.playGame();
 
     }
 

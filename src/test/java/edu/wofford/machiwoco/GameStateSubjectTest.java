@@ -4,15 +4,14 @@ import static org.hamcrest.Matchers.is;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.*;
 import org.junit.*;
-import static org.junit.Assert.*;
+
 import static org.hamcrest.CoreMatchers.*;
 
 public class GameStateSubjectTest {
     GameStateSubject gameSubject;
-    Feature2 feature2;
+    TwoPlayersPhase1 twoPlayersPhase1;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -20,9 +19,9 @@ public class GameStateSubjectTest {
 
     @Before
     public void before() {
-        feature2 = new Feature2();
-        feature2.getPlayers()[0].setTurn(true);
-        gameSubject = new GameStateSubject(feature2.EST_ORDER, feature2.getPlayers(), feature2.getMarket());
+        twoPlayersPhase1 = new TwoPlayersPhase1(false);
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        gameSubject = new GameStateSubject(twoPlayersPhase1.EST_ORDER, twoPlayersPhase1.getPlayers(), twoPlayersPhase1.getMarket());
         new GameStateObserver(gameSubject);
 
         System.setOut(new PrintStream(outContent));
@@ -32,7 +31,7 @@ public class GameStateSubjectTest {
     // test set players
     @Test
     public void testSetPlayers() {
-        Player[] players = feature2.getPlayers();
+        Player[] players = twoPlayersPhase1.getPlayers();
         gameSubject.setPlayers(players);
         assertThat(gameSubject.getPlayers(), is(players));
     }
@@ -40,7 +39,7 @@ public class GameStateSubjectTest {
     // test set market
     @Test
     public void testSetMarket() {
-        Map<Establishment, Integer> market = feature2.getMarket();
+        Map<Establishment, Integer> market = twoPlayersPhase1.getMarket();
         gameSubject.setMarket(market);
         assertThat(gameSubject.getMarket(), is(market));
     }
@@ -48,18 +47,18 @@ public class GameStateSubjectTest {
     // test set EST_ORDER
     @Test
     public void testSetEstOrder() {
-        Establishment[] est = feature2.EST_ORDER;
+        Establishment[] est = twoPlayersPhase1.EST_ORDER;
         gameSubject.setEstOrder(est);
         assertThat(gameSubject.getEstOrder(), is(est));
     }
 
     @Test
     public void testNotifyObservers() {
-        Player[] players = feature2.getPlayers();
+        Player[] players = twoPlayersPhase1.getPlayers();
         gameSubject.setPlayers(players);
-        Map<Establishment, Integer> market = feature2.getMarket();
+        Map<Establishment, Integer> market = twoPlayersPhase1.getMarket();
         gameSubject.setMarket(market);
-        Establishment[] est = feature2.EST_ORDER;
+        Establishment[] est = twoPlayersPhase1.EST_ORDER;
         gameSubject.setEstOrder(est);
         gameSubject.notifyObservers();
         assertThat(outContent.toString(), containsString("******************************************\n" +

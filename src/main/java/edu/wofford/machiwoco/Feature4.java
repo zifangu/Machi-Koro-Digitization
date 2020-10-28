@@ -17,7 +17,7 @@ import java.util.*;
  */
 
 
-public class Feature4 extends Feature3 {
+public class Feature4 extends TwoPlayersPhase1 {
 
     Map<Establishment,Integer> market;
     Map<Establishment,Integer> P2startingEst;
@@ -46,7 +46,7 @@ public class Feature4 extends Feature3 {
     Landmark[] startingLandmarks3;
 
     public Feature4(int numPlayers) {
-        super();
+        super(true);
         NUMBER_OF_PLAYERS = numPlayers;
         //**********Establishment wheat field creation************//
         wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,

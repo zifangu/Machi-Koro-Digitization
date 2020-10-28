@@ -1,19 +1,17 @@
 package edu.wofford.machiwoco;
 
-import io.cucumber.java.jv.Lan;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-public class Feature2Test {
-    Feature2 feature2;
+public class TwoPlayersPhase1Test {
+    TwoPlayersPhase1 twoPlayersPhase1;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -21,14 +19,14 @@ public class Feature2Test {
 
     @Before
     public void before() {
-        feature2 = new Feature2();
+        twoPlayersPhase1 = new TwoPlayersPhase1(false);
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
 
     @Test
     public void testPlayerNum() {
-        assertThat(feature2.getPlayers().length, is(2));
+        assertThat(twoPlayersPhase1.getPlayers().length, is(2));
     }
 
 
@@ -37,19 +35,19 @@ public class Feature2Test {
 
     @Test
     public void testInitialMarket() {
-        Establishment wheat = feature2.getWheat();
-        assertThat(feature2.getMarket().get(wheat), is(6));
+        Establishment wheat = twoPlayersPhase1.getWheat();
+        assertThat(twoPlayersPhase1.getMarket().get(wheat), is(6));
 
-        Establishment ranch = feature2.getRanch();
-        assertThat(feature2.getMarket().get(ranch), is(6));
+        Establishment ranch = twoPlayersPhase1.getRanch();
+        assertThat(twoPlayersPhase1.getMarket().get(ranch), is(6));
 
-        Establishment forest = feature2.getForest();
-        assertThat(feature2.getMarket().get(forest), is(6));
+        Establishment forest = twoPlayersPhase1.getForest();
+        assertThat(twoPlayersPhase1.getMarket().get(forest), is(6));
     }
 
     @Test
     public void testPlayerStats() {
-        Player[] players = feature2.getPlayers();
+        Player[] players = twoPlayersPhase1.getPlayers();
         int count = 0;
         for (Player p : players) {
             count += p.getCoinCount();
@@ -59,14 +57,14 @@ public class Feature2Test {
 
     @Test
     public void testStaticMarketToString() {
-        assertThat(feature2.generateStaticMarket(), is("******************************************\n" +
+        assertThat(twoPlayersPhase1.generateStaticMarket(), is("******************************************\n" +
                 "                  MARKET                  \n" +
                 "------------------------------------------\n"));
     }
 
     @Test
     public void testMartket() {
-        assertThat(feature2.generateMarket(), is("******************************************\n" +
+        assertThat(twoPlayersPhase1.generateMarket(), is("******************************************\n" +
                 "                  MARKET                  \n" +
                 "------------------------------------------\n" +
                 "Wheat Field        BW (1)  [1]      #6\n" +
@@ -76,14 +74,14 @@ public class Feature2Test {
 
     @Test
     public void testActivePlayer1() {
-        Player p = feature2.getPlayer1();
-        assertThat(feature2.generatePlayerLine(p, 1, true), is("             Player 1* [YOU]              \n"));
+        Player p = twoPlayersPhase1.getPlayer1();
+        assertThat(twoPlayersPhase1.generatePlayerLine(p, 1, true), is("             Player 1* [YOU]              \n"));
     }
 
     @Test
     public void testNonActivePlayer1() {
-        Player p = feature2.getPlayer1();
-        assertThat(feature2.generatePlayerLine(p, 1, false), is("                 Player 1                 \n"));
+        Player p = twoPlayersPhase1.getPlayer1();
+        assertThat(twoPlayersPhase1.generatePlayerLine(p, 1, false), is("                 Player 1                 \n"));
     }
 
 
@@ -100,10 +98,10 @@ public class Feature2Test {
 
     @Test
     public void testActivePlayerFull() {
-        Player p = feature2.getPlayer1();
-        feature2.getPlayers()[0].setTurn(true);
+        Player p = twoPlayersPhase1.getPlayer1();
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
 
-        assertThat(feature2.generatePlayer(p, feature2.getTurn(), true), is("             Player 1* [YOU]              \n" +
+        assertThat(twoPlayersPhase1.generatePlayer(p, twoPlayersPhase1.getTurn(), true), is("             Player 1* [YOU]              \n" +
                 "------------------------------------------\n" +
                 "                (3 coins)                 \n" +
                 "Wheat Field        BW (1)  [1]      #1\n"    +
@@ -113,16 +111,16 @@ public class Feature2Test {
 
     @Test
     public void testNoOneTurn() {
-        assertThat(feature2.getTurn(), is(0));
+        assertThat(twoPlayersPhase1.getTurn(), is(0));
     }
 
 
     @Test
     public void testCurrentGameState() {
-        Player p = feature2.getPlayer1();
-        feature2.getPlayers()[0].setTurn(true);
+        Player p = twoPlayersPhase1.getPlayer1();
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
 
-        assertThat(feature2.getCurrentGameState(), is ("******************************************\n" +
+        assertThat(twoPlayersPhase1.getCurrentGameState(), is ("******************************************\n" +
                         "                  MARKET                  \n" +
                         "------------------------------------------\n" +
                         "Wheat Field        BW (1)  [1]      #6\n" +
@@ -144,19 +142,19 @@ public class Feature2Test {
     }
     @Test
     public void testToStringIfCanConstructLandmark() {
-        Player p = feature2.getPlayer1();
-        feature2.getPlayers()[0].setTurn(true);
+        Player p = twoPlayersPhase1.getPlayer1();
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
         p.setCoinCount(10);
-        assertThat(feature2.getAvailLandmark(1), is("---------       CONSTRUCT        ---------\n" +
+        assertThat(twoPlayersPhase1.getAvailLandmark(1), is("---------       CONSTRUCT        ---------\n" +
                 " 1. City Hall          NT (7)  [ ]\n"));
     }
 
     @Test
     public void testToStringCannotConstructLandmark() {
-        Player p = feature2.getPlayer1();
-        feature2.getPlayers()[0].setTurn(true);
+        Player p = twoPlayersPhase1.getPlayer1();
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
         p.setCoinCount(3);
-        assertThat(feature2.getAvailLandmark(1), is(""));
+        assertThat(twoPlayersPhase1.getAvailLandmark(1), is(""));
     }
 
 //    @Test
@@ -174,25 +172,25 @@ public class Feature2Test {
 
         @Test
     public void testToStringCannotBuy() {
-        Player p = feature2.getPlayer2();
-        feature2.getPlayers()[1].setTurn(true);
+        Player p = twoPlayersPhase1.getPlayer2();
+        twoPlayersPhase1.getPlayers()[1].setTurn(true);
         p.setCoinCount(0);
         int count = 1;
-        assertThat(feature2.getAvailEst(count), is(""));
+        assertThat(twoPlayersPhase1.getAvailEst(count), is(""));
     }
 
     @Test
     public void testToStringCannotBuy2() {
-        Player p = feature2.getPlayer1();
-        feature2.getPlayers()[0].setTurn(true);
+        Player p = twoPlayersPhase1.getPlayer1();
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
         p.setCoinCount(0);
         int count = 1;
-        assertThat(feature2.getAvailEst(count), is(""));
+        assertThat(twoPlayersPhase1.getAvailEst(count), is(""));
     }
 
     @Test
     public void testNoPlayer() {
-        assertThat(feature2.getCurrentPlayer(), is(nullValue()));
+        assertThat(twoPlayersPhase1.getCurrentPlayer(), is(nullValue()));
     }
 
 
@@ -235,20 +233,20 @@ public class Feature2Test {
     // tests buying an establishment
     @Test
     public void testBuyCard() {
-        Player player1 = feature2.getPlayer1();
-        Player player2 = feature2.getPlayer2();
-        Map<Establishment, Integer> market = feature2.getMarket();
+        Player player1 = twoPlayersPhase1.getPlayer1();
+        Player player2 = twoPlayersPhase1.getPlayer2();
+        Map<Establishment, Integer> market = twoPlayersPhase1.getMarket();
 
-        player1.buyCard(feature2.getRanch());
-        assertTrue(player1.getEstOwned().containsKey(feature2.getRanch()));
+        player1.buyCard(twoPlayersPhase1.getRanch());
+        assertTrue(player1.getEstOwned().containsKey(twoPlayersPhase1.getRanch()));
         assertThat(player1.getCoinCount(), is(2));
-        assertTrue(player1.getEstOwned().containsKey(feature2.getRanch()));
+        assertTrue(player1.getEstOwned().containsKey(twoPlayersPhase1.getRanch()));
     }
 
     // tests actions performed if a dice roll lands within an activation range
     @Test
     public void testGetActivationNumbers() {
-        Player player1 = feature2.getPlayer1();
+        Player player1 = twoPlayersPhase1.getPlayer1();
         Map<Establishment, Integer> estOwned = player1.getEstOwned();
         Establishment test = new Establishment("X", 3, Card.Color.RED, Card.Color_ab.R, Card.Icon.GEAR, Card.Icon_ab.G,
         "X", "8", "give", "nobody", 1, "none", "none");
@@ -264,16 +262,16 @@ public class Feature2Test {
 
     @Test
     public void testActivation() {
-        Player p = feature2.getPlayer1();
-        feature2.diceSum = 1;
-        feature2.activationTest();
+        Player p = twoPlayersPhase1.getPlayer1();
+        twoPlayersPhase1.diceSum = 1;
+        twoPlayersPhase1.activationTest();
         assertThat(p.getCoinCount(), is(4));
     }
 
     // Test get/set of ai
     @Test
     public void testAi() {
-        Player player1 = feature2.getPlayer1();
+        Player player1 = twoPlayersPhase1.getPlayer1();
         player1.setAi(true);
         assertTrue(player1.isAi());
     }
@@ -281,14 +279,14 @@ public class Feature2Test {
     // Get the player's number
     @Test
     public void testGetPlayerNumber() {
-        Player player1 = feature2.getPlayer1();
+        Player player1 = twoPlayersPhase1.getPlayer1();
         assertThat(player1.getPlayerNumber(), is(1));
     }
 
     // Set the player's landmarks
     @Test
     public void testSetLandmarks() {
-        Player player1 = feature2.getPlayer1();
+        Player player1 = twoPlayersPhase1.getPlayer1();
         Landmark[] landmarks = new Landmark[2];
         Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
@@ -304,7 +302,7 @@ public class Feature2Test {
     // More Machi Tests
     @Test
     public void testSetters() {
-        Feature2 machi = new Feature2();
+        TwoPlayersPhase1 machi = new TwoPlayersPhase1(false);
         Player player1 = machi.getPlayer1();
         Player player2 = machi.getPlayer2();
 
@@ -326,7 +324,7 @@ public class Feature2Test {
     // Machi setters
     @Test
     public void testSetEstablishments() {
-        Feature2 machi = new Feature2();
+        TwoPlayersPhase1 machi = new TwoPlayersPhase1(false);
 
         Establishment wheat = machi.getWheat();
         Establishment ranch = machi.getRanch();
@@ -351,35 +349,13 @@ public class Feature2Test {
         
     }
 
-   /* @Test
-    public void testPlayGame() {
-        MachiWoCo machi = new MachiWoCo();
-        Player player1 = machi.getPlayer1();
-        Player player2 = machi.getPlayer2();
 
-        Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
-                "|  This is a city hall  |\n");
-
-        Landmark[] p1L = player1.getLandmarks();
-        Landmark[] p2L = player2.getLandmarks();
-
-        machi.playGame();
-
-        player2.buyLandmark(city);
-
-        assertEquals("The game is over. Player 2 is the winner.", outContent.toString());
-
-    } */
-
-
-
-    // game test
     @Test
     public void testNoMoveInput() {
-        feature2.getPlayers()[0].setTurn(true);
-        feature2.getBuyInput(99);
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getBuyInput(99);
         assertThat(outContent.toString(), is("Player 1 chose not to make improvements.\n"));
-//        feature2.getBuyInput(98);
+//        twoPlayersPhase1.getBuyInput(98);
 //        assertThat(outContent.toString(), containsString("Not a valid input\n"));
 
 
@@ -387,49 +363,49 @@ public class Feature2Test {
 
     @Test
     public void testEstInput() {
-        feature2.getPlayers()[0].setTurn(true);
-        assertThat(feature2.getBuyInput(1), is(true));
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        assertThat(twoPlayersPhase1.getBuyInput(1), is(true));
     }
 
     @Test
     public void testBuyInput() {
-        feature2.getPlayers()[0].setTurn(true);
-        assertThat(feature2.handleInput("1"), is(true));
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        assertThat(twoPlayersPhase1.handleInput("1"), is(true));
     }
 
     @Test
     public void testViewInput() {
-        feature2.getPlayers()[0].setTurn(true);
-        feature2.handleInput("view 1");
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.handleInput("view 1");
 //        assertThat(outContent.toString(), containsString("Wheat Field"));
-        assertThat(feature2.handleInput("view 1"), is(false));
-        assertThat(feature2.handleInput("view 90"), is(false));
+        assertThat(twoPlayersPhase1.handleInput("view 1"), is(false));
+        assertThat(twoPlayersPhase1.handleInput("view 90"), is(false));
 
     }
 
 //    @Test
 //    public void testInvalidInput() {
-//        feature2.getPlayers()[0].setTurn(true);
-//        feature2.handleInput("I love MachiWoco");
+//        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+//        twoPlayersPhase1.handleInput("I love MachiWoco");
 //        assertThat(outContent.toString(), containsString("Not a valid input"));
 //    }
 
 
     @Test
     public void testGetMenu() {
-        feature2.getPlayers()[0].setTurn(true);
-        assertThat(feature2.getMenu(), containsString("PURCHASE"));
-        assertThat(feature2.getMenu(), containsString("CANCEL"));
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        assertThat(twoPlayersPhase1.getMenu(), containsString("PURCHASE"));
+        assertThat(twoPlayersPhase1.getMenu(), containsString("CANCEL"));
 
     }
 
 
     @Test
     public void testViewLandmarkInput() {
-        feature2.getPlayers()[0].setTurn(true);
-        feature2.getCurrentPlayer().setCoinCount(10);
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getCurrentPlayer().setCoinCount(10);
 
-        feature2.handleInput("view 4");
+        twoPlayersPhase1.handleInput("view 4");
         assertThat(outContent.toString(), is(".-----------------------.\n" +
                 "| <N>   LANDMARK    {T} |\n" +
                 "|       City Hall       |\n" +
@@ -442,71 +418,71 @@ public class Feature2Test {
 
     @Test
     public void testLandInput() {
-        feature2.getPlayers()[0].setTurn(true);
-        feature2.getCurrentPlayer().setCoinCount(10);
-        assertThat(feature2.getBuyInput(4), is(true));
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getCurrentPlayer().setCoinCount(10);
+        assertThat(twoPlayersPhase1.getBuyInput(4), is(true));
     }
 
     @Test
     public void testAllLandmark() {
         Landmark[] l;
-        feature2.getPlayers()[0].setTurn(true);
-        feature2.getCurrentPlayer().setCoinCount(10);
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getCurrentPlayer().setCoinCount(10);
         int count = 0;
-        l = feature2.getCurrentPlayer().getLandmarks();
+        l = twoPlayersPhase1.getCurrentPlayer().getLandmarks();
         l[0].is_constructed = true;
-        for (int j = 0; j < feature2.NUMBER_OF_LANDMARKS; j++) {
+        for (int j = 0; j < twoPlayersPhase1.NUMBER_OF_LANDMARKS; j++) {
             if (l[j].is_constructed) {
                 count++;
             }
-            assertThat(feature2.allLandmarksConstructed(), is(true));
+            assertThat(twoPlayersPhase1.allLandmarksConstructed(), is(true));
         }
     }
 
     @Test
     public void testNoLandmark() {
         Landmark[] l;
-        feature2.getPlayers()[0].setTurn(true);
-        feature2.getCurrentPlayer().setCoinCount(10);
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getCurrentPlayer().setCoinCount(10);
         int count = 0;
-        l = feature2.getCurrentPlayer().getLandmarks();
+        l = twoPlayersPhase1.getCurrentPlayer().getLandmarks();
         l[0].is_constructed = false;
-        for (int j = 0; j < feature2.NUMBER_OF_LANDMARKS; j++) {
+        for (int j = 0; j < twoPlayersPhase1.NUMBER_OF_LANDMARKS; j++) {
             if (l[j].is_constructed) {
                 count++;
             }
-            assertThat(feature2.allLandmarksConstructed(), is(false));
+            assertThat(twoPlayersPhase1.allLandmarksConstructed(), is(false));
         }
     }
 
     @Test
     public void testIsNumeric() {
-        assertThat(feature2.isNumeric(""), is (false));
+        assertThat(twoPlayersPhase1.isNumeric(""), is (false));
 
     }
 
 
     @Test
     public void testPrintTurn() {
-        feature2.getPlayers()[0].setTurn(true);
-        feature2.printTurn();
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.printTurn();
         assertThat(outContent.toString(), containsString("Turn started for Player 1"));
     }
 
     @Test
     public void testStartGame() {
-        feature2.startGame();
+        twoPlayersPhase1.startGame();
         assertThat(outContent.toString(), containsString("The game has started. Player 1 will go first."));
     }
 
     @Test
     public void testCanAfford() {
-        feature2.getPlayers()[0].setTurn(true);
-        feature2.getCurrentPlayer().setCoinCount(10);
-        Player p = feature2.getCurrentPlayer();
-        assertThat(feature2.canAffordCard(p), is(true));
-        feature2.getCurrentPlayer().setCoinCount(0);
-        assertThat(feature2.canAffordCard(p), is(false));
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getCurrentPlayer().setCoinCount(10);
+        Player p = twoPlayersPhase1.getCurrentPlayer();
+        assertThat(twoPlayersPhase1.canAffordCard(p), is(true));
+        twoPlayersPhase1.getCurrentPlayer().setCoinCount(0);
+        assertThat(twoPlayersPhase1.canAffordCard(p), is(false));
     }
 
 
