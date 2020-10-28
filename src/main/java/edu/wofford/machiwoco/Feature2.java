@@ -722,7 +722,7 @@ public class Feature2 {
                 //System.out.println(getCurrentGameState());
                 //gameSubject.setEstOrder(EST_ORDER);
                 //gameSubject.setPlayers(getPlayers());
-                //gameSubject.setMarket(getMarket());
+                gameSubject.setMarket(getMarket());
                 gameSubject.notifyObservers();
 
                 // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
@@ -752,6 +752,8 @@ public class Feature2 {
                     cnsl.flush();
 
                     inputSubject.setActivePlayer(getCurrentPlayer());
+                    inputSubject.setPlayers(getPlayers());
+                    inputSubject.setInput(input);
                     inputSubject.notifyObservers();
 
                     buyFinished = handleInput(input);

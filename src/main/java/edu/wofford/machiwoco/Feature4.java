@@ -220,6 +220,7 @@ public class Feature4 extends Feature3 {
             //roll(); //"Player N rolled [3] = 3."
 
             // (4) ACTIVATE / ACTIONS
+            gameSubject.setMarket(getMarket());
             gameSubject.notifyObservers();
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
             diceSubject.setActivePlayer(getCurrentPlayer());

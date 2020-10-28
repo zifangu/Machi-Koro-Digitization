@@ -78,6 +78,7 @@ public class Feature3 extends Feature2 {
 
             // (2) PRINT CURRENT GAME STATE
 
+            gameSubject.setMarket(getMarket());
             gameSubject.notifyObservers();
 
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
