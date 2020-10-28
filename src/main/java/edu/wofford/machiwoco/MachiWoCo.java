@@ -33,14 +33,9 @@ public class MachiWoCo {
             } else {
                 Feature2.main(args);
             }
+        } else if (args[0].equals("phase2")) {
+            Feature4.main(args);
         }
-
-
-//        m.getPlayers()[1].setTurn(true);
-//        m.getPlayers()[0].setTurn(true);
-
-//            m.getCurrentPlayer().setCoinCount(69);
-//        p.setCoinCount(3);
 
     }
 }

@@ -499,9 +499,6 @@ public class Feature2Test {
         assertThat(feature2.canAffordCard(p), is(true));
         feature2.getCurrentPlayer().setCoinCount(0);
         assertThat(feature2.canAffordCard(p), is(false));
-
-
-
     }
 
 

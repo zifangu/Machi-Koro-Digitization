@@ -697,7 +697,6 @@ public class Feature2 {
         public void playGame() {
             startGame();
             players[0].setTurn(true);
-            int count = 0;
 
             DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
             GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
