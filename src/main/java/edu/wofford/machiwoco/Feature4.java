@@ -137,7 +137,7 @@ public class Feature4 extends Feature3 {
         if(NUMBER_OF_PLAYERS == 3) {
             player3 = new Player(P2startingEst3, startingLandmarks, 3,3, true);
         }
-        players = new Player[3];
+        players = new Player[NUMBER_OF_PLAYERS];
         players[0] = player1;
         players[1] = player2;
         if(NUMBER_OF_PLAYERS == 3) {
@@ -234,13 +234,14 @@ public class Feature4 extends Feature3 {
         int count = 0;
         boolean ai;
         DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
-        GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarketP2());
+        GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), market);
         new DiceObserver(diceSubject);
         new ActivationObserver(diceSubject);
         new GameStateObserver(gameSubject);
 
         InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
         new InputObserver(inputSubject);
+        gameSubject.setPlayers(players);
 
         while(!isGameOver()) {
             // (1) PRINT TURN
@@ -253,7 +254,7 @@ public class Feature4 extends Feature3 {
             //roll(); //"Player N rolled [3] = 3."
 
             // (4) ACTIVATE / ACTIONS
-            gameSubject.setPlayers(players);
+
             gameSubject.setMarket(getMarketP2());
             gameSubject.notifyObservers();
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
