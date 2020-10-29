@@ -14,17 +14,14 @@ This is the user guide for playing Machi Woco.
              - [End Turn](#end-turn)
     + [Winner](#winner)
   * [Phase 2](#phase-2)
-    + [Game Objective](#game-objective2)
-    + [Game Play](#game-play2)
-        - [Start Game](#start-game2)
-        - [Each Round](#each-round2)
-            - [Dice Roll](#dice-roll2)
-            - [Menu](#menu2)        
-            - [View](#view2)    
-            - [Purchase](#purchase2)
-            - [Construct](#construct2)
-            - [End Turn](#end-turn2)
-    + [Winner](#winner2)
+    + [Game Objective P2](#game-objective-P2)
+    + [Game Play P2](#game-play-P2)
+        - [Start Game](#start-game-P2)
+        - [Each Round](#each-round-P2)
+        - [Gameplay Differences P2](#gameplay-differences-P2)
+            - [Dice Roll P2](#dice-roll-P2)
+            - [Purchase P2](#purchase-P2)
+    + [Winner P2](#winner-P2)
 
 
   
@@ -140,17 +137,17 @@ In this feature of the game, the winner will be player who constructed City Hall
 
 # Phase 2
 
-## Game Objective
+## Game Objective P2
 
 For this version of the game, the objective is to be the first player to build City Hall and Train Station.
 
-## Game Play
+## Game Play P2
 
-### Start Game
+### Start Game P2
 In this version of the game, there will be 2-3 players: 1 human player (player 1) and 1-2 AI player(s).
 When a new game starts, player 1 will go first.
 
-### Each Round
+### Each Round P2
 At the beginning of each player's turn, you will first see a display of the current game state similar to this:
 
     ******************************************
@@ -176,17 +173,11 @@ At the beginning of each player's turn, you will first see a display of the curr
     
     ******************************************
     
-Market contains the establishments available to all players to purchase.
-Each market entry contains these information(in such order): 
-* name of the establishment
-* two characters representing color and icon
-* the cost in parentheses
-* the activation range
-* the number available, starting with a single space and the hashtag/pound symbol
+The Establishments Bakery, Convenience Store, Mine, and Apple Orchard have been added.
 
- 
-Each player entry also contains similar information about the establishments and landmarks with the exception that in landmarks `[ ]` indicates whether that landmark has been constructed or not as opposed to the activation range in establishments, separated by `..........................................`
-#### Dice Roll
+### Gamplay Differences P2
+
+#### Dice Roll P2
 At this point of the game, a player can roll two die if they have constructed the Train Station landmark .
 Otherwise, only one dice will be rolled.
 These die will be rolled immediately and automatically following the display of the current game state.
@@ -194,60 +185,11 @@ These die will be rolled immediately and automatically following the display of 
 For example, `Player 1 rolled [5] = 5` means player 1 rolled a 5.
 `Player 2 rolled [5][6] = 11` means player 2 rolled an 11.
 
-
-
-#### Menu
-After the dice rolls, you will be prompted to purchase or construct items as you wish. A menu similar to this will be displayed to you.
     
-    Player 1 would you like to purchase an 
-    establishment or construct a landmark? (5
-     coins
-    (To view details of an item, type 'view'  
-    followed by the item number. For example, 
-    to view item 6, type 'view 6'.)           
-    ==========================================
-    ---------        PURCHASE        ---------
-     1. Wheat Field        BW (1)  [1]      #6
-     2. Ranch              BC (1)  [2]      #6
-     3. Forest             BG (3)  [5]      #6
-    ---------         CANCEL         ---------
-    99. Do nothing                            
-    ==========================================
-    Choose a number to purchase or construct: 
-
-
-You can check your account balance on the top of this prompt. 
-
-#### View
-If you are unsure about the effects of any establishments that you are able to purchase, you can type `view N` where N is the item number you see on the menu.
-
-For example, in the menu displayed above, if you type `view 1` you can see detailed informaion about wheat field
-
-    .-----------------------.
-    | <B>      [1]      {W} |
-    |      Wheat Field      |
-    |                       |
-    |  Get 1 coin from the  |
-    |         bank.         |
-    |    (anyone's turn)    |
-    |                       |
-    | (1)                   |
-    |_______________________|
-    
- #### Purchase
- If you desire to purchase an establishment, enter the item number corresponding to the item numbers displayed to you. For example, by typing `2`, you will purchase a ranch establishment. After which your turn ends.
- 
+ #### Purchase P2
  If a Player is an AI, purchasing decisions will be made at random. If an AI player has the funds necessary a purchase can be made, but they also have the choice to skip and move on to the next player.
  
- #### Construct
- If you choose not to purchase an establishment, you can construct a landmark if one is available in your menu.
- 
- #### End turn
- Any invalid input (i.e. item numbers out of index or any phrases other than `view N`) will cause the console to prompt you again. Your turn will not end until a valid input is made.
- 
- You turn ends after you choose to either purchase an establishment or construct a landmark. You also have the option to enter `99` to not make any improvements.
- 
- ### Winner
+ ### Winner P2
 In this feature of the game, the winner will be the player who constructed City Hall and Train Station first. After which the game will immediately end.
 
 
