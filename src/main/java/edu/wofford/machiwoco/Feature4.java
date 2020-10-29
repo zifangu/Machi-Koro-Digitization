@@ -358,6 +358,35 @@ public class Feature4 extends TwoPlayersPhase1 {
         }
     }
 
+
+    public Establishment getConvenience() {
+        return convenience;
+    }
+
+    public void setConvenience(Establishment convenience) {
+        this.convenience = convenience;
+    }
+
+    public Establishment getMine() {
+        return mine;
+    }
+
+    public void setMine(Establishment mine) {
+        this.mine = mine;
+    }
+
+    public Establishment getOrchard() {
+        return orchard;
+    }
+
+    public void setOrchard(Establishment orchard) {
+        this.orchard = orchard;
+    }
+
+    public Establishment getBakery() {
+        return bakery;
+    }
+
     public static void main(String[] args) {
         Feature4 feature4 = new Feature4(Integer.parseInt(args[1]));
         feature4.playGame();

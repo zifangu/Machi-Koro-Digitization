@@ -30,13 +30,83 @@ public class Feature4Test {
         assertThat(feature4.getPlayers().length, is(3));
     }
 
+//    /**************CITY HALL TEST ERRORS************/
 //    @Test
-//    public void testAILogic() {
-//        feature4.getPlayer2().setTurn(true);
-//        feature4.aiLogic();
-//        assertThat(outContent.toString(), Matchers.anyOf(Matchers.is(1),Matchers.is(2),Matchers.is(3),Matchers.is(4),Matchers.is(5),Matchers.is(6),Matchers.is(99)));
+//    public void testCityHallInit() {
+//        Player[] players = feature4.getPlayers();
+//        for (Player p : players) {
+//            assertThat(p.getLandmarks()[0].is_constructed, is(false));
+//        }
 //    }
+//        /************************************************/
+
+
+//    /**************TRAIN STATION TEST ERRORS************/
+//        @Test
+//    public void testTrainStationInit() {
+//        Player[] players = feature4.getPlayers();
+//        for (Player p : players) {
+//            assertThat(p.getLandmarks()[1].is_constructed, is(false));
+//        }
+//    }
+//        /************************************************/
+
+
+
+    @Test
+    public void testInitialMarket() {
+        Establishment wheat = feature4.getWheat();
+        assertThat(feature4.getMarket().get(wheat), is(6));
+
+        Establishment ranch = feature4.getRanch();
+        assertThat(feature4.getMarket().get(ranch), is(6));
+
+        Establishment forest = feature4.getForest();
+        assertThat(feature4.getMarket().get(forest), is(6));
+
+//        /***********NEWLY ADDED EST ERRORS*************/
+
+//        Establishment bakery = feature4.getBakery();
+//        assertThat(feature4.getMarket().get(bakery), is(6));
 //
+//        Establishment convenience = feature4.getConvenience();
+//        assertThat(feature4.getMarket().get(convenience), is(6));
+//
+//        Establishment mine = feature4.getMine();
+//        assertThat(feature4.getMarket().get(mine), is(6));
+//
+//        Establishment orchard = feature4.getOrchard();
+//        assertThat(feature4.getMarket().get(orchard), is(6));
+//        /************************************************/
+    }
+
+
+    @Test
+    public void testInitPlayerCoinCount() {
+        Player[] players = feature4.getPlayers();
+        int count = 0;
+        for (Player p : players) {
+            count += p.getCoinCount();
+        }
+        assertThat(count, is(3*players.length));
+    }
+
+
+//        /***********PLAYER ESTABLISHMENT ERROR*************/
+//    @Test
+//    public void testInitPlayerEst() {
+//        Player[] players = feature4.getPlayers();
+//        for (Player p : players) {
+//            assertThat(p.getEstOwned().get(feature4.getWheat()), is(1));
+//            assertThat(p.getEstOwned().get(feature4.getRanch()), is(1));
+//        }
+//    }
+//        /************************************************/
+
+
+
+
+
 //    @Test
 //    public void testOneLandmark() {
 //        Player p = feature4.getCurrentPlayer();
