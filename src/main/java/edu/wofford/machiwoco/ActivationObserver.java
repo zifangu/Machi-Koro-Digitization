@@ -33,7 +33,9 @@ public class ActivationObserver extends Observer {
                     activation = 3;
                 }
 
-                if (dice == activation) {
+                if (dice == activation && (!est.getName().equals("Bakery") && !est.getName().equals("Convenience Store"))) {
+                    s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
+                } else if (dice == activation && player.isTurn()) {
                     s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
                 }
             }
