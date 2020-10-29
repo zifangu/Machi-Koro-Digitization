@@ -159,22 +159,27 @@ public class Feature4 extends TwoPlayersPhase1 {
     @Override
     protected void landmarkInit() {
         NUMBER_OF_LANDMARKS = 2;
-        Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+
+        startingLandmarks = new Landmark[2];
+        startingLandmarks[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
-        Landmark trainStation = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  You may roll 1 or 2  |\n" +
                         "|         dice.         |\n");
-        startingLandmarks = new Landmark[2];
-        startingLandmarks[0] = city;
-        startingLandmarks[1] = trainStation;
 
         startingLandmarks1 = new Landmark[2];
-        startingLandmarks1[0] = city;
-        startingLandmarks1[1] = trainStation;
+        startingLandmarks1[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+                "|  This is a city hall  |\n");
+        startingLandmarks1[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+                "|  You may roll 1 or 2  |\n" +
+                        "|         dice.         |\n");
 
         startingLandmarks2 = new Landmark[2];
-        startingLandmarks2[0] = city;
-        startingLandmarks2[1] = trainStation;
+        startingLandmarks2[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+                "|  This is a city hall  |\n");
+        startingLandmarks2[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+                "|  You may roll 1 or 2  |\n" +
+                        "|         dice.         |\n");
     }
 
     /**
@@ -338,7 +343,7 @@ public class Feature4 extends TwoPlayersPhase1 {
     protected int[] roll2(String input) {
         int diceSum = 0;
         int[] result = new int[3];
-        if (input == "2") {
+        if (input.equals("2")) {
             dice1 = (int) (Math.random() * 6 + 1);
             dice2 = (int) (Math.random() * 6 + 1);
             diceSum = dice1 + dice2;
