@@ -21,7 +21,7 @@ public class DiceSubjectTest {
     public void before() {
         twoPlayersPhase1 = new TwoPlayersPhase1(false);
         twoPlayersPhase1.getPlayers()[0].setTurn(true);
-        diceSubject = new DiceSubject(twoPlayersPhase1.getCurrentPlayer(), twoPlayersPhase1.getPlayers(), 0);
+        diceSubject = new DiceSubject(twoPlayersPhase1.getCurrentPlayer(), twoPlayersPhase1.getPlayers(), 0, 1);
         new DiceObserver(diceSubject);
         new ActivationObserver(diceSubject);
 

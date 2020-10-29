@@ -9,11 +9,13 @@ public class DiceSubject {
     private Player activePlayer;
     private Player[] players;
     private int dice;
+    private int diceNum;
 
-    public DiceSubject(Player activePlayer, Player[] players, int dice) {
+    public DiceSubject(Player activePlayer, Player[] players, int dice, int diceNum) {
         this.activePlayer = activePlayer;
         this.players = players;
         this.dice = dice;
+        this.diceNum = diceNum;
     }
 
     public Player getActivePlayer() {
@@ -39,6 +41,18 @@ public class DiceSubject {
     public void setDice(int dice) {
         this.dice = dice;
     }
+
+    public int getDiceNum() {
+        return diceNum;
+    }
+
+    public void setDiceNum(int diceNum) {
+        this.diceNum = diceNum;
+    }
+
+    /*public int[] getDice2() {
+
+    }*/
 
     public void attach(Observer observer){
         observers.add(observer);

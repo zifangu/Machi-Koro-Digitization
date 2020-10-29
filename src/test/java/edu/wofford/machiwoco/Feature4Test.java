@@ -30,6 +30,17 @@ public class Feature4Test {
         assertThat(feature4.getPlayers().length, is(3));
     }
 
+    @Test
+    public void testTrainStationConstructed() {
+        Player player = feature4.getPlayer1();
+        player.setCoinCount(10);
+        player.buyLandmark(player.getLandmarks()[1]);
+        assertThat(feature4.isTrainStationConstructed(player), is(true));
+
+        Player player2 = feature4.getPlayer2();
+        //assertFalse(feature4.isTrainStationConstructed(player2));
+    }
+
 //    /**************CITY HALL TEST ERRORS************/
 //    @Test
 //    public void testCityHallInit() {
