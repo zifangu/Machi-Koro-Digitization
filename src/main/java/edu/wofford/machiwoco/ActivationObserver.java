@@ -15,7 +15,7 @@ public class ActivationObserver extends Observer {
 
     private StringBuilder checkActivation() {
         int dice = diceSubject.getDice();
-        int activation;
+        int activation = 0;
         Player[] players = diceSubject.getPlayers();
         StringBuilder s = new StringBuilder();
         for (Player player : players) {
@@ -27,10 +27,9 @@ public class ActivationObserver extends Observer {
             for(Establishment est: keys) {
                 if(!est.getName().equals("Bakery")) {
                     activation = Integer.parseInt(est.getActivation());
-                } else if(dice==2) {
-                    activation = 2;
-                } else {
-                    activation = 3;
+                } else if(est.getName().equals("Bakery")) {
+                    if(dice == 2) { activation = 2; }
+                    else { activation = 3; }
                 }
 
                 if (dice == activation && !est.getColor_ab().equals(Card.Color_ab.G)) {
