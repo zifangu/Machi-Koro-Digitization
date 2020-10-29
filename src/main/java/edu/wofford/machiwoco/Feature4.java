@@ -266,11 +266,17 @@ public class Feature4 extends TwoPlayersPhase1 {
             System.out.print(s);
             System.out.print(getMenu()); //Ivan
 
+        } else {
+            System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
+                    "improvements.");
         }
         while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-            Console cnsl = System.console();
+            /*Console cnsl = System.console();
             String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-            cnsl.flush();
+            cnsl.flush();*/
+            System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
+            String input = sc.nextLine();
+
             buyFinished = handleInput(input);
         }
     }
@@ -405,12 +411,21 @@ public class Feature4 extends TwoPlayersPhase1 {
             gameSubject.notifyObservers();
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
             if (isTrainStationConstructed(getCurrentPlayer())) {
-                System.out.println(StringUtils.center("Player " + getCurrentPlayer().getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
-                String rollInput = sc.next();
-                diceSubject.setDiceNum(Integer.parseInt(rollInput));
-                int[] roll2Arr = roll2(rollInput);
-                diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
-                diceSubject.setDice(roll2Arr[2]);
+                //if (canAffordCard(getCurrentPlayer()) && !getCurrentPlayer().isAi()) {
+                if (!getCurrentPlayer().isAi()) {
+                    System.out.println(StringUtils.center("Player " + getCurrentPlayer().getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
+                    String rollInput = sc.next();
+                    diceSubject.setDiceNum(Integer.parseInt(rollInput));
+                    int[] roll2Arr = roll2(rollInput);
+                    diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
+                    diceSubject.setDice(roll2Arr[2]);
+                } else {
+                    int randomOfTwoInts = new Random().nextBoolean() ? 1 : 2;
+                    diceSubject.setDiceNum(randomOfTwoInts);
+                    int[] roll2Arr = roll2(Integer.toString(randomOfTwoInts));
+                    diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
+                    diceSubject.setDice(roll2Arr[2]);
+                }
             } else {
                 diceSubject.setDice(roll());
             }

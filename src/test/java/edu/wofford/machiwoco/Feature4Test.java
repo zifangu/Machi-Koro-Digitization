@@ -38,7 +38,7 @@ public class Feature4Test {
         assertThat(feature4.isTrainStationConstructed(player), is(true));
 
         Player player2 = feature4.getPlayer2();
-        //assertFalse(feature4.isTrainStationConstructed(player2));
+        //assertThat(feature4.isTrainStationConstructed(player2), is(false));
     }
 
 //    /**************CITY HALL TEST ERRORS************/
