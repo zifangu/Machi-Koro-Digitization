@@ -128,7 +128,8 @@ public class Feature4 extends TwoPlayersPhase1 {
     }
 
     /**
-     * Second player is now an AI.
+     * Builds the Players with the second player now being an AI.
+     * @param player_num the number of players taking part in the current game
      */
 
     protected void playerInitFeature4(int player_num) {
@@ -305,6 +306,10 @@ public class Feature4 extends TwoPlayersPhase1 {
         }
     }
 
+    /**
+     * Gets the market for the Phase2 version of the game
+     * @return a Map object representing the Phase 2 market
+     */
 
     public Map<Establishment,Integer> getMarketP2() {
         return market;
@@ -317,6 +322,7 @@ public class Feature4 extends TwoPlayersPhase1 {
 
     /**
      * Gets the sum of a dice roll using 2 die.
+     * @param input a String representing the number of die being rolled (1 or 2)
      * @return an array featuring the value of the first dice, the second dice, and the sum of the two rolls.
      */
 

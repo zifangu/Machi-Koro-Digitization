@@ -95,6 +95,8 @@ public class GameStateObserver extends Observer{
     /**
      * Generates formatted player menu
      * @param p Player to be passed in
+     * @param num the player's number
+     * @param active a boolean representing true if the player is active
      * @return The complete player output
      */
     protected String generatePlayer(Player p, int num, boolean active) {

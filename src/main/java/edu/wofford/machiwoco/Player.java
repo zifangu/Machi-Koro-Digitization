@@ -29,6 +29,7 @@ public class Player {
      * @param landmarks an array containing the game's Landmarks
      * @param coinCount an integer representing the Player's total coins
      * @param playerNumber an integer representing the Player's number
+     * @param ai a boolean holding true if the Player is an AI
      */
 
     public Player(Map<Establishment,Integer> estOwned, Landmark[] landmarks, int coinCount, int playerNumber, boolean ai) {

@@ -54,7 +54,8 @@ public class TwoPlayersPhase1 {
     //**********CONSTRUCTOR************//
 
         /**
-         * MachiWoco constructor serving as the infrastructure of the game. Both players are human in this class.
+         * MachiWoco constructor serving as the infrastructure of the game.
+         * @param ai a boolean holding true if the game will contain an AI player
          */
 
         public TwoPlayersPhase1(boolean ai) {
@@ -114,6 +115,7 @@ public class TwoPlayersPhase1 {
 
     /**
      * Creates either ai or human players
+     * @param ai a boolean holding true if the player being created should be an AI
      */
 
     protected void playerInit(boolean ai) {
@@ -396,7 +398,8 @@ public class TwoPlayersPhase1 {
         //**********GAME STEP 4: ROLL THE DICE************//
 
         /**
-         * Prints a message to the console displaying the current player's dice roll
+         * Returns a dice roll value
+         * @return an integer representing a dice roll value
          */
 
         protected int roll() {
@@ -617,6 +620,7 @@ public class TwoPlayersPhase1 {
 
         /**
          * Checks to see if the game is over
+         * @return a boolean holding true if the game is over
          */
 
         protected boolean isGameOver() {
