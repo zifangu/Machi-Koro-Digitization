@@ -363,3 +363,4 @@ public class Feature4 extends TwoPlayersPhase1 {
         feature4.playGame();
     }
 }
+
