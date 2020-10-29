@@ -51,6 +51,43 @@ public class DiceSubjectTest {
         assertThat(outContent.toString(), containsString("Ranch activated for Player 2"));
     }
 
+    @Test
+    public void setDiceNum() {
+        diceSubject.setDiceNum(2);
+        assertThat(diceSubject.getDiceNum(), is(2));
+    }
+
+    @Test
+    public void testGetSetDicePair() {
+        diceSubject.setDicePair(2, 4);
+        int[] test = new int[] {2, 4};
+        assertThat(diceSubject.getDicePair(), is(test));
+    }
+
+    @Test
+    public void testCorrectOutput2Die() {
+        Feature4 f4 = new Feature4(3);
+        int[] roll2Output = f4.roll2("2");
+        diceSubject.setDiceNum(2);
+        diceSubject.setDicePair(roll2Output[0], roll2Output[1]);
+        diceSubject.setDice(roll2Output[2]);
+        diceSubject.setActivePlayer(f4.getPlayer1());
+        diceSubject.notifyObservers();
+        assertThat(outContent.toString(), containsString("Player 1 rolled [" + roll2Output[0] + "][" + roll2Output[1] + "] = " + roll2Output[2] + "."));
+    }
+
+    @Test
+    public void testCorrectOutput1Die() {
+        Feature4 f4 = new Feature4(3);
+        int[] roll2Output = f4.roll2("1");
+        diceSubject.setDicePair(roll2Output[0], roll2Output[1]);
+        diceSubject.setDice(roll2Output[2]);
+        diceSubject.setActivePlayer(f4.getPlayer1());
+        diceSubject.notifyObservers();
+        assertThat(outContent.toString(), containsString("Player 1 rolled [" + roll2Output[0] + "] = " + roll2Output[2] + "."));
+    }
+
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);

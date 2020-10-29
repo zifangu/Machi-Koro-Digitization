@@ -316,21 +316,30 @@ public class Feature4 extends TwoPlayersPhase1 {
  
 
     /**
-     * Gets the sum of a dice roll using 2 die
-     * @return the sum of the 2-die dice roll
+     * Gets the sum of a dice roll using 2 die.
+     * @return an array featuring the value of the first dice, the second dice, and the sum of the two rolls.
      */
 
-    protected int roll2(String input) {
+    protected int[] roll2(String input) {
         int diceSum = 0;
+        int[] result = new int[3];
         if (input == "2") {
             dice1 = (int) (Math.random() * 6 + 1);
             dice2 = (int) (Math.random() * 6 + 1);
-            diceSum = dice1 +dice2;
-            return diceSum;
+            diceSum = dice1 + dice2;
+            
+            result[0] = dice1;
+            result[1] = dice2;
+            result[2] = diceSum;
         } else {
-            diceSum = roll();
+            dice1 = (int) (Math.random() * 6 + 1);
+            dice2 = 0;
+
+            result[0] = dice1;
+            result[1] = dice2;
+            result[2] = dice1;
         }
-        return diceSum;
+        return result;
     }
 
 
@@ -379,10 +388,9 @@ public class Feature4 extends TwoPlayersPhase1 {
                 System.out.println(StringUtils.center("Player " + getCurrentPlayer().getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
                 String rollInput = sc.next();
                 diceSubject.setDiceNum(Integer.parseInt(rollInput));
-                //diceSubject.setDice(roll2(rollInput));
-                //diceSubject.rollDice();
-
-                //diceSubject.setDice()
+                int[] roll2Arr = roll2(rollInput);
+                diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
+                diceSubject.setDice(roll2Arr[2]);
             } else {
                 diceSubject.setDice(roll());
             }
