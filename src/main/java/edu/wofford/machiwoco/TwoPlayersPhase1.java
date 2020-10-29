@@ -816,6 +816,7 @@ public class TwoPlayersPhase1 {
 
             while (!isGameOver()) {
 
+                // (1) print turn and (2) print current game state
                 gameSubject.notifyObservers();
 
                 // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
@@ -823,10 +824,10 @@ public class TwoPlayersPhase1 {
                 diceSubject.setDice(roll());
                 diceSubject.notifyObservers();
 
-                // (3) either human or ai player make moves
+                // (4) either human or ai player make moves
                 makeMove();
 
-                // (4) check if Game has ended
+                // (5) check if Game has ended
                 gameEnded();
             }
         }
