@@ -147,7 +147,7 @@ For this version of the game, the objective is to be the first player to build C
 ## Game Play
 
 ### Start Game
-In this version of the game, there will be 2-3 players: 1 human player (player1) and 1-2 AI player(s).
+In this version of the game, there will be 2-3 players: 1 human player (player 1) and 1-2 AI player(s).
 When a new game starts, player 1 will go first.
 
 ### Each Round
@@ -187,10 +187,13 @@ Each market entry contains these information(in such order):
  
 Each player entry also contains similar information about the establishments and landmarks with the exception that in landmarks `[ ]` indicates whether that landmark has been constructed or not as opposed to the activation range in establishments, separated by `..........................................`
 #### Dice Roll
-At this point of the game, a player can only roll one dice .
-That dice will be rolled immediately and automatically following the display of the current game state.
+At this point of the game, a player can roll two die if they have constructed the Train Station landmark .
+Otherwise, only one dice will be rolled.
+These die will be rolled immediately and automatically following the display of the current game state.
 
 For example, `Player 1 rolled [5] = 5` means player 1 rolled a 5.
+`Player 2 rolled [5][6] = 11` means player 2 rolled an 11.
+
 
 
 #### Menu
@@ -234,6 +237,8 @@ For example, in the menu displayed above, if you type `view 1` you can see detai
  #### Purchase
  If you desire to purchase an establishment, enter the item number corresponding to the item numbers displayed to you. For example, by typing `2`, you will purchase a ranch establishment. After which your turn ends.
  
+ If a Player is an AI, purchasing decisions will be made at random. If an AI player has the funds necessary a purchase can be made, but they also have the choice to skip and move on to the next player.
+ 
  #### Construct
  If you choose not to purchase an establishment, you can construct a landmark if one is available in your menu.
  
@@ -243,6 +248,6 @@ For example, in the menu displayed above, if you type `view 1` you can see detai
  You turn ends after you choose to either purchase an establishment or construct a landmark. You also have the option to enter `99` to not make any improvements.
  
  ### Winner
-In this feature of the game, the winner will be player who constructed City Hall first. After which the game will immediately end.
+In this feature of the game, the winner will be the player who constructed City Hall and Train Station first. After which the game will immediately end.
 
 
