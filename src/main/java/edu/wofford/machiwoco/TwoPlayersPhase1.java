@@ -725,7 +725,7 @@ public class TwoPlayersPhase1 {
 
 //        observer pattern
         gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
-        diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
+        diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0, 1);
         inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
 
 //      subscribe to subjects

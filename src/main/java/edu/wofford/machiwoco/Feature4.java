@@ -313,6 +313,36 @@ public class Feature4 extends TwoPlayersPhase1 {
     /**
      * The prompt is no longer applied to both players. AI choice are made randomly, and the prompt is redircted backed to player 1.
      */
+ 
+
+    /**
+     * Gets the sum of a dice roll using 2 die
+     * @return the sum of the 2-die dice roll
+     */
+
+    protected int roll2(String input) {
+        int diceSum = 0;
+        if (input == "2") {
+            dice1 = (int) (Math.random() * 6 + 1);
+            dice2 = (int) (Math.random() * 6 + 1);
+            diceSum = dice1 +dice2;
+            return diceSum;
+        } else {
+            diceSum = roll();
+        }
+        return diceSum;
+    }
+
+
+    /**
+     * Checks to see if the Train Station landmark is constructed for a certain player
+     * @param player the Player instance whose Train Station construction is being checked
+     * @return a boolean holding true if the Player has constructed Train Station
+     */
+
+    protected boolean isTrainStationConstructed(Player player) {
+        return player.getLandmarks()[1].getIsConstructed();
+    }
 
     @Override
     public void playGame() {
@@ -320,7 +350,7 @@ public class Feature4 extends TwoPlayersPhase1 {
         players[0].setTurn(true);
         int count = 0;
         boolean ai;
-        DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0);
+        DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0, 1);
         GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), market);
         new DiceObserver(diceSubject);
         new ActivationObserver(diceSubject);
@@ -345,9 +375,20 @@ public class Feature4 extends TwoPlayersPhase1 {
             gameSubject.setMarket(getMarketP2());
             gameSubject.notifyObservers();
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
+            if (isTrainStationConstructed(getCurrentPlayer())) {
+                System.out.println(StringUtils.center("Player " + getCurrentPlayer().getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
+                String rollInput = sc.next();
+                diceSubject.setDiceNum(Integer.parseInt(rollInput));
+                //diceSubject.setDice(roll2(rollInput));
+                //diceSubject.rollDice();
+
+                //diceSubject.setDice()
+            } else {
+                diceSubject.setDice(roll());
+            }
             diceSubject.setActivePlayer(getCurrentPlayer());
-            diceSubject.setDice(roll());
             diceSubject.notifyObservers();
+
             // (5) SHOW BUY MENU
             makeMove();
             inputSubject.notifyObservers();
@@ -358,38 +399,8 @@ public class Feature4 extends TwoPlayersPhase1 {
         }
     }
 
-
-    public Establishment getConvenience() {
-        return convenience;
-    }
-
-    public void setConvenience(Establishment convenience) {
-        this.convenience = convenience;
-    }
-
-    public Establishment getMine() {
-        return mine;
-    }
-
-    public void setMine(Establishment mine) {
-        this.mine = mine;
-    }
-
-    public Establishment getOrchard() {
-        return orchard;
-    }
-
-    public void setOrchard(Establishment orchard) {
-        this.orchard = orchard;
-    }
-
-    public Establishment getBakery() {
-        return bakery;
-    }
-
     public static void main(String[] args) {
         Feature4 feature4 = new Feature4(Integer.parseInt(args[1]));
         feature4.playGame();
     }
 }
-
