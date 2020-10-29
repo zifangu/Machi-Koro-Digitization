@@ -2,16 +2,39 @@ package edu.wofford.machiwoco;
 
 import java.util.Set;
 
+/**
+ * This class uses DiceSubject to ouput any activation occurrences throughout the playthrough of Machi Koro.
+ *
+ * @author Eric Craft
+ * @author Ivan Gu
+ * @author Bennett Joyce
+ */
+
 public class ActivationObserver extends Observer {
+
+    /**
+     * A constructor that creates a diceSubject instance and adds itself to DiceSubject's list of observers.
+     * @param diceSubject a DiceSubject instance that will be used to access the info needed in the output.
+     */
+
     public ActivationObserver(DiceSubject diceSubject) {
         this.diceSubject = diceSubject;
         this.diceSubject.attach(this);
     }
 
+    /**
+     * Prints out any instances of activation throughout playthrough of the Machi Koro game.
+     */
+
     @Override
     public void update() {
         System.out.print(checkActivation());
     }
+
+    /**
+     * Creates the string that will be displayed in the console, representing instances of activation.
+     * @return a StringBuilder object that contains any instances of activation based on dice rolls.
+     */
 
     private StringBuilder checkActivation() {
         int dice = diceSubject.getDice();

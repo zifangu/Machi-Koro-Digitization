@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 /**
- * phase 1 of the game with 1(one) random AI
+ * This is a class built to represent the Phase 2 version of Machi Koro.
  *
  * @author Eric Craft
  * @author Ivan Gu
@@ -44,6 +44,11 @@ public class Feature4 extends TwoPlayersPhase1 {
     Landmark[] startingLandmarks1;
     Landmark[] startingLandmarks2;
     Landmark[] startingLandmarks3;
+
+    /**
+     * MachiWoco constructor representing the Phase 2 version of the game.
+     * @param numPlayers an integer representing the number of Players.
+     */
 
     public Feature4(int numPlayers) {
         super(true);
@@ -146,6 +151,10 @@ public class Feature4 extends TwoPlayersPhase1 {
             players[2] = player3;
         }
     }
+
+    /**
+     * Creates the Landmarks to be used by Players in Phase 2
+     */
 
     @Override
     protected void landmarkInit() {

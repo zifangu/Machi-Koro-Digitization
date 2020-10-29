@@ -4,9 +4,22 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
+/**
+ * This class uses GameSubject to output the current game state.
+ *
+ * @author Eric Craft
+ * @author Ivan Gu
+ * @author Bennett Joyce
+ */
+
 public class GameStateObserver extends Observer{
 
     private GameStateSubject gameSubject;
+
+    /**
+     * A constructor that creates a GameSubject instance and adds itself to GameSubject's list of observers.
+     * @param gameSubject a GameSubject instance that will be used to access the info needed in the output.
+     */
 
     public GameStateObserver(GameStateSubject gameSubject){
         this.gameSubject = gameSubject;
@@ -207,6 +220,9 @@ public class GameStateObserver extends Observer{
         return result;
     }
 
+    /**
+     * Prints out the current game state to the console.
+     */
 
     @Override
     public void update() {

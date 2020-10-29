@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 /**
- * This is a class built to represent the MachiWoco game.
+ * This is a class built to represent the Phase 1 version of Machi Koro.
  *
  * @author Eric Craft
  * @author Ivan Gu
@@ -54,7 +54,7 @@ public class TwoPlayersPhase1 {
     //**********CONSTRUCTOR************//
 
         /**
-         * MachiWoco constructor serving as the infrastructure of the game.
+         * MachiWoco constructor serving as the infrastructure of the Phase 1 version of the game.
          * @param ai a boolean holding true if the game will contain an AI player
          */
 
@@ -103,6 +103,10 @@ public class TwoPlayersPhase1 {
             landmarkInit();
             playerInit(ai);
         }
+
+        /**
+         * Initializes the Landmark used in the Phase 1 version of the game.
+         */
 
         protected void landmarkInit() {
             Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
