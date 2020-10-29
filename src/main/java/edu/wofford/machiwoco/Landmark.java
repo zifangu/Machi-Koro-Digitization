@@ -41,6 +41,15 @@ public class Landmark extends Card{
         this.is_constructed = is_constructed;
     }
 
+    /**
+     * Gets the state of the Landmark's construction
+     * @return a boolean holding true if the landmark is constructed
+     */
+
+    public boolean getIsConstructed() {
+        return is_constructed;
+    }
+
     //    used by landmark sub classes to determine if a landmark is constructed or not
     protected boolean is_constructed;
     protected  Color color;

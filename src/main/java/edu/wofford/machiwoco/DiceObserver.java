@@ -9,6 +9,10 @@ public class DiceObserver extends Observer{
 
     @Override
     public void update() {
-        System.out.println( "Player " + diceSubject.getActivePlayer().getPlayerNumber() +" rolled ["+diceSubject.getDice()+"] = " + diceSubject.getDice() + ".");
+        if (diceSubject.getDiceNum() == 1) {
+            System.out.println( "Player " + diceSubject.getActivePlayer().getPlayerNumber() +" rolled ["+diceSubject.getDice()+"] = " + diceSubject.getDice() + ".");
+        } else {
+            //System.out.println( "Player " + diceSubject.getActivePlayer().getPlayerNumber() +" rolled ["+diceSubject.getDice2()[0]+"]["+diceSubject.getDice2()[1]+"] = " + diceSubject.getDice() + ".");
+        }
     }
 }
