@@ -19,7 +19,7 @@ import java.util.*;
 
 public class Feature4 extends TwoPlayersPhase1 {
 
-    Map<Establishment,Integer> market;
+    //Map<Establishment,Integer> market;
     Map<Establishment,Integer> P2startingEst;
     Map<Establishment,Integer> P2startingEst2;
     Map<Establishment,Integer> P2startingEst3;
@@ -43,7 +43,7 @@ public class Feature4 extends TwoPlayersPhase1 {
 
     Landmark[] startingLandmarks1;
     Landmark[] startingLandmarks2;
-    Landmark[] startingLandmarks3;
+   // Landmark[] startingLandmarks3;
 
     /**
      * MachiWoco constructor representing the Phase 2 version of the game.
@@ -105,7 +105,6 @@ public class Feature4 extends TwoPlayersPhase1 {
                         "|    (anyone's turn)    |\n",
                 "10", "receive", "bank", 3, "none", "none");
 
-        market = new HashMap<>();
         market.put(wheat, 6);
         market.put(ranch,6);
         market.put(forest,6);
@@ -139,15 +138,15 @@ public class Feature4 extends TwoPlayersPhase1 {
 
     protected void playerInitFeature4(int player_num) {
         NUMBER_OF_PLAYERS = player_num;
-        player1 = new Player(P2startingEst, startingLandmarks1, 3,1, false);
-        player2 = new Player(P2startingEst2, startingLandmarks2, 3,2, true);
-        if(NUMBER_OF_PLAYERS == 3) {
-            player3 = new Player(P2startingEst3, startingLandmarks3, 3,3, true);
+        player1 = new Player(P2startingEst, startingLandmarks, 3,1, false);
+        player2 = new Player(P2startingEst2, startingLandmarks1, 3,2, true);
+        if(player_num == 3) {
+            player3 = new Player(P2startingEst3, startingLandmarks2, 3,3, true);
         }
         players = new Player[NUMBER_OF_PLAYERS];
         players[0] = player1;
         players[1] = player2;
-        if(NUMBER_OF_PLAYERS == 3) {
+        if(player_num == 3) {
             players[2] = player3;
         }
     }
@@ -286,14 +285,9 @@ public class Feature4 extends TwoPlayersPhase1 {
             return true;
         } else if(index <= numberOfEstablishments) {
             Establishment e = listOfEstablishments.get(index-1);
-//            System.out.println("Player 1: round1" + player1.getEstOwned());
-//            System.out.println("Player 2:" + player2.getEstOwned());
             getCurrentPlayer().buyCard(e);
             int numberLeft = market.get(e) - 1;
             market.put(e,numberLeft);
-//            System.out.println("Player 1: jsdflkjskl" + player1.getEstOwned());
-//            System.out.println("Player 2:" + player2.getEstOwned());
-
             System.out.println("Player "  + getTurn() + " purchased the " + e.getName() + ".");
             return true;
         } else if(index <= numberOfEstablishments + numberOfLandmarks) {
@@ -324,7 +318,6 @@ public class Feature4 extends TwoPlayersPhase1 {
      * Gets the market for the Phase2 version of the game
      * @return a Map object representing the Phase 2 market
      */
-
     public Map<Establishment,Integer> getMarketP2() {
         return market;
     }
@@ -384,7 +377,7 @@ public class Feature4 extends TwoPlayersPhase1 {
         new DiceObserver(diceSubject);
         new ActivationObserver(diceSubject);
         new GameStateObserver(gameSubject);
-
+        //System.out.println("Get Bakery = " + getBakery());
         InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
         new InputObserver(inputSubject);
 //        gameSubject.setPlayers(players);
@@ -426,6 +419,36 @@ public class Feature4 extends TwoPlayersPhase1 {
             }
         }
     }
+
+
+    public Establishment getConvenience() {
+        return convenience;
+    }
+
+    public void setConvenience(Establishment convenience) {
+        this.convenience = convenience;
+    }
+
+    public Establishment getMine() {
+        return mine;
+    }
+
+    public void setMine(Establishment mine) {
+        this.mine = mine;
+    }
+
+    public Establishment getOrchard() {
+        return orchard;
+    }
+
+    public void setOrchard(Establishment orchard) {
+        this.orchard = orchard;
+    }
+
+    public Establishment getBakery() {
+        return bakery;
+    }
+
 
     public static void main(String[] args) {
         Feature4 feature4 = new Feature4(Integer.parseInt(args[1]));

@@ -41,25 +41,25 @@ public class Feature4Test {
         //assertFalse(feature4.isTrainStationConstructed(player2));
     }
 
-//    /**************CITY HALL TEST ERRORS************/
-//    @Test
-//    public void testCityHallInit() {
-//        Player[] players = feature4.getPlayers();
-//        for (Player p : players) {
-//            assertThat(p.getLandmarks()[0].is_constructed, is(false));
-//        }
-//    }
-//        /************************************************/
+    @Test
+    public void testCityHallInit() {
+        Player[] players = feature4.getPlayers();
+        for (Player p : players) {
+            Landmark[] l = p.getLandmarks();
+            assertThat(l[0].is_constructed, is(false));
+        }
+    }
+        /************************************************/
 
 
 //    /**************TRAIN STATION TEST ERRORS************/
-//        @Test
-//    public void testTrainStationInit() {
-//        Player[] players = feature4.getPlayers();
-//        for (Player p : players) {
-//            assertThat(p.getLandmarks()[1].is_constructed, is(false));
-//        }
-//    }
+        @Test
+    public void testTrainStationInit() {
+        Player[] players = feature4.getPlayers();
+        for (Player p : players) {
+            assertThat(p.getLandmarks()[1].is_constructed, is(false));
+        }
+    }
 //        /************************************************/
 
 
@@ -67,27 +67,27 @@ public class Feature4Test {
     @Test
     public void testInitialMarket() {
         Establishment wheat = feature4.getWheat();
-        assertThat(feature4.getMarket().get(wheat), is(6));
+        assertThat(feature4.getMarketP2().get(wheat), is(6));
 
         Establishment ranch = feature4.getRanch();
-        assertThat(feature4.getMarket().get(ranch), is(6));
+        assertThat(feature4.getMarketP2().get(ranch), is(6));
 
         Establishment forest = feature4.getForest();
-        assertThat(feature4.getMarket().get(forest), is(6));
+        assertThat(feature4.getMarketP2().get(forest), is(6));
 
 //        /***********NEWLY ADDED EST ERRORS*************/
 
-//        Establishment bakery = feature4.getBakery();
-//        assertThat(feature4.getMarket().get(bakery), is(6));
-//
-//        Establishment convenience = feature4.getConvenience();
-//        assertThat(feature4.getMarket().get(convenience), is(6));
-//
-//        Establishment mine = feature4.getMine();
-//        assertThat(feature4.getMarket().get(mine), is(6));
-//
-//        Establishment orchard = feature4.getOrchard();
-//        assertThat(feature4.getMarket().get(orchard), is(6));
+        Establishment bakery = feature4.getBakery();
+        assertThat(feature4.getMarketP2().get(bakery), is(6));
+
+        Establishment convenience = feature4.getConvenience();
+        assertThat(feature4.getMarketP2().get(convenience), is(6));
+
+        Establishment mine = feature4.getMine();
+        assertThat(feature4.getMarketP2().get(mine), is(6));
+
+        Establishment orchard = feature4.getOrchard();
+        assertThat(feature4.getMarketP2().get(orchard), is(6));
 //        /************************************************/
     }
 
@@ -109,7 +109,7 @@ public class Feature4Test {
 //        Player[] players = feature4.getPlayers();
 //        for (Player p : players) {
 //            assertThat(p.getEstOwned().get(feature4.getWheat()), is(1));
-//            assertThat(p.getEstOwned().get(feature4.getRanch()), is(1));
+//            assertThat(p.getEstOwned().get(feature4.getBakery()), is(1));
 //        }
 //    }
 //        /************************************************/
