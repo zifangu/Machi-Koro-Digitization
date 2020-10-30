@@ -87,6 +87,54 @@ public class DiceSubjectTest {
         assertThat(outContent.toString(), containsString("Player 1 rolled [" + roll2Output[0] + "] = " + roll2Output[2] + "."));
     }
 
+    /*@Test
+    public void testCheckActivationBranches() {
+        Map<Establishment, Integer> test = new HashMap<>();
+        Feature4 f4 = new Feature4(2);
+        Player p1 = f4.getPlayer1();
+        test.put(f4.getBakery(), 1);
+        p1.setEstOwned(test);
+        diceSubject.setDice(2);
+        diceSubject.notifyObservers();
+        assertThat(outContent.toString(), containsString("activated for Player"));
+    }*/
+
+    @Test
+    public void testDiceRollActivationBakery() {
+        // give player 2 a ranch
+        Feature4 f4 = new Feature4(2);
+        Map<Establishment,Integer> map = new HashMap<>();
+        map.put(f4.getBakery(), 1);
+        Player p2 = f4.getPlayer2();
+        p2.setEstOwned(map);
+        p2.setTurn(true);
+        f4.setPlayers(new Player[] {f4.getPlayer1(),p2});
+//        set the active player to be player 2
+        diceSubject.setActivePlayer(f4.getPlayer2());
+        diceSubject.setPlayers(f4.getPlayers());
+        diceSubject.setDice(2);
+        diceSubject.notifyObservers();
+        assertThat(outContent.toString(), containsString("Bakery activated for Player 2"));
+    }
+
+    @Test
+    public void testDiceRollActivationBakery3() {
+        // give player 2 a ranch
+        Feature4 f4 = new Feature4(2);
+        Map<Establishment,Integer> map = new HashMap<>();
+        map.put(f4.getBakery(), 1);
+        Player p2 = f4.getPlayer2();
+        p2.setEstOwned(map);
+        p2.setTurn(true);
+        f4.setPlayers(new Player[] {f4.getPlayer1(),p2});
+//        set the active player to be player 2
+        diceSubject.setActivePlayer(f4.getPlayer2());
+        diceSubject.setPlayers(f4.getPlayers());
+        diceSubject.setDice(3);
+        diceSubject.notifyObservers();
+        assertThat(outContent.toString(), containsString("Bakery activated for Player 2"));
+    }
+
 
     @After
     public void restoreStreams() {

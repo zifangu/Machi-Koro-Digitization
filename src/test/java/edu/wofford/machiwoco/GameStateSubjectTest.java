@@ -1,4 +1,5 @@
 package edu.wofford.machiwoco;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -6,7 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.*;
 import org.junit.*;
-
+import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 public class GameStateSubjectTest {
@@ -80,6 +81,18 @@ public class GameStateSubjectTest {
         "..........................................\n" +
         "City Hall          NT (7)  [ ]\n\n" +
         "******************************************"));
+    }
+
+    @Test
+    public void testPrintTurnBranches() {
+        Player p1 = gameSubject.getPlayers()[0];
+        Player p2 = gameSubject.getPlayers()[1];
+        p1.setTurn(false);
+        p2.setTurn(false);
+        gameSubject.setPlayers(new Player[] {p1, p2});
+        gameSubject.notifyObservers();
+        assertThat(outContent.toString(), not(containsString("Turn started for player")));
+        
     }
 
 
