@@ -24,8 +24,8 @@ public class Feature4 extends TwoPlayersPhase1 {
     Map<Establishment,Integer> P2startingEst2;
     Map<Establishment,Integer> P2startingEst3;
 
-    protected Player player1;
-    protected Player player2;
+//    protected Player player1;
+//    protected Player player2;
     protected Player player3;
 
     Establishment wheat;
@@ -128,7 +128,7 @@ public class Feature4 extends TwoPlayersPhase1 {
         EST_ORDER = new Establishment[] {wheat, ranch, bakery,convenience, forest, mine, orchard};
 
         landmarkInit();
-        playerInitFeature4(numPlayers);
+        playerInit(numPlayers);
     }
 
     /**
@@ -136,10 +136,11 @@ public class Feature4 extends TwoPlayersPhase1 {
      * @param player_num the number of players taking part in the current game
      */
 
-    protected void playerInitFeature4(int player_num) {
+    protected void playerInit(int player_num) {
         NUMBER_OF_PLAYERS = player_num;
         player1 = new Player(P2startingEst, startingLandmarks, 3,1, false);
         player2 = new Player(P2startingEst2, startingLandmarks1, 3,2, true);
+        //playerInitAI();
         if(player_num == 3) {
             player3 = new Player(P2startingEst3, startingLandmarks2, 3,3, true);
         }
@@ -150,6 +151,14 @@ public class Feature4 extends TwoPlayersPhase1 {
             players[2] = player3;
         }
     }
+
+    /**
+     * Creates one humand and one AI player.
+     */
+//    @Override
+//    protected void playerInitAI() {
+//
+//    }
 
     /**
      * Creates the Landmarks to be used by Players in Phase 2
@@ -362,6 +371,7 @@ public class Feature4 extends TwoPlayersPhase1 {
     }
 
 
+
     /**
      * Checks to see if the Train Station landmark is constructed for a certain player
      * @param player the Player instance whose Train Station construction is being checked
@@ -430,11 +440,105 @@ public class Feature4 extends TwoPlayersPhase1 {
             inputSubject.notifyObservers();
             //(6) End Game
             if(!allLandmarksConstructed()) {
-                endTurn();
+                    endTurn();
             }
         }
     }
+    @Override
+    public Player getCurrentPlayer() {
+        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if(players[i].isTurn()) {
+                return players[i];
+            }
+        }
+        return null;
+    }
 
+//
+//    /**
+//     * Finds which player's turn it is and provides their player number
+//     * @return the current player's number
+//     */
+//    protected int getTurn1() {
+//        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+//            if(players[i].isTurn()) {
+//                return i + 1;
+//            }
+//        }
+//        return 0;
+//    }
+//    protected void endTurn1() {
+//        int curPlayerIndex = getTurn1() - 1;
+//        System.out.println("Turn ended for Player " + getTurn1() +".");
+//        if(curPlayerIndex == NUMBER_OF_PLAYERS-1) {
+//            players[0].setTurn(true);
+//            players[curPlayerIndex].setTurn(false);
+//        } else {
+//            players[curPlayerIndex].setTurn(false);
+//            players[curPlayerIndex +1].setTurn(true);
+//        }
+//
+//    }
+//
+    @Override
+    protected void endTurn() {
+        int curPlayerIndex = getTurn() - 1;
+        System.out.println("Turn ended for Player " + getTurn() +".");
+        if(curPlayerIndex == 2) {
+            players[0].setTurn(true);
+            players[curPlayerIndex].setTurn(false);
+        } else {
+            players[curPlayerIndex].setTurn(false);
+            players[curPlayerIndex +1].setTurn(true);
+        }
+
+    }
+//
+//    protected void endTurn2() {
+//        int curPlayerIndex = getTurn() - 1;
+//        System.out.println("Turn ended for Player " + getTurn() +".");
+//        if(curPlayerIndex == 1) {
+//            players[0].setTurn(true);
+//            players[curPlayerIndex].setTurn(false);
+//        } else {
+//            players[curPlayerIndex].setTurn(false);
+//            players[curPlayerIndex +1].setTurn(true);
+//        }
+//
+//    }
+    @Override
+    protected int getTurn() {
+        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if(players[i].isTurn()) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Checks to see if all Landmarks have been constructed
+     * @return a boolean holding true if all landmarks have been constructed
+     */
+@Override
+    protected boolean allLandmarksConstructed() {
+        Landmark[] l;
+        int count = 0;
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            l = players[i].getLandmarks();
+            for(int j = 0; j < NUMBER_OF_LANDMARKS; j++) {
+                if(l[j].is_constructed) {
+                    count++;
+                }
+            }
+            if(count==NUMBER_OF_LANDMARKS) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//
 
     public Establishment getConvenience() {
         return convenience;
