@@ -12,6 +12,8 @@ This is the user guide for playing Machi Woco.
              - [Purchase](#purchase)
              - [Construct](#construct)
              - [End Turn](#end-turn)
+        - [AI-strategy](#ai-strategy)
+
     + [Winner](#winner)
   * [Phase 2](#phase-2)
     + [Game Objective P2](#game-objective-P2)
@@ -127,8 +129,12 @@ For example, in the menu displayed above, if you type `view 1` you can see detai
  #### End turn
  Any invalid input (i.e. item numbers out of index or any phrases other than `view N`) will cause the console to prompt you again. Your turn will not end until a valid input is made.
  
- You turn ends after you choose to either purchase an establishment or construct a landmark. You also have the option to enter `99` to not make any improvements.
+ A turn ends after the player made a choice about the improvement on their landmarks and establishments.
  
+ ### AI strategy
+If a Player is an AI,  decisions will be made uniformly among the choices provided to it. The choices include all the establishments and landmarks it can purchase or construct, or do nothing each round.
+
+
  ### Winner
 In this feature of the game, the winner will be player who constructed City Hall first. After which the game will immediately end.
 
