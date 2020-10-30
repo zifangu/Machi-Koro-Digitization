@@ -134,7 +134,7 @@ In this feature of the game, the winner will be player who constructed City Hall
 
 
 
-# Phase 2 (P2)
+# Phase 2
 
 ## Game Objective P2
 
