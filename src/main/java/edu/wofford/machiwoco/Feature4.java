@@ -284,6 +284,7 @@ public class Feature4 extends TwoPlayersPhase1 {
             cnsl.flush();*/
             System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
             String input = sc.nextLine();
+            System.out.println(input);
 
             buyFinished = handleInput(input);
         }
@@ -440,7 +441,7 @@ public class Feature4 extends TwoPlayersPhase1 {
             inputSubject.notifyObservers();
             //(6) End Game
             if(!allLandmarksConstructed()) {
-                    endTurn();
+                endTurn(NUMBER_OF_PLAYERS);
             }
         }
     }
@@ -480,32 +481,18 @@ public class Feature4 extends TwoPlayersPhase1 {
 //
 //    }
 //
-    @Override
-    protected void endTurn() {
+    protected void endTurn(int num) {
         int curPlayerIndex = getTurn() - 1;
         System.out.println("Turn ended for Player " + getTurn() +".");
-        if(curPlayerIndex == 2) {
+        if(curPlayerIndex == num -1) {
             players[0].setTurn(true);
             players[curPlayerIndex].setTurn(false);
         } else {
             players[curPlayerIndex].setTurn(false);
             players[curPlayerIndex +1].setTurn(true);
         }
-
     }
-//
-//    protected void endTurn2() {
-//        int curPlayerIndex = getTurn() - 1;
-//        System.out.println("Turn ended for Player " + getTurn() +".");
-//        if(curPlayerIndex == 1) {
-//            players[0].setTurn(true);
-//            players[curPlayerIndex].setTurn(false);
-//        } else {
-//            players[curPlayerIndex].setTurn(false);
-//            players[curPlayerIndex +1].setTurn(true);
-//        }
-//
-//    }
+
     @Override
     protected int getTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
@@ -523,15 +510,16 @@ public class Feature4 extends TwoPlayersPhase1 {
 @Override
     protected boolean allLandmarksConstructed() {
         Landmark[] l;
-        int count = 0;
+        int count;
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            count = 0;
             l = players[i].getLandmarks();
-            for(int j = 0; j < NUMBER_OF_LANDMARKS; j++) {
+            for(int j = 0; j < 2; j++) {
                 if(l[j].is_constructed) {
                     count++;
                 }
             }
-            if(count==NUMBER_OF_LANDMARKS) {
+            if(count==2) {
                 return true;
             }
         }

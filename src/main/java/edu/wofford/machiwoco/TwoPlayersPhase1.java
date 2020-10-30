@@ -686,8 +686,9 @@ public class TwoPlayersPhase1 {
             Landmark l;
             int numberOfLandmarks = listOfLandmarks.size();
             int numberOfEstablishments = listOfEstablishments.size();
-
-            if(isNumeric(input)) {
+           // input = input.trim();
+            //System.out.println("Input trimmed length = " + input.trim().length());
+            if(isNumeric(input.trim())) {
                 return getBuyInput(Integer.parseInt(input));
             } else if(input.substring(0,4).toLowerCase().trim().equals("view")) {
                 input = input.replaceAll("\\D+","");
