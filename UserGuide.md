@@ -175,7 +175,7 @@ At the beginning of each player's turn, you will first see a display of the curr
     
 The Establishments Bakery, Convenience Store, Mine, and Apple Orchard have been added.
 
-### Gamplay Differences P2
+### Gameplay Differences P2
 
 #### Dice Roll P2
 At this point of the game, a player can roll two die if they have constructed the Train Station landmark .

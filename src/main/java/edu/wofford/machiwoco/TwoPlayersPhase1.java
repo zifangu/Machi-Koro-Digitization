@@ -820,7 +820,7 @@ public class TwoPlayersPhase1 {
 
     /**
      * Play the MachiWoCo game in its entirety
-         */
+     */
 
         public void playGame() {
             gameInit();
