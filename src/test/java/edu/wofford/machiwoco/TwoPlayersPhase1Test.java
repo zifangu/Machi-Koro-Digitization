@@ -556,6 +556,24 @@ public class TwoPlayersPhase1Test {
         assertThat(twoPlayersPhase1.isGameOver(), is(false));
     }
 
+    @Test
+    public void testGameEnded() {
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.gameEnded();
+        assertThat(outContent.toString(), containsString("Turn ended for"));
+        assertThat(twoPlayersPhase1.getCurrentPlayer(), is(twoPlayersPhase1.getPlayer2()));
+
+    }
+
+    @Test
+    public void testGameEndedP2() {
+        twoPlayersPhase1.getPlayers()[1].setTurn(true);
+        twoPlayersPhase1.gameEnded();
+        assertThat(outContent.toString(), containsString("Turn ended for"));
+        assertThat(twoPlayersPhase1.getCurrentPlayer(), is(twoPlayersPhase1.getPlayer1()));
+
+    }
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
