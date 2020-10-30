@@ -134,8 +134,7 @@ In this feature of the game, the winner will be player who constructed City Hall
 
 
 
-
-# Phase 2
+# Phase 2 (P2)
 
 ## Game Objective P2
 
@@ -155,21 +154,38 @@ At the beginning of each player's turn, you will first see a display of the curr
     ------------------------------------------
     Wheat Field        BW (1)  [1]      #6
     Ranch              BC (1)  [2]      #6
+    Bakery             GB (1)  [2-3]    #6
+    Convenience Store  GB (2)  [4]      #6
     Forest             BG (3)  [5]      #6
-
+    Mine               BG (6)  [9]      #6
+    Apple Orchard      BW (3)  [10]     #6
+    
                  Player 1* [YOU]              
     ------------------------------------------
-                    (4 coins)                 
+                    (3 coins)                 
     Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
     ..........................................
     City Hall          NT (7)  [ ]
+    Train Station      NT (4)  [ ]
     
                      Player 2                 
     ------------------------------------------
-                    (4 coins)                 
+                    (3 coins)                 
     Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
     ..........................................
     City Hall          NT (7)  [ ]
+    Train Station      NT (4)  [ ]
+    
+                     Player 3                 
+    ------------------------------------------
+                    (3 coins)                 
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    City Hall          NT (7)  [ ]
+    Train Station      NT (4)  [ ]
     
     ******************************************
     
@@ -178,16 +194,17 @@ The Establishments Bakery, Convenience Store, Mine, and Apple Orchard have been 
 ### Gameplay Differences P2
 
 #### Dice Roll P2
-At this point of the game, a player can roll two die if they have constructed the Train Station landmark .
-Otherwise, only one dice will be rolled.
+At this point of the game, a player can roll two die if they have constructed the Train Station landmark.
+Otherwise, only one die will be rolled.
 These die will be rolled immediately and automatically following the display of the current game state.
+
+Once the AI constructs the Train Station, on subsequent moves, it will randomly select 1 or 2 die to roll. 
 
 For example, `Player 1 rolled [5] = 5` means player 1 rolled a 5.
 `Player 2 rolled [5][6] = 11` means player 2 rolled an 11.
 
-    
  #### Purchase P2
- If a Player is an AI, purchasing decisions will be made at random. If an AI player has the funds necessary a purchase can be made, but they also have the choice to skip and move on to the next player.
+If a Player is an AI, purchasing decisions will be made at random. If an AI player has the funds necessary a purchase can be made, but they also have the choice to skip and move on to the next player.
  
  ### Winner P2
 In this feature of the game, the winner will be the player who constructed City Hall and Train Station first. After which the game will immediately end.
