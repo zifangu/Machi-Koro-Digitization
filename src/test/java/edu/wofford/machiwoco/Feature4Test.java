@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -63,6 +64,50 @@ public class Feature4Test {
 //        /************************************************/
 
 
+    @Test
+    public void testNoOneTurn() {
+        assertThat(feature4.getTurn(), is(0));
+    }
+
+    @Test
+    public void testNoPlayer() {
+        assertThat(feature4.getCurrentPlayer(), is(nullValue()));
+    }
+
+    @Test
+    public void testEstInput() {
+        feature4.getPlayers()[0].setTurn(true);
+        assertThat(feature4.getBuyInput(1), is(true));
+    }
+
+    @Test
+    public void testBuyInput() {
+        feature4.getPlayers()[0].setTurn(true);
+        assertThat(feature4.handleInput("1"), is(true));
+    }
+
+    @Test
+    public void testTurnPlayer1() {
+        feature4.getPlayers()[0].setTurn(true);
+        feature4.endTurn(3);
+        assertThat(feature4.getPlayers()[0].isTurn(), is(false));
+    }
+
+    @Test
+    public void testTurnPlayer2() {
+        feature4.getPlayers()[1].setTurn(true);
+        feature4.endTurn(3);
+        assertThat(feature4.getPlayers()[1].isTurn(), is(false));
+    }
+    @Test
+    public void testTurnPlayer3() {
+        feature4.getPlayers()[2].setTurn(true);
+        feature4.endTurn(3);
+        assertThat(feature4.getPlayers()[2].isTurn(), is(false));
+        assertThat(feature4.getPlayers()[0].isTurn(), is(true));
+
+    }
+
 
     @Test
     public void testInitialMarket() {
@@ -75,8 +120,6 @@ public class Feature4Test {
         Establishment forest = feature4.getForest();
         assertThat(feature4.getMarketP2().get(forest), is(6));
 
-//        /***********NEWLY ADDED EST ERRORS*************/
-
         Establishment bakery = feature4.getBakery();
         assertThat(feature4.getMarketP2().get(bakery), is(6));
 
@@ -88,7 +131,6 @@ public class Feature4Test {
 
         Establishment orchard = feature4.getOrchard();
         assertThat(feature4.getMarketP2().get(orchard), is(6));
-//        /************************************************/
     }
 
 
@@ -109,7 +151,7 @@ public class Feature4Test {
 //        Player[] players = feature4.getPlayers();
 //        for (Player p : players) {
 //            assertThat(p.getEstOwned().get(feature4.getWheat()), is(1));
-//            assertThat(p.getEstOwned().get(feature4.getBakery()), is(1));
+////            assertThat(p.getEstOwned().get(feature4.getBakery()), is(1));
 //        }
 //    }
 //        /************************************************/

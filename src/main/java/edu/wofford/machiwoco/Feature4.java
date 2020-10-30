@@ -176,6 +176,35 @@ public class Feature4 extends TwoPlayersPhase1 {
                         "|         dice.         |\n");
     }
 
+
+    /**
+     * Gets the menu to display in String format
+     * Overrode to fit Phase 2.
+     * @return the game menu in string format
+     */
+    @Override
+    protected String getMenu() {
+        int count = 1;
+        String s = generate_pure_padding("=") + getAvailEst(count);
+        count = buyEstablishmentLogic().size() + 1;
+        return s + getAvailLandmark(count) +
+                getMenuStatic("CANCEL") +
+                "99. " + StringUtils.rightPad("Do nothing", (42-4), " ") + "\n" +
+                StringUtils.center("", 42, "=") +"\n";
+    }
+
+    /**
+     * Driver for making moves for either AI or Human
+     */
+    public void makeMove() {
+        buyFinished = false;
+        if (getCurrentPlayer().isAi()) {
+            aiLogic();
+        } else {
+            humanInput();
+        }
+    }
+
     /**
      * AI Logic for making a move
      */
@@ -193,55 +222,8 @@ public class Feature4 extends TwoPlayersPhase1 {
         handleInput(Integer.toString(ai_input));
     }
 
-    @Override
-    public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
-        Set<Establishment> setE = market.keySet();
-        ArrayList<Establishment> eResult = new ArrayList<Establishment>();
-        for(Establishment est: EST_ORDER){
-            int cost = est.getCost();
-            int numberLeft = market.get(est);
-            if(owned >= cost && numberLeft!=0) {
-                eResult.add(est);
-            }
-        }
-        return eResult;
-    }
-
-
-
-    @Override
-    protected String getAvailEst(int i) {
-
-            ArrayList<Establishment> e = buyEstablishmentLogic();
-
-//        ArrayList<Establishment> e = new ArrayList<Establishment>(Arrays.asList(EST_ORDER));
-            StringBuilder s = new StringBuilder();
-            int count = i;
-            if (e.size() != 0) {
-                for (Establishment est : e) {
-                    String order = count + ".";
-                    s.append(StringUtils.leftPad(order, 3, " ")).append(" ").append(generateSingleMarketItem(est, market.get(est)));
-                    count ++;
-                }
-                return getMenuStatic("PURCHASE") + s;
-            }
-
-            return "";
-        }
-
-    @Override
-    protected String getMenu() {
-        int count = 1;
-        String s = generate_pure_padding("=") + getAvailEst(count);
-        count = buyEstablishmentLogic().size() + 1;
-        return s + getAvailLandmark(count) +
-                getMenuStatic("CANCEL") +
-                "99. " + StringUtils.rightPad("Do nothing", (42-4), " ") + "\n" +
-                StringUtils.center("", 42, "=") +"\n";
-    }
-
     /**
-     * Human Input makes moves for human
+     * Human Input for making a move
      */
     private void humanInput() {
         // human player input
@@ -264,18 +246,6 @@ public class Feature4 extends TwoPlayersPhase1 {
         }
     }
 
-    /**
-     * Driver for making the move
-     */
-    public void makeMove() {
-        buyFinished = false;
-//            Random AI Action
-        if (getCurrentPlayer().isAi()) {
-            aiLogic();
-        } else {
-            humanInput();
-        }
-    }
 
     /**
      * Gets the sum of a dice roll using 2 die.
@@ -317,21 +287,35 @@ public class Feature4 extends TwoPlayersPhase1 {
         return player.getLandmarks()[1].getIsConstructed();
     }
 
+    /**
+     * Initialize game to be played
+     */
     @Override
-    public void playGame() {
+    protected void gameInit() {
         startGame();
         players[0].setTurn(true);
-        DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0, 1);
-        GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), market);
+
+//        observer pattern
+        gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
+        diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0, 1);
+        inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
+
+//      subscribe to subjects
         new DiceObserver(diceSubject);
         new ActivationObserver(diceSubject);
         new GameStateObserver(gameSubject);
-        InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
         new InputObserver(inputSubject);
+    }
+
+    /**
+     * Play the MachiWoCo game in its entirety
+     */
+    @Override
+    public void playGame() {
+        gameInit();
 
         while(!isGameOver()) {
 
-            gameSubject.setMarket(getMarketP2());
             gameSubject.notifyObservers();
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
             if (isTrainStationConstructed(getCurrentPlayer())) {
@@ -367,6 +351,10 @@ public class Feature4 extends TwoPlayersPhase1 {
         }
     }
 
+    /**
+     * Ends the current player's turn and checks to see if the game has ended
+     * @param num number of players in the game
+     */
     protected void endTurn(int num) {
         int curPlayerIndex = getTurn() - 1;
         System.out.println("Turn ended for Player " + getTurn() +".");
@@ -379,6 +367,10 @@ public class Feature4 extends TwoPlayersPhase1 {
         }
     }
 
+    /**
+     * Gets the current player
+     * @return the current Player's instance
+     */
     @Override
     public Player getCurrentPlayer() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
@@ -389,6 +381,10 @@ public class Feature4 extends TwoPlayersPhase1 {
         return null;
     }
 
+    /**
+     * Finds which player's turn it is and provides their player number
+     * @return the current player's number
+     */
     @Override
     protected int getTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
@@ -399,19 +395,55 @@ public class Feature4 extends TwoPlayersPhase1 {
         return 0;
     }
 
+    /**
+     * Returns an ArrayList of Landmarks that the Player can afford
+     * @param player the player who's coin count is being checked
+     * @return a Landmark ArrayList containing available and affordable Landmark cards
+     */
+    @Override
+    public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
+        Set<Establishment> setE = market.keySet();
+        ArrayList<Establishment> eResult = new ArrayList<Establishment>();
+        for(Establishment est: EST_ORDER){
+            int cost = est.getCost();
+            int numberLeft = market.get(est);
+            if(owned >= cost && numberLeft!=0) {
+                eResult.add(est);
+            }
+        }
+        return eResult;
+    }
 
-//
-
+    /**
+     * Gets the convenience store establishment
+     * @return the convenience store establishment
+     */
     public Establishment getConvenience() {
         return convenience;
     }
 
+    /**
+     * Sets the convenience store establishment
+     * @param convenience the convenience store establishment
+     */
     public void setConvenience(Establishment convenience) {
         this.convenience = convenience;
     }
 
+    /**
+     * Gets the Mine establishment
+     * @return the Mine establishment
+     */
     public Establishment getMine() {
         return mine;
+    }
+
+    /**
+     * Sets the Mine establishment
+     * @param mine  the Mine establishment
+     */
+    public void setMine(Establishment mine) {
+        this.mine = mine;
     }
 
     /**
@@ -422,18 +454,26 @@ public class Feature4 extends TwoPlayersPhase1 {
         return market;
     }
 
-    public void setMine(Establishment mine) {
-        this.mine = mine;
-    }
-
+    /**
+     * Gets the Orchard establishment
+     * @return the Orchard establishment
+     */
     public Establishment getOrchard() {
         return orchard;
     }
 
+    /**
+     * Sets the Orchard establishment
+     * @param orchard the Orchard establishment
+     */
     public void setOrchard(Establishment orchard) {
         this.orchard = orchard;
     }
 
+    /**
+     * Gets the Bakery establishment
+     * @return the Baker establishment
+     */
     public Establishment getBakery() {
         return bakery;
     }
