@@ -62,7 +62,7 @@ public class Player {
             int activation2 = 0;
             if(!est.getName().equals("Bakery")) {
                 activation = Integer.parseInt(est.getActivation());
-            } else if(est.getName().equals("Bakery")){
+            } else{
                 activation = 2;
                 activation2 = 3;
             }

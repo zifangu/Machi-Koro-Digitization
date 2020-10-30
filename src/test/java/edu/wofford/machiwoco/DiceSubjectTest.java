@@ -117,6 +117,8 @@ public class DiceSubjectTest {
         assertThat(outContent.toString(), containsString("Bakery activated for Player 2"));
     }
 
+
+
     @Test
     public void testDiceRollActivationBakery3() {
         // give player 2 a ranch
