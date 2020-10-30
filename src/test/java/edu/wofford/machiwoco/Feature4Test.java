@@ -86,12 +86,27 @@ public class Feature4Test {
         assertThat(feature4.handleInput("1"), is(true));
     }
 
-//    @Test
-//    public void testTurn() {
-//        feature4.getPlayers()[0].setTurn(true);
-//        feature4.endTurn();
-//    }
+    @Test
+    public void testTurnPlayer1() {
+        feature4.getPlayers()[0].setTurn(true);
+        feature4.endTurn(3);
+        assertThat(feature4.getPlayers()[0].isTurn(), is(false));
+    }
 
+    @Test
+    public void testTurnPlayer2() {
+        feature4.getPlayers()[1].setTurn(true);
+        feature4.endTurn(3);
+        assertThat(feature4.getPlayers()[1].isTurn(), is(false));
+    }
+    @Test
+    public void testTurnPlayer3() {
+        feature4.getPlayers()[2].setTurn(true);
+        feature4.endTurn(3);
+        assertThat(feature4.getPlayers()[2].isTurn(), is(false));
+        assertThat(feature4.getPlayers()[0].isTurn(), is(true));
+
+    }
 
 
     @Test
