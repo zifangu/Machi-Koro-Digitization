@@ -533,6 +533,19 @@ public class TwoPlayersPhase1Test {
         assertThat(outContent.toString(), containsString("Do nothing"));
     }
 
+    @Test
+    public void testIsGameOver() {
+        twoPlayersPhase1.getPlayer1().setCoinCount(69);
+        twoPlayersPhase1.getPlayer1().buyLandmark(twoPlayersPhase1.getPlayer1().getLandmarks()[0]);
+        assertThat(twoPlayersPhase1.isGameOver(), is(true));
+    }
+
+    @Test
+    public void testIsGameOverFalse() {
+        twoPlayersPhase1.getPlayer1().setCoinCount(0);
+        twoPlayersPhase1.getPlayer1().buyLandmark(twoPlayersPhase1.getPlayer1().getLandmarks()[0]);
+        assertThat(twoPlayersPhase1.isGameOver(), is(false));
+    }
 
     @After
     public void restoreStreams() {
