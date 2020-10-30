@@ -75,8 +75,6 @@ public class Feature4Test {
         Establishment forest = feature4.getForest();
         assertThat(feature4.getMarketP2().get(forest), is(6));
 
-//        /***********NEWLY ADDED EST ERRORS*************/
-
         Establishment bakery = feature4.getBakery();
         assertThat(feature4.getMarketP2().get(bakery), is(6));
 
@@ -88,7 +86,6 @@ public class Feature4Test {
 
         Establishment orchard = feature4.getOrchard();
         assertThat(feature4.getMarketP2().get(orchard), is(6));
-//        /************************************************/
     }
 
 
@@ -109,7 +106,7 @@ public class Feature4Test {
 //        Player[] players = feature4.getPlayers();
 //        for (Player p : players) {
 //            assertThat(p.getEstOwned().get(feature4.getWheat()), is(1));
-//            assertThat(p.getEstOwned().get(feature4.getBakery()), is(1));
+////            assertThat(p.getEstOwned().get(feature4.getBakery()), is(1));
 //        }
 //    }
 //        /************************************************/
