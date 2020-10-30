@@ -652,18 +652,13 @@ public class FeatureSteps {
             String line = output.nextLine();
             if (DEBUG) { System.out.println("::::::::::::::::::::     " + line); }
             if (line.contains("Choose a number to purchase or construct")) {
-                System.out.println("In the purchase or construct test loop");
 
                 Map<String, String> options = parseMarketOptions(marketString);
                 if (!guessLow) {
                     input.println("0");
-                    System.out.println("choice 0 made here");
-
                     guessLow = true;
                 } else if (!guessHigh) {
                     input.println("" + options.size());
-                    System.out.println("HIGH chioce here");
-
                     guessHigh = true;
                 } else {
                     if (options.keySet().contains("City Hall")) {

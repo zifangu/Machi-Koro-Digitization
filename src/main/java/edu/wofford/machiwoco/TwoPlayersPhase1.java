@@ -353,12 +353,6 @@ public class TwoPlayersPhase1 {
                     generatePlayerLandMark(p) + "\n";
         }
 
-
-
-
-
-
-
         //**********GAME STEP 1: START GAME************//
 
         /**
