@@ -3,12 +3,27 @@ package edu.wofford.machiwoco;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class used to hold all necessary information regarding a Player's input.
+ * 
+ * @author Eric Craft
+ * @author Ivan Gu
+ * @author Bennett Joyce
+ */
+
 public class InputSubject {
 
     private List<Observer> observers = new ArrayList<Observer>();
     private Player activePlayer;
     private Player[] players;
     private String input;
+
+    /**
+     * A constructor providing InputSubject with all necessary information regarding a Player's input.
+     * @param activePlayer the Player whose input is being observed.
+     * @param players an array of Players that are playing the current version of Machi Koro.
+     * @param input a string representing the Player's input.
+     */
 
     public InputSubject(Player activePlayer, Player[] players, String input) {
         this.activePlayer = activePlayer;

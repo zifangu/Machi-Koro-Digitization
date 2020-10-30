@@ -2,6 +2,14 @@ package edu.wofford.machiwoco;
 
 import java.util.ArrayList;
 
+/**
+ * A class that is used to observe a Player's input.
+ * 
+ * @author Eric Craft
+ * @author Ivan Gu
+ * @author Bennett Joyce
+ */
+
 public class InputObserver extends Observer{
 
     /**
