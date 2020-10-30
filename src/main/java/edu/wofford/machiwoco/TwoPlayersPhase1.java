@@ -166,7 +166,7 @@ public class TwoPlayersPhase1 {
             Landmark[] landmarkArr = player.getLandmarks();
             ArrayList<Landmark> resultArr = new ArrayList<Landmark>();
             for (int i = 0; i < landmarkArr.length; i++) {
-                if (player.getCoinCount() >= landmarkArr[i].getCost()) {
+                if (player.getCoinCount() >= landmarkArr[i].getCost() && !landmarkArr[i].is_constructed) {
                     resultArr.add(landmarkArr[i]);
                 }
             }
@@ -538,9 +538,11 @@ public class TwoPlayersPhase1 {
             int count = i;
             if (l.size() != 0) {
                 for (Landmark land : l) {
-                    String order = count + ".";
-                    s.append(StringUtils.leftPad(order, 3, " ")).append(" ").append(generateLandmark(land));
-                    count ++;
+//                    if(!land.is_constructed) {
+                        String order = count + ".";
+                        s.append(StringUtils.leftPad(order, 3, " ")).append(" ").append(generateLandmark(land));
+                        count++;
+//                    }
                 }
                 return getMenuStatic("CONSTRUCT") + s;
             }

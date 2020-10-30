@@ -19,13 +19,10 @@ import java.util.*;
 
 public class Feature4 extends TwoPlayersPhase1 {
 
-    //Map<Establishment,Integer> market;
     Map<Establishment,Integer> P2startingEst;
     Map<Establishment,Integer> P2startingEst2;
     Map<Establishment,Integer> P2startingEst3;
 
-//    protected Player player1;
-//    protected Player player2;
     protected Player player3;
 
     Establishment wheat;
@@ -43,7 +40,6 @@ public class Feature4 extends TwoPlayersPhase1 {
 
     Landmark[] startingLandmarks1;
     Landmark[] startingLandmarks2;
-   // Landmark[] startingLandmarks3;
 
     /**
      * MachiWoco constructor representing the Phase 2 version of the game.
@@ -140,7 +136,6 @@ public class Feature4 extends TwoPlayersPhase1 {
         NUMBER_OF_PLAYERS = player_num;
         player1 = new Player(P2startingEst, startingLandmarks, 3,1, false);
         player2 = new Player(P2startingEst2, startingLandmarks1, 3,2, true);
-        //playerInitAI();
         if(player_num == 3) {
             player3 = new Player(P2startingEst3, startingLandmarks2, 3,3, true);
         }
@@ -284,8 +279,6 @@ public class Feature4 extends TwoPlayersPhase1 {
             cnsl.flush();*/
             System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
             String input = sc.nextLine();
-            System.out.println(input);
-
             buyFinished = handleInput(input);
         }
     }
@@ -446,15 +439,7 @@ public class Feature4 extends TwoPlayersPhase1 {
             }
         }
     }
-    @Override
-    public Player getCurrentPlayer() {
-        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            if(players[i].isTurn()) {
-                return players[i];
-            }
-        }
-        return null;
-    }
+
 
 //
 //    /**
@@ -495,6 +480,16 @@ public class Feature4 extends TwoPlayersPhase1 {
     }
 
     @Override
+    public Player getCurrentPlayer() {
+        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if(players[i].isTurn()) {
+                return players[i];
+            }
+        }
+        return null;
+    }
+
+    @Override
     protected int getTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(players[i].isTurn()) {
@@ -526,6 +521,8 @@ public class Feature4 extends TwoPlayersPhase1 {
         }
         return false;
     }
+
+
 
 //
 
