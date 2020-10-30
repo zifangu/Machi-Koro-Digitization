@@ -485,6 +485,54 @@ public class TwoPlayersPhase1Test {
         assertThat(twoPlayersPhase1.canAffordCard(p), is(false));
     }
 
+    @Test
+    public void testHandleInputBranch() {
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getPlayers()[0].setCoinCount(10);
+        //twoPlayersPhase1.handleInput("view 4");
+        assertThat(twoPlayersPhase1.handleInput("view 4"), is(false));
+        String l = twoPlayersPhase1.getPlayer1().getLandmarks()[0].toString();
+        assertThat(outContent.toString(), containsString("l"));
+    }
+
+
+    @Test
+    public void testHandleInputBranchNotNumeric() {
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getPlayers()[0].setCoinCount(10);
+        //twoPlayersPhase1.handleInput("view x");
+        assertThat(twoPlayersPhase1.handleInput("xxxxx"), is(false));
+    }
+
+
+    @Test
+    public void testGetBuyInputBranch99() {
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        assertThat(twoPlayersPhase1.getBuyInput(99), is(true));
+    }
+
+    @Test
+    public void testGetBuyInputBranchInvalid() {
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        assertThat(twoPlayersPhase1.getBuyInput(100), is(false));
+    }
+
+    @Test
+    public void testGetBuyInputBranchNegative() {
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        assertThat(twoPlayersPhase1.getBuyInput(-1), is(false));
+    }
+
+
+    @Test
+    public void testMakeMoveAI() {
+        twoPlayersPhase1.getPlayers()[1].setAi(true);
+        twoPlayersPhase1.getPlayers()[1].setTurn(true);
+        twoPlayersPhase1.makeMove();
+        //String menu = twoPlayersPhase1.getMenu();
+        assertThat(outContent.toString(), containsString("Do nothing"));
+    }
+
 
     @After
     public void restoreStreams() {
