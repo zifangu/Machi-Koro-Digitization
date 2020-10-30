@@ -13,7 +13,6 @@ This is the user guide for playing Machi Woco.
              - [Construct](#construct)
              - [End Turn](#end-turn)
         - [AI-strategy](#ai-strategy)
-
     + [Winner](#winner)
   * [Phase 2](#phase-2)
     + [Game Objective P2](#game-objective-P2)
