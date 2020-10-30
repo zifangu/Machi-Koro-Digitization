@@ -44,9 +44,9 @@ public class TwoPlayersPhase1 {
 
     protected boolean buyFinished;
 
-    private GameStateSubject gameSubject;
-    private DiceSubject diceSubject;
-    private InputSubject inputSubject;
+    protected GameStateSubject gameSubject;
+    protected DiceSubject diceSubject;
+    protected InputSubject inputSubject;
 
     private boolean ai;
 

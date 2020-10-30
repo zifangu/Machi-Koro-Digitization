@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -61,6 +62,35 @@ public class Feature4Test {
         }
     }
 //        /************************************************/
+
+
+    @Test
+    public void testNoOneTurn() {
+        assertThat(feature4.getTurn(), is(0));
+    }
+
+    @Test
+    public void testNoPlayer() {
+        assertThat(feature4.getCurrentPlayer(), is(nullValue()));
+    }
+
+    @Test
+    public void testEstInput() {
+        feature4.getPlayers()[0].setTurn(true);
+        assertThat(feature4.getBuyInput(1), is(true));
+    }
+
+    @Test
+    public void testBuyInput() {
+        feature4.getPlayers()[0].setTurn(true);
+        assertThat(feature4.handleInput("1"), is(true));
+    }
+
+//    @Test
+//    public void testTurn() {
+//        feature4.getPlayers()[0].setTurn(true);
+//        feature4.endTurn();
+//    }
 
 
 

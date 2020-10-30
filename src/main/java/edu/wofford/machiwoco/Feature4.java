@@ -288,23 +288,34 @@ public class Feature4 extends TwoPlayersPhase1 {
     }
 
     /**
+     * Initialize game to be played
+     */
+    @Override
+    protected void gameInit() {
+        startGame();
+        players[0].setTurn(true);
+
+//        observer pattern
+        gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
+        diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0, 1);
+        inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
+
+//      subscribe to subjects
+        new DiceObserver(diceSubject);
+        new ActivationObserver(diceSubject);
+        new GameStateObserver(gameSubject);
+        new InputObserver(inputSubject);
+    }
+
+    /**
      * Play the MachiWoCo game in its entirety
      */
     @Override
     public void playGame() {
-        startGame();
-        players[0].setTurn(true);
-        DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0, 1);
-        GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), market);
-        new DiceObserver(diceSubject);
-        new ActivationObserver(diceSubject);
-        new GameStateObserver(gameSubject);
-        InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
-        new InputObserver(inputSubject);
+        gameInit();
 
         while(!isGameOver()) {
 
-            gameSubject.setMarket(getMarketP2());
             gameSubject.notifyObservers();
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
             if (isTrainStationConstructed(getCurrentPlayer())) {
