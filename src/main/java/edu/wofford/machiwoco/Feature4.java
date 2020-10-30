@@ -148,17 +148,8 @@ public class Feature4 extends TwoPlayersPhase1 {
     }
 
     /**
-     * Creates one humand and one AI player.
-     */
-//    @Override
-//    protected void playerInitAI() {
-//
-//    }
-
-    /**
      * Creates the Landmarks to be used by Players in Phase 2
      */
-
     @Override
     protected void landmarkInit() {
         NUMBER_OF_LANDMARKS = 2;
@@ -216,13 +207,6 @@ public class Feature4 extends TwoPlayersPhase1 {
         return eResult;
     }
 
-    @Override
-    protected ArrayList<Establishment> buyEstablishmentLogic() {
-        int amountOwned = getCurrentPlayer().getCoinCount();
-//        System.out.println("AMOUNT: " + amountOwned);
-        ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
-        return e;
-    }
 
 
     @Override
@@ -274,39 +258,9 @@ public class Feature4 extends TwoPlayersPhase1 {
                     "improvements.");
         }
         while(!buyFinished && canAffordCard(getCurrentPlayer())) {
-            /*Console cnsl = System.console();
-            String input = cnsl.readLine(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
-            cnsl.flush();*/
             System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
             String input = sc.nextLine();
             buyFinished = handleInput(input);
-        }
-    }
-
-    @Override
-    protected boolean getBuyInput(int index) {
-        ArrayList<Establishment> listOfEstablishments = getAffordableEstablishments(getCurrentPlayer(), getCurrentPlayer().getCoinCount());
-        ArrayList<Landmark> listOfLandmarks = getAffordableLandmarks(getCurrentPlayer());
-        int numberOfLandmarks = listOfLandmarks.size();
-        int numberOfEstablishments = listOfEstablishments.size();
-        if(index == 99) {
-            System.out.println("Player "  + getTurn() + " chose not to make improvements.");
-            return true;
-        } else if(index <= numberOfEstablishments) {
-            Establishment e = listOfEstablishments.get(index-1);
-            getCurrentPlayer().buyCard(e);
-            int numberLeft = market.get(e) - 1;
-            market.put(e,numberLeft);
-            System.out.println("Player "  + getTurn() + " purchased the " + e.getName() + ".");
-            return true;
-        } else if(index <= numberOfEstablishments + numberOfLandmarks) {
-            Landmark l = listOfLandmarks.get(index-numberOfEstablishments-1);
-            getCurrentPlayer().buyLandmark(l);
-            System.out.println("Player "  + getTurn() + " constructed the " +l.getName() + ".");
-            return true;
-        } else {
-            System.out.println("Not a valid input");
-            return false;
         }
     }
 
@@ -322,19 +276,6 @@ public class Feature4 extends TwoPlayersPhase1 {
             humanInput();
         }
     }
-
-    /**
-     * Gets the market for the Phase2 version of the game
-     * @return a Map object representing the Phase 2 market
-     */
-    public Map<Establishment,Integer> getMarketP2() {
-        return market;
-    }
-
-    /**
-     * The prompt is no longer applied to both players. AI choice are made randomly, and the prompt is redircted backed to player 1.
-     */
- 
 
     /**
      * Gets the sum of a dice roll using 2 die.
@@ -380,29 +321,15 @@ public class Feature4 extends TwoPlayersPhase1 {
     public void playGame() {
         startGame();
         players[0].setTurn(true);
-        int count = 0;
-        boolean ai;
         DiceSubject diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0, 1);
         GameStateSubject gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), market);
         new DiceObserver(diceSubject);
         new ActivationObserver(diceSubject);
         new GameStateObserver(gameSubject);
-        //System.out.println("Get Bakery = " + getBakery());
         InputSubject inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
         new InputObserver(inputSubject);
-//        gameSubject.setPlayers(players);
 
         while(!isGameOver()) {
-            // (1) PRINT TURN
-            //printTurn(); //"Turn started for Player N."
-
-            // (2) PRINT CURRENT GAME STATE
-            //System.out.println(getCurrentGameState());
-
-            // (3) ROLL THE DICE
-            //roll(); //"Player N rolled [3] = 3."
-
-            // (4) ACTIVATE / ACTIONS
 
             gameSubject.setMarket(getMarketP2());
             gameSubject.notifyObservers();
@@ -440,33 +367,6 @@ public class Feature4 extends TwoPlayersPhase1 {
         }
     }
 
-
-//
-//    /**
-//     * Finds which player's turn it is and provides their player number
-//     * @return the current player's number
-//     */
-//    protected int getTurn1() {
-//        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-//            if(players[i].isTurn()) {
-//                return i + 1;
-//            }
-//        }
-//        return 0;
-//    }
-//    protected void endTurn1() {
-//        int curPlayerIndex = getTurn1() - 1;
-//        System.out.println("Turn ended for Player " + getTurn1() +".");
-//        if(curPlayerIndex == NUMBER_OF_PLAYERS-1) {
-//            players[0].setTurn(true);
-//            players[curPlayerIndex].setTurn(false);
-//        } else {
-//            players[curPlayerIndex].setTurn(false);
-//            players[curPlayerIndex +1].setTurn(true);
-//        }
-//
-//    }
-//
     protected void endTurn(int num) {
         int curPlayerIndex = getTurn() - 1;
         System.out.println("Turn ended for Player " + getTurn() +".");
@@ -499,30 +399,6 @@ public class Feature4 extends TwoPlayersPhase1 {
         return 0;
     }
 
-    /**
-     * Checks to see if all Landmarks have been constructed
-     * @return a boolean holding true if all landmarks have been constructed
-     */
-@Override
-    protected boolean allLandmarksConstructed() {
-        Landmark[] l;
-        int count;
-        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            count = 0;
-            l = players[i].getLandmarks();
-            for(int j = 0; j < 2; j++) {
-                if(l[j].is_constructed) {
-                    count++;
-                }
-            }
-            if(count==2) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
 
 //
 
@@ -536,6 +412,14 @@ public class Feature4 extends TwoPlayersPhase1 {
 
     public Establishment getMine() {
         return mine;
+    }
+
+    /**
+     * Gets the market for the Phase2 version of the game
+     * @return a Map object representing the Phase 2 market
+     */
+    public Map<Establishment,Integer> getMarketP2() {
+        return market;
     }
 
     public void setMine(Establishment mine) {
