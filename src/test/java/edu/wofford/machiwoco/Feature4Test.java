@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -108,6 +109,14 @@ public class Feature4Test {
 
     }
 
+    @Test
+    public void testMakeMoveAI() {
+        feature4.getPlayers()[1].setAi(true);
+        feature4.getPlayers()[1].setTurn(true);
+        feature4.makeMove();
+        //String menu = twoPlayersPhase1.getMenu();
+        assertThat(outContent.toString(), containsString("Do nothing"));
+    }
 
     @Test
     public void testInitialMarket() {

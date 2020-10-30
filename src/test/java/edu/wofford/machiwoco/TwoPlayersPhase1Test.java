@@ -374,6 +374,15 @@ public class TwoPlayersPhase1Test {
     }
 
     @Test
+    public void testBuyLandmark() {
+        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getPlayers()[0].setCoinCount(1);
+        Landmark l = twoPlayersPhase1.getPlayers()[0].getLandmarks()[0];
+        twoPlayersPhase1.getPlayers()[0].buyLandmark(l);
+        assertThat(twoPlayersPhase1.getPlayers()[0].getLandmarks()[0].is_constructed,  is(false));
+    }
+
+    @Test
     public void testViewInput() {
         twoPlayersPhase1.getPlayers()[0].setTurn(true);
         twoPlayersPhase1.handleInput("view 1");
