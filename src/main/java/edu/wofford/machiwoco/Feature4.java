@@ -418,13 +418,14 @@ public class Feature4 extends TwoPlayersPhase1 {
                 //if (canAffordCard(getCurrentPlayer()) && !getCurrentPlayer().isAi()) {
                 if (!getCurrentPlayer().isAi()) {
                     System.out.println(StringUtils.center("Player " + getCurrentPlayer().getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
-                    String rollInput = sc.next();
+                    String rollInput = sc.nextLine();
+                    rollInput = rollInput.trim();
                     diceSubject.setDiceNum(Integer.parseInt(rollInput));
                     int[] roll2Arr = roll2(rollInput);
                     diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
                     diceSubject.setDice(roll2Arr[2]);
                 } else {
-                    int randomOfTwoInts = new Random().nextBoolean() ? 1 : 2;
+                    int randomOfTwoInts =  (int) ( Math.random() * 2 + 1);//new Random().nextBoolean() ? 1 : 2;
                     diceSubject.setDiceNum(randomOfTwoInts);
                     int[] roll2Arr = roll2(Integer.toString(randomOfTwoInts));
                     diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
