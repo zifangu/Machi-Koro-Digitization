@@ -25,10 +25,10 @@ public class Feature4 extends TwoPlayersPhase1 {
 
     protected Player player3;
 
-    Establishment wheat;
+    //Establishment wheat;
     Establishment bakery;
-    Establishment ranch;
-    Establishment forest;
+    //Establishment ranch;
+    //Establishment forest;
     Establishment convenience;
     Establishment mine;
     Establishment orchard;
@@ -50,18 +50,18 @@ public class Feature4 extends TwoPlayersPhase1 {
         super(true);
         NUMBER_OF_PLAYERS = numPlayers;
         //**********Establishment wheat field creation************//
-        wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
-                "|  Get 1 coin from the  |\n" +
-                        "|         bank.         |\n" +
-                        "|    (anyone's turn)    |\n",
-                "1", "receive", "bank", 1, "none", "none");
+        // wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
+        //         "|  Get 1 coin from the  |\n" +
+        //                 "|         bank.         |\n" +
+        //                 "|    (anyone's turn)    |\n",
+        //         "1", "receive", "bank", 1, "none", "none");
 
         //**********Establishment ranch creation************//
-        ranch = new Establishment("Ranch", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.COW, Card.Icon_ab.C,
-                "|  Get 1 coin from the  |\n" +
-                        "|         bank.         |\n" +
-                        "|    (anyone's turn)    |\n",
-                "2", "receive", "bank", 1, "none", "none");
+        // ranch = new Establishment("Ranch", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.COW, Card.Icon_ab.C,
+        //         "|  Get 1 coin from the  |\n" +
+        //                 "|         bank.         |\n" +
+        //                 "|    (anyone's turn)    |\n",
+        //         "2", "receive", "bank", 1, "none", "none");
 
         //**********Establishment bakery creation************//
         bakery = new Establishment("Bakery", 1, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.BREAD, Card.Icon_ab.B,
@@ -79,12 +79,12 @@ public class Feature4 extends TwoPlayersPhase1 {
                 "4", "receive", "bank", 3, "none", "none");
 
         //**********Establishment forest creation************//
-        forest = new Establishment("Forest",
-                3, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.GEAR, Card.Icon_ab.G,
-                "|  Get 1 coin from the  |\n" +
-                        "|         bank.         |\n" +
-                        "|    (anyone's turn)    |\n",
-                "5", "receive", "bank", 1, "none", "none");
+        // forest = new Establishment("Forest",
+        //         3, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.GEAR, Card.Icon_ab.G,
+        //         "|  Get 1 coin from the  |\n" +
+        //                 "|         bank.         |\n" +
+        //                 "|    (anyone's turn)    |\n",
+        //         "5", "receive", "bank", 1, "none", "none");
 
         //**********Establishment mine creation************//
         mine = new Establishment("Mine", 6, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.GEAR, Card.Icon_ab.G,
@@ -101,9 +101,9 @@ public class Feature4 extends TwoPlayersPhase1 {
                         "|    (anyone's turn)    |\n",
                 "10", "receive", "bank", 3, "none", "none");
 
-        market.put(wheat, 6);
-        market.put(ranch,6);
-        market.put(forest,6);
+        market.put(getWheat(), 6);
+        market.put(getRanch(),6);
+        market.put(getForest(),6);
         market.put(bakery, 6);
         market.put(convenience,6);
         market.put(mine,6);
@@ -113,15 +113,15 @@ public class Feature4 extends TwoPlayersPhase1 {
         P2startingEst2 = new HashMap<>();
         P2startingEst3 = new HashMap<>();
 
-        P2startingEst.put(wheat,1);
+        P2startingEst.put(getWheat(),1);
         P2startingEst.put(bakery,1);
-        P2startingEst2.put(wheat,1);
+        P2startingEst2.put(getWheat(),1);
         P2startingEst2.put(bakery,1);
-        P2startingEst3.put(wheat,1);
+        P2startingEst3.put(getWheat(),1);
         P2startingEst3.put(bakery,1);
         sc = new Scanner(System.in);
 
-        EST_ORDER = new Establishment[] {wheat, ranch, bakery,convenience, forest, mine, orchard};
+        EST_ORDER = new Establishment[] {getWheat(), getRanch(), bakery,convenience, getForest(), mine, orchard};
 
         landmarkInit();
         playerInit(numPlayers);

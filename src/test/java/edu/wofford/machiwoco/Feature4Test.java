@@ -154,16 +154,24 @@ public class Feature4Test {
     }
 
 
-//        /***********PLAYER ESTABLISHMENT ERROR*************/
-//    @Test
-//    public void testInitPlayerEst() {
-//        Player[] players = feature4.getPlayers();
-//        for (Player p : players) {
-//            assertThat(p.getEstOwned().get(feature4.getWheat()), is(1));
-////            assertThat(p.getEstOwned().get(feature4.getBakery()), is(1));
-//        }
-//    }
-//        /************************************************/
+       /***********PLAYER ESTABLISHMENT ERROR*************/
+   @Test
+   public void testInitPlayerEst() {
+       Player[] players = feature4.getPlayers();
+       //players[2].printEstOwned();
+       //assertThat(outContent.toString(), containsString("dsigsbighwsb"));
+       for (Player p : players) {
+           //assertThat(players[0].getEstOwned().get(feature4.getWheat()), is(1));
+           assertThat(p.getEstOwned().get(feature4.getWheat()), is(1));
+           assertThat(p.getEstOwned().get(feature4.getBakery()), is(1));
+           //assertThat(p.getEstOwned().get(p.getEstOwned().keySet().toArray()[0]), is(feature4.getWheat()));  -- is 1
+           //assertThat(players[0].getEstOwned().get(players[0].getEstOwned().keySet().toArray()[0]), is(feature4.getWheat()));  
+           //assertThat(players[1].getEstOwned().get(feature4.getWheat()), is("x"));
+            //p.printEstOwned();
+        }
+        //assertThat(outContent.toString(), containsString("dsigsbighwsb"));
+   }
+       /************************************************/
 
 
 
