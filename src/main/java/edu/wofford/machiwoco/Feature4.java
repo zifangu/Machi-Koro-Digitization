@@ -139,11 +139,15 @@ public class Feature4 extends TwoPlayersPhase1 {
         if(player_num == 3) {
             player3 = new Player(P2startingEst3, startingLandmarks2, 3,3, true);
         }
-        players = new Player[NUMBER_OF_PLAYERS];
-        players[0] = player1;
-        players[1] = player2;
+        // players = new Player[NUMBER_OF_PLAYERS];
+        // players[0] = player1;
+        // players[1] = player2;
+        players = new ArrayList<Player>();
+        players.add(player1);
+        players.add(player2);
         if(player_num == 3) {
-            players[2] = player3;
+            //players[2] = player3;
+            players.add(player3);
         }
     }
 
@@ -293,7 +297,8 @@ public class Feature4 extends TwoPlayersPhase1 {
     @Override
     protected void gameInit() {
         startGame();
-        players[0].setTurn(true);
+        //players[0].setTurn(true);
+        players.get(0).setTurn(true);
 
 //        observer pattern
         gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
@@ -359,11 +364,15 @@ public class Feature4 extends TwoPlayersPhase1 {
         int curPlayerIndex = getTurn() - 1;
         System.out.println("Turn ended for Player " + getTurn() +".");
         if(curPlayerIndex == num -1) {
-            players[0].setTurn(true);
-            players[curPlayerIndex].setTurn(false);
+            // players[0].setTurn(true);
+            // players[curPlayerIndex].setTurn(false);
+            players.get(0).setTurn(true);
+            players.get(curPlayerIndex).setTurn(false);
         } else {
-            players[curPlayerIndex].setTurn(false);
-            players[curPlayerIndex +1].setTurn(true);
+            // players[curPlayerIndex].setTurn(false);
+            // players[curPlayerIndex +1].setTurn(true);
+            players.get(curPlayerIndex).setTurn(false);
+            players.get(curPlayerIndex+1).setTurn(true);
         }
     }
 
@@ -374,8 +383,10 @@ public class Feature4 extends TwoPlayersPhase1 {
     @Override
     public Player getCurrentPlayer() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            if(players[i].isTurn()) {
-                return players[i];
+            //if(players[i].isTurn()) {
+            if(players.get(i).isTurn()) {
+                // return players[i];
+                return players.get(i);
             }
         }
         return null;
@@ -388,7 +399,8 @@ public class Feature4 extends TwoPlayersPhase1 {
     @Override
     protected int getTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            if(players[i].isTurn()) {
+            // if(players[i].isTurn()) {
+            if(players.get(i).isTurn()) {
                 return i + 1;
             }
         }

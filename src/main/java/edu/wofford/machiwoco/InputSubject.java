@@ -15,7 +15,8 @@ public class InputSubject {
 
     private List<Observer> observers = new ArrayList<Observer>();
     private Player activePlayer;
-    private Player[] players;
+    //private Player[] players;
+    private ArrayList<Player> players;
     private String input;
 
     /**
@@ -25,7 +26,8 @@ public class InputSubject {
      * @param input a string representing the Player's input.
      */
 
-    public InputSubject(Player activePlayer, Player[] players, String input) {
+    //public InputSubject(Player activePlayer, Player[] players, String input) {
+    public InputSubject(Player activePlayer, ArrayList<Player> players, String input) {
         this.activePlayer = activePlayer;
         this.players = players;
         this.input = input;
@@ -51,7 +53,8 @@ public class InputSubject {
      * Gets All Players
      * @return Array of All Players
      */
-    public Player[] getPlayers() {
+    // public Player[] getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -59,7 +62,8 @@ public class InputSubject {
      * Sets All Players
      * @param players Array of All Players
      */
-    public void setPlayers(Player[] players) {
+    //public void setPlayers(Player[] players) {
+    public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 

@@ -1,6 +1,7 @@
 package edu.wofford.machiwoco;
 
 import java.util.Set;
+import java.util.*;
 
 /**
  * This class uses DiceSubject to ouput any activation occurrences throughout the playthrough of Machi Koro.
@@ -39,7 +40,8 @@ public class ActivationObserver extends Observer {
     private StringBuilder checkActivation() {
         int dice = diceSubject.getDice();
         int activation = 0;
-        Player[] players = diceSubject.getPlayers();
+        //Player[] players = diceSubject.getPlayers();
+        ArrayList<Player> players = diceSubject.getPlayers();
         StringBuilder s = new StringBuilder();
         for (Player player : players) {
             // this changes the actual coin amounts in the player bank

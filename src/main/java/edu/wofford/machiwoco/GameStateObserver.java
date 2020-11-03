@@ -197,9 +197,12 @@ public class GameStateObserver extends Observer{
 
     protected StringBuilder playerStringBuilder() {
         StringBuilder s = new StringBuilder();
-        Player[] playersArr = gameSubject.getPlayers();
-        for (int i = 0; i < playersArr.length; i++) {
-            s.append(generatePlayer(playersArr[i], i + 1, playersArr[i].isTurn()));
+        //Player[] playersArr = gameSubject.getPlayers();
+        ArrayList<Player> playersArr = gameSubject.getPlayers();
+        //for (int i = 0; i < playersArr.length; i++) {
+        for (int i = 0; i < playersArr.size(); i++) {
+            //s.append(generatePlayer(playersArr[i], i + 1, playersArr[i].isTurn()));
+            s.append(generatePlayer(playersArr.get(i), i + 1, playersArr.get(i).isTurn()));
         }
         return s;
     }
@@ -211,8 +214,10 @@ public class GameStateObserver extends Observer{
 
     protected String printTurn() {
         String result = "";
-        for(int i = 0; i < gameSubject.getPlayers().length; i++) {
-            if(gameSubject.getPlayers()[i].isTurn()) {
+        // for(int i = 0; i < gameSubject.getPlayers().length; i++) {
+        for(int i = 0; i < gameSubject.getPlayers().size(); i++) {
+            // if(gameSubject.getPlayers()[i].isTurn()) {
+            if(gameSubject.getPlayers().get(i).isTurn()) {
                 result = "Turn started for Player " + (i + 1) + ".\n";
                 return result;
             }

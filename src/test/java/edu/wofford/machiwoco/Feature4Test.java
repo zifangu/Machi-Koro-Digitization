@@ -29,7 +29,8 @@ public class Feature4Test {
 
     @Test
     public void testPlayerNum() {
-        assertThat(feature4.getPlayers().length, is(3));
+        // assertThat(feature4.getPlayers().length, is(3));
+        assertThat(feature4.getPlayers().size(), is(3));
     }
 
     @Test
@@ -45,7 +46,8 @@ public class Feature4Test {
 
     @Test
     public void testCityHallInit() {
-        Player[] players = feature4.getPlayers();
+        // Player[] players = feature4.getPlayers();
+        ArrayList<Player> players = feature4.getPlayers();
         for (Player p : players) {
             Landmark[] l = p.getLandmarks();
             assertThat(l[0].is_constructed, is(false));
@@ -57,7 +59,8 @@ public class Feature4Test {
 //    /**************TRAIN STATION TEST ERRORS************/
         @Test
     public void testTrainStationInit() {
-        Player[] players = feature4.getPlayers();
+        //Player[] players = feature4.getPlayers();
+        ArrayList<Player> players = feature4.getPlayers();
         for (Player p : players) {
             assertThat(p.getLandmarks()[1].is_constructed, is(false));
         }
@@ -77,42 +80,53 @@ public class Feature4Test {
 
     @Test
     public void testEstInput() {
-        feature4.getPlayers()[0].setTurn(true);
+        // feature4.getPlayers()[0].setTurn(true);
+        feature4.getPlayers().get(0).setTurn(true);
         assertThat(feature4.getBuyInput(1), is(true));
     }
 
     @Test
     public void testBuyInput() {
-        feature4.getPlayers()[0].setTurn(true);
+        //feature4.getPlayers()[0].setTurn(true);
+        feature4.getPlayers().get(0).setTurn(true);
         assertThat(feature4.handleInput("1"), is(true));
     }
 
     @Test
     public void testTurnPlayer1() {
-        feature4.getPlayers()[0].setTurn(true);
+        //feature4.getPlayers()[0].setTurn(true);
+        feature4.getPlayers().get(0).setTurn(true);
         feature4.endTurn(3);
-        assertThat(feature4.getPlayers()[0].isTurn(), is(false));
+        //assertThat(feature4.getPlayers()[0].isTurn(), is(false));
+        assertThat(feature4.getPlayers().get(0).isTurn(), is(false));
     }
 
     @Test
     public void testTurnPlayer2() {
-        feature4.getPlayers()[1].setTurn(true);
+        // feature4.getPlayers()[1].setTurn(true);
+        feature4.getPlayers().get(1).setTurn(true);
         feature4.endTurn(3);
-        assertThat(feature4.getPlayers()[1].isTurn(), is(false));
+        //assertThat(feature4.getPlayers()[1].isTurn(), is(false));
+        assertThat(feature4.getPlayers().get(1).isTurn(), is(false));
     }
     @Test
     public void testTurnPlayer3() {
-        feature4.getPlayers()[2].setTurn(true);
+        // feature4.getPlayers()[2].setTurn(true);
+        feature4.getPlayers().get(2).setTurn(true);
         feature4.endTurn(3);
-        assertThat(feature4.getPlayers()[2].isTurn(), is(false));
-        assertThat(feature4.getPlayers()[0].isTurn(), is(true));
+        // assertThat(feature4.getPlayers()[2].isTurn(), is(false));
+        assertThat(feature4.getPlayers().get(2).isTurn(), is(false));
+        // assertThat(feature4.getPlayers()[0].isTurn(), is(true));
+        assertThat(feature4.getPlayers().get(0).isTurn(), is(true));
 
     }
 
     @Test
     public void testMakeMoveAI() {
-        feature4.getPlayers()[1].setAi(true);
-        feature4.getPlayers()[1].setTurn(true);
+        // feature4.getPlayers()[1].setAi(true);
+        feature4.getPlayers().get(1).setAi(true);
+        // feature4.getPlayers()[1].setTurn(true);
+        feature4.getPlayers().get(1).setTurn(true);
         feature4.makeMove();
         //String menu = twoPlayersPhase1.getMenu();
         assertThat(outContent.toString(), containsString("Do nothing"));
@@ -145,19 +159,22 @@ public class Feature4Test {
 
     @Test
     public void testInitPlayerCoinCount() {
-        Player[] players = feature4.getPlayers();
+        // Player[] players = feature4.getPlayers();
+        ArrayList<Player> players = feature4.getPlayers();
         int count = 0;
         for (Player p : players) {
             count += p.getCoinCount();
         }
-        assertThat(count, is(3*players.length));
+        // assertThat(count, is(3*players.length));
+        assertThat(count, is(3*players.size()));
     }
 
 
        /***********PLAYER ESTABLISHMENT ERROR*************/
    @Test
    public void testInitPlayerEst() {
-       Player[] players = feature4.getPlayers();
+    //    Player[] players = feature4.getPlayers();
+    ArrayList<Player> players = feature4.getPlayers();
        //players[2].printEstOwned();
        //assertThat(outContent.toString(), containsString("dsigsbighwsb"));
        for (Player p : players) {

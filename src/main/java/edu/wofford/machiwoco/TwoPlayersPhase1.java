@@ -21,7 +21,8 @@ public class TwoPlayersPhase1 {
 
     protected Player player1;
     protected Player player2;
-    protected Player[] players;
+    //protected Player[] players;
+    protected ArrayList<Player> players;
     Map<Establishment,Integer> market;
     Map<Establishment,Integer> startingEstablishments;
     Map<Establishment,Integer> startingEstablishments2;
@@ -138,9 +139,12 @@ public class TwoPlayersPhase1 {
         NUMBER_OF_PLAYERS = 2;
         player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
         player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, false);
-        players = new Player[NUMBER_OF_PLAYERS];
-        players[0] = player1;
-        players[1] = player2;
+        //players = new Player[NUMBER_OF_PLAYERS];
+        players = new ArrayList<Player>();
+        //players[0] = player1;
+        //players[1] = player2;
+        players.add(player1);
+        players.add(player2);
     }
 
     /**
@@ -151,9 +155,12 @@ public class TwoPlayersPhase1 {
         NUMBER_OF_PLAYERS = 2;
         player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
         player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, true);
-        players = new Player[NUMBER_OF_PLAYERS];
-        players[0] = player1;
-        players[1] = player2;
+        //players = new Player[NUMBER_OF_PLAYERS];
+        //players[0] = player1;
+        //players[1] = player2;
+        players = new ArrayList<Player>();
+        players.add(player1);
+        players.add(player2);
     }
 
     /**
@@ -369,7 +376,8 @@ public class TwoPlayersPhase1 {
 
     protected void printTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            if(players[i].isTurn()) {
+            //if(players[i].isTurn()) {
+            if(players.get(i).isTurn()) {
                 System.out.println("Turn started for Player " + (i + 1) + ".");
             }
         }
@@ -384,8 +392,10 @@ public class TwoPlayersPhase1 {
 
     protected String getCurrentGameState() {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < players.length; i++) {
-            s.append(generatePlayer(players[i], i + 1, players[i].isTurn()));
+        //for (int i = 0; i < players.length; i++) {
+        for (int i = 0; i < players.size(); i++) {
+            //s.append(generatePlayer(players[i], i + 1, players[i].isTurn()));
+            s.append(generatePlayer(players.get(i), i + 1, players.get(i).isTurn()));
         }
         return generateMarket() + s + StringUtils.center("", 42, "*");
     }
@@ -416,7 +426,8 @@ public class TwoPlayersPhase1 {
 
     protected int getTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            if(players[i].isTurn()) {
+            //if(players[i].isTurn()) {
+            if(players.get(i).isTurn()) {
                 return i + 1;
             }
         }
@@ -430,7 +441,8 @@ public class TwoPlayersPhase1 {
 
     protected void activationTest() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            players[i].getActivationNumbers(diceSum,players[i].isTurn());
+            //players[i].getActivationNumbers(diceSum,players[i].isTurn());
+            players.get(i).getActivationNumbers(diceSum,players.get(i).isTurn());
         }
     }
 
@@ -590,8 +602,10 @@ public class TwoPlayersPhase1 {
 
     public Player getCurrentPlayer() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            if(players[i].isTurn()) {
-                return players[i];
+            //if(players[i].isTurn()) {
+            if(players.get(i).isTurn()) {
+                //return players[i];
+                return players.get(i);
             }
         }
         return null;
@@ -609,11 +623,15 @@ public class TwoPlayersPhase1 {
         int curPlayerIndex = getTurn() - 1;
         System.out.println("Turn ended for Player " + getTurn() +".");
         if(curPlayerIndex == NUMBER_OF_PLAYERS-1) {
-            players[0].setTurn(true);
-            players[curPlayerIndex].setTurn(false);
+            //players[0].setTurn(true);
+            players.get(0).setTurn(true);
+            //players[curPlayerIndex].setTurn(false);
+            players.get(curPlayerIndex).setTurn(false);
         } else {
-            players[curPlayerIndex].setTurn(false);
-            players[curPlayerIndex +1].setTurn(true);
+            // players[curPlayerIndex].setTurn(false);
+            // players[curPlayerIndex +1].setTurn(true);
+            players.get(curPlayerIndex).setTurn(false);
+            players.get(curPlayerIndex+1).setTurn(true);
         }
 
     }
@@ -640,7 +658,8 @@ public class TwoPlayersPhase1 {
         Landmark[] l;
         int count = 0;
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            l = players[i].getLandmarks();
+            //l = players[i].getLandmarks();
+            l = players.get(i).getLandmarks();
             for(int j = 0; j < NUMBER_OF_LANDMARKS; j++) {
                 if(l[j].is_constructed) {
                     count++;
@@ -726,7 +745,8 @@ public class TwoPlayersPhase1 {
 
     protected void gameInit() {
         startGame();
-        players[0].setTurn(true);
+        //players[0].setTurn(true);
+        players.get(0).setTurn(true);
 
 //        observer pattern
         gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
@@ -881,7 +901,8 @@ public class TwoPlayersPhase1 {
      * @return an array of Players to take part in the game
      */
 
-    public Player[] getPlayers() {
+    //public Player[] getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -890,7 +911,8 @@ public class TwoPlayersPhase1 {
      * @param players an array of Players to take part in the game
      */
 
-    public void setPlayers(Player[] players) {
+    //public void setPlayers(Player[] players) {
+    public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 

@@ -20,7 +20,8 @@ public class DiceSubjectTest {
     @Before
     public void before() {
         twoPlayersPhase1 = new TwoPlayersPhase1(false);
-        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        //twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getPlayers().get(0).setTurn(true);
         diceSubject = new DiceSubject(twoPlayersPhase1.getCurrentPlayer(), twoPlayersPhase1.getPlayers(), 0, 1);
         new DiceObserver(diceSubject);
         new ActivationObserver(diceSubject);
@@ -108,7 +109,11 @@ public class DiceSubjectTest {
         Player p2 = f4.getPlayer2();
         p2.setEstOwned(map);
         p2.setTurn(true);
-        f4.setPlayers(new Player[] {f4.getPlayer1(),p2});
+        // f4.setPlayers(new Player[] {f4.getPlayer1(),p2});
+        ArrayList<Player> playersAl = new ArrayList<Player>();
+        playersAl.add(f4.getPlayer1());
+        playersAl.add(p2);
+
 //        set the active player to be player 2
         diceSubject.setActivePlayer(f4.getPlayer2());
         diceSubject.setPlayers(f4.getPlayers());
@@ -128,7 +133,10 @@ public class DiceSubjectTest {
         Player p2 = f4.getPlayer2();
         p2.setEstOwned(map);
         p2.setTurn(true);
-        f4.setPlayers(new Player[] {f4.getPlayer1(),p2});
+        //f4.setPlayers(new Player[] {f4.getPlayer1(),p2});
+        ArrayList<Player> playerAl = new ArrayList<Player>();
+        playerAl.add(f4.getPlayer1());
+        playerAl.add(p2);
 //        set the active player to be player 2
         diceSubject.setActivePlayer(f4.getPlayer2());
         diceSubject.setPlayers(f4.getPlayers());

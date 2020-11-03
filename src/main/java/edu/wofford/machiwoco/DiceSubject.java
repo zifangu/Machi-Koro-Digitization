@@ -15,7 +15,8 @@ public class DiceSubject {
 
     private List<Observer> observers = new ArrayList<Observer>();
     private Player activePlayer;
-    private Player[] players;
+    //private Player[] players;
+    private ArrayList<Player> players;
     private int dice;
     private int diceNum;
     private int[] dicePair;
@@ -28,7 +29,8 @@ public class DiceSubject {
      * @param diceNum the number of die to be used in the Player's roll
      */
 
-    public DiceSubject(Player activePlayer, Player[] players, int dice, int diceNum) {
+    //public DiceSubject(Player activePlayer, Player[] players, int dice, int diceNum) {
+    public DiceSubject(Player activePlayer, ArrayList<Player> players, int dice, int diceNum) {
         this.activePlayer = activePlayer;
         this.players = players;
         this.dice = dice;
@@ -58,7 +60,8 @@ public class DiceSubject {
      * @return an array of Players that are taking part in the current Machi Koro game.
      */
 
-    public Player[] getPlayers() {
+    // public Player[] getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -67,7 +70,8 @@ public class DiceSubject {
      * @param players an array of Players that will take part in the Machi Koro game.
      */
 
-    public void setPlayers(Player[] players) {
+    // public void setPlayers(Player[] players) {
+    public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 

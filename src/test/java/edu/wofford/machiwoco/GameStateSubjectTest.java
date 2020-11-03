@@ -21,7 +21,8 @@ public class GameStateSubjectTest {
     @Before
     public void before() {
         twoPlayersPhase1 = new TwoPlayersPhase1(false);
-        twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        // twoPlayersPhase1.getPlayers()[0].setTurn(true);
+        twoPlayersPhase1.getPlayers().get(0).setTurn(true);
         gameSubject = new GameStateSubject(twoPlayersPhase1.EST_ORDER, twoPlayersPhase1.getPlayers(), twoPlayersPhase1.getMarket());
         new GameStateObserver(gameSubject);
 
@@ -32,7 +33,8 @@ public class GameStateSubjectTest {
     // test set players
     @Test
     public void testSetPlayers() {
-        Player[] players = twoPlayersPhase1.getPlayers();
+        // Player[] players = twoPlayersPhase1.getPlayers();
+        ArrayList<Player> players = twoPlayersPhase1.getPlayers();
         gameSubject.setPlayers(players);
         assertThat(gameSubject.getPlayers(), is(players));
     }
@@ -55,7 +57,8 @@ public class GameStateSubjectTest {
 
     @Test
     public void testNotifyObservers() {
-        Player[] players = twoPlayersPhase1.getPlayers();
+        // Player[] players = twoPlayersPhase1.getPlayers();
+        ArrayList<Player> players = twoPlayersPhase1.getPlayers();
         gameSubject.setPlayers(players);
         Map<Establishment, Integer> market = twoPlayersPhase1.getMarket();
         gameSubject.setMarket(market);
@@ -85,11 +88,16 @@ public class GameStateSubjectTest {
 
     @Test
     public void testPrintTurnBranches() {
-        Player p1 = gameSubject.getPlayers()[0];
-        Player p2 = gameSubject.getPlayers()[1];
+        // Player p1 = gameSubject.getPlayers()[0];
+        // Player p2 = gameSubject.getPlayers()[1];
+        Player p1 = gameSubject.getPlayers().get(0);
+        Player p2 = gameSubject.getPlayers().get(1);
         p1.setTurn(false);
         p2.setTurn(false);
-        gameSubject.setPlayers(new Player[] {p1, p2});
+        // gameSubject.setPlayers(new Player[] {p1, p2});
+        ArrayList<Player> playerAl = new ArrayList<Player>();
+        playerAl.add(p1);
+        playerAl.add(p2);
         gameSubject.notifyObservers();
         assertThat(outContent.toString(), not(containsString("Turn started for player")));
         
