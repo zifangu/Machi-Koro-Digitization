@@ -39,6 +39,35 @@ public class ConsoleListenerTest {
         assertThat(outContent.toString(), containsString("Player 2 rolled [2][3] = 5."));
     }
 
+    @Test
+    public void testRanchActivation() {
+        Map<Establishment, Integer> est = new HashMap<>();
+        est.put(t.getRanch(), 1);
+        t.player2.setEstOwned(est);
+        c.diceActivation(2,  t.getPlayers());
+        assertThat(outContent.toString(), containsString("Ranch activated for Player 2"));
+    }
+
+    @Test
+    public void testRanchAndBakeryActivation() {
+        Establishment bakery = new Establishment("Bakery", 1, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.BREAD, Card.Icon_ab.B,
+                "|  Get 1 coin from the  |\n" +
+                        "|         bank.         |\n" +
+                        "|   (your turn only)    |\n",
+                "2-3", "receive", "bank", 1, "none", "none");
+
+        Map<Establishment, Integer> est = new HashMap<>();
+        est.put(t.getRanch(), 1);
+        est.put(bakery, 1);
+        t.player2.setEstOwned(est);
+        t.player2.setTurn(true);
+        c.diceActivation(2,  t.getPlayers());
+        assertThat(outContent.toString(), containsString("Ranch activated for Player 2"));
+        assertThat(outContent.toString(), containsString("Bakery activated for Player 2"));
+    }
+
+
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
