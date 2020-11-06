@@ -51,6 +51,8 @@ public class TwoPlayersPhase1 {
 
     private boolean ai;
 
+    private List<GameListener> listeners;
+
 
     //**********CONSTRUCTOR************//
 
@@ -62,6 +64,8 @@ public class TwoPlayersPhase1 {
     public TwoPlayersPhase1(boolean ai) {
 
         this.ai = ai;
+
+        listeners = new ArrayList<>();
 
         //List of Establishments
         wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
@@ -103,6 +107,14 @@ public class TwoPlayersPhase1 {
 
         landmarkInit();
         playerInit(ai);
+    }
+
+    /**
+     * Adds listener
+     * @param l the GameListener being added to the list of listeners
+     */
+    public void addListener(GameListener l) {
+        listeners.add(l);
     }
 
     /**

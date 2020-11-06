@@ -364,7 +364,7 @@ public class TwoPlayersPhase1Test {
     }
 
 
-    /*@Test
+    @Test
     public void testNoMoveInput() {
         //twoPlayersPhase1.getPlayers()[0].setTurn(true);
         twoPlayersPhase1.getPlayers().get(0).setTurn(true);
@@ -374,7 +374,7 @@ public class TwoPlayersPhase1Test {
 //        assertThat(outContent.toString(), containsString("Not a valid input\n"));
 
 
-    }*/
+    }
 
     @Test
     public void testEstInput() {
@@ -433,7 +433,7 @@ public class TwoPlayersPhase1Test {
     }
 
 
-    /*@Test
+    @Test
     public void testViewLandmarkInput() {
         //twoPlayersPhase1.getPlayers()[0].setTurn(true);
         twoPlayersPhase1.getPlayers().get(0).setTurn(true);
@@ -448,7 +448,7 @@ public class TwoPlayersPhase1Test {
                 "|                       |\n" +
                 "| (7)               [ ] |\n" +
                 "|_______________________|\n"));
-    }*/
+    }
 
     @Test
     public void testLandInput() {
