@@ -7,7 +7,7 @@ public class ActivationListener implements GameListener {
     @Override
     public void diceActivation(int dice, List<Player> players) {
         for (Player player : players) {
-            // this changes the actual coin amounts in the player bank
+            //  changes the coin amounts in the player bank
             player.getActivationNumbers(dice, player.isTurn());
         }
     }
