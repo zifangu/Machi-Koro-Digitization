@@ -118,6 +118,14 @@ public class TwoPlayersPhase1 {
     }
 
     /**
+     * Gets TwoPlayersPhase1 listeners
+     * @return TwoPlayersPhase1 listeners 
+     */
+    public List<GameListener> getListeners() {
+        return listeners;
+    }
+
+    /**
      * Initializes the Landmark used in the Phase 1 version of the game.
      */
 

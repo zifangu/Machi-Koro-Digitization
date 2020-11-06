@@ -615,6 +615,16 @@ public class TwoPlayersPhase1Test {
 
     }
 
+    @Test
+    public void testAddListener() {
+        List<GameListener> list = new ArrayList<>();
+        GameListener consoleL = new ConsoleListener();
+        twoPlayersPhase1.addListener(consoleL);
+        list.add(consoleL);
+        assertThat(twoPlayersPhase1.getListeners().get(0), is(consoleL));
+
+    }
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
