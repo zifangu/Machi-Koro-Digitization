@@ -182,11 +182,10 @@ public class Feature4Test {
            assertThat(p.getEstOwned().get(feature4.getWheat()), is(1));
            assertThat(p.getEstOwned().get(feature4.getBakery()), is(1));
            //assertThat(p.getEstOwned().get(p.getEstOwned().keySet().toArray()[0]), is(feature4.getWheat()));  -- is 1
-           //assertThat(players[0].getEstOwned().get(players[0].getEstOwned().keySet().toArray()[0]), is(feature4.getWheat()));  
+           //assertThat(players[0].getEstOwned().get(players[0].getEstOwned().keySet().toArray()[0]), is(feature4.getWheat()));
            //assertThat(players[1].getEstOwned().get(feature4.getWheat()), is("x"));
             //p.printEstOwned();
         }
-        //assertThat(outContent.toString(), containsString("dsigsbighwsb"));
    }
        /************************************************/
 

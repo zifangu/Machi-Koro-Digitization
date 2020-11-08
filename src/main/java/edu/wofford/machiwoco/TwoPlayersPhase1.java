@@ -46,12 +46,13 @@ public class TwoPlayersPhase1 {
     protected boolean buyFinished;
 
     protected GameStateSubject gameSubject;
-    protected DiceSubject diceSubject;
     protected InputSubject inputSubject;
 
     private boolean ai;
 
     private List<GameListener> listeners;
+    private ConsoleListener consoleListener;
+    private ActivationListener activationListener;
 
 
     //**********CONSTRUCTOR************//
@@ -65,7 +66,13 @@ public class TwoPlayersPhase1 {
 
         this.ai = ai;
 
+        consoleListener = new ConsoleListener();
+        activationListener = new ActivationListener();
+
         listeners = new ArrayList<>();
+        addListener(consoleListener);
+        addListener(activationListener);
+
 
         //List of Establishments
         wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
@@ -770,12 +777,9 @@ public class TwoPlayersPhase1 {
 
 //        observer pattern
         gameSubject = new GameStateSubject(EST_ORDER, getPlayers(), getMarket());
-        diceSubject = new DiceSubject(getCurrentPlayer(), getPlayers(), 0, 1);
         inputSubject = new InputSubject(getCurrentPlayer(),getPlayers(), "x");
 
 //      subscribe to subjects
-        new DiceObserver(diceSubject);
-        new ActivationObserver(diceSubject);
         new GameStateObserver(gameSubject);
         new InputObserver(inputSubject);
     }
@@ -851,6 +855,27 @@ public class TwoPlayersPhase1 {
         }
     }
 
+    private void actionsDiceRolled() {
+        for (GameListener l : listeners) {
+            l.diceRolled(dice1, dice2, getCurrentPlayer());
+            l.diceActivation((dice1 + dice2), players);
+        }
+    }
+
+    private void betterRollDice(boolean rollTwo) {
+        dice1 = (int) (Math.random() * 6 + 1);
+        if (rollTwo) {
+            dice2 = (int) (Math.random() * 6 + 1);
+        } else{
+            dice2 = 0;
+        }
+    }
+
+    protected void wayBetterRollDice(boolean rollTwo) {
+        betterRollDice(rollTwo);
+        actionsDiceRolled();
+    }
+
 
     /**
      * Play the MachiWoCo game in its entirety
@@ -865,9 +890,7 @@ public class TwoPlayersPhase1 {
             gameSubject.notifyObservers();
 
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
-            diceSubject.setActivePlayer(getCurrentPlayer());
-            diceSubject.setDice(roll());
-            diceSubject.notifyObservers();
+            wayBetterRollDice(false);
 
             // (4) either human or ai player make moves
             makeMove();
@@ -1010,10 +1033,6 @@ public class TwoPlayersPhase1 {
 
     public GameStateSubject getGameSubject() {
         return gameSubject;
-    }
-
-    public DiceSubject getDiceSubject() {
-        return diceSubject;
     }
 
     public InputSubject getInputSubject() {

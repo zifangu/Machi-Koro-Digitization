@@ -41,6 +41,8 @@ public class Feature4 extends TwoPlayersPhase1 {
     Landmark[] startingLandmarks1;
     Landmark[] startingLandmarks2;
 
+    protected DiceSubject diceSubject;
+
     /**
      * MachiWoco constructor representing the Phase 2 version of the game.
      * @param numPlayers an integer representing the number of Players.
@@ -124,6 +126,8 @@ public class Feature4 extends TwoPlayersPhase1 {
         EST_ORDER = new Establishment[] {getWheat(), getRanch(), bakery,convenience, getForest(), mine, orchard};
 
         landmarkInit();
+
+        /***************DEFINITELY NEED TO CHANGE THIS*****************/
         playerInit(numPlayers);
     }
 
@@ -131,6 +135,8 @@ public class Feature4 extends TwoPlayersPhase1 {
      * Builds the Players with the second player now being an AI.
      * @param player_num the number of players taking part in the current game
      */
+
+    /***************DEFINITELY NEED TO CHANGE THIS*****************/
 
     protected void playerInit(int player_num) {
         NUMBER_OF_PLAYERS = player_num;
