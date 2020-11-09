@@ -20,7 +20,7 @@ public class GameStateSubjectTest {
 
     @Before
     public void before() {
-        twoPlayersPhase1 = new TwoPlayersPhase1(false);
+        twoPlayersPhase1 = new TwoPlayersPhase1(false,2);
         // twoPlayersPhase1.getPlayers()[0].setTurn(true);
         twoPlayersPhase1.getPlayers().get(0).setTurn(true);
         gameSubject = new GameStateSubject(twoPlayersPhase1.EST_ORDER, twoPlayersPhase1.getPlayers(), twoPlayersPhase1.getMarket());

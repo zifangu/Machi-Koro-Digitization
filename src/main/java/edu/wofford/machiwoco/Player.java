@@ -57,6 +57,7 @@ public class Player {
 
     public void getActivationNumbers(int diceRoll, boolean isTurn){
         Set<Establishment> keys = estOwned.keySet();
+        int numTaken = 0;
         for(Establishment est: keys){
             int activation = 0;
             int activation2 = 0;
@@ -69,15 +70,45 @@ public class Player {
             int numberOwned = estOwned.get(est);
             if(diceRoll == activation || diceRoll == activation2) {
                 if(est.getColor_ab().equals(Card.Color_ab.B)) {
-                    performAction(est,numberOwned);
+                    performAction(est,numberOwned,0);
                 } else if(est.getColor_ab().equals(Card.Color_ab.G)) {
                     if(isTurn) {
-                        performAction(est, numberOwned);
+                        performAction(est, numberOwned,0);
                     }
+                } else if(est.getColor_ab().equals(Card.Color_ab.R)) {
+                    //FUNCTION TO SELECT TARGET
+                    if(activation == 3) {
+                        if(!isTurn) {
+                            performAction(est, numberOwned,0);
+                        } else if(isTurn) {
+                            performAction(est, numberOwned,countNumberOfReds()*1);
+                        }
+                    }
+
                 }
             }
         }
     }
+
+   protected int countNumberOfReds() {
+       Set<Establishment> keys = estOwned.keySet();
+       int count=0;
+       for (Establishment e : keys) {
+           if (e.getColor_ab().equals("R")) {
+               count++;
+           }
+       }
+       return count;
+   }
+
+    protected void takeCoin(int coinCount) {
+        if(this.coinCount - coinCount > 0) {
+            this.coinCount -= coinCount;
+        } else {
+            this.coinCount = 0;
+        }
+    }
+
 
     /**
      * Constructs/Buys Landmark
@@ -96,6 +127,7 @@ public class Player {
         }
         
     }
+
 
     /**
      * Buying Card Action
@@ -120,12 +152,15 @@ public class Player {
      * @param numberOwned an integer representing the amount of coins owned by the Player
      */
 
-    private void performAction(Establishment e, int numberOwned) {
+    private void performAction(Establishment e, int numberOwned, int amountToTake) {
         String type = e.getType();
         int amount = e.getAmount();
         String target = e.getTarget();
         if(type.equals("receive") && target.equals("bank")) {
             addCoins(amount * numberOwned);
+        } else if (type.equals("receive") && target.equals("active")) {
+            addCoins(amount*numberOwned);
+            takeCoin(amountToTake);
         }
     }
 

@@ -20,7 +20,7 @@ public class ConsoleListenerTest {
     @Before
     public void before() {
         c = new ConsoleListener();
-        t = new TwoPlayersPhase1(false);
+        t = new TwoPlayersPhase1(false,2);
 
         // capturing system outputs
         System.setOut(new PrintStream(outContent));

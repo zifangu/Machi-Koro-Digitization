@@ -49,7 +49,7 @@ public class Feature4 extends TwoPlayersPhase1 {
      */
 
     public Feature4(int numPlayers) {
-        super(true);
+        super(true,2);
         NUMBER_OF_PLAYERS = numPlayers;
         //**********Establishment wheat field creation************//
         // wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,

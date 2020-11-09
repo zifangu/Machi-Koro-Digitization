@@ -19,7 +19,7 @@ public class TwoPlayersPhase1Test {
 
     @Before
     public void before() {
-        twoPlayersPhase1 = new TwoPlayersPhase1(false);
+        twoPlayersPhase1 = new TwoPlayersPhase1(false,2);
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -311,7 +311,7 @@ public class TwoPlayersPhase1Test {
     // More Machi Tests
     @Test
     public void testSetters() {
-        TwoPlayersPhase1 machi = new TwoPlayersPhase1(false);
+        TwoPlayersPhase1 machi = new TwoPlayersPhase1(false,2);
         Player player1 = machi.getPlayer1();
         Player player2 = machi.getPlayer2();
 
@@ -338,7 +338,7 @@ public class TwoPlayersPhase1Test {
     // Machi setters
     @Test
     public void testSetEstablishments() {
-        TwoPlayersPhase1 machi = new TwoPlayersPhase1(false);
+        TwoPlayersPhase1 machi = new TwoPlayersPhase1(false,2);
 
         Establishment wheat = machi.getWheat();
         Establishment ranch = machi.getRanch();
