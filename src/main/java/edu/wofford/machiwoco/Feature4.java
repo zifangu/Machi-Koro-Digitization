@@ -165,23 +165,23 @@ public class Feature4 extends TwoPlayersPhase1 {
         NUMBER_OF_LANDMARKS = 2;
 
         startingLandmarks = new Landmark[2];
-        startingLandmarks[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks[1] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
-        startingLandmarks[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks[0] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  You may roll 1 or 2  |\n" +
                         "|         dice.         |\n");
 
         startingLandmarks1 = new Landmark[2];
-        startingLandmarks1[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks1[1] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
-        startingLandmarks1[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks1[0] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  You may roll 1 or 2  |\n" +
                         "|         dice.         |\n");
 
         startingLandmarks2 = new Landmark[2];
-        startingLandmarks2[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks2[1] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
-        startingLandmarks2[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks2[0] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  You may roll 1 or 2  |\n" +
                         "|         dice.         |\n");
     }
@@ -318,6 +318,14 @@ public class Feature4 extends TwoPlayersPhase1 {
         new InputObserver(inputSubject);
     }
 
+    protected boolean rollTwo() {
+        if (getCurrentPlayer().getLandmarks()[0].is_constructed) {
+            return consoleListener.rollTwo(sc, getCurrentPlayer());
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Play the MachiWoCo game in its entirety
      */
@@ -329,28 +337,29 @@ public class Feature4 extends TwoPlayersPhase1 {
 
             gameSubject.notifyObservers();
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
-            if (isTrainStationConstructed(getCurrentPlayer())) {
-                //if (canAffordCard(getCurrentPlayer()) && !getCurrentPlayer().isAi()) {
-                if (!getCurrentPlayer().isAi()) {
-                    System.out.println(StringUtils.center("Player " + getCurrentPlayer().getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
-                    String rollInput = sc.nextLine();
-                    rollInput = rollInput.trim();
-                    diceSubject.setDiceNum(Integer.parseInt(rollInput));
-                    int[] roll2Arr = roll2(rollInput);
-                    diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
-                    diceSubject.setDice(roll2Arr[2]);
-                } else {
-                    int randomOfTwoInts =  (int) ( Math.random() * 2 + 1);//new Random().nextBoolean() ? 1 : 2;
-                    diceSubject.setDiceNum(randomOfTwoInts);
-                    int[] roll2Arr = roll2(Integer.toString(randomOfTwoInts));
-                    diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
-                    diceSubject.setDice(roll2Arr[2]);
-                }
-            } else {
-                diceSubject.setDice(roll());
-            }
-            diceSubject.setActivePlayer(getCurrentPlayer());
-            diceSubject.notifyObservers();
+//            if (isTrainStationConstructed(getCurrentPlayer())) {
+//                //if (canAffordCard(getCurrentPlayer()) && !getCurrentPlayer().isAi()) {
+//                if (!getCurrentPlayer().isAi()) {
+//                    System.out.println(StringUtils.center("Player " + getCurrentPlayer().getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
+//                    String rollInput = sc.nextLine();
+//                    rollInput = rollInput.trim();
+//                    diceSubject.setDiceNum(Integer.parseInt(rollInput));
+//                    int[] roll2Arr = roll2(rollInput);
+//                    diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
+//                    diceSubject.setDice(roll2Arr[2]);
+//                } else {
+//                    int randomOfTwoInts =  (int) ( Math.random() * 2 + 1);//new Random().nextBoolean() ? 1 : 2;
+//                    diceSubject.setDiceNum(randomOfTwoInts);
+//                    int[] roll2Arr = roll2(Integer.toString(randomOfTwoInts));
+//                    diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
+//                    diceSubject.setDice(roll2Arr[2]);
+//                }
+//            } else {
+//                diceSubject.setDice(roll());
+//            }
+//            diceSubject.setActivePlayer(getCurrentPlayer());
+//            diceSubject.notifyObservers();
+            wayBetterRollDice(rollTwo());
 
             // (5) SHOW BUY MENU
             makeMove();
