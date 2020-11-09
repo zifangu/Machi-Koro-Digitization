@@ -28,6 +28,8 @@ public class TwoPlayersPhase1 {
     Map<Establishment,Integer> startingEstablishments2;
 
     int NUMBER_OF_PLAYERS;
+
+/************NEED TO CHANGE THIS CONSTRUCTOR***************/
     int NUMBER_OF_LANDMARKS = 1;
 
     Scanner sc;
@@ -50,9 +52,9 @@ public class TwoPlayersPhase1 {
 
     private boolean ai;
 
-    private List<GameListener> listeners;
-    private ConsoleListener consoleListener;
-    private ActivationListener activationListener;
+    protected List<GameListener> listeners;
+    protected ConsoleListener consoleListener;
+    protected ActivationListener activationListener;
 
 
     //**********CONSTRUCTOR************//
