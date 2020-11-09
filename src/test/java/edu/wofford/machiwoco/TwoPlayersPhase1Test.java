@@ -1,15 +1,12 @@
 package edu.wofford.machiwoco;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.*;
 import org.junit.*;
-
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
-
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -637,17 +634,7 @@ public class TwoPlayersPhase1Test {
         assertThat(twoPlayersPhase1.dice1, is(lessThanOrEqualTo(6)));
     }
 
-    @Test
-    public void testRollTwoDice() {
-        twoPlayersPhase1.getPlayers().get(0).setTurn(true);
-        twoPlayersPhase1.wayBetterRollDice(true);
-        assertThat(twoPlayersPhase1.dice1, is(greaterThanOrEqualTo(0)));
-        assertThat(twoPlayersPhase1.dice1, is(lessThanOrEqualTo(6)));
-        assertThat(twoPlayersPhase1.dice2, is(greaterThanOrEqualTo(0)));
-        assertThat(twoPlayersPhase1.dice2, is(lessThanOrEqualTo(6)));
     }
-
-
 
     @After
     public void restoreStreams() {
