@@ -62,7 +62,7 @@ public class TwoPlayersPhase1 {
      * @param ai a boolean holding true if the game will contain an AI player
      */
 
-    public TwoPlayersPhase1(boolean ai) {
+    public TwoPlayersPhase1(boolean ai,int num) {
 
         this.ai = ai;
 
@@ -113,7 +113,7 @@ public class TwoPlayersPhase1 {
         EST_ORDER = new Establishment[] {wheat, ranch, forest};
 
         landmarkInit();
-        playerInit(ai);
+        playerInit(ai,num);
     }
 
     /**
@@ -150,11 +150,11 @@ public class TwoPlayersPhase1 {
      * @param ai a boolean holding true if the player being created should be an AI
      */
 
-    protected void playerInit(boolean ai) {
+    protected void playerInit(boolean ai,int num) {
         if (ai) {
-            playerInitAI();
+            playerInitAI(num);
         } else {
-            playerInitHuman();
+            playerInitHuman(num);
         }
     }
 
@@ -162,8 +162,8 @@ public class TwoPlayersPhase1 {
      * Creates two human players.
      */
 
-    protected void playerInitHuman() {
-        NUMBER_OF_PLAYERS = 2;
+    protected void playerInitHuman(int num) {
+        NUMBER_OF_PLAYERS = num;
         player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
         player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, false);
         //players = new Player[NUMBER_OF_PLAYERS];
@@ -178,8 +178,8 @@ public class TwoPlayersPhase1 {
      * Creates one humand and one AI player.
      */
 
-    protected void playerInitAI() {
-        NUMBER_OF_PLAYERS = 2;
+    protected void playerInitAI(int num) {
+        NUMBER_OF_PLAYERS = num;
         player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
         player2 = new Player(startingEstablishments2, startingLandmarks, 3,2, true);
         //players = new Player[NUMBER_OF_PLAYERS];
@@ -876,6 +876,18 @@ public class TwoPlayersPhase1 {
         actionsDiceRolled();
     }
 
+    /**
+     * Check if all landmarks are constructed. If so, game ends
+     */
+
+    //PASSES IN DICE ROLL AND PLAYERS
+    // RETURNS ARRAYLIST OF PLAYERS PLAYER NUMS
+//    protected P playersActivated() {
+//        if(!allLandmarksConstructed()) {
+//            endTurn();
+//        }
+//    }
+
 
     /**
      * Play the MachiWoCo game in its entirety
@@ -1044,7 +1056,7 @@ public class TwoPlayersPhase1 {
         if (args.length > 1 && args[1].equals("--ai")) {
             ai_mode = true;
         }
-        TwoPlayersPhase1 f2 = new TwoPlayersPhase1(ai_mode);
+        TwoPlayersPhase1 f2 = new TwoPlayersPhase1(ai_mode,2);
         f2.playGame();
 
     }

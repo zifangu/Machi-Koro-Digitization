@@ -18,7 +18,7 @@ public class ActivationListenerTest {
     @Before
     public void before() {
         a = new ActivationListener();
-        t = new TwoPlayersPhase1(false);
+        t = new TwoPlayersPhase1(false,2);
          bakery = new Establishment("Bakery", 1, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.BREAD, Card.Icon_ab.B,
                 "|  Get 1 coin from the  |\n" +
                         "|         bank.         |\n" +

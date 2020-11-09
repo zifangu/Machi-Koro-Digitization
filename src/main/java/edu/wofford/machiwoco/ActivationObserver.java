@@ -46,15 +46,25 @@ public class ActivationObserver extends Observer {
         for (Player player : players) {
             // this changes the actual coin amounts in the player bank
             player.getActivationNumbers(dice,player.isTurn());
+           //  checkRed(players);
 
             // this prints out the activations for user's information
             Set<Establishment> keys = player.getEstOwned().keySet();
+            int x = player.getPlayerNumber();
             for(Establishment est: keys) {
                 if(!est.getName().equals("Bakery")) {
                     activation = Integer.parseInt(est.getActivation());
                 } else if(est.getName().equals("Bakery")) {
                     if(dice == 2) { activation = 2; }
                     else { activation = 3; }
+                }
+
+                if(est.getColor_ab().equals(Card.Color_ab.R) && !player.isTurn()) {
+                     if(est.getName().equals("Cafe")) {
+                        // player.perform(redCheck());
+
+                     }  else if(est.getName().equals("Family Restaurant")) {
+                     }
                 }
 
                 if (dice == activation && !est.getColor_ab().equals(Card.Color_ab.G)) {
@@ -71,4 +81,19 @@ public class ActivationObserver extends Observer {
 //        }
         return s;
     }
-}
+
+
+    private int redCheck() {
+        ArrayList<Player> players = diceSubject.getPlayers();
+        Player activePlayer = diceSubject.getActivePlayer();
+        int count = 0;
+        for(Player p: players) {
+            if(!p.equals(activePlayer)) {
+                count += p.countNumberOfReds();
+            }
+        }
+        return count;
+    }
+
+
+    }

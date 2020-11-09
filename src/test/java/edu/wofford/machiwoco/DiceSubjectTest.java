@@ -19,7 +19,7 @@ public class DiceSubjectTest {
 
     @Before
     public void before() {
-        twoPlayersPhase1 = new TwoPlayersPhase1(false);
+        twoPlayersPhase1 = new TwoPlayersPhase1(false,2);
         //twoPlayersPhase1.getPlayers()[0].setTurn(true);
         twoPlayersPhase1.getPlayers().get(0).setTurn(true);
         diceSubject = new DiceSubject(twoPlayersPhase1.getCurrentPlayer(), twoPlayersPhase1.getPlayers(), 0, 1);
