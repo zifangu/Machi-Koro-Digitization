@@ -17,10 +17,49 @@ public class ConsoleListenerTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
+    Establishment farmersMarket;
+    Establishment bakery;
+    Establishment cheeseFactory;
+    Establishment furniture;
+    Map<Establishment, Integer> est;
+
+
     @Before
     public void before() {
         c = new ConsoleListener();
         t = new TwoPlayersPhase1(false,2);
+         farmersMarket = new Establishment("Farmers Market", 2, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.FRUITO, Card.Icon_ab.O,
+                "| Get 2 coins from the  |\n" +
+                        "|   bank for each {W}   |\n" +
+                        "|   establishment you   |\n" +
+                        "|         own.          |\n" +
+                        "|   (your turn only)    |\n",
+                "11-12", "receive", "bank", 2, "icon", "wheat");
+
+         bakery = new Establishment("Bakery", 1, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.BREAD, Card.Icon_ab.B,
+                "|  Get 1 coin from the  |\n" +
+                        "|         bank.         |\n" +
+                        "|   (your turn only)    |\n",
+                "2-3", "receive", "bank", 1, "none", "none");
+
+         cheeseFactory = new Establishment("Cheese Factory", 5, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.FACTORY, Card.Icon_ab.F,
+                "| Get 3 coins from the  |\n" +
+                        "|   bank for each {C}   |\n" +
+                        "|   establishment you   |\n" +
+                        "|         own.          |\n" +
+                        "|   (your turn only)    |\n",
+                "7", "receive", "bank", 3, "icon", "cow");
+
+         furniture = new Establishment("Furniture Factory", 3, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.FACTORY, Card.Icon_ab.F,
+                "| Get 3 coins from the  |\n" +
+                        "|   bank for each {G}   |\n" +
+                        "|   establishment you   |\n" +
+                        "|         own.          |\n" +
+                        "|   (your turn only)    |\n",
+                "8", "receive", "bank", 3, "icon", "gear");
+
+
+        est = new HashMap<>();
 
         // capturing system outputs
         System.setOut(new PrintStream(outContent));
@@ -41,7 +80,6 @@ public class ConsoleListenerTest {
 
     @Test
     public void testRanchActivation() {
-        Map<Establishment, Integer> est = new HashMap<>();
         est.put(t.getRanch(), 1);
         t.player2.setEstOwned(est);
         c.diceActivation(2,  t.getPlayers());
@@ -50,13 +88,6 @@ public class ConsoleListenerTest {
 
     @Test
     public void testRanchAndBakeryActivation() {
-        Establishment bakery = new Establishment("Bakery", 1, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.BREAD, Card.Icon_ab.B,
-                "|  Get 1 coin from the  |\n" +
-                        "|         bank.         |\n" +
-                        "|   (your turn only)    |\n",
-                "2-3", "receive", "bank", 1, "none", "none");
-
-        Map<Establishment, Integer> est = new HashMap<>();
         est.put(t.getRanch(), 1);
         est.put(bakery, 1);
         t.player2.setEstOwned(est);
@@ -65,6 +96,47 @@ public class ConsoleListenerTest {
         assertThat(outContent.toString(), containsString("Ranch activated for Player 2"));
         assertThat(outContent.toString(), containsString("Bakery activated for Player 2"));
     }
+
+    @Test
+    public void testFarmersMarket11() {
+        est.put(farmersMarket, 1);
+        t.player2.setEstOwned(est);
+        t.player2.setTurn(true);
+        c.diceActivation(11,  t.getPlayers());
+        assertThat(outContent.toString(), containsString("Farmers Market activated for Player 2"));
+        c.diceActivation(12,  t.getPlayers());
+        assertThat(outContent.toString(), containsString("Farmers Market activated for Player 2"));
+    }
+
+    @Test
+    public void testFarmersMarket12() {
+        est.put(farmersMarket, 1);
+        t.player2.setEstOwned(est);
+        t.player2.setTurn(true);
+        c.diceActivation(12,  t.getPlayers());
+        assertThat(outContent.toString(), containsString("Farmers Market activated for Player 2"));
+    }
+
+    @Test
+    public void testCheeseFactory() {
+        est.put(cheeseFactory, 1);
+        t.player2.setEstOwned(est);
+        t.player2.setTurn(true);
+        c.diceActivation(7,  t.getPlayers());
+        assertThat(outContent.toString(), containsString("Cheese Factory activated for Player 2"));
+    }
+
+    @Test
+    public void testFurniture() {
+        est.put(furniture, 1);
+        t.player2.setEstOwned(est);
+        t.player2.setTurn(true);
+        c.diceActivation(8,  t.getPlayers());
+        assertThat(outContent.toString(), containsString("Furniture Factory activated for Player 2"));
+    }
+
+
+
 
 
 
