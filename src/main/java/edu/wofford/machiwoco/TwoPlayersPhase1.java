@@ -1051,7 +1051,7 @@ public class TwoPlayersPhase1 {
         return inputSubject;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args, int i) {
         boolean ai_mode = false;
         if (args.length > 1 && args[1].equals("--ai")) {
             ai_mode = true;

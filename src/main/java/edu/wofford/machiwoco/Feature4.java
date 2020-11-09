@@ -49,7 +49,7 @@ public class Feature4 extends TwoPlayersPhase1 {
      */
 
     public Feature4(int numPlayers) {
-        super(true,2);
+        super(true,numPlayers);
         NUMBER_OF_PLAYERS = numPlayers;
         //**********Establishment wheat field creation************//
         // wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
@@ -380,56 +380,6 @@ public class Feature4 extends TwoPlayersPhase1 {
             players.get(curPlayerIndex).setTurn(false);
             players.get(curPlayerIndex+1).setTurn(true);
         }
-    }
-
-    /**
-     * Gets the current player
-     * @return the current Player's instance
-     */
-    @Override
-    public Player getCurrentPlayer() {
-        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            //if(players[i].isTurn()) {
-            if(players.get(i).isTurn()) {
-                // return players[i];
-                return players.get(i);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Finds which player's turn it is and provides their player number
-     * @return the current player's number
-     */
-    @Override
-    protected int getTurn() {
-        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            // if(players[i].isTurn()) {
-            if(players.get(i).isTurn()) {
-                return i + 1;
-            }
-        }
-        return 0;
-    }
-
-    /**
-     * Returns an ArrayList of Landmarks that the Player can afford
-     * @param player the player who's coin count is being checked
-     * @return a Landmark ArrayList containing available and affordable Landmark cards
-     */
-    @Override
-    public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
-        Set<Establishment> setE = market.keySet();
-        ArrayList<Establishment> eResult = new ArrayList<Establishment>();
-        for(Establishment est: EST_ORDER){
-            int cost = est.getCost();
-            int numberLeft = market.get(est);
-            if(owned >= cost && numberLeft!=0) {
-                eResult.add(est);
-            }
-        }
-        return eResult;
     }
 
     /**
