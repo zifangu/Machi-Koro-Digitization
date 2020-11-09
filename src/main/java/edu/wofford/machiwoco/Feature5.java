@@ -131,7 +131,7 @@ public class Feature5 extends Feature4 {
      */
     @Override
     protected void landmarkInit() {
-        NUMBER_OF_LANDMARKS = 2;
+        NUMBER_OF_LANDMARKS = 3;
 
         startingLandmarks = new Landmark[2];
         startingLandmarks[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
