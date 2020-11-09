@@ -133,7 +133,7 @@ public class Feature5 extends Feature4 {
     protected void landmarkInit() {
         NUMBER_OF_LANDMARKS = 3;
 
-        startingLandmarks = new Landmark[2];
+        startingLandmarks = new Landmark[3];
         startingLandmarks[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
         startingLandmarks[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
