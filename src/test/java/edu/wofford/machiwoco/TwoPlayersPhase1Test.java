@@ -10,6 +10,9 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+
 public class TwoPlayersPhase1Test {
     TwoPlayersPhase1 twoPlayersPhase1;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -634,7 +637,7 @@ public class TwoPlayersPhase1Test {
         assertThat(twoPlayersPhase1.dice1, is(lessThanOrEqualTo(6)));
     }
 
-    }
+    
 
     @After
     public void restoreStreams() {

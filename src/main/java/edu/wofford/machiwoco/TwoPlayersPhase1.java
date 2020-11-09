@@ -59,7 +59,8 @@ public class TwoPlayersPhase1 {
 
     /**
      * MachiWoco constructor serving as the infrastructure of the Phase 1 version of the game.
-     * @param ai a boolean holding true if the game will contain an AI player
+     * @param ai a boolean holding true if the game will contain an AI player.
+     * @param num an integer representing the number of players.
      */
 
     public TwoPlayersPhase1(boolean ai,int num) {

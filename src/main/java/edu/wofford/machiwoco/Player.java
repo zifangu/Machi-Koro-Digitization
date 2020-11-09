@@ -58,6 +58,9 @@ public class Player {
     public void getActivationNumbers(int diceRoll, boolean isTurn){
         Set<Establishment> keys = estOwned.keySet();
         int numTaken = 0;
+        int numberOwnedCow = 0;//getNumberOwnedIcon(Card.Icon.COW);
+        int numberOwnedGear = 0;//getNumberOwnedIcon(Card.Icon.GEAR);
+        int numberOwnedWheat = 0;//getNumberOwnedIcon(Card.Icon.WHEAT);
         for(Establishment est: keys){
             int activation = 0;
             int activation2 = 0;
@@ -72,6 +75,13 @@ public class Player {
                 if(est.getColor_ab().equals(Card.Color_ab.B)) {
                     performAction(est,numberOwned,0);
                 } else if(est.getColor_ab().equals(Card.Color_ab.G)) {
+                    if (isTurn && est.getName() == "Cheese Factory") {
+                        performAction(est, numberOwnedCow, 0);
+                    } else if (isTurn && est.getName() == "Furniture Factory") {
+                        performAction(est, numberOwnedCow, 0);
+                    } else if (isTurn && est.getName() == "Farmers Market") {
+                        performAction(est, numberOwnedCow, 0);
+                    }
                     if(isTurn) {
                         performAction(est, numberOwned,0);
                     }
