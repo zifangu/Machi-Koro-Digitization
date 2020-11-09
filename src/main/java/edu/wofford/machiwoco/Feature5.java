@@ -85,11 +85,11 @@ public class Feature5 extends Feature4 {
         P2startingEst3 = new HashMap<>();
 
         P2startingEst.put(getWheat(),1);
-        P2startingEst.put(bakery,1);
+        P2startingEst.put(getBakery(),1);
         P2startingEst2.put(getWheat(),1);
-        P2startingEst2.put(bakery,1);
+        P2startingEst2.put(getBakery(),1);
         P2startingEst3.put(getWheat(),1);
-        P2startingEst3.put(bakery,1);
+        P2startingEst3.put(getBakery(),1);
         sc = new Scanner(System.in);
 
         EST_ORDER = new Establishment[] {getWheat(), getRanch(), getBakery(),getConvenience(), getForest(), cheeseFactory, furnitureFactory, getMine(), getOrchard(), farmersMarket};
