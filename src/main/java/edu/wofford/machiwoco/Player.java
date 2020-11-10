@@ -171,8 +171,8 @@ public class Player {
             addCoins(amount*numberOwned);
             takeCoin(amountToTake);
         }
-        if(landmarks.length > 2 && landmarks[2].getIsConstructed() && (e.getIcon_ab().name() == "U" || e.getIcon_ab().name() == "B")) {
-            addCoins(1);
+        if(landmarks.length > 2 && landmarks[2].getIsConstructed() && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
+            addCoins(numberOwned);
         }
     }
 

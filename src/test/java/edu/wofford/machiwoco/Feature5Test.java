@@ -35,8 +35,9 @@ public class Feature5Test {
     public void testShoppingMall() {
         feature5.getPlayer1().getLandmarks()[2].setIs_constructed(true);
         feature5.getPlayer1().setTurn(true);
+        feature5.getPlayer1().getEstOwned().put(feature5.getBakery(), 2);
         feature5.getPlayer1().getActivationNumbers(2, true);
-        assertThat(feature5.getPlayer1().getCoinCount(), is(5));
+        assertThat(feature5.getPlayer1().getCoinCount(), is(7));
     }
 
 
