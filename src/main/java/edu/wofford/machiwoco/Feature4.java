@@ -32,7 +32,8 @@ public class Feature4 extends TwoPlayersPhase1 {
     Establishment convenience;
     Establishment mine;
     Establishment orchard;
-    Establishment[] EST_ORDER;
+    //Establishment[] EST_ORDER;
+    ArrayList<Establishment> EST_ORDER;
 
 //    int NUMBER_OF_PLAYERS;
 //    int NUMBER_OF_LANDMARKS;
@@ -123,7 +124,15 @@ public class Feature4 extends TwoPlayersPhase1 {
         P2startingEst3.put(bakery,1);
         sc = new Scanner(System.in);
 
-        EST_ORDER = new Establishment[] {getWheat(), getRanch(), bakery,convenience, getForest(), mine, orchard};
+        //EST_ORDER = new Establishment[] {getWheat(), getRanch(), bakery,convenience, getForest(), mine, orchard};
+        EST_ORDER = new ArrayList<Establishment>();
+        EST_ORDER.add(getWheat());
+        EST_ORDER.add(getRanch());
+        EST_ORDER.add(bakery);
+        EST_ORDER.add(convenience);
+        EST_ORDER.add(getForest());
+        EST_ORDER.add(mine);
+        EST_ORDER.add(orchard);
 
         landmarkInit();
 

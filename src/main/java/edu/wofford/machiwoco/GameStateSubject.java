@@ -17,20 +17,20 @@ import java.util.*;
 public class GameStateSubject {
 
     private List<edu.wofford.machiwoco.Observer> observers = new ArrayList<edu.wofford.machiwoco.Observer>();
-    Establishment[] EST_ORDER;
+    ArrayList<Establishment> EST_ORDER;
     // Player[] players;
     ArrayList<Player> players;
     Map<Establishment,Integer> market;
 
     /**
      * The constructor used to initialize the GameStateSubject class and its necessary variables.
-     * @param EST_ORDER an array of the Establishments in order of how they are to be displayed in the current game state.
+     * @param EST_ORDER an arrayList of the Establishments in order of how they are to be displayed in the current game state.
      * @param players an array of all the Players within the current version of Machi Koro.
      * @param market a Map instance representing the the current game's market
      */
 
     // public GameStateSubject(Establishment[] EST_ORDER, Player[] players, Map<Establishment,Integer> market) {
-    public GameStateSubject(Establishment[] EST_ORDER, ArrayList<Player> players, Map<Establishment,Integer> market) {
+    public GameStateSubject(ArrayList<Establishment> EST_ORDER, ArrayList<Player> players, Map<Establishment,Integer> market) {
         this.EST_ORDER = EST_ORDER;
         this.players = players;
         this.market = market;
@@ -39,7 +39,7 @@ public class GameStateSubject {
      * Gets Establishment Order
      * @return Array of correctly-ordered eEstablishments
      */
-    public Establishment[] getEstOrder() {
+    public ArrayList<Establishment> getEstOrder() {
         return EST_ORDER;
     }
 
@@ -47,7 +47,7 @@ public class GameStateSubject {
      * Sets correctly-ordered array of Establishment Order
      * @param EST_ORDER Array of ordered Establishments
      */
-    public void setEstOrder(Establishment[] EST_ORDER) {
+    public void setEstOrder(ArrayList<Establishment> EST_ORDER) {
         this.EST_ORDER = EST_ORDER;
     }
 

@@ -50,7 +50,7 @@ public class GameStateSubjectTest {
     // test set EST_ORDER
     @Test
     public void testSetEstOrder() {
-        Establishment[] est = twoPlayersPhase1.EST_ORDER;
+        ArrayList<Establishment> est = twoPlayersPhase1.EST_ORDER;
         gameSubject.setEstOrder(est);
         assertThat(gameSubject.getEstOrder(), is(est));
     }
@@ -62,7 +62,7 @@ public class GameStateSubjectTest {
         gameSubject.setPlayers(players);
         Map<Establishment, Integer> market = twoPlayersPhase1.getMarket();
         gameSubject.setMarket(market);
-        Establishment[] est = twoPlayersPhase1.EST_ORDER;
+        ArrayList<Establishment> est = twoPlayersPhase1.EST_ORDER;
         gameSubject.setEstOrder(est);
         gameSubject.notifyObservers();
         assertThat(outContent.toString(), containsString("******************************************\n" +

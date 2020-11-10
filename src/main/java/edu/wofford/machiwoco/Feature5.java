@@ -26,7 +26,7 @@ public class Feature5 extends Feature4 {
     Establishment cheeseFactory;
     Establishment furnitureFactory;
     Establishment farmersMarket;
-    Establishment[] EST_ORDER;
+    ArrayList<Establishment> EST_ORDER;
 
     int NUMBER_OF_LANDMARKS=3;
 
@@ -92,7 +92,18 @@ public class Feature5 extends Feature4 {
         P2startingEst3.put(getBakery(),1);
         sc = new Scanner(System.in);
 
-        EST_ORDER = new Establishment[] {getWheat(), getRanch(), getBakery(),getConvenience(), getForest(), cheeseFactory, furnitureFactory, getMine(), getOrchard(), farmersMarket};
+        //EST_ORDER = new Establishment[] {getWheat(), getRanch(), getBakery(),getConvenience(), getForest(), cheeseFactory, furnitureFactory, getMine(), getOrchard(), farmersMarket};
+        EST_ORDER = new ArrayList<Establishment>();
+        EST_ORDER.add(getWheat());
+        EST_ORDER.add(getRanch());
+        EST_ORDER.add(getBakery());
+        EST_ORDER.add(getConvenience());
+        EST_ORDER.add(getForest());
+        EST_ORDER.add(cheeseFactory);
+        EST_ORDER.add(furnitureFactory);
+        EST_ORDER.add(getMine());
+        EST_ORDER.add(getOrchard());
+        EST_ORDER.add(farmersMarket);
 
         landmarkInit();
 

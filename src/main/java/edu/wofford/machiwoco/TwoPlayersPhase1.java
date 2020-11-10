@@ -41,7 +41,7 @@ public class TwoPlayersPhase1 {
     Establishment wheat;
     Establishment ranch;
     Establishment forest;
-    Establishment[] EST_ORDER;
+    ArrayList<Establishment> EST_ORDER;
 
     Landmark[] startingLandmarks;
 
@@ -113,7 +113,11 @@ public class TwoPlayersPhase1 {
         // Scanner to read in data
         sc = new Scanner(System.in);
 
-        EST_ORDER = new Establishment[] {wheat, ranch, forest};
+        //EST_ORDER = new Establishment[] {wheat, ranch, forest};
+        EST_ORDER = new ArrayList<Establishment>();
+        EST_ORDER.add(wheat);
+        EST_ORDER.add(ranch);
+        EST_ORDER.add(forest);
 
         landmarkInit();
         playerInit(ai,num);
