@@ -150,31 +150,31 @@ public class Feature5 extends Feature4 {
         startingLandmarks[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  You may roll 1 or 2  |\n" +
                         "|         dice.         |\n");
-        startingLandmarks[1] = new Landmark("Shopping Mall", 10, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks[2] = new Landmark("Shopping Mall", 10, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|   Your {U} and {B}    |\n" +
                         "|  establishments earn  |\n" +
                                 "|     +1 coin when      |\n" +
                                         "|      activated.       |\n");
 
-        startingLandmarks1 = new Landmark[2];
+        startingLandmarks1 = new Landmark[3];
         startingLandmarks1[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
         startingLandmarks1[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  You may roll 1 or 2  |\n" +
                         "|         dice.         |\n");
-        startingLandmarks1[1] = new Landmark("Shopping Mall", 10, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks1[2] = new Landmark("Shopping Mall", 10, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|   Your {U} and {B}    |\n" +
                         "|  establishments earn  |\n" +
                                 "|     +1 coin when      |\n" +
                                         "|      activated.       |\n");
 
-        startingLandmarks2 = new Landmark[2];
+        startingLandmarks2 = new Landmark[3];
         startingLandmarks2[0] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
         startingLandmarks2[1] = new Landmark("Train Station", 4, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  You may roll 1 or 2  |\n" +
                         "|         dice.         |\n");
-        startingLandmarks2[1] = new Landmark("Shopping Mall", 10, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
+        startingLandmarks2[2] = new Landmark("Shopping Mall", 10, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|   Your {U} and {B}    |\n" +
                         "|  establishments earn  |\n" +
                                 "|     +1 coin when      |\n" +
