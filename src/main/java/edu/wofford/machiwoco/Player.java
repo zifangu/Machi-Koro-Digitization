@@ -64,26 +64,24 @@ public class Player {
         for(Establishment est: keys){
             int activation = 0;
             int activation2 = 0;
-            if(!est.getName().equals("Bakery")) {
-                activation = Integer.parseInt(est.getActivation());
-            } else{
+            if(est.getName().equals("Bakery")) {
                 activation = 2;
                 activation2 = 3;
+            } else if (est.getName().equals("Farmers Market")) {
+                activation = 11;
+                activation2 = 12;
+            } else {
+                activation = Integer.parseInt(est.getActivation());
             }
             int numberOwned = estOwned.get(est);
             if(diceRoll == activation || diceRoll == activation2) {
                 if(est.getColor_ab().equals(Card.Color_ab.B)) {
                     performAction(est,numberOwned,0);
                 } else if(est.getColor_ab().equals(Card.Color_ab.G)) {
-                    if (isTurn && est.getName() == "Cheese Factory") {
-                        performAction(est, numberOwnedCow, 0);
-                    } else if (isTurn && est.getName() == "Furniture Factory") {
-                        performAction(est, numberOwnedCow, 0);
-                    } else if (isTurn && est.getName() == "Farmers Market") {
-                        performAction(est, numberOwnedCow, 0);
-                    }
-                    if(isTurn) {
-                        performAction(est, numberOwned,0);
+                    if (isTurn && est.getModifierType() == "icon") {
+                        performActionIcon(est, numberOwned);
+                    } else if (isTurn) {
+                        performAction(est, numberOwned, 0);
                     }
                 } else if(est.getColor_ab().equals(Card.Color_ab.R)) {
                     //FUNCTION TO SELECT TARGET
@@ -160,6 +158,7 @@ public class Player {
      * Performs the action associated with the given Establishment
      * @param e the Establishment upon which an action is being performed
      * @param numberOwned an integer representing the amount of coins owned by the Player
+     * @param amountToTake an integer representing the amount to be taken from another Player
      */
 
     private void performAction(Establishment e, int numberOwned, int amountToTake) {
@@ -172,6 +171,49 @@ public class Player {
             addCoins(amount*numberOwned);
             takeCoin(amountToTake);
         }
+    }
+
+    /**
+     * Performs the action associated with the given Establishment if said Establishment relies on icons.
+     * @param e the Establishment upon which an action is being performed
+     * @param numberOwned an integer representing the amount of coins owned by the Player
+     */
+
+    private void performActionIcon(Establishment e, int numberOwned) {
+        String type = e.getType();
+        int amount = e.getAmount();
+        String target = e.getTarget();
+        int numberOwnedIcon = 0;
+        // it's getting icon ab of cheese factory
+        String modifier = e.getModifier();
+        String modifierAb = "";
+        if (modifier == "cow") {
+            numberOwnedIcon = getNumberOwnedIcon("C");
+        } else if (modifier == "gear") {
+            numberOwnedIcon = getNumberOwnedIcon("G");
+        } else if (modifier == "wheat") {
+            numberOwnedIcon = getNumberOwnedIcon("W");
+        }
+        addCoins(amount * numberOwned * numberOwnedIcon);
+
+    }
+
+    /**
+     * Gets the number of Establishments owned corresponding to a specific icon.
+     * @param icon_ab the icon of the card(s) being observed.
+     * @return an integer representing the number of Establishments owned corresponding to a specific icon.
+     */
+
+    public int getNumberOwnedIcon(String icon_ab) {
+        int count = 0;
+
+        for (Map.Entry<Establishment, Integer> est : estOwned.entrySet()) {
+            if (est.getKey().getIcon_ab().name() == icon_ab) {
+                count = count + estOwned.get(est.getKey());
+            }
+        }
+
+        return count;
     }
 
     /**

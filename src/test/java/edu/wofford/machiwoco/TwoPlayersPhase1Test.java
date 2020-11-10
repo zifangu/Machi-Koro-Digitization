@@ -640,7 +640,82 @@ public class TwoPlayersPhase1Test {
         assertThat(twoPlayersPhase1.dice1, is(lessThanOrEqualTo(6)));
     }
 
-    
+    @Test
+    public void testGetNumberOwnedIcon() {
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(twoPlayersPhase1.getWheat(), 3);
+        assertThat(twoPlayersPhase1.getPlayer1().getNumberOwnedIcon("W"), is(3));
+
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(twoPlayersPhase1.getRanch(), 3);
+        assertThat(twoPlayersPhase1.getPlayer1().getNumberOwnedIcon("C"), is(3));
+    }
+
+    @Test
+    public void testPerformActionIconCow() {
+        Establishment cheese = new Establishment("Cheese Factory", 5, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.FACTORY, Card.Icon_ab.F,
+                "| Get 3 coins from the  |\n" +
+                          "|   bank for each {C}   |\n" +
+                          "|   establishment you   |\n" +
+                          "|         own.          |\n" +
+                          "|   (your turn only)    |\n",
+                "7", "receive", "bank", 3, "icon", "cow");
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(twoPlayersPhase1.getRanch(), 3);
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(cheese, 1);
+        twoPlayersPhase1.getPlayer1().setTurn(true);
+        twoPlayersPhase1.getPlayer1().getActivationNumbers(7, true);
+        assertThat(twoPlayersPhase1.getPlayer1().getCoinCount(), is(12));
+
+    }
+
+    @Test
+    public void testPerformActionIconGear() {
+        Establishment furnitureFactory = new Establishment("Furniture Factory", 3, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.FACTORY,Card.Icon_ab.F,
+                "| Get 3 coins from the  |\n" +
+                          "|   bank for each {G}   |\n" +
+                          "|   establishment you   |\n" +
+                          "|         own.          |\n" +
+                          "|   (your turn only)    |\n",
+                "8", "receive", "bank", 3, "icon", "gear");
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(twoPlayersPhase1.getForest(), 3);
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(furnitureFactory, 1);
+        twoPlayersPhase1.getPlayer1().setTurn(true);
+        twoPlayersPhase1.getPlayer1().getActivationNumbers(8, true);
+        assertThat(twoPlayersPhase1.getPlayer1().getCoinCount(), is(12));
+
+    }
+
+    @Test
+    public void testPerformActionIconWheat() {
+        Establishment farmersMarket = new Establishment("Farmers Market", 2, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.FRUITO, Card.Icon_ab.O,
+        "| Get 2 coins from the  |\n" +
+                  "|   bank for each {W}   |\n" +
+                  "|   establishment you   |\n" +
+                  "|         own.          |\n" +
+                  "|   (your turn only)    |\n",
+        "11-12", "receive", "bank", 2, "icon", "wheat");
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(twoPlayersPhase1.getWheat(), 3);
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(farmersMarket, 1);
+        twoPlayersPhase1.getPlayer1().setTurn(true);
+        twoPlayersPhase1.getPlayer1().getActivationNumbers(11, true);
+        assertThat(twoPlayersPhase1.getPlayer1().getCoinCount(), is(9));
+
+    }
+
+    @Test
+    public void testPerformActionIconNonExistent() {
+        Establishment test = new Establishment("test", 2, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.FRUITO, Card.Icon_ab.O,
+        "| Get 2 coins from the  |\n" +
+                  "|   bank for each {W}   |\n" +
+                  "|   establishment you   |\n" +
+                  "|         own.          |\n" +
+                  "|   (your turn only)    |\n",
+        "12", "receive", "bank", 2, "icon", "test");
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(twoPlayersPhase1.getWheat(), 3);
+        twoPlayersPhase1.getPlayer1().getEstOwned().put(test, 1);
+        twoPlayersPhase1.getPlayer1().setTurn(true);
+        twoPlayersPhase1.getPlayer1().getActivationNumbers(12, true);
+        assertThat(twoPlayersPhase1.getPlayer1().getCoinCount(), is(3));
+
+    }
 
     @After
     public void restoreStreams() {
