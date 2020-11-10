@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.is;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.*;
+
+import org.hamcrest.Matchers;
 import org.junit.*;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -237,6 +239,13 @@ public class Feature4Test {
        feature4.sc = new Scanner("1");
        assertThat(feature4.rollTwo(), is(false));
    }
+
+    @Test
+    public void testRollTwoAI() {
+        feature4.getPlayer2().getLandmarks()[0].setIs_constructed(true);
+        feature4.getPlayer2().setTurn(true);
+        assertThat(feature4.rollTwo(), Matchers.either(Matchers.is(true)).or(Matchers.is(false)));
+    }
 
    @Test
    public void testRollTwoNotConstructed() {

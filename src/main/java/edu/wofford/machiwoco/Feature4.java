@@ -19,25 +19,14 @@ import java.util.*;
 
 public class Feature4 extends TwoPlayersPhase1 {
 
-    Map<Establishment,Integer> P2startingEst;
-    Map<Establishment,Integer> P2startingEst2;
     Map<Establishment,Integer> P2startingEst3;
 
     protected Player player3;
 
-    //Establishment wheat;
     Establishment bakery;
-    //Establishment ranch;
-    //Establishment forest;
     Establishment convenience;
     Establishment mine;
     Establishment orchard;
-    //Establishment[] EST_ORDER;
-//    ArrayList<Establishment> EST_ORDER;
-
-//    int NUMBER_OF_PLAYERS;
-//    int NUMBER_OF_LANDMARKS;
-
 
     Landmark[] startingLandmarks1;
     Landmark[] startingLandmarks2;
@@ -112,8 +101,6 @@ public class Feature4 extends TwoPlayersPhase1 {
         market.put(mine,6);
         market.put(orchard,6);
 
-        P2startingEst = new HashMap<>();
-        P2startingEst2 = new HashMap<>();
         P2startingEst3 = new HashMap<>();
 
 //        P2startingEst.put(getWheat(),1);
@@ -368,9 +355,7 @@ public class Feature4 extends TwoPlayersPhase1 {
             makeMove();
 
             //(6) End Game
-            if(!allLandmarksConstructed()) {
-                endTurn(NUMBER_OF_PLAYERS);
-            }
+            gameEnded();
         }
     }
 
