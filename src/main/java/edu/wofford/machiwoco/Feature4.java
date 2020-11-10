@@ -219,17 +219,22 @@ public class Feature4 extends TwoPlayersPhase1 {
      * AI Logic for making a move
      */
     protected void aiLogic() {
-        System.out.println(getMenu());
-        int estSize = buyEstablishmentLogic().size();
-        int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
-        // add last option of "99. Do Nothing" to AI
-        int ai_choices = estSize + lmkSize + 1;
-        int ai_input = (int) (Math.random() * ai_choices + 1);
-        if (ai_input == ai_choices) {
-            ai_input = 99;
+        if(canAffordCard(getCurrentPlayer())) {
+            System.out.println(getMenu());
+            int estSize = buyEstablishmentLogic().size();
+            int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
+            // add last option of "99. Do Nothing" to AI
+            int ai_choices = estSize + lmkSize + 1;
+            int ai_input = (int) (Math.random() * ai_choices + 1);
+            if (ai_input == ai_choices) {
+                ai_input = 99;
+            }
+            System.out.println("AI CHOSE: " + ai_input);
+            handleInput(Integer.toString(ai_input));
+        } else {
+            System.out.println("Player " + getTurn() + "did not have enough money to make \n" +
+                    "improvements.");
         }
-        System.out.println("AI CHOSE: " + ai_input);
-        handleInput(Integer.toString(ai_input));
     }
 
     /**
@@ -320,7 +325,11 @@ public class Feature4 extends TwoPlayersPhase1 {
 
     protected boolean rollTwo() {
         if (getCurrentPlayer().getLandmarks()[0].is_constructed) {
-            return consoleListener.rollTwo(sc, getCurrentPlayer());
+            if (getCurrentPlayer().isAi()) {
+                return new Random().nextBoolean();
+            } else {
+                return consoleListener.rollTwo(sc, getCurrentPlayer());
+            }
         } else {
             return false;
         }

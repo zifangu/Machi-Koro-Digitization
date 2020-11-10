@@ -687,8 +687,9 @@ public class TwoPlayersPhase1 {
 
     protected boolean allLandmarksConstructed() {
         Landmark[] l;
-        int count = 0;
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            int count = 0;
+
             //l = players[i].getLandmarks();
             l = players.get(i).getLandmarks();
             for(int j = 0; j < NUMBER_OF_LANDMARKS; j++) {
