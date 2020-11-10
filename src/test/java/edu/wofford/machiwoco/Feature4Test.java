@@ -261,6 +261,22 @@ public class Feature4Test {
 
     //
 
+    @Test
+    public void testEstOrder() {
+       ArrayList<Establishment> estTest = new ArrayList<>();
+        estTest.add(feature4.wheat);
+        estTest.add(feature4.ranch);
+        estTest.add(feature4.bakery);
+        estTest.add(feature4.convenience);
+        estTest.add(feature4.forest);
+        estTest.add(feature4.mine);
+        estTest.add(feature4.orchard);
+        assertThat(feature4.EST_ORDER.size(), is(7));
+        for (int i = 0; i < feature4.EST_ORDER.size(); i++) {
+           assertThat(feature4.EST_ORDER.get(i), is(estTest.get(i)));
+       }
+    }
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);

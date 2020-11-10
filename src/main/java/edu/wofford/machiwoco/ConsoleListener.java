@@ -51,7 +51,7 @@ public class ConsoleListener implements GameListener {
     public boolean rollTwo(Scanner sc, Player p) {
         int input = 0;
         while (input != 1 && input != 2) {
-            System.out.print(StringUtils.center("Player " + p.getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
+            System.out.println(StringUtils.center("Player " + p.getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
             input = Integer.parseInt(sc.nextLine());
         }
         return input != 1;

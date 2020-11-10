@@ -33,7 +33,7 @@ public class Feature4 extends TwoPlayersPhase1 {
     Establishment mine;
     Establishment orchard;
     //Establishment[] EST_ORDER;
-    ArrayList<Establishment> EST_ORDER;
+//    ArrayList<Establishment> EST_ORDER;
 
 //    int NUMBER_OF_PLAYERS;
 //    int NUMBER_OF_LANDMARKS;
@@ -116,18 +116,21 @@ public class Feature4 extends TwoPlayersPhase1 {
         P2startingEst2 = new HashMap<>();
         P2startingEst3 = new HashMap<>();
 
-        P2startingEst.put(getWheat(),1);
-        P2startingEst.put(bakery,1);
-        P2startingEst2.put(getWheat(),1);
-        P2startingEst2.put(bakery,1);
+//        P2startingEst.put(getWheat(),1);
+//        P2startingEst.put(bakery,1);
+        startingEstablishments.put(bakery, 1);
+//        P2startingEst2.put(getWheat(),1);
+//        P2startingEst2.put(bakery,1);
+        startingEstablishments2.put(bakery, 1);
+
         P2startingEst3.put(getWheat(),1);
         P2startingEst3.put(bakery,1);
         sc = new Scanner(System.in);
 
         //EST_ORDER = new Establishment[] {getWheat(), getRanch(), bakery,convenience, getForest(), mine, orchard};
-        EST_ORDER = new ArrayList<Establishment>();
-        EST_ORDER.add(getWheat());
-        EST_ORDER.add(getRanch());
+//        EST_ORDER.add(getWheat());
+//        EST_ORDER.add(getRanch());
+        EST_ORDER.remove(getForest());
         EST_ORDER.add(bakery);
         EST_ORDER.add(convenience);
         EST_ORDER.add(getForest());
@@ -149,8 +152,10 @@ public class Feature4 extends TwoPlayersPhase1 {
 
     protected void playerInit(int player_num) {
         NUMBER_OF_PLAYERS = player_num;
-        player1 = new Player(P2startingEst, startingLandmarks, 3,1, false);
-        player2 = new Player(P2startingEst2, startingLandmarks1, 3,2, true);
+//        player1 = new Player(P2startingEst, startingLandmarks, 3,1, false);
+//        player2 = new Player(P2startingEst2, startingLandmarks1, 3,2, true);
+        player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
+        player2 = new Player(startingEstablishments2, startingLandmarks1, 3,2, true);
         if(player_num == 3) {
             player3 = new Player(P2startingEst3, startingLandmarks2, 3,3, true);
         }
@@ -353,35 +358,15 @@ public class Feature4 extends TwoPlayersPhase1 {
 
         while(!isGameOver()) {
 
+            // (1) print turn and (2) print current game state
             gameSubject.notifyObservers();
+
             // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
-//            if (isTrainStationConstructed(getCurrentPlayer())) {
-//                //if (canAffordCard(getCurrentPlayer()) && !getCurrentPlayer().isAi()) {
-//                if (!getCurrentPlayer().isAi()) {
-//                    System.out.println(StringUtils.center("Player " + getCurrentPlayer().getPlayerNumber() + ", would you like to roll 1 or 2 die?", 42, " "));
-//                    String rollInput = sc.nextLine();
-//                    rollInput = rollInput.trim();
-//                    diceSubject.setDiceNum(Integer.parseInt(rollInput));
-//                    int[] roll2Arr = roll2(rollInput);
-//                    diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
-//                    diceSubject.setDice(roll2Arr[2]);
-//                } else {
-//                    int randomOfTwoInts =  (int) ( Math.random() * 2 + 1);//new Random().nextBoolean() ? 1 : 2;
-//                    diceSubject.setDiceNum(randomOfTwoInts);
-//                    int[] roll2Arr = roll2(Integer.toString(randomOfTwoInts));
-//                    diceSubject.setDicePair(roll2Arr[0], roll2Arr[1]);
-//                    diceSubject.setDice(roll2Arr[2]);
-//                }
-//            } else {
-//                diceSubject.setDice(roll());
-//            }
-//            diceSubject.setActivePlayer(getCurrentPlayer());
-//            diceSubject.notifyObservers();
             wayBetterRollDice(rollTwo());
 
             // (5) SHOW BUY MENU
             makeMove();
-            inputSubject.notifyObservers();
+
             //(6) End Game
             if(!allLandmarksConstructed()) {
                 endTurn(NUMBER_OF_PLAYERS);
