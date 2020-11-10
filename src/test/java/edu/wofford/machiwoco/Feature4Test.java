@@ -217,6 +217,20 @@ public class Feature4Test {
    }
 
    @Test
+   public void testAILogic99() {
+       feature4.getPlayer2().setTurn(true);
+       feature4.getPlayer2().setCoinCount(1);
+       Map<Establishment, Integer> newMarket = new HashMap<>();
+       newMarket.put(feature4.getWheat(), 0);
+       feature4.market = newMarket;
+       feature4.EST_ORDER = new ArrayList<Establishment>();
+       feature4.EST_ORDER.add(feature4.getWheat());
+       feature4.makeMove();
+       assertThat(outContent.toString(), containsString("chose not to make"));
+
+   }
+
+   @Test
    public void testRollTwo() {
        feature4.getPlayer1().getLandmarks()[0].setIs_constructed(true);
        feature4.getPlayer1().setTurn(true);

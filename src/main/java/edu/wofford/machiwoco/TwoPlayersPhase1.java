@@ -830,11 +830,6 @@ public class TwoPlayersPhase1 {
                 System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
                 String input = sc.nextLine();
 
-                inputSubject.setActivePlayer(getCurrentPlayer());
-                inputSubject.setPlayers(getPlayers());
-                inputSubject.setInput(input);
-                inputSubject.notifyObservers();
-
                 buyFinished = handleInput(input);
             }
         } else {
