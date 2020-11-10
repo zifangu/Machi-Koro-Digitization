@@ -190,11 +190,47 @@ public class Feature4Test {
             //p.printEstOwned();
         }
    }
-       /************************************************/
 
+   @Test
+   public void testMakeMove() {
+       feature4.getPlayer1().setTurn(true);
+       feature4.sc = new Scanner("1");
+       feature4.makeMove();
+       assertThat(outContent.toString(), containsString("would you like to purchase"));
+   }
 
+   @Test
+   public void testHumanInputNoMoney() {
+       feature4.getPlayer1().setTurn(true);
+       feature4.getPlayer1().setCoinCount(0);
+       //feature4.sc = new Scanner("1");
+       feature4.makeMove();
+       assertThat(outContent.toString(), containsString("did not have enough money"));
+   }
 
+   @Test
+   public void testAILogicDoNothing() {
+       feature4.getPlayer2().setTurn(true);
+       feature4.getPlayer2().setCoinCount(0);
+       feature4.makeMove();
+       assertThat(outContent.toString(), containsString("did not have enough money"));
+   }
 
+   @Test
+   public void testRollTwo() {
+       feature4.getPlayer1().getLandmarks()[0].setIs_constructed(true);
+       feature4.getPlayer1().setTurn(true);
+       feature4.sc = new Scanner("1");
+       assertThat(feature4.rollTwo(), is(false));
+   }
+
+   @Test
+   public void testRollTwoNotConstructed() {
+       feature4.getPlayer1().setTurn(true);
+       assertThat(feature4.rollTwo(), is(false));
+   }
+
+   
 
 //    @Test
 //    public void testOneLandmark() {

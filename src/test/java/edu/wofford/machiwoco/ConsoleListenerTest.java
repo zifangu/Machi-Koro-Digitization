@@ -136,9 +136,35 @@ public class ConsoleListenerTest {
     }
 
 
+    @Test
+    public void testBakery() {
+        est.put(bakery, 1);
+        t.player2.setEstOwned(est);
+        t.player2.setTurn(true);
+        c.diceActivation(3,  t.getPlayers());
+        assertThat(outContent.toString(), containsString("Bakery activated for Player 2"));
+    }
 
+    @Test
+    public void testNotTurn() {
+        est.put(bakery, 1);
+        t.player2.setEstOwned(est);
+        t.player2.setTurn(false);
+        c.diceActivation(3,  t.getPlayers());
+        assertThat(outContent.toString(), not(containsString("Bakery activated for Player 2")));
+    }
 
+    @Test
+    public void testRollTwo2() {
+        Scanner sc = new Scanner("2");
+        assertThat(c.rollTwo(sc, t.player2), is(true));
+    }
 
+    @Test
+    public void testRollTwo1() {
+        Scanner sc = new Scanner("1");
+        assertThat(c.rollTwo(sc, t.player2), is(false));
+    }
 
     @After
     public void restoreStreams() {

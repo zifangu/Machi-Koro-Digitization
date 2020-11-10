@@ -717,6 +717,21 @@ public class TwoPlayersPhase1Test {
 
     }
 
+    @Test
+    public void testRoll() {
+        int dice = twoPlayersPhase1.roll();
+        assertTrue(dice == (int)dice);
+    }
+
+    // @Test
+    // public void testMakeMove() {
+    //     twoPlayersPhase1.getPlayer1().setCoinCount(10);
+    //     twoPlayersPhase1.getPlayer1().setTurn(true);
+    //     twoPlayersPhase1.sc = new Scanner("1");
+    //     twoPlayersPhase1.makeMove();
+    //     assertThat(outContent.toString(), containsString("would you like to purchase"));
+    // }
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
