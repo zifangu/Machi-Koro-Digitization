@@ -30,7 +30,7 @@ public class TwoPlayersPhase1 {
     int NUMBER_OF_PLAYERS;
 
 /************NEED TO CHANGE THIS CONSTRUCTOR***************/
-    int NUMBER_OF_LANDMARKS = 1;
+    int NUMBER_OF_LANDMARKS;
 
     Scanner sc;
 
@@ -140,6 +140,7 @@ public class TwoPlayersPhase1 {
      */
 
     protected void landmarkInit() {
+        NUMBER_OF_LANDMARKS = 1;
         Landmark city = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
         startingLandmarks = new Landmark[1];
@@ -695,6 +696,9 @@ public class TwoPlayersPhase1 {
                     count++;
                 }
             }
+            System.out.println("COUNT: "+ count);
+            System.out.println("LANDMARK: "+ NUMBER_OF_LANDMARKS);
+
             if(count==NUMBER_OF_LANDMARKS) {
                 return true;
             }

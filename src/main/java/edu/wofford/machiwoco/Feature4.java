@@ -34,8 +34,8 @@ public class Feature4 extends TwoPlayersPhase1 {
     Establishment orchard;
     Establishment[] EST_ORDER;
 
-    int NUMBER_OF_PLAYERS;
-    int NUMBER_OF_LANDMARKS;
+//    int NUMBER_OF_PLAYERS;
+//    int NUMBER_OF_LANDMARKS;
 
 
     Landmark[] startingLandmarks1;
