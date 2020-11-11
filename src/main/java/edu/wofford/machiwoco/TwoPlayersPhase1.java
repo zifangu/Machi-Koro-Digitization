@@ -156,6 +156,7 @@ public class TwoPlayersPhase1 {
     /**
      * Creates either ai or human players
      * @param ai a boolean holding true if the player being created should be an AI
+     * @param num an integer representing the number of players to be created
      */
 
     protected void playerInit(boolean ai,int num) {
@@ -168,6 +169,7 @@ public class TwoPlayersPhase1 {
 
     /**
      * Creates two human players.
+     * @param num an integer representing the number of human Players.
      */
 
     protected void playerInitHuman(int num) {
@@ -184,6 +186,7 @@ public class TwoPlayersPhase1 {
 
     /**
      * Creates one humand and one AI player.
+     * @param num an integer representing the number of AI players.
      */
 
     protected void playerInitAI(int num) {
