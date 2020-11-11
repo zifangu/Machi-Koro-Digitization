@@ -83,7 +83,7 @@ public class Feature5 extends Feature4 {
     }
 
     /**
-     * Builds the Players with the second player now being an AI.
+     * Builds the Players to take part in the Phase3 version of Machi Koco.
      * @param player_num the number of players taking part in the current game
      */
 
@@ -104,8 +104,9 @@ public class Feature5 extends Feature4 {
     }
 
     /**
-     * Creates the Landmarks to be used by Players in Phase 2
+     * Creates the Landmarks to be used by Players in Phase 3
      */
+
     @Override
     protected void landmarkInit() {
         NUMBER_OF_LANDMARKS = 3;
@@ -150,6 +151,7 @@ public class Feature5 extends Feature4 {
      /**
       * Initialize game to be played
       */
+
     @Override
     protected void gameInit() {
         startGame();
@@ -166,6 +168,11 @@ public class Feature5 extends Feature4 {
         new GameStateObserver(gameSubject);
         new InputObserver(inputSubject);
     }
+
+    /**
+     * Starts the Phase 3 version of Machi Koro.
+     * @param args a String array representing the user's console arguments.
+     */
 
     public static void main(String[] args) {
         Feature5 feature5 = new Feature5(Integer.parseInt(args[1]));

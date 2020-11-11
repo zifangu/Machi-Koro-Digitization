@@ -18,7 +18,6 @@ public class GameStateSubject {
 
     private List<edu.wofford.machiwoco.Observer> observers = new ArrayList<edu.wofford.machiwoco.Observer>();
     ArrayList<Establishment> EST_ORDER;
-    // Player[] players;
     ArrayList<Player> players;
     Map<Establishment,Integer> market;
 
@@ -29,7 +28,6 @@ public class GameStateSubject {
      * @param market a Map instance representing the the current game's market
      */
 
-    // public GameStateSubject(Establishment[] EST_ORDER, Player[] players, Map<Establishment,Integer> market) {
     public GameStateSubject(ArrayList<Establishment> EST_ORDER, ArrayList<Player> players, Map<Establishment,Integer> market) {
         this.EST_ORDER = EST_ORDER;
         this.players = players;
@@ -55,7 +53,6 @@ public class GameStateSubject {
      * Gets array of all players
      * @return Array of players
      */
-    // public Player[] getPlayers() {
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -64,7 +61,6 @@ public class GameStateSubject {
      * Sets correctly-ordered array of Players
      * @param players array of players in current game
      */
-    //public void setPlayers(Player[] players) {
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }

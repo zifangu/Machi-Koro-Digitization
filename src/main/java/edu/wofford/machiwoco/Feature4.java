@@ -286,6 +286,11 @@ public class Feature4 extends TwoPlayersPhase1 {
         new InputObserver(inputSubject);
     }
 
+    /**
+     * Returns a boolean holding true if the Player rolls two die.
+     * @return a boolean holding true if the Player rolls two die.
+     */
+
     protected boolean rollTwo() {
         if (getCurrentPlayer().getLandmarks()[0].is_constructed) {
             if (getCurrentPlayer().isAi()) {
@@ -405,6 +410,10 @@ public class Feature4 extends TwoPlayersPhase1 {
         return bakery;
     }
 
+    /**
+     * Starts the MachiWoco game.
+     * @param args a String array representing the user's console arguments.
+     */
 
     public static void main(String[] args) {
         Feature4 feature4 = new Feature4(Integer.parseInt(args[1]));

@@ -11,6 +11,11 @@ package edu.wofford.machiwoco;
 
 public class MachiWoCo {
 
+    /**
+     * Selects which phase of the game to play based on console input.
+     * @param args a String array representing the user's console arguments.
+     */
+
     public static void main(String[] args) {
 
         if (args[0].equals("phase0")) {

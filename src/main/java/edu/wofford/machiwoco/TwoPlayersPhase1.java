@@ -29,7 +29,6 @@ public class TwoPlayersPhase1 {
 
     int NUMBER_OF_PLAYERS;
 
-/************NEED TO CHANGE THIS CONSTRUCTOR***************/
     int NUMBER_OF_LANDMARKS;
 
     Scanner sc;
@@ -127,14 +126,16 @@ public class TwoPlayersPhase1 {
      * Adds listener
      * @param l the GameListener being added to the list of listeners
      */
+
     public void addListener(GameListener l) {
         listeners.add(l);
     }
 
     /**
-     * Gets TwoPlayersPhase1 listeners
-     * @return TwoPlayersPhase1 listeners 
+     * Gets the current game state's listeners
+     * @return current game state's listeners 
      */
+
     public List<GameListener> getListeners() {
         return listeners;
     }
@@ -150,8 +151,6 @@ public class TwoPlayersPhase1 {
         startingLandmarks = new Landmark[1];
         startingLandmarks[0] = city;
     }
-
-    //********Player Init**********//
 
     /**
      * Creates either ai or human players
@@ -185,7 +184,7 @@ public class TwoPlayersPhase1 {
     }
 
     /**
-     * Creates one humand and one AI player.
+     * Creates one human and one AI player.
      * @param num an integer representing the number of AI players.
      */
 
@@ -389,7 +388,6 @@ public class TwoPlayersPhase1 {
      */
 
     protected String generatePlayer(Player p, int num, boolean active) {
-//        System.out.println("PLAYER: "+ active);
         return generatePlayerLine(p, num, active) +
                 generate_pure_padding("-") +
                 generatePlayerCoin(p) +
@@ -430,9 +428,7 @@ public class TwoPlayersPhase1 {
 
     protected String getCurrentGameState() {
         StringBuilder s = new StringBuilder();
-        //for (int i = 0; i < players.length; i++) {
         for (int i = 0; i < players.size(); i++) {
-            //s.append(generatePlayer(players[i], i + 1, players[i].isTurn()));
             s.append(generatePlayer(players.get(i), i + 1, players.get(i).isTurn()));
         }
         return generateMarket() + s + StringUtils.center("", 42, "*");
@@ -450,11 +446,9 @@ public class TwoPlayersPhase1 {
 
     protected int roll() {
         dice1 = (int) (Math.random() * 6 + 1);
-        dice2 = 0; //(int) (Math.random() * 6 + 1);
+        dice2 = 0;
         diceSum = dice1 +dice2;
         return diceSum;
-//            System.out.println("Player "  + getTurn() + " rolled ["+dice1+"] = " + diceSum + ".");
-        //System.out.println("Player "  + getTurn() + " rolled ["+dice1+"]["+dice2+"] =" + diceSum + ".");
     }
 
     /**
@@ -464,7 +458,6 @@ public class TwoPlayersPhase1 {
 
     protected int getTurn() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            //if(players[i].isTurn()) {
             if(players.get(i).isTurn()) {
                 return i + 1;
             }
@@ -479,7 +472,6 @@ public class TwoPlayersPhase1 {
 
     protected void activationTest() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            //players[i].getActivationNumbers(diceSum,players[i].isTurn());
             players.get(i).getActivationNumbers(diceSum,players.get(i).isTurn());
         }
     }
@@ -491,7 +483,6 @@ public class TwoPlayersPhase1 {
 
     protected ArrayList<Establishment> buyEstablishmentLogic() {
         int amountOwned = getCurrentPlayer().getCoinCount();
-//        System.out.println("AMOUNT: " + amountOwned);
         ArrayList<Establishment> e = getAffordableEstablishments(getCurrentPlayer(),amountOwned);
         return e;
     }
@@ -535,13 +526,9 @@ public class TwoPlayersPhase1 {
             return true;
         } else if(index <= numberOfEstablishments && index > 0) {
             Establishment e = listOfEstablishments.get(index-1);
-//            System.out.println("Player 1: round1" + player1.getEstOwned());
-//            System.out.println("Player 2:" + player2.getEstOwned());
             getCurrentPlayer().buyCard(e);
             int numberLeft = market.get(e) - 1;
             market.put(e,numberLeft);
-//            System.out.println("Player 1: jsdflkjskl" + player1.getEstOwned());
-//            System.out.println("Player 2:" + player2.getEstOwned());
 
             System.out.println("Player "  + getTurn() + " purchased the " + e.getName() + ".");
             return true;
@@ -551,7 +538,6 @@ public class TwoPlayersPhase1 {
             System.out.println("Player "  + getTurn() + " constructed the " +l.getName() + ".");
             return true;
         } else {
-//                System.out.println("Not a valid input");
             return false;
         }
     }
@@ -582,11 +568,9 @@ public class TwoPlayersPhase1 {
         int count = i;
         if (l.size() != 0) {
             for (Landmark land : l) {
-//                    if(!land.is_constructed) {
                 String order = count + ".";
                 s.append(StringUtils.leftPad(order, 3, " ")).append(" ").append(generateLandmark(land));
                 count++;
-//                    }
             }
             return getMenuStatic("CONSTRUCT") + s;
         }
@@ -640,9 +624,7 @@ public class TwoPlayersPhase1 {
 
     public Player getCurrentPlayer() {
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            //if(players[i].isTurn()) {
             if(players.get(i).isTurn()) {
-                //return players[i];
                 return players.get(i);
             }
         }
@@ -661,13 +643,9 @@ public class TwoPlayersPhase1 {
         int curPlayerIndex = getTurn() - 1;
         System.out.println("Turn ended for Player " + getTurn() +".");
         if(curPlayerIndex == NUMBER_OF_PLAYERS-1) {
-            //players[0].setTurn(true);
             players.get(0).setTurn(true);
-            //players[curPlayerIndex].setTurn(false);
             players.get(curPlayerIndex).setTurn(false);
         } else {
-            // players[curPlayerIndex].setTurn(false);
-            // players[curPlayerIndex +1].setTurn(true);
             players.get(curPlayerIndex).setTurn(false);
             players.get(curPlayerIndex+1).setTurn(true);
         }
@@ -697,15 +675,12 @@ public class TwoPlayersPhase1 {
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             int count = 0;
 
-            //l = players[i].getLandmarks();
             l = players.get(i).getLandmarks();
             for(int j = 0; j < NUMBER_OF_LANDMARKS; j++) {
                 if(l[j].is_constructed) {
                     count++;
                 }
             }
-            //System.out.println("COUNT: "+ count);
-            //System.out.println("LANDMARK: "+ NUMBER_OF_LANDMARKS);
 
             if(count==NUMBER_OF_LANDMARKS) {
                 return true;
@@ -743,8 +718,7 @@ public class TwoPlayersPhase1 {
         Landmark l;
         int numberOfLandmarks = listOfLandmarks.size();
         int numberOfEstablishments = listOfEstablishments.size();
-        // input = input.trim();
-        //System.out.println("Input trimmed length = " + input.trim().length());
+
         if(isNumeric(input.trim())) {
             return getBuyInput(Integer.parseInt(input));
         } else if(input.substring(0,4).toLowerCase().trim().equals("view")) {
@@ -787,7 +761,6 @@ public class TwoPlayersPhase1 {
 
     protected void gameInit() {
         startGame();
-        //players[0].setTurn(true);
         players.get(0).setTurn(true);
 
 //        observer pattern
@@ -827,7 +800,7 @@ public class TwoPlayersPhase1 {
                     "to view item 6, type 'view 6'.)           ";
 
             System.out.println(s);
-            System.out.println(getMenu()); //Ivan
+            System.out.println(getMenu());
 
             while (!buyFinished) {
                 System.out.println(StringUtils.center("Choose a number to purchase or construct: ", 42, " "));
@@ -865,12 +838,21 @@ public class TwoPlayersPhase1 {
         }
     }
 
+    /**
+     * Retreives the dice roll and its corresponding activations.
+     */
+
     private void actionsDiceRolled() {
         for (GameListener l : listeners) {
             l.diceRolled(dice1, dice2, getCurrentPlayer());
             l.diceActivation((dice1 + dice2), players);
         }
     }
+
+    /**
+     * Rolls the die.
+     * @param rollTwo a boolean holding true if the Player chooses to roll two die.
+     */
 
     private void betterRollDice(boolean rollTwo) {
         dice1 = (int) (Math.random() * 6 + 1);
@@ -880,6 +862,11 @@ public class TwoPlayersPhase1 {
             dice2 = 0;
         }
     }
+
+    /**
+     * Performs the dice roll and checks for any actions associated with the roll.
+     * @param rollTwo a boolean holding true if the Player chooses to roll two die.
+     */
 
     protected void wayBetterRollDice(boolean rollTwo) {
         betterRollDice(rollTwo);
@@ -1053,13 +1040,29 @@ public class TwoPlayersPhase1 {
         this.forest = forest;
     }
 
+    /**
+     * Gets the current gameStateSubject representing the current game state.
+     * @return the current game state.
+     */
+
     public GameStateSubject getGameSubject() {
         return gameSubject;
     }
 
+    /**
+     * Gets the current inputSubject representing a Player's input.
+     * @return the inputSUbject instance holding Players' input.
+     */
+
     public InputSubject getInputSubject() {
         return inputSubject;
     }
+
+    /**
+     * Initializes the playing of the Phase1 version of Machi Koro based on human/human Players or human/AI.
+     * @param args a String array representing the user's console arguments.
+     * @param i an integer representing the number of players.
+     */
 
     public static void main(String[] args, int i) {
         boolean ai_mode = false;

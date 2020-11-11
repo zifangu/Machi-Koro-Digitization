@@ -125,7 +125,6 @@ public class Establishment extends Card {
         super(name,cost,color,icon,description);
         this.color_ab = color_ab;
         this.icon_ab = icon_ab;
-//       this.effect = effect;
         this.activation = activation;
         this.type = type;
         this.target = target;
@@ -417,18 +416,6 @@ public class Establishment extends Card {
         System.out.println(restaurant.toString()+ "\n");
         System.out.println(orchard.toString()+ "\n");
         System.out.println(market.toString()+ "\n");
-
-
-//        bakery.color_ab = Card.Color_ab.G;
-//        bakery.icon_ab = Card.Icon_ab.B;
-//        System.out.println(bakery.toString()+ "\n");
-//
-//        stadium.color_ab = Card.Color_ab.P;
-//        stadium.icon_ab = Card.Icon_ab.T;
-//        System.out.println(stadium.toString()+ "\n");
-
-
-
 
     }
 }

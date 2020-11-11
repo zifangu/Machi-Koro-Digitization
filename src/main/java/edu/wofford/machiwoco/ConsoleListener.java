@@ -6,7 +6,22 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * A class used to output messages to the Player through the console regarding dice rolls and activated Establishments.
+ * 
+ * @author Eric Craft
+ * @author Ivan Gu
+ * @author Bennett Joyce
+ */
+
 public class ConsoleListener implements GameListener {
+
+    /**
+     * Outputs the Player's dice roll to the console.
+     * @param dice1 an integer representing the first die's total.
+     * @param dice2 an integer representing the second die's total.
+     * @param p the Player instance that conducted the dice roll.
+     */
 
     @Override
     public void diceRolled(int dice1, int dice2, Player p) {
@@ -18,6 +33,12 @@ public class ConsoleListener implements GameListener {
                     " rolled ["+dice1+"]" + "[" + dice2 + "] = " + (dice1 + dice2) + ".");
         }
     }
+
+    /**
+     * Outputs Establishments activated by the Player's dice roll to the console.
+     * @param dice an integer representing the completed dice roll.
+     * @param players a List of the current game state's Players.
+     */
 
     @Override
     public void diceActivation(int dice, List<Player> players) {
@@ -47,6 +68,13 @@ public class ConsoleListener implements GameListener {
         }
         System.out.print(s);
     }
+
+    /**
+     * Prompts the user to choose how many die to roll.
+     * @param sc a Scanner item used to take in the user's input.
+     * @param p the Player choosing the number of die to roll.
+     * @return a boolean holding true if the Player chooses to roll two die.
+     */
 
     public boolean rollTwo(Scanner sc, Player p) {
         int input = 0;
