@@ -79,8 +79,6 @@ public class Feature5 extends Feature4 {
         EST_ORDER.add(farmersMarket);
 
         landmarkInit();
-
-        /***************DEFINITELY NEED TO CHANGE THIS*****************/
         playerInit(numPlayers);
     }
 
@@ -89,7 +87,6 @@ public class Feature5 extends Feature4 {
      * @param player_num the number of players taking part in the current game
      */
 
-    /***************DEFINITELY NEED TO CHANGE THIS*****************/
     @Override
     protected void playerInit(int player_num) {
         NUMBER_OF_PLAYERS = player_num;
@@ -150,13 +147,12 @@ public class Feature5 extends Feature4 {
                                         "|      activated.       |\n");
     }
 
-    // /**
-    //  * Initialize game to be played
-    //  */
+     /**
+      * Initialize game to be played
+      */
     @Override
     protected void gameInit() {
         startGame();
-        //players[0].setTurn(true);
         players.get(0).setTurn(true);
 
 //        observer pattern
@@ -169,29 +165,6 @@ public class Feature5 extends Feature4 {
         new ActivationObserver(diceSubject);
         new GameStateObserver(gameSubject);
         new InputObserver(inputSubject);
-    }
-
-    /**
-     * Play the MachiWoCo game in its entirety
-     */
-    @Override
-    public void playGame() {
-        gameInit();
-
-        while(!isGameOver()) {
-
-            // (1) print turn and (2) print current game state
-            gameSubject.notifyObservers();
-
-            // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
-            wayBetterRollDice(rollTwo());
-
-            // (5) SHOW BUY MENU
-            makeMove();
-
-            //(6) End Game
-            gameEnded();
-        }
     }
 
     public static void main(String[] args) {
