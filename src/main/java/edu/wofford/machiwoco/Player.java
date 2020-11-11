@@ -41,6 +41,12 @@ public class Player {
       this.ai = ai;
     }
 
+    /**
+     * A function returning the random (and valid) choice made by the AI.
+     * @param range an integer representing the last valid choice available to the AI.
+     * @return an integer representing the AI's random choice.
+     */
+
     protected int random_ai_choice(int range) {
         int ai_input = (int) (Math.random() * range + 1);
         if (ai_input == range) {
@@ -98,6 +104,11 @@ public class Player {
         }
     }
 
+    /**
+     * Counts the number of Red cards owned by a Player.
+     * @return an integer representing the number of Red cards owned by a Player.
+     */
+
    protected int countNumberOfReds() {
        Set<Establishment> keys = estOwned.keySet();
        int count=0;
@@ -108,6 +119,11 @@ public class Player {
        }
        return count;
    }
+
+   /**
+    * Takes coins out of the Player's coinCount total.
+    @param coinCount an integer representing the amount of coins to be taken from the Player.
+    */
 
     protected void takeCoin(int coinCount) {
         if(this.coinCount - coinCount > 0) {
