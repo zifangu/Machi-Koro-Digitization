@@ -120,17 +120,22 @@ public class Player {
        return count;
    }
 
-   /**
-    * Takes coins out of the Player's coinCount total.
-    @param coinCount an integer representing the amount of coins to be taken from the Player.
-    */
+    /**
+     * Takes coins from player. If insufficient funds, the player then have 0 coins.
+     * @param coinCount the amount to be taken from the player
+     * @return the amount actually taken from the player
+     */
 
-    protected void takeCoin(int coinCount) {
-        if(this.coinCount - coinCount > 0) {
+    public int takeCoin(int coinCount) {
+        int coinTaken;
+        if(this.coinCount - coinCount >= 0) {
             this.coinCount -= coinCount;
+            coinTaken = coinCount;
         } else {
+            coinTaken = this.coinCount;
             this.coinCount = 0;
         }
+        return coinTaken;
     }
 
 
@@ -249,7 +254,7 @@ public class Player {
      * @param coinCount an integer representing the amount of coins to be added to the Player's coin count
      */
 
-    private void addCoins(int coinCount) {
+    public void addCoins(int coinCount) {
         this.coinCount += coinCount;
     }
 

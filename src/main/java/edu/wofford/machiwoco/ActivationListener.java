@@ -1,5 +1,6 @@
 package edu.wofford.machiwoco;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,11 +24,23 @@ public class ActivationListener implements GameListener {
         }
     }
 
-//    takemoney(plaertotake, plaertogive, money) {
-//        result = playertotake.subtract(money)
-//        playertogfive.add(result)
-//    }
+    public ArrayList<Player> nonActivePlayers(List<Player> players) {
+        ArrayList<Player> nonActive = new ArrayList<>();
+        int currentPlayerIndex = 0;
+        for (Player p : players) {
+            if (p.isTurn()) {currentPlayerIndex = players.indexOf(p);}
+        }
 
+        for (int i = 1; i < players.size(); i++) {
+            nonActive.add(players.get((currentPlayerIndex + i)%players.size()));
+        }
+        return nonActive;
+    }
+
+
+    public void takeMoney(Player playerToTake, Player playerToGive, int amount) {
+            playerToGive.addCoins(playerToTake.takeCoin(amount));
+    }
 
     @Override
     public void diceRolled(int dice1, int dice2, Player p) {
