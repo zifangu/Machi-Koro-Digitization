@@ -41,19 +41,6 @@ public class Feature4 extends TwoPlayersPhase1 {
     public Feature4(int numPlayers) {
         super(true,numPlayers);
         NUMBER_OF_PLAYERS = numPlayers;
-        //**********Establishment wheat field creation************//
-        // wheat = new Establishment("Wheat Field", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
-        //         "|  Get 1 coin from the  |\n" +
-        //                 "|         bank.         |\n" +
-        //                 "|    (anyone's turn)    |\n",
-        //         "1", "receive", "bank", 1, "none", "none");
-
-        //**********Establishment ranch creation************//
-        // ranch = new Establishment("Ranch", 1, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.COW, Card.Icon_ab.C,
-        //         "|  Get 1 coin from the  |\n" +
-        //                 "|         bank.         |\n" +
-        //                 "|    (anyone's turn)    |\n",
-        //         "2", "receive", "bank", 1, "none", "none");
 
         //**********Establishment bakery creation************//
         bakery = new Establishment("Bakery", 1, Card.Color.GREEN, Card.Color_ab.G, Card.Icon.BREAD, Card.Icon_ab.B,
@@ -70,21 +57,12 @@ public class Feature4 extends TwoPlayersPhase1 {
                         "|   (your turn only)    |\n",
                 "4", "receive", "bank", 3, "none", "none");
 
-        //**********Establishment forest creation************//
-        // forest = new Establishment("Forest",
-        //         3, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.GEAR, Card.Icon_ab.G,
-        //         "|  Get 1 coin from the  |\n" +
-        //                 "|         bank.         |\n" +
-        //                 "|    (anyone's turn)    |\n",
-        //         "5", "receive", "bank", 1, "none", "none");
-
         //**********Establishment mine creation************//
         mine = new Establishment("Mine", 6, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.GEAR, Card.Icon_ab.G,
                 "| Get 5 coins from the  |\n" +
                         "|         bank.         |\n" +
                         "|    (anyone's turn)    |\n",
                 "9", "receive", "bank", 5, "none", "none");
-
 
         //**********Establishment orchard creation************//
         orchard = new Establishment("Apple Orchard", 3, Card.Color.BLUE, Card.Color_ab.B, Card.Icon.WHEAT, Card.Icon_ab.W,
@@ -103,20 +81,14 @@ public class Feature4 extends TwoPlayersPhase1 {
 
         P2startingEst3 = new HashMap<>();
 
-//        P2startingEst.put(getWheat(),1);
-//        P2startingEst.put(bakery,1);
         startingEstablishments.put(bakery, 1);
-//        P2startingEst2.put(getWheat(),1);
-//        P2startingEst2.put(bakery,1);
         startingEstablishments2.put(bakery, 1);
 
         P2startingEst3.put(getWheat(),1);
         P2startingEst3.put(bakery,1);
         sc = new Scanner(System.in);
 
-        //EST_ORDER = new Establishment[] {getWheat(), getRanch(), bakery,convenience, getForest(), mine, orchard};
-//        EST_ORDER.add(getWheat());
-//        EST_ORDER.add(getRanch());
+
         EST_ORDER.remove(getForest());
         EST_ORDER.add(bakery);
         EST_ORDER.add(convenience);
@@ -125,8 +97,6 @@ public class Feature4 extends TwoPlayersPhase1 {
         EST_ORDER.add(orchard);
 
         landmarkInit();
-
-        /***************DEFINITELY NEED TO CHANGE THIS*****************/
         playerInit(numPlayers);
     }
 
@@ -135,25 +105,18 @@ public class Feature4 extends TwoPlayersPhase1 {
      * @param player_num the number of players taking part in the current game
      */
 
-    /***************DEFINITELY NEED TO CHANGE THIS*****************/
-
     protected void playerInit(int player_num) {
         NUMBER_OF_PLAYERS = player_num;
-//        player1 = new Player(P2startingEst, startingLandmarks, 3,1, false);
-//        player2 = new Player(P2startingEst2, startingLandmarks1, 3,2, true);
         player1 = new Player(startingEstablishments, startingLandmarks, 3,1, false);
         player2 = new Player(startingEstablishments2, startingLandmarks1, 3,2, true);
         if(player_num == 3) {
             player3 = new Player(P2startingEst3, startingLandmarks2, 3,3, true);
         }
-        // players = new Player[NUMBER_OF_PLAYERS];
-        // players[0] = player1;
-        // players[1] = player2;
         players = new ArrayList<Player>();
         players.add(player1);
         players.add(player2);
+
         if(player_num == 3) {
-            //players[2] = player3;
             players.add(player3);
         }
     }
@@ -164,7 +127,6 @@ public class Feature4 extends TwoPlayersPhase1 {
     @Override
     protected void landmarkInit() {
         NUMBER_OF_LANDMARKS = 2;
-
         startingLandmarks = new Landmark[2];
         startingLandmarks[1] = new Landmark("City Hall", 7, Card.Color.NONE, Card.Color_ab.N, Card.Icon.TOWER, Card.Icon_ab.T,
                 "|  This is a city hall  |\n");
