@@ -1,5 +1,6 @@
 package edu.wofford.machiwoco;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -37,17 +38,35 @@ public class ActivationListener implements GameListener {
         }
     }
 
-//    takemoney(plaertotake, plaertogive, money) {
-//        result = playertotake.subtract(money)
-//        playertogfive.add(result)
-//    }
+    /**
+     * Provides a list of non-active Players.
+     * @param players a List of Players involved in the current game.
+     * @return an ArrayList of Players that are not currently active.
+     */
+
+    public ArrayList<Player> nonActivePlayers(List<Player> players) {
+        ArrayList<Player> nonActive = new ArrayList<>();
+        int currentPlayerIndex = 0;
+        for (Player p : players) {
+            if (p.isTurn()) {currentPlayerIndex = players.indexOf(p);}
+        }
+
+        for (int i = 1; i < players.size(); i++) {
+            nonActive.add(players.get((currentPlayerIndex + i)%players.size()));
+        }
+        return nonActive;
+    }
 
     /**
-     * Provides the necessary information for a Player's dice roll.
-     * @param dice1 an integer representing the first die's total.
-     * @param dice2 an integer representing the second die's total.
-     * @param p the Player instance who conducted the dice roll.
+     * Takes money from a given Player.
+     * @param playerToTake the Player taking/receiving coins.
+     * @param playerToGive the Player losing/giving coins.
+     * @param amount an integer representing the number of coins that are being given/being taken away.
      */
+
+    public void takeMoney(Player playerToTake, Player playerToGive, int amount) {
+            playerToGive.addCoins(playerToTake.takeCoin(amount));
+    }
 
     @Override
     public void diceRolled(int dice1, int dice2, Player p) {
