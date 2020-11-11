@@ -701,8 +701,8 @@ public class TwoPlayersPhase1 {
                     count++;
                 }
             }
-            System.out.println("COUNT: "+ count);
-            System.out.println("LANDMARK: "+ NUMBER_OF_LANDMARKS);
+            //System.out.println("COUNT: "+ count);
+            //System.out.println("LANDMARK: "+ NUMBER_OF_LANDMARKS);
 
             if(count==NUMBER_OF_LANDMARKS) {
                 return true;

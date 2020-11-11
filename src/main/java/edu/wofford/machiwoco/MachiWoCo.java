@@ -19,6 +19,8 @@ public class MachiWoCo {
             TwoPlayersPhase1.main(args,2);
         } else if (args[0].equals("phase2")) {
             Feature4.main(args);
+        } else if (args[0].equals("phase3")) {
+            Feature5.main(args);
         }
 
     }
