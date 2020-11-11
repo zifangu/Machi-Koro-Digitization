@@ -170,6 +170,33 @@ public class Feature5 extends Feature4 {
     }
 
     /**
+     * Gets the Cheese Factory establishment.
+     * @return the Establishment Cheese Factory.
+     */
+
+    public Establishment getCheeseFactory() {
+        return cheeseFactory;    
+    }
+
+    /**
+     * Gets the Furniture Factory establishment.
+     * @return the Establishment Furniture Factory.
+     */
+
+    public Establishment getFurnitureFactory() {
+        return furnitureFactory;    
+    }
+
+    /**
+     * Gets the Farmers Market establishment.
+     * @return the Establishment Farmers Market.
+     */
+
+    public Establishment getFarmersMarket() {
+        return farmersMarket;    
+    }
+
+    /**
      * Starts the Phase 3 version of Machi Koro.
      * @param args a String array representing the user's console arguments.
      */

@@ -40,6 +40,21 @@ public class Feature5Test {
         assertThat(feature5.getPlayer1().getCoinCount(), is(7));
     }
 
+    @Test
+    public void testGetCheeseFactory() {
+        assertThat(feature5.getCheeseFactory(), is(feature5.cheeseFactory));
+    }
+
+    @Test
+    public void testGetFurnitureFactory() {
+        assertThat(feature5.getFurnitureFactory(), is(feature5.furnitureFactory));
+    }
+
+    @Test
+    public void testGetFarmersMarket() {
+        assertThat(feature5.getFarmersMarket(), is(feature5.farmersMarket));
+    }
+
 
     @After
     public void restoreStreams() {
