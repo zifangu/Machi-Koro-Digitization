@@ -238,7 +238,7 @@ public class Feature4 extends TwoPlayersPhase1 {
             dice1 = (int) (Math.random() * 6 + 1);
             dice2 = (int) (Math.random() * 6 + 1);
             diceSum = dice1 + dice2;
-            
+
             result[0] = dice1;
             result[1] = dice2;
             result[2] = diceSum;

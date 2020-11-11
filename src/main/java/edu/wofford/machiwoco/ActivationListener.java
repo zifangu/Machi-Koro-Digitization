@@ -1,18 +1,20 @@
 package edu.wofford.machiwoco;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 /**
  * A class that pulls from the current game state to perform activation actions based on a Player's dice roll.
- * 
+ *
  * @author Eric Craft
  * @author Ivan Gu
  * @author Bennett Joyce
  */
 
 public class ActivationListener implements GameListener {
+
     /**
      * Checks what activations will be activated based on a Player's given dice roll.
      * @param dice an integer representing the Player's dice roll.
@@ -21,17 +23,24 @@ public class ActivationListener implements GameListener {
 
     @Override
     public void diceActivation(int dice, List<Player> players) {
+       ArrayList<Player> inactivePlayers = nonActivePlayers(players);
+       Player active= players.get(0);
+       for(Player p : players) {
+           if(p.isTurn()) {
+               active = p;
+           }
+       }
+       int moneyOwed;
+       for(Player p : inactivePlayers) {
+           moneyOwed = 0;
+           if (dice == 3) {
+                 moneyOwed = p.numOfCafe(p.getEstOwned());
+           } else if (dice == 9 || dice == 10) {
+                 moneyOwed = p.numOfRestaurant(p.getEstOwned()) *2;
+           }
+           takeMoney(active,p,moneyOwed);
+       }
 
-//        Player playtotake = activeplayer
-//        List playertogive = nonactive;
-//        for (Player pl : playertogive) {
-//            if dice == 3
-//                moneyowned = pl.cafeowned
-//            else if dice == 9 or 10
-//                moneyowned = pl.(restaurantowned) * 2
-//            takemoney(playertotake, pl, moneyowned)
-//        }
-//
         for (Player player : players) {
             //  changes the coin amounts in the player bank\
             player.getActivationNumbers(dice, player.isTurn());
@@ -65,7 +74,7 @@ public class ActivationListener implements GameListener {
      */
 
     public void takeMoney(Player playerToTake, Player playerToGive, int amount) {
-            playerToGive.addCoins(playerToTake.takeCoin(amount));
+        playerToGive.addCoins(playerToTake.takeCoin(amount));
     }
 
     @Override

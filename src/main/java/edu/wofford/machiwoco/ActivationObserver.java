@@ -46,7 +46,7 @@ public class ActivationObserver extends Observer {
         for (Player player : players) {
             // this changes the actual coin amounts in the player bank
             player.getActivationNumbers(dice,player.isTurn());
-           //  checkRed(players);
+            //  checkRed(players);
 
             // this prints out the activations for user's information
             Set<Establishment> keys = player.getEstOwned().keySet();
@@ -60,11 +60,7 @@ public class ActivationObserver extends Observer {
                 }
 
                 if(est.getColor_ab().equals(Card.Color_ab.R) && !player.isTurn()) {
-                     if(est.getName().equals("Cafe")) {
-                        // player.perform(redCheck());
-
-                     }  else if(est.getName().equals("Family Restaurant")) {
-                     }
+                    s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
                 }
 
                 if (dice == activation && !est.getColor_ab().equals(Card.Color_ab.G)) {
@@ -101,4 +97,4 @@ public class ActivationObserver extends Observer {
     }
 
 
-    }
+}

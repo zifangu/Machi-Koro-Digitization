@@ -42,7 +42,7 @@ public class ConsoleListener implements GameListener {
 
     @Override
     public void diceActivation(int dice, List<Player> players) {
-        int activation = 0;
+        int activation;
         StringBuilder s = new StringBuilder();
         for (Player player : players) {
             Set<Establishment> keys = player.getEstOwned().keySet();
@@ -52,6 +52,9 @@ public class ConsoleListener implements GameListener {
                     case "Bakery": if(dice == 2) { activation = 2; }
                                     else { activation = 3; }
                                     break;
+                    case "Family Restaurant": if(dice == 9) { activation = 9; }
+                                              else { activation = 10; }
+                                              break;
 
                     case "Farmers Market": if(dice == 11) { activation = 11; }
                                             else { activation = 12; }
@@ -59,9 +62,11 @@ public class ConsoleListener implements GameListener {
 
                     default: activation = Integer.parseInt(est.getActivation());
                 }
-                if (dice == activation && !est.getColor_ab().equals(Card.Color_ab.G)) {
+               if(dice == activation && est.getColor_ab().equals(Card.Color_ab.R) && !player.isTurn()) {
+                   s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
+               } else if (dice == activation && !est.getColor_ab().equals(Card.Color_ab.G)) {
                     s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
-                } else if (dice == activation && player.isTurn()) {
+                } else if (dice == activation && player.isTurn() && !est.getColor_ab().equals(Card.Color_ab.R)) {
                     s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
                 }
             }
@@ -69,12 +74,17 @@ public class ConsoleListener implements GameListener {
         System.out.print(s);
     }
 
-    /**
-     * Prompts the user to choose how many die to roll.
-     * @param sc a Scanner item used to take in the user's input.
-     * @param p the Player choosing the number of die to roll.
-     * @return a boolean holding true if the Player chooses to roll two die.
-     */
+//    /**
+//     * Prompts the user to choose how many die to roll.
+//     * @param sc a Scanner item used to take in the user's input.
+//     * @param p the Player choosing the number of die to roll.
+//     * @return a boolean holding true if the Player chooses to roll two die.
+//     */
+//
+//    @Override
+//    public void targetAndTake(Player p1, Player p2, int amountToTake) {
+//
+//    }
 
     public boolean rollTwo(Scanner sc, Player p) {
         int input = 0;

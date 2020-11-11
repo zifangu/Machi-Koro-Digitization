@@ -19,8 +19,6 @@ public class Player {
     private boolean turn;
     private boolean ai;
 
-
-
     private int playerNumber;
 
     /**
@@ -76,6 +74,9 @@ public class Player {
             } else if (est.getName().equals("Farmers Market")) {
                 activation = 11;
                 activation2 = 12;
+            } else if (est.getName().equals("Family Restaurant")) {
+                activation = 9;
+                activation2 = 10;
             } else {
                 activation = Integer.parseInt(est.getActivation());
             }
@@ -89,17 +90,18 @@ public class Player {
                     } else if (isTurn) {
                         performAction(est, numberOwned, 0);
                     }
-                } else if(est.getColor_ab().equals(Card.Color_ab.R)) {
-                    //FUNCTION TO SELECT TARGET
-                    if(activation == 3) {
-                        if(!isTurn) {
-                            performAction(est, numberOwned,0);
-                        } else if(isTurn) {
-                            performAction(est, numberOwned,countNumberOfReds()*1);
-                        }
-                    }
-
                 }
+//                else if(est.getColor_ab().equals(Card.Color_ab.R)) {
+//                    //FUNCTION TO SELECT TARGET
+//                    if(activation == 3) {
+//                        if(!isTurn) {
+//                            performAction(est, numberOwned,0);
+//                        } else if(isTurn) {
+//                            performAction(est, numberOwned,countNumberOfReds()*1);
+//                        }
+//                    }
+//
+//                }
             }
         }
     }
@@ -143,7 +145,6 @@ public class Player {
      * Constructs/Buys Landmark
      * @param l The landmark needed to match another landmark in the player's landmarks array
      */
-
     public void buyLandmark(Landmark l) {
         int cost = l.getCost();
         int counter = 0;
@@ -154,8 +155,38 @@ public class Player {
             }
             counter++;
         }
-        
     }
+
+    /**
+     * Return the number of Cafes for a player
+     * @param p The map of players
+     * @return number of Cafes owned
+     */
+    public int numOfCafe(Map<Establishment,Integer> p) {
+        for(Establishment e:estOwned.keySet()) {
+            if(e.getName().equals("Cafe")) {
+                return estOwned.get(e);
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Return the number of Restaurant for a player
+     * @param p The map of players
+     * @return number of Restaurant owned
+     */
+    public int numOfRestaurant(Map<Establishment,Integer> p) {
+        for(Establishment e:estOwned.keySet()) {
+            if(e.getName().equals("Family Restaurant")) {
+                return estOwned.get(e);
+            }
+        }
+        return 0;
+    }
+
+
+
 
 
     /**
@@ -232,7 +263,7 @@ public class Player {
         int count = 0;
 
         for (Map.Entry<Establishment, Integer> est : estOwned.entrySet()) {
-            if (est.getKey().getIcon_ab().name() == icon_ab) {
+            if (est.getKey().getIcon_ab().name().equals(icon_ab)) {
                 count = count + estOwned.get(est.getKey());
             }
         }
