@@ -122,6 +122,10 @@ public class Player {
        return count;
    }
 
+//   protected boolean isShoppingMallConstructed() {
+//       return sh
+//   }
+
     /**
      * Takes coins from player. If insufficient funds, the player then have 0 coins.
      * @param coinCount the amount to be taken from the player

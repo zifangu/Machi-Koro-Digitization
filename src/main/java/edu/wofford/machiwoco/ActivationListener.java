@@ -35,11 +35,21 @@ public class ActivationListener implements GameListener {
            moneyOwed = 0;
            if (dice == 3) {
                if(p.numOfCafe(p.getEstOwned()) > 0) {
-                   moneyOwed = p.numOfCafe(p.getEstOwned());
+                   if (p.isShoppingMallConstructed()) {
+                       moneyOwed = p.numOfCafe(p.getEstOwned()) * 2;
+                   } else {
+                       moneyOwed = p.numOfCafe(p.getEstOwned());
+                   }
                }
+
            } else if (dice == 9 || dice == 10) {
                if(p.numOfRestaurant(p.getEstOwned()) > 0)  {
-                   moneyOwed = p.numOfRestaurant(p.getEstOwned()) *2;
+                   if(p.isShoppingMallConstructed()) {
+                       moneyOwed =  p.numOfRestaurant(p.getEstOwned()) *3;
+                   } else {
+                       moneyOwed =  p.numOfRestaurant(p.getEstOwned()) *2;
+                   }
+
                }
            }
            takeMoney(active,p,moneyOwed);
