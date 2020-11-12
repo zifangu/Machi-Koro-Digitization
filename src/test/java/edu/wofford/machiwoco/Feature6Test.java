@@ -30,5 +30,28 @@ public class Feature6Test {
         System.setErr(new PrintStream(errContent));
     }
 
+    @Test 
+    public void testGetCafe() {
+        assertThat(feature6.getCafe(), is(feature6.cafe));
+    }
+
+    @Test
+    public void testGetFamilyRest() {
+        Feature6 newF6 = new Feature6(4);
+        assertThat(newF6.getFamilyRestaurant(), is(newF6.familyRestaurant));
+    }
+
+    @Test
+    public void testIsTSConstructed() {
+        feature6.getPlayer1().getLandmarks()[1].setIs_constructed(true);
+        assertThat(feature6.getPlayer1().isShoppingMallConstructed(), is(true));
+    }
+
+    @Test
+    public void testIsTSConstructedFalse() {
+        feature6.getPlayer1().getLandmarks()[1].setIs_constructed(false);
+        assertThat(feature6.getPlayer1().isShoppingMallConstructed(), is(false));
+    }
+
 
 }

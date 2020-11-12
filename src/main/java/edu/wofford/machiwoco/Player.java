@@ -272,6 +272,19 @@ public class Player {
     }
 
     /**
+     * Gets whether or not the Shopping Mall landmark is constructed.
+     * @return a boolean holding true if the Player has constructed the Shopping Mall landmark.
+     */
+    public boolean isShoppingMallConstructed() {
+        for (int i = 0; i < landmarks.length; i++) {
+            if (landmarks[i].getName() == "Shopping Mall") {
+                return landmarks[i].getIsConstructed();
+            }
+        }
+        return false;
+    }
+
+    /**
      * Prints a message to the console stating that an activation has occurred.
      */
 

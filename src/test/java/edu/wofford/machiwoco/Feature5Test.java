@@ -55,6 +55,17 @@ public class Feature5Test {
         assertThat(feature5.getFarmersMarket(), is(feature5.farmersMarket));
     }
 
+    @Test
+    public void testIsTSConstructed() {
+        feature5.getPlayer1().getLandmarks()[2].setIs_constructed(true);
+        assertThat(feature5.getPlayer1().isShoppingMallConstructed(), is(true));
+    }
+
+    @Test
+    public void testIsTSConstructedFalse() {
+        feature5.getPlayer1().getLandmarks()[2].setIs_constructed(false);
+        assertThat(feature5.getPlayer1().isShoppingMallConstructed(), is(false));
+    }
 
     @After
     public void restoreStreams() {
