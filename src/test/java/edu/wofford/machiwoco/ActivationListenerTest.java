@@ -15,6 +15,7 @@ public class ActivationListenerTest {
     TwoPlayersPhase1 t;
     Establishment bakery;
     Feature5 f5;
+    Feature6 f6;
 
     @Before
     public void before() {
@@ -26,6 +27,7 @@ public class ActivationListenerTest {
                         "|   (your turn only)    |\n",
                 "2-3", "receive", "bank", 1, "none", "none");
         f5 = new Feature5(3);
+        f6 = new Feature6(3);
     }
 
     @Test
@@ -98,6 +100,95 @@ public class ActivationListenerTest {
         assertThat(a.nonActivePlayers(f5.players).size(), is(2));
         assertThat(a.nonActivePlayers(f5.players).get(1), is(f5.player1));
         assertThat(a.nonActivePlayers(f5.players).get(0), is(f5.player2));
+    }
+
+    @Test
+    public void testTakeMoney() {
+        f6.player1.setTurn(false);
+        f6.player2.setTurn(true);
+        f6.player1.getEstOwned().put(f6.getCafe(), 1);
+        a.diceActivation(3, f6.players);
+        assertThat(f6.player1.getCoinCount(), is(4));
+    }
+
+    @Test
+    public void testTakeMoneyNotEnough() {
+        f6.player1.setTurn(false);
+        f6.player2.setTurn(true);
+        f6.player2.setCoinCount(2);
+        f6.player1.getEstOwned().put(f6.getCafe(), 3);
+        a.diceActivation(3, f6.players);
+        assertThat(f6.player1.getCoinCount(), is(5));
+        assertThat(f6.player2.getCoinCount(), is(1));
+    }
+
+    @Test
+    public void testTakeMoney3Player() {
+        f6.player1.setTurn(false);
+        f6.player2.setTurn(true);
+        f6.player2.setCoinCount(5);
+        f6.player1.getEstOwned().put(f6.getCafe(), 3);
+        f6.player3.getEstOwned().put(f6.getCafe(), 4);
+        a.diceActivation(3, f6.players);
+        assertThat(f6.player1.getCoinCount(), is(6));
+        assertThat(f6.player3.getCoinCount(), is(5));
+        assertThat(f6.player2.getCoinCount(), is(1));
+    }
+
+    @Test
+    public void testTakeMoneyFamRest() {
+        f6.player1.setTurn(false);
+        f6.player2.setTurn(true);
+        f6.player2.setCoinCount(5);
+        f6.player1.getEstOwned().put(f6.getFamilyRestaurant(), 2);
+        a.diceActivation(9, f6.players);
+        assertThat(f6.player1.getCoinCount(), is(7));
+    }
+
+    @Test
+    public void testTakeMoneyFamRestNoMoney() {
+        f6.player1.setTurn(false);
+        f6.player2.setTurn(true);
+        f6.player2.setCoinCount(3);
+        f6.player1.getEstOwned().put(f6.getFamilyRestaurant(), 2);
+        a.diceActivation(10, f6.players);
+        assertThat(f6.player1.getCoinCount(), is(6));
+    }
+
+    @Test
+    public void testTakeMoneyFamRestShopMall() {
+        f6.player1.setTurn(false);
+        f6.player2.setTurn(true);
+        f6.player2.setCoinCount(10);
+        f6.player1.getEstOwned().put(f6.getFamilyRestaurant(), 2);
+        f6.player1.getLandmarks()[1].is_constructed = true;
+        a.diceActivation(9, f6.players);
+        assertThat(f6.player1.getCoinCount(), is(9));
+    }
+
+    @Test
+    public void testTakeMoneyFamRestShopMallNoMoney() {
+        f6.player1.setTurn(false);
+        f6.player2.setTurn(true);
+        f6.player2.setCoinCount(5);
+        f6.player1.getEstOwned().put(f6.getFamilyRestaurant(), 2);
+        f6.player1.getLandmarks()[1].is_constructed = true;
+        a.diceActivation(9, f6.players);
+        assertThat(f6.player1.getCoinCount(), is(8));
+        assertThat(f6.player2.getCoinCount(), is(0));
+    }
+
+    @Test
+    public void testTakeMoneyFamRestShopMallMine() {
+        f6.player1.setTurn(false);
+        f6.player2.setTurn(true);
+        f6.player2.setCoinCount(5);
+        f6.player1.getEstOwned().put(f6.getFamilyRestaurant(), 2);
+        f6.player2.getEstOwned().put(f6.getMine(), 3);
+        f6.player1.getLandmarks()[1].is_constructed = true;
+        a.diceActivation(9, f6.players);
+        assertThat(f6.player1.getCoinCount(), is(8));
+        assertThat(f6.player2.getCoinCount(), is(15));
     }
 
 

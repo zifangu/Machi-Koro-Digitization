@@ -85,7 +85,7 @@ public class Player {
                 if(est.getColor_ab().equals(Card.Color_ab.B)) {
                     performAction(est,numberOwned,0);
                 } else if(est.getColor_ab().equals(Card.Color_ab.G)) {
-                    if (isTurn && est.getModifierType() == "icon") {
+                    if (isTurn && est.getModifierType().equals("icon")) {
                         performActionIcon(est, numberOwned);
                     } else if (isTurn) {
                         performAction(est, numberOwned, 0);
@@ -121,6 +121,10 @@ public class Player {
        }
        return count;
    }
+
+//   protected boolean isShoppingMallConstructed() {
+//       return sh
+//   }
 
     /**
      * Takes coins from player. If insufficient funds, the player then have 0 coins.
@@ -223,7 +227,8 @@ public class Player {
             //addCoins(amount*numberOwned);
             //takeCoin(amountToTake);
         }
-        if(landmarks.length > 2 && landmarks[2].getIsConstructed() && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
+
+        if(landmarks.length > 2 && (!e.getColor_ab().equals(Card.Color_ab.R)) && isShoppingMallConstructed() && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
             addCoins(numberOwned);
         }
     }
@@ -276,9 +281,22 @@ public class Player {
      * @return a boolean holding true if the Player has constructed the Shopping Mall landmark.
      */
     public boolean isShoppingMallConstructed() {
-        for (int i = 0; i < landmarks.length; i++) {
-            if (landmarks[i].getName() == "Shopping Mall") {
-                return landmarks[i].getIsConstructed();
+        for (Landmark landmark : landmarks) {
+            if (landmark.getName().equals("Shopping Mall")) {
+                return landmark.getIsConstructed();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets whether or not the Amusement Park landmark is constructed.
+     * @return a boolean holding true if the Player has constructed the Amusement Park landmark.
+     */
+    public boolean isAmusementConstructed() {
+        for (Landmark landmark : landmarks) {
+            if (landmark.getName().equals("Amusement Park")) {
+                return landmark.getIsConstructed();
             }
         }
         return false;

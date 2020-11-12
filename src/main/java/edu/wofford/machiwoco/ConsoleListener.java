@@ -62,13 +62,25 @@ public class ConsoleListener implements GameListener {
 
                     default: activation = Integer.parseInt(est.getActivation());
                 }
-               if(dice == activation && est.getColor_ab().equals(Card.Color_ab.R) && !player.isTurn()) {
-                   s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
-               } else if (dice == activation && !est.getColor_ab().equals(Card.Color_ab.G)) {
-                    s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
-                } else if (dice == activation && player.isTurn() && !est.getColor_ab().equals(Card.Color_ab.R)) {
-                    s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
+                if(dice == activation){
+                    if(player.isTurn()) {
+                        if(!est.getColor_ab().equals(Card.Color_ab.R)){
+                            s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
+                        }
+                    } else {
+                        if(!est.getColor_ab().equals(Card.Color_ab.G)) {
+                            s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
+                        }
+                    }
+
                 }
+//               if(dice == activation && est.getColor_ab().equals(Card.Color_ab.R) && !player.isTurn()) {
+//                   s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
+//               } else if (dice == activation && !est.getColor_ab().equals(Card.Color_ab.G)) {
+//                    s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
+//                } else if (dice == activation && player.isTurn() && !est.getColor_ab().equals(Card.Color_ab.R)) {
+//                    s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
+//                }
             }
         }
         System.out.print(s);
