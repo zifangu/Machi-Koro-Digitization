@@ -280,9 +280,22 @@ public class Player {
      * @return a boolean holding true if the Player has constructed the Shopping Mall landmark.
      */
     public boolean isShoppingMallConstructed() {
-        for (int i = 0; i < landmarks.length; i++) {
-            if (landmarks[i].getName() == "Shopping Mall") {
-                return landmarks[i].getIsConstructed();
+        for (Landmark landmark : landmarks) {
+            if (landmark.getName().equals("Shopping Mall")) {
+                return landmark.getIsConstructed();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets whether or not the Amusement Park landmark is constructed.
+     * @return a boolean holding true if the Player has constructed the Amusement Park landmark.
+     */
+    public boolean isAmusementConstructed() {
+        for (Landmark landmark : landmarks) {
+            if (landmark.getName().equals("Amusement Park")) {
+                return landmark.getIsConstructed();
             }
         }
         return false;
