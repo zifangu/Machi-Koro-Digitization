@@ -23,6 +23,22 @@ This is the user guide for playing Machi Woco.
             - [Dice Roll P2](#dice-roll-P2)
             - [Purchase P2](#purchase-P2)
     + [Winner P2](#winner-P2)
+* [Phase 3](#phase-3)
+    + [Game Objective P3](#game-objective-P3)
+    + [Game Play P3](#game-play-P3)
+        - [Start Game](#start-game-P3)
+        - [Each Round](#each-round-P3)
+        - [Gameplay Differences P3](#gameplay-differences-P3)
+            - [Dice Roll P3](#dice-roll-P3)
+    + [Winner P2](#winner-P2)
+* [Phase 4](#phase-4)
+    + [Game Objective P4](#game-objective-P4)
+    + [Game Play P4](#game-play-P4)
+        - [Start Game](#start-game-P4)
+        - [Each Round](#each-round-P4)
+        - [Gameplay Differences P4](#gameplay-differences-P4)
+            - [Dice Roll P3](#dice-roll-P4)
+    + [Winner P2](#winner-P4)
 
 
   
@@ -215,3 +231,161 @@ If a Player is an AI, purchasing decisions will be made at random. If an AI play
 In this feature of the game, the winner will be the player who constructed City Hall and Train Station first. After which the game will immediately end.
 
 
+
+# Phase 3
+
+## Game Objective P3
+
+For this version of the game, the objective is to be the first player to build City Hall, Train Station, and Shopping Mall.
+
+## Game Play P3
+
+### Start Game P3
+In this version of the game, there will be 2-3 players: 1 human player (player 1) and 1-2 AI player(s). The starting Establishments
+for each Player remain the same.
+When a new game starts, player 1 will go first.
+
+### Each Round P3
+At the beginning of each player's turn, you will first see a display of the current game state similar to this:
+
+    ******************************************
+                      MARKET                  
+    ------------------------------------------
+    Wheat Field        BW (1)  [1]      #6
+    Ranch              BC (1)  [2]      #6
+    Bakery             GB (1)  [2-3]    #6
+    Convenience Store  GB (2)  [4]      #6
+    Forest             BG (3)  [5]      #6
+    Cheese Factory     GF (5)  [7]      #6
+    Furniture Factory  GF (3)  [8]      #6
+    Mine               BG (6)  [9]      #6
+    Apple Orchard      BW (3)  [10]     #6
+    Farmers Market     GO (2)  [11-12]  #6
+    
+                 Player 1* [YOU]              
+    ------------------------------------------
+                    (3 coins)                 
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    City Hall          NT (7)  [ ]
+    Shopping Mall      NT (10) [ ]
+    
+                     Player 2                 
+    ------------------------------------------
+                    (3 coins)                 
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    City Hall          NT (7)  [ ]
+    Shopping Mall      NT (10) [ ]
+    
+                     Player 3                 
+    ------------------------------------------
+                    (3 coins)                 
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    City Hall          NT (7)  [ ]
+    Shopping Mall      NT (10) [ ]
+    
+    ******************************************
+    
+The Establishments Cheese Factory, Furniture Factory, and Farmers Market have been added.
+The Shopping Mall landmark has been added.
+
+### Gameplay Differences P3
+
+#### Dice Roll P3
+The three new Establishments all carry out the same base function. Each card - when activated - receives a specified 
+amount of coins based on how many cards of a given icon the Player owns.
+
+The Shopping Mall landmark allows the Player to earn +1 coin for every Cup or Bread establishments that are activated
+on a given turn.
+ 
+ ### Winner P3
+In this feature of the game, the winner will be the player who constructed City Hall, Train Station, and Shopping Mall first. After which the game will immediately end.
+
+
+
+# Phase 4
+
+## Game Objective P4
+
+For this version of the game, the objective is to be the first player to build Train Station, Shopping Mall, and Amusement Park landmarks.
+
+## Game Play P4
+
+### Start Game P4
+In this version of the game, there will be 2-4 players: 1 human player (player 1) and 1-3 AI player(s). The starting Establishments
+for each Player remain the same.
+When a new game starts, player 1 will go first.
+
+### Each Round P4
+At the beginning of each player's turn, you will first see a display of the current game state similar to this:
+
+    ******************************************
+                      MARKET                  
+    ------------------------------------------
+    Wheat Field        BW (1)  [1]      #6
+    Ranch              BC (1)  [2]      #6
+    Bakery             GB (1)  [2-3]    #6
+    Cafe               RU (2)  [3]      #6
+    Convenience Store  GB (2)  [4]      #6
+    Forest             BG (3)  [5]      #6
+    Cheese Factory     GF (5)  [7]      #6
+    Furniture Factory  GF (3)  [8]      #6
+    Mine               BG (6)  [9]      #6
+    Family Restaurant  RU (3)  [9-10]   #6
+    Apple Orchard      BW (3)  [10]     #6
+    Farmers Market     GO (2)  [11-12]  #6
+    
+                 Player 1* [YOU]              
+    ------------------------------------------
+                    (3 coins)                 
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    Shopping Mall      NT (10) [ ]
+    Amusement Park     NT (16) [ ]
+    
+                     Player 2                 
+    ------------------------------------------
+                    (3 coins)                 
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    Shopping Mall      NT (10) [ ]
+    Amusement Park     NT (16) [ ]
+    
+                     Player 3                 
+    ------------------------------------------
+                    (3 coins)                 
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    Shopping Mall      NT (10) [ ]
+    Amusement Park     NT (16) [ ]
+    
+    ******************************************
+    
+The Establishments Cafe and Family Restaurant have been added.
+The City Hall landmark has been removed, and the Amusement Park landmark has been added.
+
+### Gameplay Differences P4
+
+#### Dice Roll P4
+The two new Establishments all carry out the same base function. Each card - when activated - takes a specified number of coins
+from the Player who conducted the roll and gives this total to any Player(s) who own a Cafe or Family Restaurant.
+
+The Amusement Park landmark allows the Player to take another turn if they roll doubles. This requires the construction of the 
+Train Station landmark.
+ 
+ ### Winner P4
+In this feature of the game, the winner will be the player who constructed Train Station, Shopping Mall, and Amusement Park first. After which the game will immediately end.
