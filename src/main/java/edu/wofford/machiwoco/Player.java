@@ -220,8 +220,8 @@ public class Player {
         if(type.equals("receive") && target.equals("bank")) {
             addCoins(amount * numberOwned);
         } else if (type.equals("receive") && target.equals("active")) {
-            addCoins(amount*numberOwned);
-            takeCoin(amountToTake);
+            //addCoins(amount*numberOwned);
+            //takeCoin(amountToTake);
         }
         if(landmarks.length > 2 && landmarks[2].getIsConstructed() && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
             addCoins(numberOwned);

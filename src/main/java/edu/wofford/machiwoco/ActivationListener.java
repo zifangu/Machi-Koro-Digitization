@@ -34,9 +34,13 @@ public class ActivationListener implements GameListener {
        for(Player p : inactivePlayers) {
            moneyOwed = 0;
            if (dice == 3) {
-                 moneyOwed = p.numOfCafe(p.getEstOwned());
+               if(p.numOfCafe(p.getEstOwned()) > 0) {
+                   moneyOwed = p.numOfCafe(p.getEstOwned());
+               }
            } else if (dice == 9 || dice == 10) {
-                 moneyOwed = p.numOfRestaurant(p.getEstOwned()) *2;
+               if(p.numOfRestaurant(p.getEstOwned()) > 0)  {
+                   moneyOwed = p.numOfRestaurant(p.getEstOwned()) *2;
+               }
            }
            takeMoney(active,p,moneyOwed);
        }
@@ -54,14 +58,20 @@ public class ActivationListener implements GameListener {
      */
 
     public ArrayList<Player> nonActivePlayers(List<Player> players) {
+        ArrayList<Player> temp = new ArrayList<>();
         ArrayList<Player> nonActive = new ArrayList<>();
+
         int currentPlayerIndex = 0;
         for (Player p : players) {
             if (p.isTurn()) {currentPlayerIndex = players.indexOf(p);}
         }
 
         for (int i = 1; i < players.size(); i++) {
-            nonActive.add(players.get((currentPlayerIndex + i)%players.size()));
+            temp.add(players.get((currentPlayerIndex + i)%players.size()));
+        }
+
+        for (int i = temp.size()-1; i > -1; i--) {
+            nonActive.add(temp.get(i));
         }
         return nonActive;
     }

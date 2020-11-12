@@ -86,8 +86,8 @@ public class ActivationListenerTest {
         f5.player1.setTurn(false);
         f5.player2.setTurn(true);
         assertThat(a.nonActivePlayers(f5.players).size(), is(2));
-        assertThat(a.nonActivePlayers(f5.players).get(0), is(f5.player3));
-        assertThat(a.nonActivePlayers(f5.players).get(1), is(f5.player1));
+        assertThat(a.nonActivePlayers(f5.players).get(1), is(f5.player3));
+        assertThat(a.nonActivePlayers(f5.players).get(0), is(f5.player1));
     }
 
 
@@ -96,8 +96,8 @@ public class ActivationListenerTest {
         f5.player1.setTurn(false);
         f5.player3.setTurn(true);
         assertThat(a.nonActivePlayers(f5.players).size(), is(2));
-        assertThat(a.nonActivePlayers(f5.players).get(0), is(f5.player1));
-        assertThat(a.nonActivePlayers(f5.players).get(1), is(f5.player2));
+        assertThat(a.nonActivePlayers(f5.players).get(1), is(f5.player1));
+        assertThat(a.nonActivePlayers(f5.players).get(0), is(f5.player2));
     }
 
 
