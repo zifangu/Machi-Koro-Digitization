@@ -212,4 +212,22 @@ public class Feature6 extends Feature5 {
         Feature6 feature6 = new Feature6(Integer.parseInt(args[1]));
         feature6.playGame();
     }
+
+    /**
+     * Gets the cafe Establishment.
+     * @return the Establishment Cafe.
+     */
+
+    public Establishment getCafe() {
+        return cafe;
+    }
+
+    /**
+     * Gets the family restaurant Establishment.
+     * @return the Establishment Family Restaurant.
+     */
+
+    public Establishment getFamilyRestaurant() {
+        return familyRestaurant;
+    }
 }
