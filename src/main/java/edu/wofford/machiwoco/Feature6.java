@@ -203,6 +203,40 @@ public class Feature6 extends Feature5 {
         new InputObserver(inputSubject);
     }
 
+    @Override
+    public void playGame() {
+        gameInit();
+
+        while(!isGameOver()) {
+
+            // (1) print turn and (2) print current game state
+            gameSubject.notifyObservers();
+
+            // (3) ROLL THE DICE AND THE CORRESPONDING ACTIVATIONS
+            wayBetterRollDice(rollTwo());
+
+            // (5) SHOW BUY MENU
+            makeMove();
+
+            //(6) End Game
+            gameEnded();
+        }
+    }
+
+    @Override
+    protected void gameEnded() {
+        if(!allLandmarksConstructed()) {
+            endTurn();
+        }
+    }
+
+    @Override
+    protected void endTurn() {
+        if (!(getCurrentPlayer().isAmusementConstructed() && (dice1 == dice2))) {
+            super.endTurn();
+        }
+    }
+
     /**
      * Starts the Phase 4 version of Machi Koro.
      * @param args a String array representing the user's console arguments.
