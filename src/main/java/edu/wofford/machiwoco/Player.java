@@ -85,7 +85,7 @@ public class Player {
                 if(est.getColor_ab().equals(Card.Color_ab.B)) {
                     performAction(est,numberOwned,0);
                 } else if(est.getColor_ab().equals(Card.Color_ab.G)) {
-                    if (isTurn && est.getModifierType() == "icon") {
+                    if (isTurn && est.getModifierType().equals("icon")) {
                         performActionIcon(est, numberOwned);
                     } else if (isTurn) {
                         performAction(est, numberOwned, 0);
@@ -227,7 +227,8 @@ public class Player {
             //addCoins(amount*numberOwned);
             //takeCoin(amountToTake);
         }
-        if(landmarks.length > 2 && landmarks[2].getIsConstructed() && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
+
+        if(landmarks.length > 2 && (!e.getColor_ab().equals(Card.Color_ab.R)) && isShoppingMallConstructed() && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
             addCoins(numberOwned);
         }
     }
