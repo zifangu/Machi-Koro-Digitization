@@ -1,6 +1,5 @@
 package edu.wofford.machiwoco;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
@@ -61,34 +60,36 @@ public class Player {
 
     public void getActivationNumbers(int diceRoll, boolean isTurn){
         Set<Establishment> keys = estOwned.keySet();
-        int numTaken = 0;
-        int numberOwnedCow = 0;//getNumberOwnedIcon(Card.Icon.COW);
-        int numberOwnedGear = 0;//getNumberOwnedIcon(Card.Icon.GEAR);
-        int numberOwnedWheat = 0;//getNumberOwnedIcon(Card.Icon.WHEAT);
+
         for(Establishment est: keys){
             int activation = 0;
             int activation2 = 0;
-            if(est.getName().equals("Bakery")) {
-                activation = 2;
-                activation2 = 3;
-            } else if (est.getName().equals("Farmers Market")) {
-                activation = 11;
-                activation2 = 12;
-            } else if (est.getName().equals("Family Restaurant")) {
-                activation = 9;
-                activation2 = 10;
-            } else {
-                activation = Integer.parseInt(est.getActivation());
+            switch (est.getName()) {
+                case "Bakery":
+                    activation = 2;
+                    activation2 = 3;
+                    break;
+                case "Farmers Market":
+                    activation = 11;
+                    activation2 = 12;
+                    break;
+                case "Family Restaurant":
+                    activation = 9;
+                    activation2 = 10;
+                    break;
+                default:
+                    activation = Integer.parseInt(est.getActivation());
+                    break;
             }
             int numberOwned = estOwned.get(est);
             if(diceRoll == activation || diceRoll == activation2) {
                 if(est.getColor_ab().equals(Card.Color_ab.B)) {
-                    performAction(est,numberOwned,0);
+                    performAction(est,numberOwned);
                 } else if(est.getColor_ab().equals(Card.Color_ab.G)) {
                     if (isTurn && est.getModifierType().equals("icon")) {
                         performActionIcon(est, numberOwned);
                     } else if (isTurn) {
-                        performAction(est, numberOwned, 0);
+                        performAction(est, numberOwned);
                     }
                 }
 //                else if(est.getColor_ab().equals(Card.Color_ab.R)) {
@@ -115,7 +116,7 @@ public class Player {
        Set<Establishment> keys = estOwned.keySet();
        int count=0;
        for (Establishment e : keys) {
-           if (e.getColor_ab().equals("R")) {
+           if (e.getColor_ab().equals("R")){
                count++;
            }
        }
@@ -162,6 +163,51 @@ public class Player {
     }
 
     /**
+     * Return true if Stadium is owned
+     * @param p The map of players
+     * @return boolean whether stadium is owned
+     */
+    public boolean isStadiumOwned(Map<Establishment,Integer> p) {
+        for(Establishment e:estOwned.keySet()) {
+            if(e.getName().equals("Stadium")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Return true if Stadium is owned
+     * @param p The map of players
+     * @return boolean whether Business Center is owned
+     */
+    public boolean isBusinessCenterOwned(Map<Establishment,Integer> p) {
+        for(Establishment e:estOwned.keySet()) {
+            if(e.getName().equals("Business Center")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Return true if Stadium is owned
+     * @param p The map of players
+     * @return boolean whether Business Center is owned
+     */
+    public boolean isTVStationOwned(Map<Establishment,Integer> p) {
+        for(Establishment e: getEstOwned().keySet()) {
+            if(e.getName().equals("TV Station")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+    /**
      * Return the number of Cafes for a player
      * @param p The map of players
      * @return number of Cafes owned
@@ -189,10 +235,6 @@ public class Player {
         return 0;
     }
 
-
-
-
-
     /**
      * Buying Card Action
      * @param e the Establishment upon which an action is being performed
@@ -214,19 +256,16 @@ public class Player {
      * Performs the action associated with the given Establishment
      * @param e the Establishment upon which an action is being performed
      * @param numberOwned an integer representing the amount of coins owned by the Player
-     * @param amountToTake an integer representing the amount to be taken from another Player
      */
 
-    private void performAction(Establishment e, int numberOwned, int amountToTake) {
+    private void performAction(Establishment e, int numberOwned) {
         String type = e.getType();
         int amount = e.getAmount();
         String target = e.getTarget();
         if(type.equals("receive") && target.equals("bank")) {
             addCoins(amount * numberOwned);
-        } else if (type.equals("receive") && target.equals("active")) {
-            //addCoins(amount*numberOwned);
-            //takeCoin(amountToTake);
         }
+
 
         if(landmarks.length > 2 && (!e.getColor_ab().equals(Card.Color_ab.R)) && isShoppingMallConstructed() && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
             addCoins(numberOwned);
@@ -240,19 +279,20 @@ public class Player {
      */
 
     private void performActionIcon(Establishment e, int numberOwned) {
-        String type = e.getType();
         int amount = e.getAmount();
-        String target = e.getTarget();
         int numberOwnedIcon = 0;
         // it's getting icon ab of cheese factory
         String modifier = e.getModifier();
-        String modifierAb = "";
-        if (modifier == "cow") {
-            numberOwnedIcon = getNumberOwnedIcon("C");
-        } else if (modifier == "gear") {
-            numberOwnedIcon = getNumberOwnedIcon("G");
-        } else if (modifier == "wheat") {
-            numberOwnedIcon = getNumberOwnedIcon("W");
+        switch (modifier) {
+            case "cow":
+                numberOwnedIcon = getNumberOwnedIcon("C");
+                break;
+            case "gear":
+                numberOwnedIcon = getNumberOwnedIcon("G");
+                break;
+            case "wheat":
+                numberOwnedIcon = getNumberOwnedIcon("W");
+                break;
         }
         addCoins(amount * numberOwned * numberOwnedIcon);
 
@@ -313,15 +353,6 @@ public class Player {
             }
         }
         return false;
-    }
-
-    /**
-     * Prints a message to the console stating that an activation has occurred.
-     */
-
-    private void printCardAfterActivation(Establishment e) {
-        String name = e.getName();
-        System.out.println(name + " activated for Player " + getPlayerNumber() + ".");
     }
 
     /**

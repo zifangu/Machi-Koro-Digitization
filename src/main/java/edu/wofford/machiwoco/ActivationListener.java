@@ -54,10 +54,25 @@ public class ActivationListener implements GameListener {
            }
            takeMoney(active,p,moneyOwed);
        }
+       if(active.isStadiumOwned(active.getEstOwned()) && dice == 6) {
+            stadiumLogic(active,inactivePlayers);
+       }
+
 
         for (Player player : players) {
             //  changes the coin amounts in the player bank\
             player.getActivationNumbers(dice, player.isTurn());
+        }
+    }
+
+    /**
+     * Logic for handling stadium card
+     * @param active currently active player
+     * @param inactivePlayers Arraylist of inactive players
+     */
+    protected void stadiumLogic(Player active, ArrayList<Player> inactivePlayers) {
+        for(Player p : inactivePlayers) {
+            takeMoney(p,active,2);
         }
     }
 

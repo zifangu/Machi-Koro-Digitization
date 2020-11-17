@@ -69,7 +69,7 @@ public class ConsoleListener implements GameListener {
                             s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
                         }
                     } else {
-                        if(!est.getColor_ab().equals(Card.Color_ab.G)) {
+                        if(!est.getColor_ab().equals(Card.Color_ab.G) && !est.getColor_ab().equals(Card.Color_ab.P)) {
                             s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
                         }
                     }

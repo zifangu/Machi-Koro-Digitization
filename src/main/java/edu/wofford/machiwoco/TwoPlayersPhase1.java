@@ -493,7 +493,6 @@ public class TwoPlayersPhase1 {
      * @param owned the amount of coins owned by the given player
      * @return an ArrayList of Establishments that are available to purhcase by a given player
      */
-    //!!!!NEED TO TEST!!!!//
     public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
         Set<Establishment> setE = market.keySet();
         ArrayList<Establishment> eResult = new ArrayList<Establishment>();
@@ -501,7 +500,18 @@ public class TwoPlayersPhase1 {
             int cost = est.getCost();
             int numberLeft = market.get(est);
             if(owned >= cost && numberLeft!=0) {
-                eResult.add(est);
+                if(!est.getColor_ab().equals(Card.Color_ab.P)) {
+                    eResult.add(est);
+                } else {
+                    if(est.getName().equals("Stadium") && !player.isStadiumOwned(player.getEstOwned())) {
+                        eResult.add(est);
+                    } else if (est.getName().equals("Business Center") && !player.isBusinessCenterOwned(player.getEstOwned())) {
+                        eResult.add(est);
+                    } else if (est.getName().equals("TV Station") && !player.isTVStationOwned(player.getEstOwned())) {
+                        eResult.add(est);
+                    }
+                }
+
             }
         }
         return eResult;
@@ -509,7 +519,6 @@ public class TwoPlayersPhase1 {
 
     //**********GAME STEP 5.5: PURCHASE AND CONSTRUCT************//
 
-    //!!!!NEED TO MAKE PRIVATE!!!!//
     /**
      * Receives buy/construct input and calls buyCard() to buy Establishment
      * or buyLandmark() to construct Landmark

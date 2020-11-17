@@ -2,11 +2,6 @@ package edu.wofford.machiwoco;
 
 import org.apache.commons.lang3.StringUtils;
 
-//"name": "Wheat Field",
-////            "cost": 1,
-////            "color": "blue",
-////            "icon": "wheat",
-
 /**
  * This is a class that represents the basics of a Machi Koro card - both for Establishment and Landmark.
  * 

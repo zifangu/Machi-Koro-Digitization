@@ -71,9 +71,9 @@ public class Feature7 extends Feature6 {
         market.put(getFarmersMarket(), 6);
         market.put(getCafe(), 6);
         market.put(getFamilyRestaurant(), 6);
-        market.put(tvStation, 6);
-        market.put(businessComplex, 6);
-        market.put(stadium, 6);
+        market.put(tvStation, numPlayers);
+        market.put(businessComplex, numPlayers);
+        market.put(stadium, numPlayers);
 
         sc = new Scanner(System.in);
 
@@ -257,6 +257,14 @@ public class Feature7 extends Feature6 {
             // (5) check if Game has ended
             gameEnded();
         }
+    }
+
+    /**
+     * Returns stadium establishment.
+     * @return stadium establishment.
+     */
+    protected Establishment getStadium() {
+        return stadium;
     }
 
 

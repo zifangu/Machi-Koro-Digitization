@@ -2,19 +2,6 @@ package edu.wofford.machiwoco;
 
 import org.apache.commons.lang3.StringUtils;
 
-//      "name": "Wheat Field",
-//            "cost": 1,
-//            "color": "blue", green purple red
-//            "icon": "wheat", cow bread
-//            "activation": "1",
-//            "effect": {
-//                "type": "receive", "exchange"
-//                "target": "bank", "active" "others" "choice" "exchange"
-//                "amount": 1,
-//                "modifierType": "none", "icon"
-//                "modifier": "none"  wheat gear cow
-//
-
 /** 
  * This is a class built to represent all establishment cards.
  * 

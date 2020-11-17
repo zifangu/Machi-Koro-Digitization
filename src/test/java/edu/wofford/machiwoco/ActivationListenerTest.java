@@ -16,6 +16,9 @@ public class ActivationListenerTest {
     Establishment bakery;
     Feature5 f5;
     Feature6 f6;
+    Feature6 fourPlayers;
+    Feature7 f7;
+
 
     @Before
     public void before() {
@@ -28,6 +31,8 @@ public class ActivationListenerTest {
                 "2-3", "receive", "bank", 1, "none", "none");
         f5 = new Feature5(3);
         f6 = new Feature6(3);
+        fourPlayers = new Feature6(4);
+        f7 = new Feature7(3);
     }
 
     @Test
@@ -191,7 +196,65 @@ public class ActivationListenerTest {
         assertThat(f6.player2.getCoinCount(), is(15));
     }
 
+    @Test
+    public void testCoinCountError() {
+        fourPlayers.player1.setTurn(false);
+        fourPlayers.player3.setTurn(true);
 
+//        fourPlayers.player1.setCoinCount(10);
+        fourPlayers.player2.setCoinCount(11);
+        fourPlayers.player3.setCoinCount(14);
+        fourPlayers.player4.setCoinCount(11);
 
+//        fourPlayers.player3.getLandmarks()[0].is_constructed = true;
+//        fourPlayers.player3.getLandmarks()[2].is_constructed = true;
 
+        fourPlayers.player2.getEstOwned().put(fourPlayers.getCafe(), 1);
+        fourPlayers.player4.getEstOwned().put(fourPlayers.getCafe(), 1);
+        fourPlayers.player3.getEstOwned().put(fourPlayers.getBakery(), 3);
+        a.diceActivation(3, fourPlayers.players);
+        fourPlayers.player3.buyCard(fourPlayers.cheeseFactory);
+        assertThat(fourPlayers.player3.getCoinCount(), is(10));
+       // assertThat(f6.player2.getCoinCount(), is(15));
+
+    }
+
+    @Test
+    public void testStadiumLogic() {
+        f7.player1.setTurn(false);
+        ArrayList<Player> p = new ArrayList<>();
+        p.add(f7.player1);
+        p.add(f7.player2);
+
+        f7.player1.setCoinCount(3);
+        f7.player2.setCoinCount(3);
+        f7.player3.setCoinCount(3);
+
+        f7.player3.setTurn(true);
+
+        f7.player1.getEstOwned().put(f7.getStadium(), 1);
+        a.stadiumLogic(f7.player3,p);
+
+        assertThat(f7.player3.getCoinCount(), is(7));
+        // assertThat(f6.player2.getCoinCount(), is(15));
+    }
+
+    @Test
+    public void testStadiumOverflow() {
+        f7.player1.setTurn(false);
+        ArrayList<Player> p = new ArrayList<>();
+        p.add(f7.player1);
+        p.add(f7.player2);
+
+        f7.player1.setCoinCount(1);
+        f7.player2.setCoinCount(3);
+        f7.player3.setCoinCount(3);
+
+        f7.player3.setTurn(true);
+
+        f7.player1.getEstOwned().put(f7.getStadium(), 1);
+        a.stadiumLogic(f7.player3,p);
+        assertThat(f7.player3.getCoinCount(), is(6));
+        // assertThat(f6.player2.getCoinCount(), is(15));
+    }
 }
