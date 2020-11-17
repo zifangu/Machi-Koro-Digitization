@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.*;
 
 /**
  * A class used to output messages to the Player through the console regarding dice rolls and activated Establishments.
@@ -98,6 +99,13 @@ public class ConsoleListener implements GameListener {
 //
 //    }
 
+    /**
+     * Returns a boolean representing whether or not the Player has decided to roll 1 or 2 die.
+     * @param sc a Scanner object used to gather the Player's input.
+     * @param p the Player rolling the die.
+     * @return a boolean holding true if the Player chooses to roll two die.
+     */
+
     public boolean rollTwo(Scanner sc, Player p) {
         int input = 0;
         while (input != 1 && input != 2) {
@@ -106,6 +114,46 @@ public class ConsoleListener implements GameListener {
         }
         return input != 1;
     }
+
+    public Player playerChooseTarget(Scanner sc, Player p, ArrayList<Player> playerArr) {
+        ArrayList<Player> validPlayers = new ArrayList<Player>();
+        System.out.println(StringUtils.center("-------     AVAILABLE PLAYERS      -------", 42, " "));
+        for (int i = 0; i < playerArr.size(); i++) {
+            if (!playerArr.get(i).isTurn() && playerArr.get(i).getCoinCount() > 0) {
+                validPlayers.add(playerArr.get(i));
+            }
+        }
+        
+        int count = 1;
+        for (Player pl : validPlayers) {
+            String s = "";
+            s += count + ". ";
+            s += StringUtils.rightPad("Player " + pl.getPlayerNumber(), 20, " ");
+            s += " (" + pl.getCoinCount() + " coins)";
+            System.out.println(s);
+            count++;
+        }
+
+        //System.out.println(StringUtils.center("" + i + 1 + ". Player " + playerArr.get(i).getPlayerNumber()))
+
+        int input = 0;
+        //System.out.println("size: " + validPlayers.size());
+        while (input != 1 && input < validPlayers.size()) {
+            System.out.println(StringUtils.center("Player " + p.getPlayerNumber() + ", who would you like to target?", 42, " "));
+            input = Integer.parseInt(sc.nextLine());
+        }
+        return validPlayers.get(input - 1);
+    }
+
+    // public Establishment playerChooseEstablishment(Scanner sc, Player p, Player target) {
+    //     int input = 0;
+    //     while (input > 0 && input <= target.getEstOwned().size()) {
+    //         System.out.println(StringUtils.center("Player " + p.getPlayerNumber() + ", select an establishment:", 42, " "));
+    //         input = Integer.parseInt(sc.nextLine());
+    //     }
+    //     // return target.getEstOwned().get(input - 1);
+    //     return target.getEstOwned().key(input - 1);
+    // }
 
 
 

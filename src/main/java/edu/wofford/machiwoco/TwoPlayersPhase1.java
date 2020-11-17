@@ -842,7 +842,7 @@ public class TwoPlayersPhase1 {
      * Retreives the dice roll and its corresponding activations.
      */
 
-    private void actionsDiceRolled() {
+    protected void actionsDiceRolled() {
         for (GameListener l : listeners) {
             l.diceRolled(dice1, dice2, getCurrentPlayer());
             l.diceActivation((dice1 + dice2), players);
@@ -854,7 +854,7 @@ public class TwoPlayersPhase1 {
      * @param rollTwo a boolean holding true if the Player chooses to roll two die.
      */
 
-    private void betterRollDice(boolean rollTwo) {
+    protected void betterRollDice(boolean rollTwo) {
         dice1 = (int) (Math.random() * 6 + 1);
         if (rollTwo) {
             dice2 = (int) (Math.random() * 6 + 1);

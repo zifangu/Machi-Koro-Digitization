@@ -290,6 +290,19 @@ public class Player {
     }
 
     /**
+     * Gets whether or not the TV Station landmark is constructed.
+     * @return a boolean holding true if the Player has constructed the TV Station landmark.
+     */
+    public boolean isTVStationConstructed() {
+        for (Establishment e : estOwned.keySet()) {
+            if (e.name.equals("TV Station")) {
+                return e.is_constructed;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Gets whether or not the Amusement Park landmark is constructed.
      * @return a boolean holding true if the Player has constructed the Amusement Park landmark.
      */

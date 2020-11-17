@@ -166,6 +166,17 @@ public class ConsoleListenerTest {
         assertThat(c.rollTwo(sc, t.player2), is(false));
     }
 
+    @Test
+    public void testTargetPlayer() {
+        Feature7 feature7 = new Feature7(3);
+        Scanner sc = new Scanner("2");
+        feature7.getPlayer1().setTurn(true);
+        c.playerChooseTarget(sc, feature7.player1, feature7.getPlayers());
+        assertThat(outContent.toString(), containsString("2. Player 3"));
+        //assertThat(outContent.toString(), containsString("size: 3"));
+        
+    }
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);

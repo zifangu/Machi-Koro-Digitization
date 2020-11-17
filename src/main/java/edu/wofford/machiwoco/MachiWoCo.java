@@ -28,6 +28,8 @@ public class MachiWoCo {
             Feature5.main(args);
         } else if (args[0].equals("phase4")) {
             Feature6.main(args);
+        } else if (args[0].equals("phase5")) {
+            Feature7.main(args);
         }
 
     }
