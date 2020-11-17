@@ -203,6 +203,9 @@ public class Feature6 extends Feature5 {
         new InputObserver(inputSubject);
     }
 
+    /**
+     * Play the MachiWoCo game in its entirety
+     */
     @Override
     public void playGame() {
         gameInit();
@@ -223,6 +226,9 @@ public class Feature6 extends Feature5 {
         }
     }
 
+    /**
+     * Check if all landmarks are constructed. If so, game ends
+     */
     @Override
     protected void gameEnded() {
         if(!allLandmarksConstructed()) {
@@ -230,6 +236,9 @@ public class Feature6 extends Feature5 {
         }
     }
 
+    /**
+     * Ends the current player's turn and checks to see if the game has ended
+     */
     @Override
     protected void endTurn() {
         if (!(getCurrentPlayer().isAmusementConstructed() && (dice1 == dice2))) {
