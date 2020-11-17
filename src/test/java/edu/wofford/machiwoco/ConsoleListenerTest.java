@@ -171,7 +171,7 @@ public class ConsoleListenerTest {
         Feature7 feature7 = new Feature7(3);
         Scanner sc = new Scanner("2");
         feature7.getPlayer1().setTurn(true);
-        c.playerChooseTarget(sc, feature7.player1, feature7.getPlayers());
+        c.playerChooseTarget(sc, feature7.player1, feature7.getPlayers(), true);
         assertThat(outContent.toString(), containsString("2. Player 3"));
         //assertThat(outContent.toString(), containsString("size: 3"));
         

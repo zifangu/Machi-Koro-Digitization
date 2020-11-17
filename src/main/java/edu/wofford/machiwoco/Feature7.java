@@ -227,11 +227,19 @@ public class Feature7 extends Feature6 {
     @Override
     public void wayBetterRollDice(boolean rollTwo) {
         betterRollDice(rollTwo);
+        actionsDiceRolled();
+
         if ((dice1 + dice2) == 6 && getCurrentPlayer().isTVStationConstructed()) {
-            Player playerToTarget = consoleListener.playerChooseTarget(sc, getCurrentPlayer(), players);
+            Player playerToTarget = consoleListener.playerChooseTarget(sc, getCurrentPlayer(), players, true);
             activationListener.takeMoney(playerToTarget, getCurrentPlayer(), 5);
         }
-        actionsDiceRolled();
+
+//        if ((dice1 + dice2) == 6 && getCurrentPlayer().isBusinessCenterOwned()) {
+//            Player playerToTarget = consoleListener.playerChooseTarget(sc, getCurrentPlayer(), players, false);
+//            Establishment estToTake = consoleListener.playerChooseEst(sc, playerToTarget);
+//            Establishment estToGive = consoleListener.playerChooseEst(sc, getCurrentPlayer());
+//            activationListener.exchangeEst(playerToTarget, getCurrentPlayer(), estToTake, estToGive);
+//        }
     }
 
     /**

@@ -65,7 +65,7 @@ public class ConsoleListener implements GameListener {
                 }
                 if(dice == activation){
                     if(player.isTurn()) {
-                        if(!est.getColor_ab().equals(Card.Color_ab.R)){
+                        if(!est.getColor_ab().equals(Card.Color_ab.R) && !est.getColor_ab().equals(Card.Color_ab.P)){
                             s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
                         }
                     } else {
@@ -115,15 +115,20 @@ public class ConsoleListener implements GameListener {
         return input != 1;
     }
 
-    public Player playerChooseTarget(Scanner sc, Player p, ArrayList<Player> playerArr) {
+    public Player playerChooseTarget(Scanner sc, Player p, ArrayList<Player> playerArr, boolean tv) {
+        if (tv) {
+            System.out.println("TV Station activated for Player " + p.getPlayerNumber());
+        } else {
+            System.out.println("Business Complex activated for Player " + p.getPlayerNumber());
+        }
         ArrayList<Player> validPlayers = new ArrayList<Player>();
+        System.out.println();
         System.out.println(StringUtils.center("-------     AVAILABLE PLAYERS      -------", 42, " "));
         for (int i = 0; i < playerArr.size(); i++) {
             if (!playerArr.get(i).isTurn() && playerArr.get(i).getCoinCount() > 0) {
                 validPlayers.add(playerArr.get(i));
             }
         }
-        
         int count = 1;
         for (Player pl : validPlayers) {
             String s = "";
@@ -133,9 +138,6 @@ public class ConsoleListener implements GameListener {
             System.out.println(s);
             count++;
         }
-
-        //System.out.println(StringUtils.center("" + i + 1 + ". Player " + playerArr.get(i).getPlayerNumber()))
-
         int input = 0;
         //System.out.println("size: " + validPlayers.size());
         while (input != 1 && input < validPlayers.size()) {
@@ -145,16 +147,42 @@ public class ConsoleListener implements GameListener {
         return validPlayers.get(input - 1);
     }
 
-    // public Establishment playerChooseEstablishment(Scanner sc, Player p, Player target) {
-    //     int input = 0;
-    //     while (input > 0 && input <= target.getEstOwned().size()) {
-    //         System.out.println(StringUtils.center("Player " + p.getPlayerNumber() + ", select an establishment:", 42, " "));
-    //         input = Integer.parseInt(sc.nextLine());
-    //     }
-    //     // return target.getEstOwned().get(input - 1);
-    //     return target.getEstOwned().key(input - 1);
-    // }
+//     public Establishment playerChooseEstablishment(Scanner sc, Player p, Player target) {
+//
+//
+//        int input = 0;
+//         while (input != 1 && input < target.getEstOwned().size()) {
+//             System.out.println(StringUtils.center("Player " + p.getPlayerNumber() + ", select an establishment:", 42, " "));
+//             input = Integer.parseInt(sc.nextLine());
+//         }
+//         // return target.getEstOwned().get(input - 1);
+//         return target.getEstOwned().k(input - 1);
+//     }
 
+//    public Establishment playerChooseEst(Scanner sc, Player player) {
+//        System.out.println(StringUtils.center("-------  AVAILABLE ESTABLISHMENTS  -------", 42, " "));
+//        String s = "";
+//        s += StringUtils.center("Plaer " + player.getPlayerNumber(), 42, " ");
+//        int count = 1;
+//
+//        for (Establishment est : player.getEstOwned().keySet()) {
+//            StringUtils.rightPad(e.getName(), 18, " ") + " " +
+//                    e.getColor_ab() + e.getIcon_ab() + " " +
+//                    generateCost(e.getCost()) + " " +
+//                    generateActivation(e.getActivation())
+//        }
+//    }
+
+
+    public static void main(String[] args) {
+        ConsoleListener c = new ConsoleListener();
+        Feature7 feature7 = new Feature7(3);
+        feature7.getPlayer1().setTurn(true);
+//        c.playerChooseTarget(new Scanner(System.in), feature7.getCurrentPlayer(), feature7.players);
+//        System.out.println("player1: " + feature7.getPlayer1().getCoinCount());
+//        System.out.println("playerf2: " + feature7.getPlayer2().getCoinCount());
+
+    }
 
 
 
