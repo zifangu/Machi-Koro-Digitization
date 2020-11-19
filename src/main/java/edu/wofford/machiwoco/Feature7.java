@@ -231,10 +231,10 @@ public class Feature7 extends Feature6 {
 
         if ((dice1 + dice2) == 6) {
             if (getCurrentPlayer().isTVStationConstructed()) {
-                Player playerToTarget = consoleListener.playerChooseTarget(sc, getCurrentPlayer(), players, true);
+                Player playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, true);
                 activationListener.takeMoney(playerToTarget, getCurrentPlayer(), 5);
             } else if (getCurrentPlayer().isStadiumOwned()) {
-                Player playerToTarget = consoleListener.playerChooseTarget(sc, getCurrentPlayer(), players, false);
+                Player playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, false);
 
             }
         }

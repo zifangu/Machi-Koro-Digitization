@@ -1,5 +1,6 @@
 package edu.wofford.machiwoco;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.aMapWithSize;
 import static org.hamcrest.Matchers.is;
 
 import java.io.ByteArrayOutputStream;
@@ -171,7 +172,7 @@ public class ConsoleListenerTest {
         Feature7 feature7 = new Feature7(3);
         Scanner sc = new Scanner("2");
         feature7.getPlayer1().setTurn(true);
-        c.playerChooseTarget(sc, feature7.player1, feature7.getPlayers(), true);
+        c.playerChooseTarget(feature7.EST_ORDER, sc, feature7.player1, feature7.getPlayers(), true);
         assertThat(outContent.toString(), containsString("2. Player 3"));
         //assertThat(outContent.toString(), containsString("size: 3"));
         
@@ -207,13 +208,49 @@ public class ConsoleListenerTest {
         assertThat(outContent.toString(), containsString("Family Restaurant activated for Player 1"));
     }
 
+//    @Test
+//    public void testBusinessActivation() {
+//        Feature7 feature7 = new Feature7(3);
+//        Scanner sc = new Scanner("1");
+//        feature7.getPlayer1().setTurn(true);
+////        assertThat(feature7.EST_ORDER.size(), is (15));
+////        assertThat(feature7.player1.getEstOwned().size(), is (2));
+//
+//        c.playerChooseTarget(feature7.EST_ORDER, sc, feature7.player1, feature7.getPlayers(), false);
+//        assertThat(outContent.toString(), containsString("Business Complex activated for Player 1"));
+//    }
+
     @Test
     public void testBusinessActivation() {
         Feature7 feature7 = new Feature7(3);
-        Scanner sc = new Scanner("2");
+        Scanner sc = new Scanner("1");
         feature7.getPlayer1().setTurn(true);
-        c.playerChooseTarget(sc, feature7.player1, feature7.getPlayers(), false);
-        assertThat(outContent.toString(), containsString("Business Complex activated for Player 1"));
+//        assertThat(feature7.EST_ORDER.size(), is (15));
+//        assertThat(feature7.player1.getEstOwned().size(), is (2));
+        feature7.getPlayer2().getEstOwned().put(feature7.wheat, 2);
+        feature7.player3.getEstOwned().put(feature7.orchard, 1);
+
+        c.playerChooseTarget(feature7.EST_ORDER, sc, feature7.player1, feature7.getPlayers(), false);
+        assertThat(outContent.toString(), containsString("1. Player 2"));
+        assertThat(outContent.toString(), containsString("2. Player 3"));
+    }
+
+    @Test
+    public void testBusinessActivationOnlyStartNPurple() {
+        // TODO test passing when not supposed to
+
+        Feature7 feature7 = new Feature7(3);
+        Scanner sc = new Scanner("1");
+        feature7.getPlayer1().setTurn(true);
+//        assertThat(feature7.EST_ORDER.size(), is (15));
+//        assertThat(feature7.player1.getEstOwned().size(), is (2));
+        feature7.player2.getEstOwned().put(feature7.orchard, 1);
+        feature7.getPlayer2().getEstOwned().put(feature7.businessComplex,1);
+        feature7.player3.getEstOwned().put(feature7.stadium, 1);
+
+        c.playerChooseTarget(feature7.EST_ORDER, sc, feature7.player1, feature7.getPlayers(), false);
+        assertThat(outContent.toString(), containsString("1. Player 2"));
+        assertThat(outContent.toString(), containsString("Player 3"));
     }
 
     @Test
