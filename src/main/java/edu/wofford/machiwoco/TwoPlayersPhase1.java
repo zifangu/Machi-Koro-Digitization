@@ -209,9 +209,9 @@ public class TwoPlayersPhase1 {
         // cycle through the Landmarks... if player's coin count is >= cost of Landmark, add Landmark to array
         Landmark[] landmarkArr = player.getLandmarks();
         ArrayList<Landmark> resultArr = new ArrayList<Landmark>();
-        for (int i = 0; i < landmarkArr.length; i++) {
-            if (player.getCoinCount() >= landmarkArr[i].getCost() && !landmarkArr[i].is_constructed) {
-                resultArr.add(landmarkArr[i]);
+        for (Landmark landmark : landmarkArr) {
+            if (player.getCoinCount() >= landmark.getCost() && !landmark.is_constructed) {
+                resultArr.add(landmark);
             }
         }
 
@@ -494,7 +494,6 @@ public class TwoPlayersPhase1 {
      * @return an ArrayList of Establishments that are available to purhcase by a given player
      */
     public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
-        Set<Establishment> setE = market.keySet();
         ArrayList<Establishment> eResult = new ArrayList<Establishment>();
         for(Establishment est: EST_ORDER){
             int cost = est.getCost();
@@ -883,9 +882,7 @@ public class TwoPlayersPhase1 {
         actionsDiceRolled();
     }
 
-    /**
-     * Check if all landmarks are constructed. If so, game ends
-     */
+
 
     //PASSES IN DICE ROLL AND PLAYERS
     // RETURNS ARRAYLIST OF PLAYERS PLAYER NUMS
@@ -1050,23 +1047,6 @@ public class TwoPlayersPhase1 {
         this.forest = forest;
     }
 
-    /**
-     * Gets the current gameStateSubject representing the current game state.
-     * @return the current game state.
-     */
-
-    public GameStateSubject getGameSubject() {
-        return gameSubject;
-    }
-
-    /**
-     * Gets the current inputSubject representing a Player's input.
-     * @return the inputSUbject instance holding Players' input.
-     */
-
-    public InputSubject getInputSubject() {
-        return inputSubject;
-    }
 
     /**
      * Initializes the playing of the Phase1 version of Machi Koro based on human/human Players or human/AI.

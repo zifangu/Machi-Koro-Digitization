@@ -55,13 +55,17 @@ public class ActivationListener implements GameListener {
            }
            takeMoney(active,p,moneyOwed);
        }
-       if(active.isStadiumOwned() && dice == 6) {
-            stadiumLogic(active,inactivePlayers);
-       }
+       if(dice ==6) {
+           if(active.isStadiumOwned()) {
+               stadiumLogic(active,inactivePlayers);
+           }
+           if(active.isTVStationConstructed()) {
 
-       if (active.isTVStationConstructed() && dice == 6) {
+           }
+           if(active.isBusinessCenterOwned()) {
+             //  swap(active,targetedPlayerFunction(),estToTakeFromThatPlayer(),estToGiveToThatPlayer());
+           }
        }
-
 
         for (Player player : players) {
             //  changes the coin amounts in the player bank\
@@ -114,6 +118,20 @@ public class ActivationListener implements GameListener {
 
     public void takeMoney(Player playerToTake, Player playerToGive, int amount) {
         playerToGive.addCoins(playerToTake.takeCoin(amount));
+    }
+
+    /**
+     * Swaps establishment from one player to another
+     * @param playerToTake the Player getting one of their cards swapped.
+     * @param playerToGive the Player swapping the establishment
+     * @param estToGive establishment given to player to take
+     * @param estToTake establishmentt taken from the player
+     */
+    public void swap(Player playerToTake, Player playerToGive, Establishment estToTake, Establishment estToGive) {
+        playerToGive.removeCard(estToGive);
+        playerToGive.addCard(estToTake);
+        playerToTake.removeCard(estToTake);
+        playerToTake.addCard(estToGive);
     }
 
 

@@ -194,8 +194,8 @@ public class Player {
      * @return boolean whether Business Center is owned
      */
     public boolean isTVStationOwned(Map<Establishment,Integer> p) {
-        for(Establishment e: getEstOwned().keySet()) {
-            if(e.getName().equals("TV Station")) {
+        for (Establishment e : getEstOwned().keySet()) {
+            if (e.getName().equals("TV Station")) {
                 return true;
             }
         }
@@ -249,6 +249,33 @@ public class Player {
             setCoinCount(getCoinCount() - cost);
         }
     }
+
+    /**
+     * Removeing Card Action
+     * @param e the Establishment to be removed
+     */
+
+    protected void removeCard(Establishment e) {
+        if(estOwned.containsKey(e)) {
+            int numberOwned = estOwned.get(e);
+            estOwned.put(e, numberOwned - 1);
+        }
+    }
+
+    /**
+     * Removeing Card Action
+     * @param e the Establishment to be removed
+     */
+
+    public void addCard(Establishment e) {
+        if(estOwned.containsKey(e)) {
+            int numberOwned = estOwned.get(e);
+            estOwned.put(e, numberOwned + 1);
+        } else {
+            estOwned.put(e, 1);
+        }
+    }
+
 
     /**
      * Performs the action associated with the given Establishment
