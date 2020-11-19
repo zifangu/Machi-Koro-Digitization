@@ -177,6 +177,45 @@ public class ConsoleListenerTest {
         
     }
 
+    @Test
+    public void testStadiumActivationOutput() {
+        Feature7 feature7 = new Feature7(3);
+        est.put(feature7.stadium, 1);
+        feature7.getPlayer1().setEstOwned(est);
+        feature7.getPlayer1().setTurn(true);
+        c.diceActivation(6, feature7.getPlayers());
+        assertThat(outContent.toString(), containsString("Stadium activated for Player 1"));
+    }
+
+    @Test
+    public void testRestaurantActivationOutput() {
+        Feature6 feature6 = new Feature6(3);
+        est.put(feature6.familyRestaurant, 1);
+        feature6.getPlayer1().setEstOwned(est);
+        feature6.getPlayer1().setTurn(false);
+        c.diceActivation(9, feature6.getPlayers());
+        assertThat(outContent.toString(), containsString("Family Restaurant activated for Player 1"));
+    }
+
+    @Test
+    public void testRestaurantActivationOutput10() {
+        Feature6 feature6 = new Feature6(3);
+        est.put(feature6.familyRestaurant, 1);
+        feature6.getPlayer1().setEstOwned(est);
+        feature6.getPlayer1().setTurn(false);
+        c.diceActivation(10, feature6.getPlayers());
+        assertThat(outContent.toString(), containsString("Family Restaurant activated for Player 1"));
+    }
+
+    @Test
+    public void testBusinessActivation() {
+        Feature7 feature7 = new Feature7(3);
+        Scanner sc = new Scanner("2");
+        feature7.getPlayer1().setTurn(true);
+        c.playerChooseTarget(sc, feature7.player1, feature7.getPlayers(), false);
+        assertThat(outContent.toString(), containsString("Business Complex activated for Player 1"));
+    }
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);

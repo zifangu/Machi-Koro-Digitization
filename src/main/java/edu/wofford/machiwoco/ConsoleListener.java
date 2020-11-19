@@ -68,6 +68,9 @@ public class ConsoleListener implements GameListener {
                         if(!est.getColor_ab().equals(Card.Color_ab.R) && !est.getColor_ab().equals(Card.Color_ab.P)){
                             s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
                         }
+                        if (est.name.equals("Stadium")) {
+                            s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
+                        }
                     } else {
                         if(!est.getColor_ab().equals(Card.Color_ab.G) && !est.getColor_ab().equals(Card.Color_ab.P)) {
                             s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
