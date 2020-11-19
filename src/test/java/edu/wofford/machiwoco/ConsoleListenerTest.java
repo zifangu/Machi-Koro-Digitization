@@ -216,6 +216,19 @@ public class ConsoleListenerTest {
         assertThat(outContent.toString(), containsString("Business Complex activated for Player 1"));
     }
 
+    @Test
+    public void testBusinessCenterEstPrint() {
+        Feature7 feature7 = new Feature7(3);
+        feature7.getPlayer1().setTurn(true);
+        feature7.getPlayer2().getEstOwned().put(feature7.forest, 2);
+        c.playerChooseEst(new Scanner("1"), feature7.EST_ORDER, feature7.player2);
+//        assertThat(feature7.EST_ORDER.size(), is(15));
+        assertThat(outContent.toString(), containsString("1. Wheat Field"));
+        assertThat(outContent.toString(), containsString("2. Bakery"));
+        assertThat(outContent.toString(), containsString("3. Forest"));
+
+    }
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);

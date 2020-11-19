@@ -503,7 +503,7 @@ public class TwoPlayersPhase1 {
                 if(!est.getColor_ab().equals(Card.Color_ab.P)) {
                     eResult.add(est);
                 } else {
-                    if(est.getName().equals("Stadium") && !player.isStadiumOwned(player.getEstOwned())) {
+                    if(est.getName().equals("Stadium") && !player.isStadiumOwned()) {
                         eResult.add(est);
                     } else if (est.getName().equals("Business Center") && !player.isBusinessCenterOwned()) {
                         eResult.add(est);

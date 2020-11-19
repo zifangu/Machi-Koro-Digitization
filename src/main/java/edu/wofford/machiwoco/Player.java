@@ -164,10 +164,9 @@ public class Player {
 
     /**
      * Return true if Stadium is owned
-     * @param p The map of players
      * @return boolean whether stadium is owned
      */
-    public boolean isStadiumOwned(Map<Establishment,Integer> p) {
+    public boolean isStadiumOwned() {
         for(Establishment e:estOwned.keySet()) {
             if(e.getName().equals("Stadium")) {
                 return true;

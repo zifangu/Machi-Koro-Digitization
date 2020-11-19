@@ -55,7 +55,7 @@ public class ActivationListener implements GameListener {
            }
            takeMoney(active,p,moneyOwed);
        }
-       if(active.isStadiumOwned(active.getEstOwned()) && dice == 6) {
+       if(active.isStadiumOwned() && dice == 6) {
             stadiumLogic(active,inactivePlayers);
        }
 

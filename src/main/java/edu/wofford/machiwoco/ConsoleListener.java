@@ -71,6 +71,7 @@ public class ConsoleListener implements GameListener {
                         if (est.name.equals("Stadium")) {
                             s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
                         }
+
                     } else {
                         if(!est.getColor_ab().equals(Card.Color_ab.G) && !est.getColor_ab().equals(Card.Color_ab.P)) {
                             s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
@@ -128,8 +129,18 @@ public class ConsoleListener implements GameListener {
         System.out.println();
         System.out.println(StringUtils.center("-------     AVAILABLE PLAYERS      -------", 42, " "));
         for (int i = 0; i < playerArr.size(); i++) {
-            if (!playerArr.get(i).isTurn() && playerArr.get(i).getCoinCount() > 0) {
-                validPlayers.add(playerArr.get(i));
+
+//            tv station constructed
+            if (tv) {
+                if (!playerArr.get(i).isTurn() && playerArr.get(i).getCoinCount() > 0) {
+                    validPlayers.add(playerArr.get(i));
+                }
+
+//                business center logic
+            } else {
+                if (!playerArr.get(i).isTurn()) {
+                    validPlayers.add(playerArr.get(i));
+                }
             }
         }
         int count = 1;
@@ -151,8 +162,6 @@ public class ConsoleListener implements GameListener {
     }
 
 //     public Establishment playerChooseEstablishment(Scanner sc, Player p, Player target) {
-//
-//
 //        int input = 0;
 //         while (input != 1 && input < target.getEstOwned().size()) {
 //             System.out.println(StringUtils.center("Player " + p.getPlayerNumber() + ", select an establishment:", 42, " "));
@@ -162,19 +171,45 @@ public class ConsoleListener implements GameListener {
 //         return target.getEstOwned().k(input - 1);
 //     }
 
-//    public Establishment playerChooseEst(Scanner sc, Player player) {
-//        System.out.println(StringUtils.center("-------  AVAILABLE ESTABLISHMENTS  -------", 42, " "));
-//        String s = "";
-//        s += StringUtils.center("Plaer " + player.getPlayerNumber(), 42, " ");
-//        int count = 1;
-//
-//        for (Establishment est : player.getEstOwned().keySet()) {
-//            StringUtils.rightPad(e.getName(), 18, " ") + " " +
-//                    e.getColor_ab() + e.getIcon_ab() + " " +
-//                    generateCost(e.getCost()) + " " +
-//                    generateActivation(e.getActivation())
-//        }
-//    }
+    /**
+     * Provides the given cost in string form
+     * @param cost the cost of the card
+     * @return the string representing the cost of the card to be used in toString()
+     */
+
+    protected String generateCost(int cost) {
+        String act = "(" + cost + ")";
+        return StringUtils.rightPad(act, 4, " ");
+    }
+
+    /**
+     * Provides the given activation range in string form
+     * @param s the activation range in string format
+     * @return the string representing the activation range of the card
+     */
+
+    public String generateActivation(String s) {
+        String act = "[" + s + "]";
+        return StringUtils.rightPad(act, 7, " ");
+    }
+
+    public Establishment playerChooseEst(Scanner sc, List<Establishment> est_order, Player player) {
+        System.out.println(StringUtils.center("-------  AVAILABLE ESTABLISHMENTS  -------", 42, " "));
+        String s = "";
+        s += StringUtils.center("Player " + player.getPlayerNumber(), 42, " ") + "\n";
+        int count = 1;
+        for (Establishment est : est_order) {
+            if (player.getEstOwned().containsKey(est)) {
+                s += count + ". " + StringUtils.rightPad(est.getName(), 16, " ") +
+                        est.getColor_ab() + est.getIcon_ab() + " " +
+                        generateCost(est.getCost()) + " " +
+                        generateActivation(est.getActivation()) + "\n";
+                count++;
+            }
+        }
+        System.out.println(s);
+        return null;
+    }
 
 
     public static void main(String[] args) {
