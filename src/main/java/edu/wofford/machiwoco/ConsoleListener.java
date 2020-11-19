@@ -119,7 +119,7 @@ public class ConsoleListener implements GameListener {
         return input != 1;
     }
 
-    public Player playerChooseTarget(Scanner sc, Player p, ArrayList<Player> playerArr, boolean tv) {
+    public Player playerChooseTarget(List<Establishment> est_order, Scanner sc, Player p, ArrayList<Player> playerArr, boolean tv) {
         if (tv) {
             System.out.println("TV Station activated for Player " + p.getPlayerNumber());
         } else {
@@ -128,18 +128,25 @@ public class ConsoleListener implements GameListener {
         ArrayList<Player> validPlayers = new ArrayList<Player>();
         System.out.println();
         System.out.println(StringUtils.center("-------     AVAILABLE PLAYERS      -------", 42, " "));
-        for (int i = 0; i < playerArr.size(); i++) {
+        for (Player player : playerArr) {
 
-//            tv station constructed
+//            tv station logic
             if (tv) {
-                if (!playerArr.get(i).isTurn() && playerArr.get(i).getCoinCount() > 0) {
-                    validPlayers.add(playerArr.get(i));
+                if (!player.isTurn() && player.getCoinCount() > 0) {
+                    validPlayers.add(player);
                 }
 
 //                business center logic
             } else {
-                if (!playerArr.get(i).isTurn()) {
-                    validPlayers.add(playerArr.get(i));
+                if (!player.isTurn()) {
+//                    est_order = [wheat, ranch, bakery ...]
+                    int wheat_num = player.getEstOwned().get(est_order.get(0));
+                    int bakery_num = player.getEstOwned().get(est_order.get(2));
+// todo
+//                    the only way to not have a player available is when they have only 1 wheat, only 1 bakery, and purple cards and nothing else
+                    if (!(wheat_num == 1 && bakery_num == 1 && player.getEstOwned().size() == 2)) {
+                        validPlayers.add(player);
+                    }
                 }
             }
         }
@@ -159,7 +166,9 @@ public class ConsoleListener implements GameListener {
             input = Integer.parseInt(sc.nextLine());
         }
         return validPlayers.get(input - 1);
+//        return null;
     }
+
 
 //     public Establishment playerChooseEstablishment(Scanner sc, Player p, Player target) {
 //        int input = 0;
