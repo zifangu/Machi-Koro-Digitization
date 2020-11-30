@@ -1,10 +1,5 @@
 package edu.wofford.machiwoco;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.Console;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -225,11 +220,16 @@ public class Feature7 extends Feature6 {
     }
 
     public ArrayList<Establishment> playerOwnedEst(Player player) {
-        ArrayList<Establishment> playerToTargetEst = new ArrayList<>();
+        ArrayList<Establishment> targetableEst = new ArrayList<>();
         for (Establishment est : EST_ORDER) {
-            if (player.getEstOwned().containsKey(est)) {playerToTargetEst.add(est);}
+            if (player.getEstOwned().containsKey(est)) {
+                if ((est.getColor_ab() != Card.Color_ab.P) &&
+                        !((est == getWheat() || est == getBakery()) && player.getEstOwned().get(est) == 1)) {
+                    targetableEst.add(est);
+                }
+            }
         }
-        return playerToTargetEst;
+        return targetableEst;
     }
 
 
@@ -242,15 +242,12 @@ public class Feature7 extends Feature6 {
             if (getCurrentPlayer().isTVStationConstructed()) {
                 Player playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, true);
                 activationListener.takeMoney(playerToTarget, getCurrentPlayer(), 5);
-          // TODO: Why prompt on stadium?
-            } else if (getCurrentPlayer().isStadiumOwned()) {
+            }
+            if (getCurrentPlayer().isBusinessComplexOwned()) {
                 Player playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, false);
-            } else if (getCurrentPlayer().isBusinessCenterOwned()) {
-                Player playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, false);
-
-                // TODO arraylist to be displayed should not contain start cards or purple.
                 Establishment estToTake = consoleListener.playerChooseEst(sc, playerToTarget, playerOwnedEst(playerToTarget), getCurrentPlayer().getPlayerNumber());
-
+                Establishment estToGive = consoleListener.playerChooseEst(sc, getCurrentPlayer(), playerOwnedEst(getCurrentPlayer()), getCurrentPlayer().getPlayerNumber());
+                activationListener.swap(playerToTarget, getCurrentPlayer(), estToTake, estToGive);
             }
         }
 
@@ -269,7 +266,9 @@ public class Feature7 extends Feature6 {
     @Override
     public void playGame() {
         gameInit();
-        player1.getEstOwned().put(tvStation, 1);
+
+        // TODO: random AI purple logic +
+        //  if no available player for tv station prompt should not appear.
 
         while (!isGameOver()) {
 
@@ -303,6 +302,9 @@ public class Feature7 extends Feature6 {
 
     public static void main(String[] args) {
         Feature7 feature7 = new Feature7(Integer.parseInt(args[1]));
+//        feature7.getPlayer1().getEstOwned().put(feature7.businessComplex, 1);
+//        feature7.getPlayer1().getEstOwned().put(feature7.tvStation, 1);
+//        feature7.getPlayer1().getEstOwned().put(feature7.orchard, 2);
         feature7.playGame();
     }
 }

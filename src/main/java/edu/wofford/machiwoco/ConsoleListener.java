@@ -162,12 +162,12 @@ public class ConsoleListener implements GameListener {
             System.out.println(s);
             count++;
         }
-        int input = 0;
+        int input;
         //System.out.println("size: " + validPlayers.size());
-        while (input != 1 && input < validPlayers.size()) {
+        do {
             System.out.println(StringUtils.center("Player " + p.getPlayerNumber() + ", who would you like to target?", 42, " "));
             input = Integer.parseInt(sc.nextLine());
-        }
+        } while ((input != 1 && input > validPlayers.size()) || input < 1);
         return validPlayers.get(input - 1);
 //        return null;
     }
@@ -212,21 +212,21 @@ public class ConsoleListener implements GameListener {
         int count = 1;
         for (Establishment est : estToDisplay) {
             if (player.getEstOwned().containsKey(est)) {
-                s += count + ". " + StringUtils.rightPad(est.getName(), 16, " ") +
+                s += StringUtils.leftPad(count + ". ", 4, " ") + StringUtils.rightPad(est.getName(), 19, " ") +
                         est.getColor_ab() + est.getIcon_ab() + " " +
                         generateCost(est.getCost()) + " " +
                         generateActivation(est.getActivation()) + "\n";
                 count++;
             }
         }
-        System.out.println(s);
+        System.out.print(s);
 
-        int input = 0;
+        int input;
         //System.out.println("size: " + validPlayers.size());
-        while (input != 1 && input < player.getEstOwned().size()) {
-            System.out.println(StringUtils.center("Player " + currPlayerNum + ", select an establishment: ", 42, " "));
+        do {
+            System.out.println(StringUtils.rightPad("Player " + currPlayerNum + ", select an establishment: ", 42, " "));
             input = Integer.parseInt(sc.nextLine());
-        }
+        } while (input > player.getEstOwned().size() || input < 1);
         return estToDisplay.get(input-1);
     }
 
