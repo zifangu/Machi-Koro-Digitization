@@ -224,6 +224,15 @@ public class Feature7 extends Feature6 {
         new InputObserver(inputSubject);
     }
 
+    public ArrayList<Establishment> playerOwnedEst(Player player) {
+        ArrayList<Establishment> playerToTargetEst = new ArrayList<>();
+        for (Establishment est : EST_ORDER) {
+            if (player.getEstOwned().containsKey(est)) {playerToTargetEst.add(est);}
+        }
+        return playerToTargetEst;
+    }
+
+
     @Override
     public void wayBetterRollDice(boolean rollTwo) {
         betterRollDice(rollTwo);
@@ -233,8 +242,14 @@ public class Feature7 extends Feature6 {
             if (getCurrentPlayer().isTVStationConstructed()) {
                 Player playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, true);
                 activationListener.takeMoney(playerToTarget, getCurrentPlayer(), 5);
+          // TODO: Why prompt on stadium?
             } else if (getCurrentPlayer().isStadiumOwned()) {
                 Player playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, false);
+            } else if (getCurrentPlayer().isBusinessCenterOwned()) {
+                Player playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, false);
+
+                // TODO arraylist to be displayed should not contain start cards or purple.
+                Establishment estToTake = consoleListener.playerChooseEst(sc, playerToTarget, playerOwnedEst(playerToTarget), getCurrentPlayer().getPlayerNumber());
 
             }
         }
