@@ -258,7 +258,11 @@ public class Player {
     protected void removeCard(Establishment e) {
         if(estOwned.containsKey(e)) {
             int numberOwned = estOwned.get(e);
-            estOwned.put(e, numberOwned - 1);
+             if(numberOwned == 1) {
+                 estOwned.remove(e);
+             } else if (numberOwned > 1) {
+                estOwned.put(e, numberOwned - 1);
+            }
         }
     }
 
