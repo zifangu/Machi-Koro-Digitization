@@ -504,7 +504,7 @@ public class TwoPlayersPhase1 {
                 } else {
                     if(est.getName().equals("Stadium") && !player.isStadiumOwned()) {
                         eResult.add(est);
-                    } else if (est.getName().equals("Business Center") && !player.isBusinessCenterOwned()) {
+                    } else if (est.getName().equals("Business Center") && !player.isBusinessComplexOwned()) {
                         eResult.add(est);
                     } else if (est.getName().equals("TV Station") && !player.isTVStationOwned(player.getEstOwned())) {
                         eResult.add(est);

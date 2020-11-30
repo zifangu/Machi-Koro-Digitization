@@ -62,7 +62,7 @@ public class ActivationListener implements GameListener {
            if(active.isTVStationConstructed()) {
 
            }
-           if(active.isBusinessCenterOwned()) {
+           if(active.isBusinessComplexOwned()) {
              //  swap(active,targetedPlayerFunction(),estToTakeFromThatPlayer(),estToGiveToThatPlayer());
            }
        }

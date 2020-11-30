@@ -179,9 +179,9 @@ public class Player {
      * Return true if Stadium is owned
      * @return boolean whether Business Center is owned
      */
-    public boolean isBusinessCenterOwned() {
+    public boolean isBusinessComplexOwned() {
         for(Establishment e:estOwned.keySet()) {
-            if(e.getName().equals("Business Center")) {
+            if(e.getName().equals("Business Complex")) {
                 return true;
             }
         }
