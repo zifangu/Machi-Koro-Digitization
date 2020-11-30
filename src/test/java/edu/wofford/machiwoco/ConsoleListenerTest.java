@@ -237,29 +237,28 @@ public class ConsoleListenerTest {
 
     @Test
     public void testBusinessActivationOnlyStartNPurple() {
-        // TODO test passing when not supposed to
-
         Feature7 feature7 = new Feature7(3);
         Scanner sc = new Scanner("1");
         feature7.getPlayer1().setTurn(true);
-//        assertThat(feature7.EST_ORDER.size(), is (15));
-//        assertThat(feature7.player1.getEstOwned().size(), is (2));
         feature7.player2.getEstOwned().put(feature7.orchard, 1);
         feature7.getPlayer2().getEstOwned().put(feature7.businessComplex,1);
         feature7.player3.getEstOwned().put(feature7.stadium, 1);
 
         c.playerChooseTarget(feature7.EST_ORDER, sc, feature7.player1, feature7.getPlayers(), false);
         assertThat(outContent.toString(), containsString("1. Player 2"));
-        assertThat(outContent.toString(), containsString("Player 3"));
+        assertThat(outContent.toString(), not(containsString("Player 3")));
     }
 
     @Test
     public void testBusinessCenterEstPrint() {
         Feature7 feature7 = new Feature7(3);
-        feature7.getPlayer1().setTurn(true);
+        feature7.getPlayer1().setTurn(false);
         feature7.getPlayer2().getEstOwned().put(feature7.forest, 2);
-        c.playerChooseEst(new Scanner("1"), feature7.EST_ORDER, feature7.player2);
+        feature7.getPlayer2().setTurn(true);
+        c.playerChooseEst(new Scanner("1"), feature7.getPlayer2(), feature7.playerOwnedEst(feature7.player2), feature7.getCurrentPlayer().getPlayerNumber());
 //        assertThat(feature7.EST_ORDER.size(), is(15));
+//        c.playerChooseEst(new Scanner("1"), feature7.getPlayer1(), feature7.playerOwnedEst(feature7.player1), feature7.getCurrentPlayer().getPlayerNumber());
+
         assertThat(outContent.toString(), containsString("1. Wheat Field"));
         assertThat(outContent.toString(), containsString("2. Bakery"));
         assertThat(outContent.toString(), containsString("3. Forest"));

@@ -142,9 +142,12 @@ public class ConsoleListener implements GameListener {
 //                    est_order = [wheat, ranch, bakery ...]
                     int wheat_num = player.getEstOwned().get(est_order.get(0));
                     int bakery_num = player.getEstOwned().get(est_order.get(2));
-// todo
-//                    the only way to not have a player available is when they have only 1 wheat, only 1 bakery, and purple cards and nothing else
-                    if (!(wheat_num == 1 && bakery_num == 1 && player.getEstOwned().size() == 2)) {
+//                    the only way to not have a player available is when they have only 1 wheat, only 1 bakery, purple cards and nothing else
+                    int purpleCount = 0;
+                    for (Establishment e : player.getEstOwned().keySet()) {
+                        if (e.getColor_ab().equals(Card.Color_ab.P)) {purpleCount++;}
+                    }
+                    if (!(wheat_num == 1 && bakery_num == 1 && player.getEstOwned().size() == 2+purpleCount)) {
                         validPlayers.add(player);
                     }
                 }
@@ -202,12 +205,12 @@ public class ConsoleListener implements GameListener {
         return StringUtils.rightPad(act, 7, " ");
     }
 
-    public Establishment playerChooseEst(Scanner sc, List<Establishment> est_order, Player player) {
+    public Establishment playerChooseEst(Scanner sc, Player player, ArrayList<Establishment> estToDisplay, int currPlayerNum) {
         System.out.println(StringUtils.center("-------  AVAILABLE ESTABLISHMENTS  -------", 42, " "));
         String s = "";
         s += StringUtils.center("Player " + player.getPlayerNumber(), 42, " ") + "\n";
         int count = 1;
-        for (Establishment est : est_order) {
+        for (Establishment est : estToDisplay) {
             if (player.getEstOwned().containsKey(est)) {
                 s += count + ". " + StringUtils.rightPad(est.getName(), 16, " ") +
                         est.getColor_ab() + est.getIcon_ab() + " " +
@@ -217,7 +220,14 @@ public class ConsoleListener implements GameListener {
             }
         }
         System.out.println(s);
-        return null;
+
+        int input = 0;
+        //System.out.println("size: " + validPlayers.size());
+        while (input != 1 && input < player.getEstOwned().size()) {
+            System.out.println(StringUtils.center("Player " + currPlayerNum + ", select an establishment: ", 42, " "));
+            input = Integer.parseInt(sc.nextLine());
+        }
+        return estToDisplay.get(input-1);
     }
 
 
