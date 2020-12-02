@@ -255,9 +255,9 @@ public class ConsoleListenerTest {
         feature7.getPlayer1().setTurn(false);
         feature7.getPlayer2().getEstOwned().put(feature7.forest, 2);
         feature7.getPlayer2().setTurn(true);
-        c.playerChooseEst(new Scanner("1"), feature7.getPlayer2(), feature7.playerOwnedEst(feature7.player2), feature7.getCurrentPlayer().getPlayerNumber());
+        c.playerChooseEst(new Scanner("1"), feature7.getPlayer2(), feature7.availEstBusComplex(feature7.player2), feature7.getCurrentPlayer().getPlayerNumber());
 //        assertThat(feature7.EST_ORDER.size(), is(15));
-//        c.playerChooseEst(new Scanner("1"), feature7.getPlayer1(), feature7.playerOwnedEst(feature7.player1), feature7.getCurrentPlayer().getPlayerNumber());
+//        c.playerChooseEst(new Scanner("1"), feature7.getPlayer1(), feature7.availEstBusComplex()(feature7.player1), feature7.getCurrentPlayer().getPlayerNumber());
 
         assertThat(outContent.toString(), not(containsString("1. Wheat Field")));
         assertThat(outContent.toString(), not(containsString("2. Bakery")));
@@ -273,7 +273,7 @@ public class ConsoleListenerTest {
         feature7.getPlayer1().getEstOwned().put(feature7.tvStation, 1);
         feature7.getPlayer1().getEstOwned().put(feature7.farmersMarket, 1);
         feature7.getPlayer2().setTurn(true);
-        c.playerChooseEst(new Scanner("1"), feature7.getPlayer1(), feature7.playerOwnedEst(feature7.player1), feature7.getCurrentPlayer().getPlayerNumber());
+        c.playerChooseEst(new Scanner("1"), feature7.getPlayer1(), feature7.availEstBusComplex(feature7.player1), feature7.getCurrentPlayer().getPlayerNumber());
         assertThat(outContent.toString(), containsString("1. Wheat Field"));
         assertThat(outContent.toString(), containsString("2. Forest"));
         assertThat(outContent.toString(), not(containsString("TV Station")));

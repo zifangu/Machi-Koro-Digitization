@@ -134,7 +134,7 @@ public class Feature4Test {
         feature4.getPlayers().get(1).setTurn(true);
         feature4.makeMove();
         //String menu = twoPlayersPhase1.getMenu();
-        assertThat(outContent.toString(), containsString("Do nothing"));
+        assertThat(outContent.toString(), containsString("Player "+feature4.getPlayer2().getPlayerNumber()));
     }
 
     @Test

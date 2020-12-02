@@ -26,6 +26,7 @@ public class Feature7Test {
     @Before
     public void before() {
         feature7 = new Feature7(3);
+        feature7.player1.setTurn(true);
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -46,5 +47,43 @@ public class Feature7Test {
     public void testIsTSConstructedFalse() {
         feature7.getPlayer1().getLandmarks()[1].setIs_constructed(false);
         assertThat(feature7.getPlayer1().isShoppingMallConstructed(), is(false));
+    }
+
+    @Test
+    public void testAvailPlayersTV() {
+        feature7.getPlayer2().setCoinCount(0);
+        feature7.player3.setCoinCount(2);
+        ArrayList<Player> temp = feature7.availPlayersTV(feature7.players);
+        assertThat(temp.size(), is(1));
+        assertThat(temp.get(0), is(feature7.player3));
+    }
+
+    @Test
+    public void testTVNoMoney() {
+        feature7.player2.setCoinCount(0);
+        feature7.player3.setCoinCount(0);
+        feature7.TVStationLogic();
+        assertThat(outContent.toString(), containsString("TV Station activated, but no player is available to target."));
+    }
+
+    @Test
+    public void testTVAI() {
+        feature7.getPlayer1().setTurn(false);
+        feature7.getPlayer2().setTurn(true);
+        feature7.TVStationLogic();
+//        started with 3, wanted to get five, but only 3 is available.
+        assertThat(feature7.getPlayer2().getCoinCount(), is(6));
+    }
+
+    @Test
+    public void testTVAI2() {
+        feature7.getPlayer1().setTurn(false);
+        feature7.getPlayer1().setCoinCount(9);
+        feature7.player3.setCoinCount(5);
+        feature7.getPlayer2().setTurn(true);
+        feature7.TVStationLogic();
+//        started with 3, wanted to get five, but only 3 is available.
+        assertThat(feature7.getPlayer2().getCoinCount(), is(8));
+        assertThat(feature7.getPlayer1().getCoinCount() + feature7.player3.getCoinCount(), is(9));
     }
 }

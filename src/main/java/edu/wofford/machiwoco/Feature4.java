@@ -183,7 +183,7 @@ public class Feature4 extends TwoPlayersPhase1 {
      */
     protected void aiLogic() {
         if(canAffordCard(getCurrentPlayer())) {
-            System.out.println(getMenu());
+//            System.out.println(getMenu());
             int estSize = buyEstablishmentLogic().size();
             int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
             // add last option of "99. Do Nothing" to AI
@@ -192,7 +192,7 @@ public class Feature4 extends TwoPlayersPhase1 {
             if (ai_input == ai_choices) {
                 ai_input = 99;
             }
-            System.out.println("AI CHOSE: " + ai_input);
+//            System.out.println("AI CHOSE: " + ai_input);
             handleInput(Integer.toString(ai_input));
         } else {
             System.out.println("Player " + getTurn() + "did not have enough money to make \n" +

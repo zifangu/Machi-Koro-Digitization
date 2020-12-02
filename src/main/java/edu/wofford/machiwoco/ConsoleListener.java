@@ -212,7 +212,7 @@ public class ConsoleListener implements GameListener {
         int count = 1;
         for (Establishment est : estToDisplay) {
             if (player.getEstOwned().containsKey(est)) {
-                s += StringUtils.leftPad(count + ". ", 4, " ") + StringUtils.rightPad(est.getName(), 19, " ") +
+                s += StringUtils.rightPad(count + ". ", 3, " ") + StringUtils.rightPad(est.getName(), 19, " ") +
                         est.getColor_ab() + est.getIcon_ab() + " " +
                         generateCost(est.getCost()) + " " +
                         generateActivation(est.getActivation()) + "\n";

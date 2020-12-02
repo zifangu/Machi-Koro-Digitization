@@ -181,7 +181,7 @@ public class Player {
      */
     public boolean isBusinessComplexOwned() {
         for(Establishment e:estOwned.keySet()) {
-            if(e.getName().equals("Business Complex")) {
+            if(e.getName().equals("Business Center")) {
                 return true;
             }
         }
