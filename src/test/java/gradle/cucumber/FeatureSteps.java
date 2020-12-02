@@ -972,7 +972,7 @@ public class FeatureSteps {
                 "Family Restaurant",
                 "Stadium",
                 "TV Station",
-                "Business Center",
+                "Business Complex",
                 "Train Station",
                 "Shopping Mall",
                 "Amusement Park",

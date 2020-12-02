@@ -45,7 +45,7 @@ public class Feature7 extends Feature6 {
                             "|   (your turn only)    |\n",
                 "6", "receive", "others", 2, "none", "none");
 
-        businessComplex = new Establishment("Business Center", 8, Card.Color.PURPLE, Card.Color_ab.P, Card.Icon.TOWER, Card.Icon_ab.T,
+        businessComplex = new Establishment("Business Complex", 8, Card.Color.PURPLE, Card.Color_ab.P, Card.Icon.TOWER, Card.Icon_ab.T,
                 "| Exchange one of your  |\n" +
                             "|       non-tower       |\n" +
                             "| establishments for 1  |\n" +
@@ -307,11 +307,26 @@ public class Feature7 extends Feature6 {
         activationListener.swap(playerToTarget, getCurrentPlayer(), estToTake, estToGive);
     }
 
+    public boolean radioTowerLogic() {
+        if (getCurrentPlayer().isAi()) {return rand.nextBoolean();}
+        return consoleListener.playerChooseReroll(sc, getCurrentPlayer());
+    }
+
 
     @Override
     public void wayBetterRollDice(boolean rollTwo) {
         betterRollDice(rollTwo);
-        actionsDiceRolled();
+        if (getCurrentPlayer().isRadioTowerConstructed()) {
+            consoleListener.diceRolled(dice1, dice2, getCurrentPlayer());
+            boolean reroll = radioTowerLogic();
+            if (reroll) {
+                betterRollDice(rollTwo());
+                actionsDiceRolled();
+            } else {
+                consoleListener.diceActivation(dice1+dice2, players);
+                activationListener.diceActivation(dice1+dice2, players);
+            }
+        } else { actionsDiceRolled();}
 
         if ((dice1 + dice2) == 6) {
             if (getCurrentPlayer().isTVStationConstructed()) {TVStationLogic();}
@@ -333,9 +348,6 @@ public class Feature7 extends Feature6 {
     @Override
     public void playGame() {
         gameInit();
-
-        // TODO: random AI purple logic +
-        //  if no available player for tv station prompt should not appear.
 
         while (!isGameOver()) {
 
@@ -373,6 +385,7 @@ public class Feature7 extends Feature6 {
 //        feature7.getPlayer1().getEstOwned().put(feature7.tvStation, 1);
 //        feature7.getPlayer1().getEstOwned().put(feature7.stadium, 1);
 //        feature7.getPlayer1().getEstOwned().put(feature7.orchard, 2);
+//        feature7.getPlayer1().getLandmarks()[3].is_constructed = true;
         feature7.playGame();
     }
 }

@@ -280,6 +280,15 @@ public class ConsoleListenerTest {
         assertThat(outContent.toString(), not(containsString("Bakery")));
     }
 
+    @Test
+    public void testPlayerChooseReroll() {
+        Feature7 feature7 = new Feature7(3);
+        boolean temp = c.playerChooseReroll(new Scanner("Y"), feature7.player1);
+        assertThat(outContent.toString(), containsString("would you like to reroll the dice? (y/n):"));
+        assertThat(temp, is(true));
+
+    }
+
     @After
     public void restoreStreams() {
         System.setOut(originalOut);

@@ -1,5 +1,6 @@
 package edu.wofford.machiwoco;
 
+import javax.swing.*;
 import java.util.Map;
 import java.util.Set;
 
@@ -181,7 +182,7 @@ public class Player {
      */
     public boolean isBusinessComplexOwned() {
         for(Establishment e:estOwned.keySet()) {
-            if(e.getName().equals("Business Center")) {
+            if(e.getName().equals("Business Complex")) {
                 return true;
             }
         }
@@ -370,6 +371,18 @@ public class Player {
         }
         return false;
     }
+
+    /**
+     * Gets whether or not the Radio Tower landmark is constructed.
+     * @return a boolean holding true if the Player has constructed the Radio Tower landmark.
+     */
+    public boolean isRadioTowerConstructed() {
+        for (Landmark l: landmarks) {
+            if (l.getName().equals("Radio Tower") && l.getIsConstructed()) {return true;}
+        }
+        return false;
+    }
+
 
     /**
      * Gets whether or not the Amusement Park landmark is constructed.

@@ -86,4 +86,12 @@ public class Feature7Test {
         assertThat(feature7.getPlayer2().getCoinCount(), is(8));
         assertThat(feature7.getPlayer1().getCoinCount() + feature7.player3.getCoinCount(), is(9));
     }
+
+    @Test
+    public void testRadioConstructed() {
+        feature7.getPlayer1().getLandmarks()[3].setIs_constructed(true);
+        assertThat(feature7.player1.isRadioTowerConstructed(), is(true));
+        assertThat(feature7.player1.getLandmarks()[0].getIsConstructed(), is(false));
+    }
+
 }

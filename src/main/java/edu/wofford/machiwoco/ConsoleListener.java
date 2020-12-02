@@ -230,6 +230,15 @@ public class ConsoleListener implements GameListener {
         return estToDisplay.get(input-1);
     }
 
+    public boolean playerChooseReroll(Scanner sc, Player p) {
+        String input;
+        do {
+            System.out.println("Player " + p.getPlayerNumber() + ", would you like to reroll the dice? (y/n): ");
+            input = sc.nextLine().toLowerCase();
+        } while (!input.equals("y") && !input.equals("n"));
+        return input.equals("y");
+    }
+
 
     public static void main(String[] args) {
         ConsoleListener c = new ConsoleListener();
