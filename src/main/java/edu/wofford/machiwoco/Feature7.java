@@ -75,6 +75,12 @@ public class Feature7 extends Feature6 {
     *****************************
         market.put(   ) until market have 5 from A, 5 from B and 2 from C
 
+        setDeck(DeckA, 5);
+        setDeck(DeckB, 5);
+        setDeck(DeckC, 2);
+
+        
+
 
     Ivan
     Test and Documentation
@@ -131,6 +137,21 @@ public class Feature7 extends Feature6 {
 
         landmarkInit();
         playerInit(numPlayers);
+    }
+
+    /**
+     * Establishes the market in 5-5-2 format.
+     * @param deck a stack representing one of the 3 decks that will be used in the creation of the market itself.
+     * @param sizeOfDeck an integer representing the number of cards in the deck.
+     */
+
+    private void setDeck(Stack deck, int sizeOfDeck) {
+        int unique = 0;
+        while (unique != sizeOfDeck) {
+                Establishment e = deck.pop();
+                if (!market.containsKey(e.getKey())) unique++;
+                market.put(e, 1);
+        }
     }
 
     /**
