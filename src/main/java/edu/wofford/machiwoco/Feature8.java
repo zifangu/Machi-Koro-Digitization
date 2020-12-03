@@ -19,6 +19,15 @@ public class Feature8 extends Feature7 {
     Establishment businessComplex;
     Establishment stadium;
     Random rand;
+    Map<Establishment,Integer> a;
+    Map<Establishment,Integer> b;
+    Map<Establishment,Integer> c;
+
+    Stack<Establishment> DeckA;
+    Stack<Establishment> DeckB;
+    Stack<Establishment> DeckC;
+
+
 
     /**
      * MachiWoco constructor representing the Phase 6 version of the game.
@@ -30,49 +39,41 @@ public class Feature8 extends Feature7 {
         NUMBER_OF_PLAYERS = numPlayers;
         rand = new Random();
 
+
+
+        DeckA = new Stack<>();
+        DeckB = new Stack<>();
+        DeckC = new Stack<>();
+
+        a = new HashMap<>();
+        b = new HashMap<>();
+        c = new HashMap<>();
+
+        a.put(getWheat(),6);
+        a.put(getRanch(),6);
+        a.put(getBakery(),6);
+        a.put(getCafe(),6);
+        a.put(getConvenience(),6);
+        a.put(getForest(),6);
+
+        b.put(getCheeseFactory(),6);
+        b.put(getFurnitureFactory(),6);
+        b.put(getMine(),6);
+        b.put(getFamilyRestaurant(),6);
+        b.put(getOrchard(),6);
+        b.put(getFarmersMarket(),6);
+
+        c.put(getBusiness(),numPlayers);
+        c.put(getStadium(),numPlayers);
+        c.put(getTvStation(),numPlayers);
+
+        shuffleMaps(a,DeckA,a.size()*6);
+        shuffleMaps(b,DeckB,b.size()*6);
+        shuffleMaps(c,DeckC,c.size()*numPlayers);
+
         setDeck(DeckA, 5);
         setDeck(DeckB, 5);
         setDeck(DeckC, 2);
-        /*
-        HashMap a = wheat, ranch, bakery, cafe , convenience, forest
-        HashMap b = Cheese, Funiture, Mine, Family , Orchard, Farmer
-        HashMap c = Stadium, TV, BusComplex
-
-    Bennett
-        Stack DeckA;
-        while (a.size() != 0) {
-            Get an random Establishment.
-            Push it to DeckA
-        }
-        Same for DeckB and DeckC
-
-    Eric
-    *****Already randomlized*****
-        DeckA
-        DeckB
-        DeckC
-    *****************************
-        market.put(   ) until market have 5 from A, 5 from B and 2 from C
-
-
-        
-
-
-    Ivan
-    Test and Documentation
-
-
-        Establishment = random(a)
-        while (DeckA.size < 6) {
-            DeckA.push(Establishment)
-            a.put(Establishment, a.get(Establishment) -1)
-        }
-
-
-        market.put(     );
-
-
-         */
 
         sc = new Scanner(System.in);
 
@@ -97,19 +98,36 @@ public class Feature8 extends Feature7 {
         landmarkInit();
         playerInit(numPlayers);
     }
+    /**
+     * Populates the deck with shuffled maps
+     * @param x the separates hashmaps (A, B, or C) to randomly pull establishments from
+     * @param deckToPushTo deck to push the values from hashmap x into
+     * @param totalCards total number of cards in the hashmap
+     */
+    private void shuffleMaps(Map<Establishment, Integer> x, Stack<Establishment> deckToPushTo,int totalCards) {
+        List<Establishment> keysAsArray = new ArrayList<>(x.keySet());
+        Random r = new Random();
+        while(deckToPushTo.size() < totalCards){
+            Establishment e = keysAsArray.get(r.nextInt(keysAsArray.size()));
+            deckToPushTo.push(e);
+        }
+    }
 
     /**
      * Establishes the market in 5-5-2 format.
      * @param deck a stack representing one of the 3 decks that will be used in the creation of the market itself.
-     * @param sizeOfDeck an integer representing the number of cards in the deck.
+     * @param maxSize the size of the visible cards
      */
-
-    private void setDeck(Stack deck, int sizeOfDeck) {
+    private void setDeck(Stack<Establishment> deck,int maxSize) {
         int unique = 0;
-        while (unique != sizeOfDeck) {
-                Establishment e = deck.pop();
-                if (!market.containsKey(e.getName())) unique++;
+        while (unique !=maxSize && deck.size() > 0) {
+            Establishment e = deck.pop();
+            if (market.containsKey(e.getName())) {
+                market.put(e,market.get(e)+1);
+            } else {
+                unique++;
                 market.put(e, 1);
+            }
         }
     }
 
