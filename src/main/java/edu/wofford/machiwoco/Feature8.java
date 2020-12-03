@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.Random;
 
 /**
- * This is a class built to represent the Phase 5 version of Machi Koro.
+ * This is a class built to represent the Phase 6 version of Machi Koro.
  *
  * @author Eric Craft
  * @author Ivan Gu
@@ -13,7 +13,7 @@ import java.util.Random;
  */
 
 
-public class Feature7 extends Feature6 {
+public class Feature8 extends Feature7 {
 
     Establishment tvStation;
     Establishment businessComplex;
@@ -21,39 +21,18 @@ public class Feature7 extends Feature6 {
     Random rand;
 
     /**
-     * MachiWoco constructor representing the Phase 5 version of the game.
+     * MachiWoco constructor representing the Phase 6 version of the game.
      * @param numPlayers an integer representing the number of Players.
      */
 
-    public Feature7(int numPlayers) {
+    public Feature8(int numPlayers) {
         super(2);
         NUMBER_OF_PLAYERS = numPlayers;
         rand = new Random();
-        
-        // Establishments go here
-        tvStation = new Establishment("TV Station",
-                7, Card.Color.PURPLE, Card.Color_ab.P, Card.Icon.TOWER, Card.Icon_ab.T,
-                "| Take 5 coins from an  |\n" +
-                          "|       opponent.       |\n" +
-                          "|   (your turn only)    |\n",
-                "6", "receive", "choice", 5, "none", "none");
-        
-        stadium = new Establishment("Stadium",
-                6, Card.Color.PURPLE, Card.Color_ab.P, Card.Icon.TOWER, Card.Icon_ab.T,
-                "|   Take 2 coins from   |\n" +
-                            "|    each opponent.     |\n" +
-                            "|   (your turn only)    |\n",
-                "6", "receive", "others", 2, "none", "none");
 
-        businessComplex = new Establishment("Business Complex", 8, Card.Color.PURPLE, Card.Color_ab.P, Card.Icon.TOWER, Card.Icon_ab.T,
-                "| Exchange one of your  |\n" +
-                            "|       non-tower       |\n" +
-                            "| establishments for 1  |\n" +
-                            "|   an opponent owns.   |\n" +
-                            "|   (your turn only)    |\n",
-                "6", "exchange", "choice", 0, "none", "none");
-
-        market.keySet().size();
+        setDeck(DeckA, 5);
+        setDeck(DeckB, 5);
+        setDeck(DeckC, 2);
         /*
         HashMap a = wheat, ranch, bakery, cafe , convenience, forest
         HashMap b = Cheese, Funiture, Mine, Family , Orchard, Farmer
@@ -75,9 +54,6 @@ public class Feature7 extends Feature6 {
     *****************************
         market.put(   ) until market have 5 from A, 5 from B and 2 from C
 
-        setDeck(DeckA, 5);
-        setDeck(DeckB, 5);
-        setDeck(DeckC, 2);
 
         
 
@@ -98,23 +74,6 @@ public class Feature7 extends Feature6 {
 
          */
 
-
-        market.put(getWheat(), 6);
-        market.put(getRanch(),6);
-        market.put(getForest(),6);
-        market.put(getBakery(), 6);
-        market.put(getConvenience(),6);
-        market.put(getMine(),6);
-        market.put(getOrchard(),6);
-        market.put(getCheeseFactory(), 6);
-        market.put(getFurnitureFactory(), 6);
-        market.put(getFarmersMarket(), 6);
-        market.put(getCafe(), 6);
-        market.put(getFamilyRestaurant(), 6);
-        market.put(tvStation, numPlayers);
-        market.put(businessComplex, numPlayers);
-        market.put(stadium, numPlayers);
-
         sc = new Scanner(System.in);
 
         // EST_ORDER
@@ -125,9 +84,9 @@ public class Feature7 extends Feature6 {
         EST_ORDER.add(getCafe());
         EST_ORDER.add(getConvenience());
         EST_ORDER.add(getForest());
-        EST_ORDER.add(stadium);
-        EST_ORDER.add(tvStation);
-        EST_ORDER.add(businessComplex);
+        EST_ORDER.add(getStadium());
+        EST_ORDER.add(getTvStation());
+        EST_ORDER.add(getBusiness());
         EST_ORDER.add(getCheeseFactory());
         EST_ORDER.add(getFurnitureFactory());
         EST_ORDER.add(getMine());
@@ -137,6 +96,21 @@ public class Feature7 extends Feature6 {
 
         landmarkInit();
         playerInit(numPlayers);
+    }
+
+    /**
+     * Establishes the market in 5-5-2 format.
+     * @param deck a stack representing one of the 3 decks that will be used in the creation of the market itself.
+     * @param sizeOfDeck an integer representing the number of cards in the deck.
+     */
+
+    private void setDeck(Stack deck, int sizeOfDeck) {
+        int unique = 0;
+        while (unique != sizeOfDeck) {
+                Establishment e = deck.pop();
+                if (!market.containsKey(e.getName())) unique++;
+                market.put(e, 1);
+        }
     }
 
     /**
@@ -264,127 +238,6 @@ public class Feature7 extends Feature6 {
         new InputObserver(inputSubject);
     }
 
-    public ArrayList<Establishment> availEstBusComplex(Player player) {
-        ArrayList<Establishment> targetableEst = new ArrayList<>();
-        for (Establishment est : EST_ORDER) {
-            if (player.getEstOwned().containsKey(est)) {
-                if ((est.getColor_ab() != Card.Color_ab.P) &&
-                        !((est == getWheat() || est == getBakery()) && player.getEstOwned().get(est) == 1)) {
-                    targetableEst.add(est);
-                }
-            }
-        }
-        return targetableEst;
-    }
-
-    public ArrayList<Player> availPlayersTV(ArrayList<Player> players) {
-        ArrayList<Player> availPlayers = new ArrayList<>();
-        for (Player p : players) {
-            if (!p.isTurn() && p.getCoinCount() > 0) {
-                availPlayers.add(p);
-            }
-        }
-        return availPlayers;
-    }
-
-    public ArrayList<Player> availPlayersBus(ArrayList<Player> players) {
-        ArrayList<Player> availPlayers = new ArrayList<>();
-        for (Player p : players) {
-            if (!p.isTurn()) {
-                int wheat_num = p.getEstOwned().get(wheat);
-                int bakery_num = p.getEstOwned().get(bakery);
-                int purpleCount = 0;
-                for (Establishment e : p.getEstOwned().keySet()) {
-                    if (e.getColor_ab().equals(Card.Color_ab.P)) {purpleCount++;}
-                }
-                if (!(wheat_num == 1 && bakery_num == 1 && p.getEstOwned().size() == 2+purpleCount)) {
-                    availPlayers.add(p);
-                }
-            }
-        }
-        return availPlayers;
-    }
-
-    public Player aiPlayerChoice(ArrayList<Player> players) {
-//  nextInt(upperbound) generates random numbers in the range 0 to upperbound-1
-        return players.get(rand.nextInt(players.size()));
-    }
-
-    public Establishment aiEstChoice(ArrayList<Establishment> establishments) {
-        return establishments.get(rand.nextInt(establishments.size()));
-    }
-
-    public void TVStationLogic() {
-            int coinCount = 0;
-            for (Player p : players) {
-                if (!p.isTurn()) {
-                    coinCount += p.getCoinCount();
-                }
-            }
-            if (coinCount > 0) {
-                Player playerToTarget;
-                if (!getCurrentPlayer().isAi()) {
-                    playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, true);
-                } else {
-                    playerToTarget = aiPlayerChoice(availPlayersTV(players));
-                }
-                activationListener.takeMoney(playerToTarget, getCurrentPlayer(), 5);
-            } else {
-                System.out.println("TV Station activated, but no player is available to target.");
-            }
-        }
-
-    public void busComplexLogic() {
-        Player playerToTarget;
-        Establishment estToTake;
-        Establishment estToGive;
-        if (getCurrentPlayer().isAi()) {
-            playerToTarget = aiPlayerChoice(availPlayersBus(players));
-            estToTake = aiEstChoice(availEstBusComplex(playerToTarget));
-            estToGive = aiEstChoice(availEstBusComplex(getCurrentPlayer()));
-        } else {
-            playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, false);
-            estToTake = consoleListener.playerChooseEst(sc, playerToTarget, availEstBusComplex(playerToTarget), getCurrentPlayer().getPlayerNumber());
-            estToGive = consoleListener.playerChooseEst(sc, getCurrentPlayer(), availEstBusComplex(getCurrentPlayer()), getCurrentPlayer().getPlayerNumber());
-        }
-        activationListener.swap(playerToTarget, getCurrentPlayer(), estToTake, estToGive);
-    }
-
-    public boolean radioTowerLogic() {
-        if (getCurrentPlayer().isAi()) {return rand.nextBoolean();}
-        return consoleListener.playerChooseReroll(sc, getCurrentPlayer());
-    }
-
-
-    @Override
-    public void wayBetterRollDice(boolean rollTwo) {
-        betterRollDice(rollTwo);
-        if (getCurrentPlayer().isRadioTowerConstructed()) {
-            consoleListener.diceRolled(dice1, dice2, getCurrentPlayer());
-            boolean reroll = radioTowerLogic();
-            if (reroll) {
-                betterRollDice(rollTwo());
-                System.out.println("Player " + getCurrentPlayer().getPlayerNumber() + " used a reroll.");
-                actionsDiceRolled();
-            } else {
-                consoleListener.diceActivation(dice1+dice2, players);
-                activationListener.diceActivation(dice1+dice2, players);
-            }
-        } else { actionsDiceRolled();}
-
-        if ((dice1 + dice2) == 6) {
-            if (getCurrentPlayer().isTVStationConstructed()) {TVStationLogic();}
-            if (getCurrentPlayer().isBusinessComplexOwned()) {busComplexLogic();}
-        }
-
-//        if ((dice1 + dice2) == 6 && getCurrentPlayer().isBusinessCenterOwned()) {
-//            Player playerToTarget = consoleListener.playerChooseTarget(sc, getCurrentPlayer(), players, false);
-//            Establishment estToTake = consoleListener.playerChooseEst(sc, playerToTarget);
-//            Establishment estToGive = consoleListener.playerChooseEst(sc, getCurrentPlayer());
-//            activationListener.exchangeEst(playerToTarget, getCurrentPlayer(), estToTake, estToGive);
-//        }
-    }
-
     /**
      * Play the MachiWoCo game in its entirety
      */
@@ -409,30 +262,6 @@ public class Feature7 extends Feature6 {
         }
     }
 
-    /**
-     * Returns stadium establishment.
-     * @return stadium establishment.
-     */
-    protected Establishment getStadium() {
-        return stadium;
-    }
-
-    /**
-     * Returns tvStation establishment.
-     * @return tvStation establishment.
-     */
-    protected Establishment getTvStation() {
-        return tvStation;
-    }
-
-    /**
-     * Returns businessComplex establishment.
-     * @return buinessComplex establishment.
-     */
-    protected Establishment getBusiness() {
-        return businessComplex;
-    }
-
 
     /**
      * Starts the Phase 4 version of Machi Koro.
@@ -440,12 +269,12 @@ public class Feature7 extends Feature6 {
      */
 
     public static void main(String[] args) {
-        Feature7 feature7 = new Feature7(Integer.parseInt(args[1]));
+        Feature8 feature8 = new Feature8(Integer.parseInt(args[1]));
 //        feature7.getPlayer1().getEstOwned().put(feature7.businessComplex, 1);
 //        feature7.getPlayer1().getEstOwned().put(feature7.tvStation, 1);
 //        feature7.getPlayer1().getEstOwned().put(feature7.stadium, 1);
 //        feature7.getPlayer1().getEstOwned().put(feature7.orchard, 2);
 //        feature7.getPlayer1().getLandmarks()[3].is_constructed = true;
-        feature7.playGame();
+        feature8.playGame();
     }
 }
