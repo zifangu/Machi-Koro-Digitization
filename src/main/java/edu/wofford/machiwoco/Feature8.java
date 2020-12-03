@@ -122,7 +122,7 @@ public class Feature8 extends Feature7 {
         int unique = 0;
         while (unique !=maxSize && deck.size() > 0) {
             Establishment e = deck.pop();
-            if (market.containsKey(e.getName())) {
+            if (market.containsKey(e)) {
                 market.put(e,market.get(e)+1);
             } else {
                 unique++;
