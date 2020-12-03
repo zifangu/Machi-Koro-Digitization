@@ -53,7 +53,44 @@ public class Feature7 extends Feature6 {
                             "|   (your turn only)    |\n",
                 "6", "exchange", "choice", 0, "none", "none");
 
-        
+        market.keySet().size();
+        /*
+        HashMap a = wheat, ranch, bakery, cafe , convenience, forest
+        HashMap b = Cheese, Funiture, Mine, Family , Orchard, Farmer
+        HashMap c = Stadium, TV, BusComplex
+
+    Bennett
+        Stack DeckA;
+        while (a.size() != 0) {
+            Get an random Establishment.
+            Push it to DeckA
+        }
+        Same for DeckB and DeckC
+
+    Eric
+    *****Already randomlized*****
+        DeckA
+        DeckB
+        DeckC
+    *****************************
+        market.put(   ) until market have 5 from A, 5 from B and 2 from C
+
+
+    Ivan
+    Test and Documentation
+
+
+        Establishment = random(a)
+        while (DeckA.size < 6) {
+            DeckA.push(Establishment)
+            a.put(Establishment, a.get(Establishment) -1)
+        }
+
+
+        market.put(     );
+
+
+         */
 
 
         market.put(getWheat(), 6);
