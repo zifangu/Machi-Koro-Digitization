@@ -321,6 +321,7 @@ public class Feature7 extends Feature6 {
             boolean reroll = radioTowerLogic();
             if (reroll) {
                 betterRollDice(rollTwo());
+                System.out.println("Player " + getCurrentPlayer().getPlayerNumber() + " used a reroll.");
                 actionsDiceRolled();
             } else {
                 consoleListener.diceActivation(dice1+dice2, players);
