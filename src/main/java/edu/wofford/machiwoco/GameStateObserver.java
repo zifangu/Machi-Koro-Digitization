@@ -184,7 +184,9 @@ public class GameStateObserver extends Observer{
     protected  String generateMarket() {
         StringBuilder s = new StringBuilder();
         for (Establishment e : gameSubject.getEstOrder()) {
-            s.append(generateSingleMarketItem(e, gameSubject.getMarket().get(e)));
+            if (gameSubject.getMarket().containsKey(e)) {
+                s.append(generateSingleMarketItem(e, gameSubject.getMarket().get(e)));
+            }
         }
         return generateStaticMarket() + s + "\n";
     }

@@ -71,9 +71,30 @@ public class Feature8 extends Feature7 {
         shuffleMaps(b,DeckB,b.size()*6);
         shuffleMaps(c,DeckC,c.size()*numPlayers);
 
+        market.remove(wheat);
+        market.remove(ranch);
+        market.remove(cafe);
+        market.remove(bakery);
+        market.remove(convenience);
+        market.remove(forest);
+        market.remove(cheeseFactory);
+        market.remove(furnitureFactory);
+        market.remove(mine);
+        market.remove(familyRestaurant);
+        market.remove(orchard);
+        market.remove(farmersMarket);
+        market.remove(businessComplex);
+        market.remove(stadium);
+        market.remove(tvStation);
+
+
+
         setDeck(DeckA, 5);
         setDeck(DeckB, 5);
         setDeck(DeckC, 2);
+
+
+
 
         sc = new Scanner(System.in);
 
@@ -265,6 +286,17 @@ public class Feature8 extends Feature7 {
         gameInit();
 
         while (!isGameOver()) {
+
+            // todo: Bennett fix the purple deck.
+
+            /*
+            // Eric
+            1. If something in the market has #0, remove it from the
+                market.
+
+            // Ivan
+            2. Pull from the appropriate deck.
+             */
 
             // (1) print turn and (2) print current game state
             gameSubject.notifyObservers();

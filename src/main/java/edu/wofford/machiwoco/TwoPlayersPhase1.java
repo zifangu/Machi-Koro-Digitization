@@ -495,22 +495,24 @@ public class TwoPlayersPhase1 {
      */
     public ArrayList<Establishment> getAffordableEstablishments(Player player, int owned) {
         ArrayList<Establishment> eResult = new ArrayList<Establishment>();
-        for(Establishment est: EST_ORDER){
-            int cost = est.getCost();
-            int numberLeft = market.get(est);
-            if(owned >= cost && numberLeft!=0) {
-                if(!est.getColor_ab().equals(Card.Color_ab.P)) {
-                    eResult.add(est);
-                } else {
-                    if(est.getName().equals("Stadium") && !player.isStadiumOwned()) {
+        for(Establishment est: EST_ORDER) {
+            if (market.containsKey(est)) {
+                int cost = est.getCost();
+                int numberLeft = market.get(est);
+                if (owned >= cost && numberLeft != 0) {
+                    if (!est.getColor_ab().equals(Card.Color_ab.P)) {
                         eResult.add(est);
-                    } else if (est.getName().equals("Business Center") && !player.isBusinessComplexOwned()) {
-                        eResult.add(est);
-                    } else if (est.getName().equals("TV Station") && !player.isTVStationOwned(player.getEstOwned())) {
-                        eResult.add(est);
+                    } else {
+                        if (est.getName().equals("Stadium") && !player.isStadiumOwned()) {
+                            eResult.add(est);
+                        } else if (est.getName().equals("Business Center") && !player.isBusinessComplexOwned()) {
+                            eResult.add(est);
+                        } else if (est.getName().equals("TV Station") && !player.isTVStationOwned(player.getEstOwned())) {
+                            eResult.add(est);
+                        }
                     }
-                }
 
+                }
             }
         }
         return eResult;
