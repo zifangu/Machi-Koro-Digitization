@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.is;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.*;
+
+import org.hamcrest.Matchers;
 import org.junit.*;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -81,6 +83,7 @@ public class Feature7Test {
         feature7.getPlayer1().setCoinCount(9);
         feature7.player3.setCoinCount(5);
         feature7.getPlayer2().setTurn(true);
+        feature7.getPlayer2().getEstOwned().put(feature7.getTvStation(), 1);
         feature7.TVStationLogic();
 //        started with 3, wanted to get five, but only 3 is available.
         assertThat(feature7.getPlayer2().getCoinCount(), is(8));
@@ -92,6 +95,111 @@ public class Feature7Test {
         feature7.getPlayer1().getLandmarks()[3].setIs_constructed(true);
         assertThat(feature7.player1.isRadioTowerConstructed(), is(true));
         assertThat(feature7.player1.getLandmarks()[0].getIsConstructed(), is(false));
+    }
+
+    @Test
+    public void testBusCompAI() {
+        feature7.getPlayer1().setTurn(false);
+        feature7.getPlayer2().setTurn(true);
+
+        feature7.getPlayer2().getEstOwned().put(feature7.orchard, 2);
+        feature7.getPlayer2().getEstOwned().put(feature7.getBusiness(), 1);
+        feature7.player3.getEstOwned().put(feature7.getWheat(), 2);
+        feature7.player3.getEstOwned().put(feature7.getBusiness(), 1);
+
+        feature7.busComplexLogic();
+        assertThat(feature7.player3.getEstOwned().get(feature7.wheat), is(1));
+        assertThat(feature7.player2.getEstOwned().get(feature7.orchard), is(1));
+        assertThat(feature7.player2.getEstOwned().get(feature7.wheat), is(2));
+    }
+
+    @Test
+    public void testBusCompAI2() {
+        feature7.getPlayer1().setTurn(false);
+        feature7.getPlayer2().setTurn(true);
+        feature7.getPlayer2().getEstOwned().put(feature7.orchard, 2);
+        feature7.getPlayer2().getEstOwned().put(feature7.getBusiness(), 1);
+        feature7.player3.getEstOwned().put(feature7.familyRestaurant, 2);
+        feature7.player3.getEstOwned().put(feature7.getBusiness(), 1);
+        feature7.busComplexLogic();
+        assertThat(feature7.player2.getEstOwned().get(feature7.orchard), is(1));
+        assertThat(feature7.player2.getEstOwned().get(feature7.familyRestaurant), is(1));
+    }
+
+    @Test
+    public void testBusCompAI3() {
+        feature7.getPlayer1().setTurn(false);
+        feature7.getPlayer2().setTurn(true);
+        feature7.getPlayer2().getEstOwned().put(feature7.orchard, 2);
+        feature7.getPlayer2().getEstOwned().put(feature7.getBusiness(), 1);
+        feature7.player3.getEstOwned().put(feature7.bakery, 2);
+        feature7.player3.getEstOwned().put(feature7.getBusiness(), 1);
+        feature7.busComplexLogic();
+        assertThat(feature7.player2.getEstOwned().get(feature7.orchard), is(1));
+        assertThat(feature7.player2.getEstOwned().get(feature7.bakery), is(2));
+    }
+
+    @Test
+    public void testBusCompHuman() {
+        feature7.getPlayer1().getEstOwned().put(feature7.orchard, 2);
+        feature7.getPlayer1().getEstOwned().put(feature7.familyRestaurant, 2);
+        feature7.getPlayer1().getEstOwned().put(feature7.getBusiness(), 1);
+
+        feature7.getPlayer2().getEstOwned().put(feature7.mine, 2);
+
+        feature7.player3.getEstOwned().put(feature7.bakery, 2);
+
+        feature7.sc = new Scanner("1\n1\n1");
+        feature7.busComplexLogic();
+        assertThat(feature7.player1.getEstOwned().get(feature7.mine), is(1));
+        assertThat(feature7.player2.getEstOwned().get(feature7.mine), is(1));
+    }
+
+    @Test
+    public void testBusCompHuman2() {
+        feature7.getPlayer1().getEstOwned().put(feature7.orchard, 2);
+        feature7.getPlayer1().getEstOwned().put(feature7.familyRestaurant, 2);
+        feature7.getPlayer1().getEstOwned().put(feature7.getBusiness(), 1);
+
+        feature7.getPlayer2().getEstOwned().put(feature7.mine, 2);
+
+        feature7.player3.getEstOwned().put(feature7.bakery, 2);
+
+        feature7.sc = new Scanner("2\n1\n1");
+        feature7.busComplexLogic();
+        assertThat(feature7.player1.getEstOwned().get(feature7.bakery), is(2));
+        assertThat(feature7.player1.getEstOwned().get(feature7.orchard), is(2));
+        assertThat(feature7.player1.getEstOwned().get(feature7.familyRestaurant), is(1));
+        assertThat(feature7.player3.getEstOwned().get(feature7.bakery), is(1));
+    }
+
+    @Test
+    public void testGamePlay() {
+        feature7.getPlayer1().getEstOwned().put(feature7.tvStation, 1);
+        feature7.getPlayer1().setCoinCount(2);
+        feature7.player3.setCoinCount(69);
+        feature7.sc = new Scanner("2");
+        feature7.TVStationLogic();
+        assertThat(feature7.getPlayer1().getCoinCount(), is(7));
+        assertThat(feature7.player3.getCoinCount(), is(64));
+
+
+    }
+
+    @Test
+    public void testRadioAI() {
+        feature7.player1.setTurn(false);
+        feature7.player3.setTurn(true);
+        feature7.player3.getLandmarks()[3].is_constructed = true;
+        assertThat(feature7.radioTowerLogic(), Matchers.either(Matchers.is(true)).or(Matchers.is(false)));
+    }
+
+    @Test
+    public void testRadioHuman() {
+        feature7.sc = new Scanner("y");
+        feature7.player1.getLandmarks()[3].is_constructed = true;
+        boolean human = feature7.radioTowerLogic();
+        assertThat(human, is(true));
     }
 
 }

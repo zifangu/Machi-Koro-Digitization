@@ -53,7 +53,6 @@ public class Feature7 extends Feature6 {
                             "|   (your turn only)    |\n",
                 "6", "exchange", "choice", 0, "none", "none");
 
-        market.keySet().size();
         /*
         HashMap a = wheat, ranch, bakery, cafe , convenience, forest
         HashMap b = Cheese, Funiture, Mine, Family , Orchard, Farmer

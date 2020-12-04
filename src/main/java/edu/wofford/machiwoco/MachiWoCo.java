@@ -30,6 +30,8 @@ public class MachiWoCo {
             Feature6.main(args);
         } else if (args[0].equals("phase5")) {
             Feature7.main(args);
+        } else if (args[0].equals("phase6")) {
+            Feature8.main(args);
         } else if (args[0].equals("console")) {
             ConsoleListener.main(args);
         }
