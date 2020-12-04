@@ -277,6 +277,10 @@ public class Feature8 extends Feature7 {
         new InputObserver(inputSubject);
     }
 
+    public void removeZeroesMarket() {
+        market.values().removeAll(Collections.singleton(0));
+    }
+
     /**
      * Play the MachiWoCo game in its entirety
      */
