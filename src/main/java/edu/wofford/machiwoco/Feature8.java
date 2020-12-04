@@ -15,9 +15,6 @@ import java.util.Random;
 
 public class Feature8 extends Feature7 {
 
-    Establishment tvStation;
-    Establishment businessComplex;
-    Establishment stadium;
     Random rand;
     Map<Establishment,Integer> a;
     Map<Establishment,Integer> b;
@@ -36,10 +33,9 @@ public class Feature8 extends Feature7 {
 
     public Feature8(int numPlayers) {
         super(2);
+        //market/
         NUMBER_OF_PLAYERS = numPlayers;
         rand = new Random();
-
-
 
         DeckA = new Stack<>();
         DeckB = new Stack<>();
@@ -83,18 +79,15 @@ public class Feature8 extends Feature7 {
         market.remove(familyRestaurant);
         market.remove(orchard);
         market.remove(farmersMarket);
-        market.remove(businessComplex);
-        market.remove(stadium);
-        market.remove(tvStation);
+        market.remove(getBusiness());
+        market.remove(getStadium());
+        market.remove(getTvStation());
 
 
 
         setDeck(DeckA, 5);
         setDeck(DeckB, 5);
         setDeck(DeckC, 2);
-
-
-
 
         sc = new Scanner(System.in);
 
@@ -151,6 +144,7 @@ public class Feature8 extends Feature7 {
             }
         }
     }
+
 
     /**
      * Builds the Players to take part in the Phase3 version of Machi Koco.
@@ -324,11 +318,6 @@ public class Feature8 extends Feature7 {
 
     public static void main(String[] args) {
         Feature8 feature8 = new Feature8(Integer.parseInt(args[1]));
-//        feature7.getPlayer1().getEstOwned().put(feature7.businessComplex, 1);
-//        feature7.getPlayer1().getEstOwned().put(feature7.tvStation, 1);
-//        feature7.getPlayer1().getEstOwned().put(feature7.stadium, 1);
-//        feature7.getPlayer1().getEstOwned().put(feature7.orchard, 2);
-//        feature7.getPlayer1().getLandmarks()[3].is_constructed = true;
         feature8.playGame();
     }
 }
