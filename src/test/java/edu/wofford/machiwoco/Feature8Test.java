@@ -10,7 +10,7 @@ import java.util.*;
 import org.hamcrest.Matchers;
 import org.junit.*;
 
-import sun.security.action.GetIntegerAction;
+//import sun.security.action.GetIntegerAction;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
@@ -52,5 +52,14 @@ public class Feature8Test {
         feature8.removeZeroesMarket();
         assertThat(feature8.getMarket(), is(resultmarket));
     }
+
+//    @Test
+//    public void testDeck() {
+//        Feature8 feature8 = new Feature8(3);
+//        assertThat(feature8.DeckA.size(), is(36));
+////        assertThat(outContent.toString(), is("XD"));
+////
+//    }
+
 
 }

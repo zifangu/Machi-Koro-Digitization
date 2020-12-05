@@ -24,6 +24,11 @@ public class Feature8 extends Feature7 {
     Stack<Establishment> DeckB;
     Stack<Establishment> DeckC;
 
+    int uniqueA;
+    int uniqueB;
+    int uniqueC;
+
+
 
 
     /**
@@ -63,8 +68,8 @@ public class Feature8 extends Feature7 {
         c.put(getStadium(),numPlayers);
         c.put(getTvStation(),numPlayers);
 
-        shuffleMaps(a,DeckA,a.size()*6);
-        shuffleMaps(b,DeckB,b.size()*6);
+        shuffleMaps(a,DeckA,36);
+        shuffleMaps(b,DeckB,36);
         shuffleMaps(c,DeckC,c.size()*numPlayers);
 
         market.remove(wheat);
@@ -85,9 +90,12 @@ public class Feature8 extends Feature7 {
 
 
 
-        setDeck(DeckA, 5);
-        setDeck(DeckB, 5);
-        setDeck(DeckC, 2);
+        setDeck(DeckA, 5, 0);
+        setDeck(DeckB, 5, 0);
+        setDeck(DeckC, 2, 0);
+        uniqueA = 5;
+        uniqueB = 5;
+        uniqueC = 2;
 
         sc = new Scanner(System.in);
 
@@ -119,11 +127,15 @@ public class Feature8 extends Feature7 {
      * @param totalCards total number of cards in the hashmap
      */
     private void shuffleMaps(Map<Establishment, Integer> x, Stack<Establishment> deckToPushTo,int totalCards) {
-        List<Establishment> keysAsArray = new ArrayList<>(x.keySet());
         Random r = new Random();
         while(deckToPushTo.size() < totalCards){
+            x.values().removeAll(Collections.singleton(0));
+            List<Establishment> keysAsArray = new ArrayList<>(x.keySet());
             Establishment e = keysAsArray.get(r.nextInt(keysAsArray.size()));
             deckToPushTo.push(e);
+//            System.out.println("MY NAME IS: " + e.getName() + "\n");
+            if (x.get(e) > 0) {x.put(e, x.get(e)-1);}
+            else {x.remove(e);}
         }
     }
 
@@ -132,8 +144,8 @@ public class Feature8 extends Feature7 {
      * @param deck a stack representing one of the 3 decks that will be used in the creation of the market itself.
      * @param maxSize the size of the visible cards
      */
-    private void setDeck(Stack<Establishment> deck,int maxSize) {
-        int unique = 0;
+    private int setDeck(Stack<Establishment> deck,int maxSize, int curSize) {
+        int unique = curSize;
         while (unique !=maxSize && deck.size() > 0) {
             Establishment e = deck.pop();
             if (market.containsKey(e)) {
@@ -143,6 +155,7 @@ public class Feature8 extends Feature7 {
                 market.put(e, 1);
             }
         }
+        return unique;
     }
 
 
@@ -272,6 +285,21 @@ public class Feature8 extends Feature7 {
     }
 
     public void removeZeroesMarket() {
+        for (Establishment e: market.keySet()) {
+            if (market.get(e) == 0) {
+                if (e.getName().equals("Bakery")) {
+                    uniqueA--;
+                } else if (e.getName().equals("Family Restaurant") || e.getName().equals("Farmers Market")) {
+                    uniqueB--;
+                } else if (Integer.parseInt(e.getActivation()) < 6) {
+                    uniqueA--;
+                } else if (Integer.parseInt(e.getActivation()) == 6) {
+                    uniqueC--;
+                } else if (Integer.parseInt(e.getActivation()) > 6) {
+                    uniqueB--;
+                }
+            }
+        }
         market.values().removeAll(Collections.singleton(0));
     }
 
@@ -284,18 +312,6 @@ public class Feature8 extends Feature7 {
         gameInit();
 
         while (!isGameOver()) {
-
-            // todo: Bennett fix the purple deck.
-
-            /*
-            // Eric
-            1. If something in the market has #0, remove it from the
-                market.
-
-            // Ivan
-            2. Pull from the appropriate deck.
-             */
-
             // (1) print turn and (2) print current game state
             gameSubject.notifyObservers();
 
@@ -307,6 +323,12 @@ public class Feature8 extends Feature7 {
 
             // (5) check if Game has ended
             gameEnded();
+
+            removeZeroesMarket();
+            uniqueA = setDeck(DeckA, 5, uniqueA);
+            uniqueB = setDeck(DeckB, 5, uniqueB);
+            uniqueC = setDeck(DeckC, 2, uniqueC);
+
         }
     }
 
@@ -318,6 +340,7 @@ public class Feature8 extends Feature7 {
 
     public static void main(String[] args) {
         Feature8 feature8 = new Feature8(Integer.parseInt(args[1]));
+//        feature8.player1.setCoinCount(50);
         feature8.playGame();
     }
 }
