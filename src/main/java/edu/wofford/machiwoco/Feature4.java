@@ -203,7 +203,7 @@ public class Feature4 extends TwoPlayersPhase1 {
     /**
      * Human Input for making a move
      */
-    private void humanInput() {
+    protected void humanInput() {
         // human player input
         if(canAffordCard(getCurrentPlayer())) {
             String s = "Player " + getTurn() + " would you like to purchase an \n" + "establishment or construct a landmark?" + " (" + getCurrentPlayer().getCoinCount() +

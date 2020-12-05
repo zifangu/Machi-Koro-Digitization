@@ -59,6 +59,51 @@ public class Player {
      * @param isTurn  boolean representing whether the player's turn is active
      */
 
+    protected int peekActivation(int diceRoll, boolean isTurn){
+        int potential = 0;
+        Set<Establishment> keys = estOwned.keySet();
+        for(Establishment est: keys){
+            int activation = 0;
+            int activation2 = 0;
+            switch (est.getName()) {
+                case "Bakery":
+                    activation = 2;
+                    activation2 = 3;
+                    break;
+                case "Farmers Market":
+                    activation = 11;
+                    activation2 = 12;
+                    break;
+                case "Family Restaurant":
+                    activation = 9;
+                    activation2 = 10;
+                    break;
+                default:
+                    activation = Integer.parseInt(est.getActivation());
+                    break;
+            }
+            int numberOwned = estOwned.get(est);
+            if(diceRoll == activation || diceRoll == activation2) {
+                if(est.getColor_ab().equals(Card.Color_ab.B)) {
+                    potential = peekAction(est,numberOwned);
+                } else if(est.getColor_ab().equals(Card.Color_ab.G)) {
+                    if (isTurn && est.getModifierType().equals("icon")) {
+                        potential = peekActionIcon(est, numberOwned);
+                    } else if (isTurn) {
+                        potential = peekAction(est, numberOwned);
+                    }
+                }
+            }
+        }
+        return potential;
+    }
+
+    /**
+     * Calls the action to be performed based on the Player's dice roll
+     * @param diceRoll an integer representing the result of the Player's dice roll
+     * @param isTurn  boolean representing whether the player's turn is active
+     */
+
     public void getActivationNumbers(int diceRoll, boolean isTurn){
         Set<Establishment> keys = estOwned.keySet();
 
@@ -93,17 +138,6 @@ public class Player {
                         performAction(est, numberOwned);
                     }
                 }
-//                else if(est.getColor_ab().equals(Card.Color_ab.R)) {
-//                    //FUNCTION TO SELECT TARGET
-//                    if(activation == 3) {
-//                        if(!isTurn) {
-//                            performAction(est, numberOwned,0);
-//                        } else if(isTurn) {
-//                            performAction(est, numberOwned,countNumberOfReds()*1);
-//                        }
-//                    }
-//
-//                }
             }
         }
     }
@@ -281,6 +315,21 @@ public class Player {
         }
     }
 
+    protected int peekAction(Establishment e, int numberOwned) {
+        int potential = 0;
+        String type = e.getType();
+        int amount = e.getAmount();
+        String target = e.getTarget();
+        if(type.equals("receive") && target.equals("bank")) {
+            potential = amount * numberOwned;
+        }
+        if(landmarks.length > 2 && (!e.getColor_ab().equals(Card.Color_ab.R)) && isShoppingMallConstructed() && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
+            potential += numberOwned;
+        }
+        return potential;
+    }
+
+
 
     /**
      * Performs the action associated with the given Establishment
@@ -308,6 +357,31 @@ public class Player {
      * @param numberOwned an integer representing the amount of coins owned by the Player
      */
 
+    protected int peekActionIcon(Establishment e, int numberOwned) {
+        int amount = e.getAmount();
+        int numberOwnedIcon = 0;
+        // it's getting icon ab of cheese factory
+        String modifier = e.getModifier();
+        switch (modifier) {
+            case "cow":
+                numberOwnedIcon = getNumberOwnedIcon("C");
+                break;
+            case "gear":
+                numberOwnedIcon = getNumberOwnedIcon("G");
+                break;
+            case "wheat":
+                numberOwnedIcon = getNumberOwnedIcon("W");
+                break;
+        }
+        return amount * numberOwned * numberOwnedIcon;
+    }
+
+    /**
+     * Performs the action associated with the given Establishment if said Establishment relies on icons.
+     * @param e the Establishment upon which an action is being performed
+     * @param numberOwned an integer representing the amount of coins owned by the Player
+     */
+
     private void performActionIcon(Establishment e, int numberOwned) {
         int amount = e.getAmount();
         int numberOwnedIcon = 0;
@@ -325,7 +399,6 @@ public class Player {
                 break;
         }
         addCoins(amount * numberOwned * numberOwnedIcon);
-
     }
 
     /**

@@ -126,7 +126,7 @@ public class Feature8 extends Feature7 {
      * @param deckToPushTo deck to push the values from hashmap x into
      * @param totalCards total number of cards in the hashmap
      */
-    private void shuffleMaps(Map<Establishment, Integer> x, Stack<Establishment> deckToPushTo,int totalCards) {
+    protected void shuffleMaps(Map<Establishment, Integer> x, Stack<Establishment> deckToPushTo,int totalCards) {
         Random r = new Random();
         while(deckToPushTo.size() < totalCards){
             x.values().removeAll(Collections.singleton(0));
@@ -144,7 +144,7 @@ public class Feature8 extends Feature7 {
      * @param deck a stack representing one of the 3 decks that will be used in the creation of the market itself.
      * @param maxSize the size of the visible cards
      */
-    private int setDeck(Stack<Establishment> deck,int maxSize, int curSize) {
+    protected int setDeck(Stack<Establishment> deck,int maxSize, int curSize) {
         int unique = curSize;
         while (unique !=maxSize && deck.size() > 0) {
             Establishment e = deck.pop();
