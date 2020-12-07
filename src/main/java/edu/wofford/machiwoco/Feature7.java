@@ -139,7 +139,7 @@ public class Feature7 extends Feature6 {
     }
 
     /**
-     * Builds the Players to take part in the Phase3 version of Machi Koco.
+     * Builds the Players to take part in the Phase 5 version of Machi Koco.
      * @param player_num the number of players taking part in the current game
      */
 
@@ -166,7 +166,7 @@ public class Feature7 extends Feature6 {
     }
 
     /**
-     * Creates the Landmarks to be used by Players in Phase 3
+     * Creates the Landmarks to be used by Players in Phase 5
      */
 
     @Override
@@ -263,6 +263,12 @@ public class Feature7 extends Feature6 {
         new InputObserver(inputSubject);
     }
 
+    /**
+     * Provides an ArrayList of Establishments available to be targeted by the Business Complex.
+     * @param player the Player being targeted.
+     * @return an ArrayList of Establishments available to be targeted.
+     */
+
     public ArrayList<Establishment> availEstBusComplex(Player player) {
         ArrayList<Establishment> targetableEst = new ArrayList<>();
         for (Establishment est : EST_ORDER) {
@@ -276,6 +282,12 @@ public class Feature7 extends Feature6 {
         return targetableEst;
     }
 
+    /**
+     * Provides an ArrayList of Players available to be targeted by the TV Station.
+     * @param players an ArrayList of all current Players.
+     * @return an ArrayList of Players available to be targeted.
+     */
+
     public ArrayList<Player> availPlayersTV(ArrayList<Player> players) {
         ArrayList<Player> availPlayers = new ArrayList<>();
         for (Player p : players) {
@@ -285,6 +297,12 @@ public class Feature7 extends Feature6 {
         }
         return availPlayers;
     }
+
+    /**
+     * Provides an ArrayList of Players available to be targeted by the Business Complex.
+     * @param players an ArrayList of all current Players.
+     * @return an ArrayList of Players available to be targeted.
+     */
 
     public ArrayList<Player> availPlayersBus(ArrayList<Player> players) {
         ArrayList<Player> availPlayers = new ArrayList<>();
@@ -304,14 +322,30 @@ public class Feature7 extends Feature6 {
         return availPlayers;
     }
 
+    /**
+     * Provides a Player for the AI to randomly target.
+     * @param players an ArrayList of all current Players.
+     * @return the Player to be targeted by the AI.
+     */
+
     public Player aiPlayerChoice(ArrayList<Player> players) {
 //  nextInt(upperbound) generates random numbers in the range 0 to upperbound-1
         return players.get(rand.nextInt(players.size()));
     }
 
+    /**
+     * Provides an Establishment for the AI to randomly target or select.
+     * @param establishments an ArrayList of available Establishments
+     * @return the Establishment to be targeted or selected by the AI.
+     */
+
     public Establishment aiEstChoice(ArrayList<Establishment> establishments) {
         return establishments.get(rand.nextInt(establishments.size()));
     }
+
+    /**
+     * Conducts all logic associated with the activation of the TV Station establishment.
+     */
 
     public void TVStationLogic() {
             int coinCount = 0;
@@ -332,6 +366,10 @@ public class Feature7 extends Feature6 {
                 System.out.println("TV Station activated, but no player is available to target.");
             }
         }
+
+    /**
+     * Conducts all logic associated with the activation of the Business Complex establishment.
+     */
 
     public void busComplexLogic() {
         Player playerToTarget;
@@ -354,6 +392,10 @@ public class Feature7 extends Feature6 {
         return consoleListener.playerChooseReroll(sc, getCurrentPlayer());
     }
 
+    /**
+     * Conducts a diceRoll and carries out any related activations.
+     * @param rollTwo a boolean holding true if the roll includes two die.
+     */
 
     @Override
     public void wayBetterRollDice(boolean rollTwo) {
@@ -434,7 +476,7 @@ public class Feature7 extends Feature6 {
 
 
     /**
-     * Starts the Phase 4 version of Machi Koro.
+     * Starts the Phase 5 version of Machi Koro.
      * @param args a String array representing the user's console arguments.
      */
 

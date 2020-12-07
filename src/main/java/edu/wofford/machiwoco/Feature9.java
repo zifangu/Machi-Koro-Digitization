@@ -2,15 +2,28 @@ package edu.wofford.machiwoco;
 
 import java.util.Random;
 
+/**
+ * This is a class built to represent the Phase 6 version of Machi Koro with a Strategic AI.
+ *
+ * @author Eric Craft
+ * @author Ivan Gu
+ * @author Bennett Joyce
+ */
+
 public class Feature9 extends Feature8 {
+
+    /**
+     * MachiWoco constructor representing the Phase 6 version of the game with a Strategic AI.
+     * @param numPlayers an integer representing the number of Players.
+     */
 
     public Feature9(int numPlayers) {
         super(numPlayers);
     }
 
     /**
-     *  if player owns any card that has activation value greater than 6, roll two die.
-     * @return decision to roll two die.
+     *  If a player owns any card that has an activation value greater than 6, roll two die.
+     * @return a boolean representing the decision to roll two die.
      */
 
     protected boolean aiRollTwoLogic() {
@@ -44,13 +57,18 @@ public class Feature9 extends Feature8 {
     }
 
     /**
-     * if potential income is less than 2, than reroll.
-     * @return the decision to reroll dice
+     * If the AI's potential income is less than 2, reroll.
+     * @return a boolean representing the decision to reroll the die.
      */
     protected boolean rerollAILogic() {
         int potential = getCurrentPlayer().peekActivation(dice1+dice2, true);
         return potential < 2;
     }
+
+    /**
+     * Conducts the logic associated with the Radio Tower.
+     * @return a boolean holding true if the Player chooses to reroll.
+     */
 
     @Override
     public boolean radioTowerLogic() {
@@ -58,6 +76,10 @@ public class Feature9 extends Feature8 {
         return consoleListener.playerChooseReroll(sc, getCurrentPlayer());
     }
 
+    /**
+     * Conducts a diceRoll and carries out any related activations.
+     * @param rollTwo a boolean holding true if the roll includes two die.
+     */
 
     @Override
     public void wayBetterRollDice(boolean rollTwo) {
@@ -80,6 +102,11 @@ public class Feature9 extends Feature8 {
             if (getCurrentPlayer().isBusinessComplexOwned()) {busComplexLogic();}
         }
     }
+
+    /**
+     * Contains all logic that the Strategic AI should follow when in position to purchase a card.
+     * @return an integer representing the market selection for the AI.
+     */
 
     protected int purchaseLogic() {
         if (!isTrainStationConstructed(getCurrentPlayer())) {
@@ -113,6 +140,7 @@ public class Feature9 extends Feature8 {
     /**
      * AI Logic for making a move
      */
+
     @Override
     protected void aiLogic() {
         if(canAffordCard(getCurrentPlayer())) {
@@ -134,6 +162,7 @@ public class Feature9 extends Feature8 {
     /**
      * Driver for making moves for either AI or Human
      */
+
     @Override
     public void makeMove() {
         buyFinished = false;

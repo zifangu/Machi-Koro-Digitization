@@ -187,7 +187,7 @@ public class Feature8 extends Feature7 {
     }
 
     /**
-     * Creates the Landmarks to be used by Players in Phase 3
+     * Creates the Landmarks to be used by Players in Phase 6
      */
 
     @Override
@@ -284,6 +284,10 @@ public class Feature8 extends Feature7 {
         new InputObserver(inputSubject);
     }
 
+    /**
+     * Removes any Establishments that would appear in the market with a count of 0.
+     */
+
     public void removeZeroesMarket() {
         for (Establishment e: market.keySet()) {
             if (market.get(e) == 0) {
@@ -334,7 +338,7 @@ public class Feature8 extends Feature7 {
 
 
     /**
-     * Starts the Phase 4 version of Machi Koro.
+     * Starts the Phase 6 version of Machi Koro.
      * @param args a String array representing the user's console arguments.
      */
 
