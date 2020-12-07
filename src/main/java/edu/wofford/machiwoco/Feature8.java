@@ -142,7 +142,9 @@ public class Feature8 extends Feature7 {
     /**
      * Establishes the market in 5-5-2 format.
      * @param deck a stack representing one of the 3 decks that will be used in the creation of the market itself.
-     * @param maxSize the size of the visible cards
+     * @param maxSize the size of the visible cards.
+     * @param curSize an integer representing the current size of the deck.
+     * @return an integer representing the number of unique cards in the deck.
      */
     protected int setDeck(Stack<Establishment> deck,int maxSize, int curSize) {
         int unique = curSize;

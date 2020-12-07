@@ -117,6 +117,8 @@ public class Feature9 extends Feature8 {
 
     /**
      * Contains all logic that the Strategic AI should follow when in position to purchase a card.
+     * @param availEst an ArrayList of available establishments for purchase.
+     * @param availLand an ArrayList of available landmarks for purchase.
      * @return an integer representing the market selection for the AI.
      */
 
@@ -169,12 +171,24 @@ public class Feature9 extends Feature8 {
         return 1;
     }
 
+    /**
+     * Gets the last index of the most expensive card available for purchase based off a specific color.
+     * @param est an ArrayList representing available Establishments.
+     * @param color an enumeration representing the abbreviated value of the desired color.
+     * @return an integer representing the last index of the most expensive card available for puchase.
+     */
+
     protected int getIndexColorAB(ArrayList<Establishment> est, Card.Color_ab color) {
         for (int i = est.size()-1; i > 0; i--) {
             if (est.get(i).getColor_ab().equals(color)) {return i+1;}
         }
         return 0;
     }
+
+    /**
+     * Gets the number of Landmarks constructed by the current Player.
+     * @return an integer representing the number of Landmarks constructed by the current Player.
+     */
 
     protected int currPlayerNumLandmarkConstructed() {
         int count = 0;
@@ -267,11 +281,23 @@ public class Feature9 extends Feature8 {
         return player.getLandmarks()[0].getIsConstructed();
     }
 
+    /**
+     * Main driver for the Feature9 class.
+     * @param args an array of Strings representing command line input.
+     */
+
     public static void main(String[] args) {
         Feature9 feature9 = new Feature9(Integer.parseInt(args[1]));
 //        feature9.player1.getLandmarks()[0].setIs_constructed(true);
         feature9.playGame();
     }
+
+    /**
+     * Provides the Player to be targeted by the AI.
+     * @param players an ArrayList of the current Players.
+     * @param smart a boolean holding true if the AI is strategic.
+     * @return the Player to be targeted by the AI.
+     */
 
     public Player aiPlayerChoice(ArrayList<Player> players, boolean smart) {
 //  nextInt(upperbound) generates random numbers in the range 0 to upperbound-1
@@ -284,6 +310,10 @@ public class Feature9 extends Feature8 {
         }
         return players.get(rand.nextInt(players.size()));
     }
+
+    /**
+     * Conducts the logic associated with an activated TV Station establishment.
+     */
 
     @Override
     public void TVStationLogic() {

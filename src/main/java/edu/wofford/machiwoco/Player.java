@@ -41,9 +41,19 @@ public class Player {
       smart = false;
     }
 
+    /**
+     * Returns a boolean representing if the current Player is strategic.
+     * @return a boolean holding true if the Player is strategic.
+     */
+
     public boolean isSmart() {
         return smart;
     }
+
+    /**
+     * Sets whether or not the current Player is strategic.
+     * @param smart a boolean holding true if the Player is set to be strategic.
+     */
 
     public void setSmart(boolean smart) {
         this.smart = smart;
@@ -67,6 +77,7 @@ public class Player {
      * Calls the action to be performed based on the Player's dice roll
      * @param diceRoll an integer representing the result of the Player's dice roll
      * @param isTurn  boolean representing whether the player's turn is active
+     * @return an integer representing 
      */
 
     protected int peekActivation(int diceRoll, boolean isTurn){
@@ -325,6 +336,13 @@ public class Player {
         }
     }
 
+    /**
+     * Returns the potential value of activating blue or green cards in order to plan out the best move available.
+     * @param e the Establishment being observed.
+     * @param numberOwned an integer representing how many of the specified Establishments are owned by the Player.
+     * @return an integer representing the potential value of the given Establishment's activation.
+     */
+
     protected int peekAction(Establishment e, int numberOwned) {
         int potential = 0;
         String type = e.getType();
@@ -365,6 +383,7 @@ public class Player {
      * Performs the action associated with the given Establishment if said Establishment relies on icons.
      * @param e the Establishment upon which an action is being performed
      * @param numberOwned an integer representing the amount of coins owned by the Player
+     * @return an integer representing how many coins have been awarded after the activation of the given Establishment.
      */
 
     protected int peekActionIcon(Establishment e, int numberOwned) {
