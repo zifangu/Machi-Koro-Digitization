@@ -1,5 +1,6 @@
 package edu.wofford.machiwoco;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -18,7 +19,8 @@ public class Feature9 extends Feature8 {
      */
 
     public Feature9(int numPlayers) {
-        super(numPlayers);
+        super(2+numPlayers);
+        player2.setSmart(true);
     }
 
     /**
@@ -47,7 +49,11 @@ public class Feature9 extends Feature8 {
     protected boolean rollTwo() {
         if (getCurrentPlayer().getLandmarks()[0].is_constructed) {
             if (getCurrentPlayer().isAi()) {
-                return aiRollTwoLogic();
+                if (getCurrentPlayer().isSmart()) {
+                    return aiRollTwoLogic();
+                } else {
+                    return rand.nextBoolean();
+                }
             } else {
                 return consoleListener.rollTwo(sc, getCurrentPlayer());
             }
@@ -72,7 +78,13 @@ public class Feature9 extends Feature8 {
 
     @Override
     public boolean radioTowerLogic() {
-        if (getCurrentPlayer().isAi()) {return rerollAILogic();}
+        if (getCurrentPlayer().isAi()) {
+            if (getCurrentPlayer().isSmart()) {
+                return rerollAILogic();
+            } else {
+                return rand.nextBoolean();
+            }
+        }
         return consoleListener.playerChooseReroll(sc, getCurrentPlayer());
     }
 
@@ -108,34 +120,70 @@ public class Feature9 extends Feature8 {
      * @return an integer representing the market selection for the AI.
      */
 
-    protected int purchaseLogic() {
+    protected int purchaseLogic(ArrayList<Establishment> availEst, ArrayList<Landmark> availLand) {
         if (!isTrainStationConstructed(getCurrentPlayer())) {
             int establishmentOwned = 0;
-            for (Establishment est : buyEstablishmentLogic()) {
+            for (Establishment est : getCurrentPlayer().getEstOwned().keySet()) {
                 establishmentOwned += getCurrentPlayer().getEstOwned().get(est);
             }
 
-            if (establishmentOwned > 4) {
+            if (establishmentOwned > 4 && getCurrentPlayer().getCoinCount() > 3) {
                 // purchase train somehow
-            } else if (buyEstablishmentLogic().contains(getRanch())) {
-                // purchase ranch
-            } else if (buyEstablishmentLogic().contains(getForest())) {
-                // purchase ranch
-            } else if (buyEstablishmentLogic().contains(getWheat())) {
-                // purchase ranch
-            } else if (buyEstablishmentLogic().contains(getConvenience())) {
-                // purchase ranch
-            } else if (buyEstablishmentLogic().contains(getCafe())) {
-                // purchase ranch
-            } else if (buyEstablishmentLogic().contains(getFamilyRestaurant())) {
-                // purchase ranch
-
-                // need to do any card logic.
-
+                return availEst.size()+1;
+            } else if (availEst.contains(getRanch())) {
+                return availEst.indexOf(getRanch())+1;
+            } else if (availEst.contains(getForest())) {
+                return availEst.indexOf(getForest())+1;
+            } else if (availEst.contains(getWheat())) {
+                return availEst.indexOf(getWheat())+1;
+            } else if (availEst.contains(getConvenience())) {
+                return availEst.indexOf(getConvenience())+1;
+            } else if (availEst.contains(getCafe())) {
+                return availEst.indexOf(getCafe())+1;
             }
+            return 1;
+        } else {
+            if (availLand.size() > 0) {
+                // purchases the most expensive landmark
+                return availEst.size() + availLand.size();
+            } else if (availEst.contains(furnitureFactory) && getCurrentPlayer().getNumberOwnedIcon("G") > 2) {
+                return availEst.indexOf(furnitureFactory)+1;
+            } else if (availEst.contains(cheeseFactory) && getCurrentPlayer().getEstOwned().get(getRanch()) > 2) {
+                return availEst.indexOf(cheeseFactory)+1;
+            } else if (availEst.contains(getMine())) {
+                return availEst.indexOf(getMine())+1;
+            } else if (availEst.contains(getForest())) {
+                return availEst.indexOf(getForest())+1;
+            } else if (currPlayerNumLandmarkConstructed() > 3 && getCurrentPlayer().getCoinCount() > 18) {
+                return 99;
+            } else if (getIndexColorAB(availEst, Card.Color_ab.P)!=0) {
+                return getIndexColorAB(availEst, Card.Color_ab.P);
+            } else if (getIndexColorAB(availEst, Card.Color_ab.B)!=0) {
+                return getIndexColorAB(availEst, Card.Color_ab.B);
+            } else if (getIndexColorAB(availEst, Card.Color_ab.R)!=0) {
+                return getIndexColorAB(availEst, Card.Color_ab.R);
+            } else if (getIndexColorAB(availEst, Card.Color_ab.G)!=0) {
+                return getIndexColorAB(availEst, Card.Color_ab.G);
+            }
+        }
+        return 1;
+    }
+
+    protected int getIndexColorAB(ArrayList<Establishment> est, Card.Color_ab color) {
+        for (int i = est.size()-1; i > 0; i--) {
+            if (est.get(i).getColor_ab().equals(color)) {return i+1;}
         }
         return 0;
     }
+
+    protected int currPlayerNumLandmarkConstructed() {
+        int count = 0;
+        for (Landmark l : getCurrentPlayer().getLandmarks()) {
+            if(l.is_constructed) {count++;}
+        }
+        return count;
+    }
+
 
     /**
      * AI Logic for making a move
@@ -149,8 +197,15 @@ public class Feature9 extends Feature8 {
             int lmkSize = getAffordableLandmarks(getCurrentPlayer()).size();
             // add last option of "99. Do Nothing" to AI
             int ai_choices = estSize + lmkSize + 1;
-            int ai_input = purchaseLogic();
-
+            int ai_input;
+            if (getCurrentPlayer().isSmart()) {
+                ai_input = purchaseLogic(buyEstablishmentLogic(), getAffordableLandmarks(getCurrentPlayer()));
+            } else {
+                ai_input = (int) (Math.random() * ai_choices + 1);
+                if (ai_input == ai_choices) {
+                    ai_input = 99;
+                }
+            }
 //            System.out.println("AI CHOSE: " + ai_input);
             handleInput(Integer.toString(ai_input));
         } else {
@@ -199,6 +254,55 @@ public class Feature9 extends Feature8 {
             uniqueB = setDeck(DeckB, 5, uniqueB);
             uniqueC = setDeck(DeckC, 2, uniqueC);
 
+        }
+    }
+
+    /**
+     * Checks to see if the Train Station landmark is constructed for a certain player
+     * @param player the Player instance whose Train Station construction is being checked
+     * @return a boolean holding true if the Player has constructed Train Station
+     */
+    @Override
+    protected boolean isTrainStationConstructed(Player player) {
+        return player.getLandmarks()[0].getIsConstructed();
+    }
+
+    public static void main(String[] args) {
+        Feature9 feature9 = new Feature9(Integer.parseInt(args[1]));
+//        feature9.player1.getLandmarks()[0].setIs_constructed(true);
+        feature9.playGame();
+    }
+
+    public Player aiPlayerChoice(ArrayList<Player> players, boolean smart) {
+//  nextInt(upperbound) generates random numbers in the range 0 to upperbound-1
+        Player temp = players.get(0);
+        for (Player p: players) {
+            if (p.getCoinCount() > temp.getCoinCount()) {temp = p;}
+        }
+        if (smart) {
+            return temp;
+        }
+        return players.get(rand.nextInt(players.size()));
+    }
+
+    @Override
+    public void TVStationLogic() {
+        int coinCount = 0;
+        for (Player p : players) {
+            if (!p.isTurn()) {
+                coinCount += p.getCoinCount();
+            }
+        }
+        if (coinCount > 0) {
+            Player playerToTarget;
+            if (!getCurrentPlayer().isAi()) {
+                playerToTarget = consoleListener.playerChooseTarget(EST_ORDER, sc, getCurrentPlayer(), players, true);
+            } else {
+                playerToTarget = aiPlayerChoice(availPlayersTV(players), getCurrentPlayer().isSmart());
+            }
+            activationListener.takeMoney(playerToTarget, getCurrentPlayer(), 5);
+        } else {
+            System.out.println("TV Station activated, but no player is available to target.");
         }
     }
 

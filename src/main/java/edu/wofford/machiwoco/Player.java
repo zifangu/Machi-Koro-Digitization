@@ -18,6 +18,7 @@ public class Player {
     private Landmark[] landmarks;
     private boolean turn;
     private boolean ai;
+    private boolean smart;
 
     private int playerNumber;
 
@@ -37,6 +38,15 @@ public class Player {
       this.playerNumber = playerNumber;
       turn = false;
       this.ai = ai;
+      smart = false;
+    }
+
+    public boolean isSmart() {
+        return smart;
+    }
+
+    public void setSmart(boolean smart) {
+        this.smart = smart;
     }
 
     /**
