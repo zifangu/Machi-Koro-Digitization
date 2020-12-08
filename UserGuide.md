@@ -30,15 +30,23 @@ This is the user guide for playing Machi Woco.
         - [Each Round](#each-round-P3)
         - [Gameplay Differences P3](#gameplay-differences-P3)
             - [Dice Roll P3](#dice-roll-P3)
-    + [Winner P2](#winner-P2)
+    + [Winner P3](#winner-P3)
 * [Phase 4](#phase-4)
     + [Game Objective P4](#game-objective-P4)
     + [Game Play P4](#game-play-P4)
         - [Start Game](#start-game-P4)
         - [Each Round](#each-round-P4)
         - [Gameplay Differences P4](#gameplay-differences-P4)
-            - [Dice Roll P3](#dice-roll-P4)
-    + [Winner P2](#winner-P4)
+            - [Dice Roll P4](#dice-roll-P4)
+    + [Winner P4](#winner-P4)
+* [Phase 5](#phase-5)
+    + [Game Objective P5](#game-objective-P5)
+    + [Game Play P5](#game-play-P5)
+        - [Start Game](#start-game-P5)
+        - [Each Round](#each-round-P5)
+        - [Gameplay Differences P5](#gameplay-differences-P5)
+            - [Dice Roll P5](#dice-roll-P5)
+    + [Winner P5](#winner-P5)
 
 
   
@@ -389,3 +397,169 @@ Train Station landmark.
  
  ### Winner P4
 In this feature of the game, the winner will be the player who constructed Train Station, Shopping Mall, and Amusement Park first. After which the game will immediately end.
+
+
+# Phase 5
+
+## Game Objective P5
+
+For this version of the game, the objective is to be the first player to build the Train Station, Shopping Mall, Amusement Park, and Radio Tower landmarks.
+
+## Game Play P5
+
+### Start Game P5
+In this version of the game, there will be 2-4 players: 1 human player (player 1) and 1-3 AI player(s). The starting Establishments
+for each Player remain the same.
+When a new game starts, player 1 will go first.
+
+### Each Round P5
+At the beginning of each player's turn, you will first see a display of the current game state similar to this:
+
+    ******************************************
+                    MARKET
+    ------------------------------------------
+    Wheat Field        BW (1)  [1]      #6
+    Ranch              BC (1)  [2]      #6
+    Bakery             GB (1)  [2-3]    #6
+    Cafe               RU (2)  [3]      #6
+    Convenience Store  GB (2)  [4]      #6
+    Forest             BG (3)  [5]      #6
+    Stadium            PT (6)  [6]      #3
+    TV Station         PT (7)  [6]      #3
+    Business Complex   PT (8)  [6]      #3
+    Cheese Factory     GF (5)  [7]      #6
+    Furniture Factory  GF (3)  [8]      #6
+    Mine               BG (6)  [9]      #6
+    Family Restaurant  RU (3)  [9-10]   #6
+    Apple Orchard      BW (3)  [10]     #6
+    Farmers Market     GO (2)  [11-12]  #6
+
+                Player 1* [YOU]
+    ------------------------------------------
+                    (3 coins)
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    Shopping Mall      NT (10) [ ]
+    Amusement Park     NT (16) [ ]
+    Radio Tower        NT (22) [ ]
+
+                    Player 2
+    ------------------------------------------
+                    (3 coins)
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    Shopping Mall      NT (10) [ ]
+    Amusement Park     NT (16) [ ]
+    Radio Tower        NT (22) [ ]
+
+                    Player 3
+    ------------------------------------------
+                    (3 coins)
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    Shopping Mall      NT (10) [ ]
+    Amusement Park     NT (16) [ ]
+    Radio Tower        NT (22) [ ]
+
+    ******************************************
+    
+The Purple Establishments Stadium, TV Station, and Business Complex have been added.
+The Radio Tower landmark has been added.
+
+### Gameplay Differences P5
+
+#### Dice Roll P5
+The three new Establishments offer some new actions available to Players - as long as the card is activated on that Player's turn. Stadium allows the Player to take 2 coins from each opponent when activated on their turn, TV Station lets the current Player target another Player and then take 5 coins from them, and Business Complex lets the current Player exchange one of their non-purple cards for another selected opponent's non-purple card. 
+
+The Radio Tower landmark allows the Player to choose to re-roll the dice once per turn.
+ 
+ ### Winner P5
+In this feature of the game, the winner will be the player who constructed Train Station, Shopping Mall, Amusement Park, and Radio Tower first. After which the game will immediately end.
+
+
+# Phase 6
+
+## Game Objective P6
+
+For this version of the game, the objective remains the same as in Phase 5.
+
+## Game Play P6
+
+### Start Game P6
+In this version of the game, there will be 2-4 players: 1 human player (player 1) and 1-3 AI player(s). One of these AI Players will be considered a "strategic AI," meaning that it will always act through prioritized decisions in an effort to win the game. The starting Establishments for each Player remain the same. When a new game starts, player 1 will go first.
+
+### Each Round P6
+At the beginning of each player's turn, you will first see a display of the current game state similar to this:
+
+    ******************************************
+                    MARKET
+    ------------------------------------------
+    Wheat Field        BW (1)  [1]      #3
+    Ranch              BC (1)  [2]      #2
+    Bakery             GB (1)  [2-3]    #1
+    Cafe               RU (2)  [3]      #1
+    Convenience Store  GB (2)  [4]      #2
+    Stadium            PT (6)  [6]      #2
+    TV Station         PT (7)  [6]      #1
+    Cheese Factory     GF (5)  [7]      #1
+    Furniture Factory  GF (3)  [8]      #1
+    Mine               BG (6)  [9]      #3
+    Family Restaurant  RU (3)  [9-10]   #3
+    Apple Orchard      BW (3)  [10]     #2
+
+                Player 1* [YOU]
+    ------------------------------------------
+                    (3 coins)
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    Shopping Mall      NT (10) [ ]
+    Amusement Park     NT (16) [ ]
+    Radio Tower        NT (22) [ ]
+
+                    Player 2
+    ------------------------------------------
+                    (3 coins)
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    Shopping Mall      NT (10) [ ]
+    Amusement Park     NT (16) [ ]
+    Radio Tower        NT (22) [ ]
+
+                    Player 3
+    ------------------------------------------
+                    (3 coins)
+    Wheat Field        BW (1)  [1]      #1
+    Bakery             GB (1)  [2-3]    #1
+    ..........................................
+    Train Station      NT (4)  [ ]
+    Shopping Mall      NT (10) [ ]
+    Amusement Park     NT (16) [ ]
+    Radio Tower        NT (22) [ ]
+
+    ****************************************** 
+
+### 5-5-2 Market
+Notice that the number of Establishments available in the market are staggered, and that all Establishments are not currently listed. This is because the Phase 6 version of the game uses a different market than all previous Phases: the 5-5-2 market. This Hybrid Supply variant uses 3 decks: Deck 1 contains all Establishments with activation numbers 6 and under, Deck 2 contains all Establishments with activation numbers 7 and above, and Deck 3 contains all major establishments (Purple cards). The three decks are shuffled face down and drawn until we have 5 unique cards from Decks 1 & 2, and 2 unique cards from Deck 3. Duplicates are stacked. This format continues throughout the game, as there should always be 12 unique cards visible.
+
+### Strategic AI
+The last new addition to Phase 6 is the introduction of the Strategic AI. This Strategic AI operates in its best interest to win the game, making prioritized decisions rather than random selections.
+
+#### Roll Logic
+We've implemented a few preferred actions for the AI when it comes to dice rolls. First off, the AI should choose to roll 2 die if it has any Establishments with an activation above 6. Additionally, the AI should choose to reroll (with the Radio Tower landmark constructed) if their first roll would result in less than 2 coins received.
+
+#### Purchase Logic
+The Strategic AI will be faced with numerous purchasing decisions throughout the playthrough of the game. 
+
+ 
+### Winner P6
+In this feature of the game, the winner will be the player who constructed Train Station, Shopping Mall, Amusement Park, and Radio Tower first. After which the game will immediately end.
