@@ -232,8 +232,8 @@ public class Player {
     }
 
     /**
-     * Return true if Stadium is owned
-     * @return boolean whether Business Center is owned
+     * Return true if Business Complex is owned
+     * @return boolean whether Business Complex is owned
      */
     public boolean isBusinessComplexOwned() {
         for(Establishment e:estOwned.keySet()) {
@@ -245,9 +245,9 @@ public class Player {
     }
 
     /**
-     * Return true if Stadium is owned
+     * Return true if TV Station is owned
      * @param p The map of players
-     * @return boolean whether Business Center is owned
+     * @return boolean whether TV Station is owned
      */
     public boolean isTVStationOwned(Map<Establishment,Integer> p) {
         for (Establishment e : getEstOwned().keySet()) {
