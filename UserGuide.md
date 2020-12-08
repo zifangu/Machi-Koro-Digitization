@@ -47,6 +47,20 @@ This is the user guide for playing Machi Woco.
         - [Gameplay Differences P5](#gameplay-differences-P5)
             - [Dice Roll P5](#dice-roll-P5)
     + [Winner P5](#winner-P5)
+* [Phase 6](#phase-6)
+    + [Game Objective P6](#game-objective-P6)
+    + [Game Play P6](#game-play-P6)
+        - [Start Game](#start-game-P6)
+        - [Each Round](#each-round-P6)
+        - [5-5-2 Market](#5-5-2-market)
+        - [Strategic AI](#strategic-AI)
+            - [Roll Logic](#roll-logic)
+            - [AI Purchase Logic - TS *not* Constructed](#ai-purchase-logic---train-station-not-constructed)
+            - [AI Purchase Logic - TS *is* Constructed](#ai-purchase-logic---train-station-is-constructed)
+            - [AI Purchase Logic - No Purchase](#ai-purchase-logic---no-purchase)
+            - [AI Purchase Logic - Purchase By Color](#ai-purchase-logic---purchase-by-color)
+            - [AI TV Station Logic](#ai-tv-station-logic)
+    + [Winner P6](#winner-P6)
 
 
   
@@ -564,7 +578,13 @@ The Strategic AI will be faced with numerous purchasing decisions throughout the
 Much like the logic involved when the Train Statin is not constructed, this portion of purchasing logic also follows a prioritized set of purchasing options. The primary option is to purchase a Landmark if the AI has the coins, looking to buy the most expensive available (we believe that the more expensive landmarks serve a better purpose than any that are cheaper). Next, the AI should look to purchase the Furniture Factory IF they own more than two Establishments with the Gear icon. The next prioritized purchase is similar, as the AI should purchase the Cheese Factory IF they have more than two Ranch cards. We don't believe that cards with such specific targets should be bought unless the AI has a decent number of these targets already owned in order to quickly stack coins upon activation. If there has yet to been a purchase made, the AI should then look to purchase the Mine followed by the Forest. Both of these contain Gear icons (setting the AI up nicely upon the purchase of a Furniture Factory), and the Mine should be purchased first due to its large payout.
 
 #### AI Purchase Logic - No Purchase
+If none of the aformentioned purchases have been made by the Strategic AI, the next prioritized move is to do nothing if the AI has more than 2 landmarks constructed and has more than 18 coins. At this point, we feel as if the best strategy for the AI is to sit back and build up his coins even more in order to quickly put them in a position to win. Buying more establishments at this point seems wasteful in our opinion and with only one more Landmark to go, it would be better to save up in an effort to win the game upon the next roll.
 
+#### AI Purchase Logic - Purchase By Color
+At this point in the AI's purchasing dilemma, we have narrowed down their choices to simply purchasing an Establishment based off color. We believe that certain colors are more useful than others and therefore have priority. We expect the AI to look for colored cards in the following order, purchasing the most expensive Establishment available that meets this criteria: Purple, Blue, Red, Green. We believe that this ranking goes in order from the greatest payout/reward to the least greatest, and that these prioritized cards give the AI the best chance at winning.
+
+#### AI TV Station Logic
+Upon TV Station's activation for the Strategic AI, the AI should target the player with the highest coin count. Not only does this Player more than likely have the required amount of coins (5), but they are also most likely in the lead or right there near the top. 
 
  
 ### Winner P6
