@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.*;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import org.hamcrest.Matchers;
 import org.junit.*;
 
@@ -417,6 +418,35 @@ public class Feature9Test {
         feature9.TVStationLogic();
 //        started with 3, wanted to get five, but only 3 is available.
         assertThat(feature9.getPlayer2().getCoinCount(), is(6));
+    }
+
+    @Test
+    public void testTVAI2() {
+        feature9.getPlayer1().setTurn(false);
+        feature9.getPlayer1().setCoinCount(5);
+        feature9.getPlayer2().setTurn(true);
+        feature9.TVStationLogic();
+//        started with 3, wanted to get five, but only 3 is available.
+        assertThat(feature9.getPlayer2().getCoinCount(), is(8));
+    }
+
+    @Test
+    public void testTVAI3() {
+        feature9.getPlayer1().setTurn(false);
+        feature9.player3.setCoinCount(5);
+        feature9.getPlayer2().setTurn(true);
+        feature9.TVStationLogic();
+//        started with 3, wanted to get five, but only 3 is available.
+        assertThat(feature9.getPlayer2().getCoinCount(), is(8));
+    }
+
+    @Test
+    public void testTVAI4() {
+        feature9.getPlayer1().setTurn(false);
+        feature9.player3.setTurn(true);
+        feature9.TVStationLogic();
+//        started with 3, wanted to get five, but only 3 is available.
+        assertThat(feature9.player3.getCoinCount(), is(6));
     }
 
     @Test
