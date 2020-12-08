@@ -329,6 +329,24 @@ public class Feature9Test {
     }
 
     @Test
+    public void testRandomAI() {
+        feature9.player1.setTurn(false);
+        feature9.player3.setTurn(true);
+        feature9.makeMove();
+        assertThat(outContent.toString(), containsString("Player 3"));
+    }
+
+    @Test
+    public void testNoMoney() {
+        feature9.player1.setTurn(false);
+        feature9.player3.setTurn(true);
+        feature9.player3.setCoinCount(0);
+
+        feature9.makeMove();
+        assertThat(outContent.toString(), containsString("Player 3"));
+    }
+
+    @Test
     public void testRed() {
         feature9.player1.setTurn(false);
         feature9.player2.setTurn(true);
