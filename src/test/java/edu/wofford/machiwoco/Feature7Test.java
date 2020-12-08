@@ -187,6 +187,23 @@ public class Feature7Test {
     }
 
     @Test
+    public void testWayBetter() {
+        feature7.wayBetterRollDice(true);
+        assertThat(feature7.dice1+feature7.dice2, lessThanOrEqualTo(12));
+    }
+
+
+    @Test
+    public void testWayBetter2() {
+        feature7.player1.setTurn(false);
+        feature7.player2.setTurn(true);
+        feature7.player2.getLandmarks()[3].setIs_constructed(true);
+        feature7.wayBetterRollDice(true);
+
+        assertThat(feature7.dice1+feature7.dice2, lessThanOrEqualTo(12));
+    }
+
+    @Test
     public void testRadioAI() {
         feature7.player1.setTurn(false);
         feature7.player3.setTurn(true);

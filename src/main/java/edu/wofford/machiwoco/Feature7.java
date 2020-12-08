@@ -392,6 +392,8 @@ public class Feature7 extends Feature6 {
         return consoleListener.playerChooseReroll(sc, getCurrentPlayer());
     }
 
+
+
     /**
      * Conducts a diceRoll and carries out any related activations.
      * @param rollTwo a boolean holding true if the roll includes two die.
