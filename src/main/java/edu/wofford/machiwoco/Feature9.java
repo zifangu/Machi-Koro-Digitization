@@ -179,7 +179,7 @@ public class Feature9 extends Feature8 {
      */
 
     protected int getIndexColorAB(ArrayList<Establishment> est, Card.Color_ab color) {
-        for (int i = est.size()-1; i > 0; i--) {
+        for (int i = est.size()-1; i >= 0; i--) {
             if (est.get(i).getColor_ab().equals(color)) {return i+1;}
         }
         return 0;
