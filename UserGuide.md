@@ -557,8 +557,14 @@ The last new addition to Phase 6 is the introduction of the Strategic AI. This S
 #### Roll Logic
 We've implemented a few preferred actions for the AI when it comes to dice rolls. First off, the AI should choose to roll 2 die if it has any Establishments with an activation above 6. Additionally, the AI should choose to reroll (with the Radio Tower landmark constructed) if their first roll would result in less than 2 coins received.
 
-#### Purchase Logic
-The Strategic AI will be faced with numerous purchasing decisions throughout the playthrough of the game. 
+#### AI Purchase Logic - Train Station *not* Constructed
+The Strategic AI will be faced with numerous purchasing decisions throughout the playthrough of the game. The first part of the logic will center around checking whether or not Train Station has been constructed. If it hasn't been constructed and the AI has 4 or more coins they should follow a prioritized set of purchasing options based on which selection is available: first, they would purchase the train station, or secondarily purchase Ranch, Forest, or Wheat in that order (Ranch is the lowest cost, Forest has a higher activation than Wheat, and we already own one wheat to begin with). If none of those 4 purchasing options are made, the AI should look to purchase the Convenience Store followed by the Cafe. The Convenience Store has a higher activation and provides the AI with more coins upon activation. If for some reason none of these are valid options, it will select the first card available for purchase.
+
+#### AI Purchase Logic - Train Station *is* Constructed
+Much like the logic involved when the Train Statin is not constructed, this portion of purchasing logic also follows a prioritized set of purchasing options. The primary option is to purchase a Landmark if the AI has the coins, looking to buy the most expensive available (we believe that the more expensive landmarks serve a better purpose than any that are cheaper). Next, the AI should look to purchase the Furniture Factory IF they own more than two Establishments with the Gear icon. The next prioritized purchase is similar, as the AI should purchase the Cheese Factory IF they have more than two Ranch cards. We don't believe that cards with such specific targets should be bought unless the AI has a decent number of these targets already owned in order to quickly stack coins upon activation. If there has yet to been a purchase made, the AI should then look to purchase the Mine followed by the Forest. Both of these contain Gear icons (setting the AI up nicely upon the purchase of a Furniture Factory), and the Mine should be purchased first due to its large payout.
+
+#### AI Purchase Logic - No Purchase
+
 
  
 ### Winner P6
