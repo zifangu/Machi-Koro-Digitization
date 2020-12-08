@@ -79,13 +79,6 @@ public class ConsoleListener implements GameListener {
                     }
 
                 }
-//               if(dice == activation && est.getColor_ab().equals(Card.Color_ab.R) && !player.isTurn()) {
-//                   s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
-//               } else if (dice == activation && !est.getColor_ab().equals(Card.Color_ab.G)) {
-//                    s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
-//                } else if (dice == activation && player.isTurn() && !est.getColor_ab().equals(Card.Color_ab.R)) {
-//                    s.append(est.getName()).append(" activated for Player ").append(player.getPlayerNumber()).append("\n");
-//                }
             }
         }
         System.out.print(s);
@@ -142,6 +135,7 @@ public class ConsoleListener implements GameListener {
 //                    est_order = [wheat, ranch, bakery ...]
                     int wheat_num = player.getEstOwned().get(est_order.get(0));
                     int bakery_num = player.getEstOwned().get(est_order.get(2));
+
 //                    the only way to not have a player available is when they have only 1 wheat, only 1 bakery, purple cards and nothing else
                     int purpleCount = 0;
                     for (Establishment e : player.getEstOwned().keySet()) {
@@ -163,25 +157,12 @@ public class ConsoleListener implements GameListener {
             count++;
         }
         int input;
-        //System.out.println("size: " + validPlayers.size());
         do {
             System.out.println(StringUtils.center("Player " + p.getPlayerNumber() + ", who would you like to target?", 42, " "));
             input = Integer.parseInt(sc.nextLine());
         } while ((input != 1 && input > validPlayers.size()) || input < 1);
         return validPlayers.get(input - 1);
-//        return null;
     }
-
-
-//     public Establishment playerChooseEstablishment(Scanner sc, Player p, Player target) {
-//        int input = 0;
-//         while (input != 1 && input < target.getEstOwned().size()) {
-//             System.out.println(StringUtils.center("Player " + p.getPlayerNumber() + ", select an establishment:", 42, " "));
-//             input = Integer.parseInt(sc.nextLine());
-//         }
-//         // return target.getEstOwned().get(input - 1);
-//         return target.getEstOwned().k(input - 1);
-//     }
 
     /**
      * Provides the given cost in string form

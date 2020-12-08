@@ -13,5 +13,4 @@ import java.util.*;
 public interface GameListener {
     void diceRolled (int dice1, int dice2, Player p);
     void diceActivation (int dice, List<Player> players);
-  //  void targetAndTake(Player p1,Player p2, int amountToTake);
 }

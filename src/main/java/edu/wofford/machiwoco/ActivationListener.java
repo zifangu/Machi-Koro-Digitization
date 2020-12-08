@@ -59,16 +59,11 @@ public class ActivationListener implements GameListener {
            if(active.isStadiumOwned()) {
                stadiumLogic(active,inactivePlayers);
            }
-           if(active.isTVStationConstructed()) {
+           // Business Center and TV Station logic is handled elsewhere
 
-           }
-           if(active.isBusinessComplexOwned()) {
-             //  swap(active,targetedPlayerFunction(),estToTakeFromThatPlayer(),estToGiveToThatPlayer());
-           }
        }
-
         for (Player player : players) {
-            //  changes the coin amounts in the player bank\
+            //  changes the coin amounts in the player bank
             player.getActivationNumbers(dice, player.isTurn());
         }
     }

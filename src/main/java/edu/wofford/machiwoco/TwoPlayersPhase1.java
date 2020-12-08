@@ -855,7 +855,6 @@ public class TwoPlayersPhase1 {
     protected void actionsDiceRolled() {
         for (GameListener l : listeners) {
             l.diceRolled(dice1, dice2, getCurrentPlayer());
-//            l.playerChooseTarget(sc, getCurrentPlayer(), players);
             l.diceActivation((dice1 + dice2), players);
         }
     }

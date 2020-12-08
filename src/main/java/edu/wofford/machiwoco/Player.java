@@ -351,7 +351,9 @@ public class Player {
         if(type.equals("receive") && target.equals("bank")) {
             potential = amount * numberOwned;
         }
-        if(landmarks.length > 2 && (!e.getColor_ab().equals(Card.Color_ab.R)) && isShoppingMallConstructed() && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
+        if(landmarks.length > 2 && (!e.getColor_ab().equals(Card.Color_ab.R))
+                && isShoppingMallConstructed()
+                && (e.getIcon_ab().name().equals("U") || e.getIcon_ab().name().equals("B"))) {
             potential += numberOwned;
         }
         return potential;

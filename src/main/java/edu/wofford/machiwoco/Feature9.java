@@ -63,12 +63,12 @@ public class Feature9 extends Feature8 {
     }
 
     /**
-     * If the AI's potential income is less than 2, reroll.
+     * If the AI's potential income is less than 4, reroll.
      * @return a boolean representing the decision to reroll the die.
      */
     protected boolean rerollAILogic() {
         int potential = getCurrentPlayer().peekActivation(dice1+dice2, true);
-        return potential < 2;
+        return potential < 4;
     }
 
     /**
@@ -289,6 +289,10 @@ public class Feature9 extends Feature8 {
     public static void main(String[] args) {
         Feature9 feature9 = new Feature9(Integer.parseInt(args[1]));
 //        feature9.player1.getLandmarks()[0].setIs_constructed(true);
+//        feature9.player1.getEstOwned().put(feature9.businessComplex, 1);
+//        feature9.player1.getEstOwned().put(feature9.tvStation, 1);
+//        feature9.player1.getEstOwned().put(feature9.stadium, 1);
+
         feature9.playGame();
     }
 
