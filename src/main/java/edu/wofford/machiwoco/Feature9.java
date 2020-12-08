@@ -156,7 +156,7 @@ public class Feature9 extends Feature8 {
                 return availEst.indexOf(getMine())+1;
             } else if (availEst.contains(getForest())) {
                 return availEst.indexOf(getForest())+1;
-            } else if (currPlayerNumLandmarkConstructed() > 3 && getCurrentPlayer().getCoinCount() > 18) {
+            } else if (currPlayerNumLandmarkConstructed() > 2 && getCurrentPlayer().getCoinCount() > 18) {
                 return 99;
             } else if (getIndexColorAB(availEst, Card.Color_ab.P)!=0) {
                 return getIndexColorAB(availEst, Card.Color_ab.P);

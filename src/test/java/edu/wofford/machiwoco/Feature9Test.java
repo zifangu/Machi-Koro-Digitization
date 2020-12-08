@@ -28,7 +28,7 @@ public class Feature9Test {
 
     @Before
     public void before() {
-        feature9 = new Feature9(0);
+        feature9 = new Feature9(1);
         feature9.player1.setTurn(true);
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
@@ -218,6 +218,81 @@ public class Feature9Test {
         assertThat(feature9.currPlayerNumLandmarkConstructed(), is(4));
     }
 
+//    @Test
+//    public void testFurniture2() {
+//        feature9.player1.setTurn(false);
+//        feature9.player2.setTurn(true);
+//        feature9.player2.getLandmarks()[0].setIs_constructed(true);
+//        feature9.player2.setCoinCount(9);
+//        feature9.player2.getEstOwned().put(feature9.forest, 1);
+//        if (!feature9.market.containsKey(feature9.furnitureFactory)) {feature9.market.put(feature9.furnitureFactory, 1);}
+//        feature9.makeMove();
+//        assertThat(feature9.player2.getEstOwned().get(feature9.furnitureFactory), is(1));
+//    }
+
+//    @Test
+//    public void testCheese() {
+//        feature9.player1.setTurn(false);
+//        feature9.player2.setTurn(true);
+//        feature9.player2.getLandmarks()[0].setIs_constructed(true);
+//        feature9.player2.setCoinCount(9);
+//        feature9.player2.getEstOwned().put(feature9.forest, 3);
+//
+//        if (feature9.market.containsKey(feature9.furnitureFactory)) {
+//            feature9.market.remove(feature9.getFurnitureFactory());
+//        }
+//
+//        if (!feature9.market.containsKey(feature9.cheeseFactory)) {feature9.market.put(feature9.cheeseFactory, 1);}
+//        feature9.makeMove();
+//        assertThat(feature9.player2.getEstOwned().get(feature9.cheeseFactory), is(1));
+//    }
+
+    @Test
+    public void testMine() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.getLandmarks()[0].setIs_constructed(true);
+        feature9.player2.setCoinCount(9);
+        feature9.player2.getEstOwned().put(feature9.forest, 1);
+        feature9.market.remove(feature9.cheeseFactory);
+        feature9.market.remove(feature9.furnitureFactory);
+        if (!feature9.market.containsKey(feature9.mine)) {feature9.market.put(feature9.mine, 1);}
+        feature9.makeMove();
+        assertThat(feature9.player2.getEstOwned().get(feature9.mine), is(1));
+    }
+
+    @Test
+    public void testForest2() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.getLandmarks()[0].setIs_constructed(true);
+        feature9.player2.setCoinCount(9);
+        feature9.player2.getEstOwned().put(feature9.forest, 1);
+        feature9.market.remove(feature9.cheeseFactory);
+        feature9.market.remove(feature9.furnitureFactory);
+        feature9.market.remove(feature9.mine);
+
+        if (!feature9.market.containsKey(feature9.forest)) {feature9.market.put(feature9.forest, 1);}
+        feature9.makeMove();
+        assertThat(feature9.player2.getEstOwned().get(feature9.forest), is(2));
+    }
+
+    @Test
+    public void testWait() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.getLandmarks()[0].setIs_constructed(true);
+        feature9.player2.getLandmarks()[1].setIs_constructed(true);
+        feature9.player2.getLandmarks()[2].setIs_constructed(true);
+        feature9.player2.setCoinCount(20);
+        feature9.market.remove(feature9.cheeseFactory);
+        feature9.market.remove(feature9.furnitureFactory);
+        feature9.market.remove(feature9.mine);
+        feature9.market.remove(feature9.forest);
+        feature9.makeMove();
+        assertThat(feature9.player2.getLandmarks()[3].is_constructed, is(false));
+    }
+
 
 //    @Test
 //    public void testPurple() {
@@ -297,6 +372,60 @@ public class Feature9Test {
         assertThat(feature9.player2.getEstOwned().get(feature9.farmersMarket), is(1));
     }
 
+    @Test
+    public void testWayBetter() {
+        feature9.wayBetterRollDice(true);
+        assertThat(feature9.dice1+feature9.dice2, lessThanOrEqualTo(12));
+    }
+
+
+    @Test
+    public void testWayBetter2() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.getLandmarks()[3].setIs_constructed(true);
+        feature9.wayBetterRollDice(true);
+
+        assertThat(feature9.dice1+feature9.dice2, lessThanOrEqualTo(12));
+    }
+
+    @Test
+    public void testRadio() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.getLandmarks()[3].setIs_constructed(true);
+        feature9.wayBetterRollDice(true);
+
+        assertThat(feature9.dice1+feature9.dice2, lessThanOrEqualTo(12));
+    }
+
+    @Test
+    public void testRadio2() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.setSmart(false);
+        feature9.player2.getLandmarks()[3].setIs_constructed(true);
+        feature9.wayBetterRollDice(true);
+
+        assertThat(feature9.dice1+feature9.dice2, lessThanOrEqualTo(12));
+    }
+
+    @Test
+    public void testTVAI() {
+        feature9.getPlayer1().setTurn(false);
+        feature9.getPlayer2().setTurn(true);
+        feature9.TVStationLogic();
+//        started with 3, wanted to get five, but only 3 is available.
+        assertThat(feature9.getPlayer2().getCoinCount(), is(6));
+    }
+
+    @Test
+    public void testTVNoMoney() {
+        feature9.player2.setCoinCount(0);
+        feature9.player3.setCoinCount(0);
+        feature9.TVStationLogic();
+        assertThat(outContent.toString(), containsString("TV Station activated, but no player is available to target."));
+    }
 //    @Test
 //    public void testPurple() {
 //        feature9.player1.setTurn(false);
