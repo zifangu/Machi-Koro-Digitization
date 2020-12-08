@@ -455,6 +455,53 @@ public class Feature9Test {
         feature9.TVStationLogic();
         assertThat(outContent.toString(), containsString("TV Station activated, but no player is available to target."));
     }
+    @Test
+    public void testSmartAiLogic() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        assertThat(feature9.aiRollTwoLogic(), is(false));
+    }
+    @Test
+    public void testSmartAiLogic2() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.getEstOwned().put(feature9.familyRestaurant, 1);
+        assertThat(feature9.aiRollTwoLogic(), is(true));
+    }
+    @Test
+    public void testSmartAiLogic3() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.getEstOwned().put(feature9.farmersMarket, 1);
+        assertThat(feature9.aiRollTwoLogic(), is(true));
+    }
+    @Test
+    public void testSmartAiLogic4() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.getEstOwned().put(feature9.mine, 1);
+        assertThat(feature9.aiRollTwoLogic(), is(true));
+    }
+
+    @Test
+    public void testSmartAiRollTwo() {
+        feature9.player1.setTurn(false);
+        feature9.player2.setTurn(true);
+        feature9.player2.getLandmarks()[0].setIs_constructed(true);
+        assertThat(feature9.rollTwo(), is(false));
+    }
+
+    @Test
+    public void testRegularAiRollTwo() {
+        feature9.player1.setTurn(false);
+        feature9.player3.setTurn(true);
+        feature9.player3.getLandmarks()[0].setIs_constructed(true);
+        assertThat(feature9.rollTwo(), Matchers.either(Matchers.is(true)).or(Matchers.is(false)));
+    }
+
+
+
+
 //    @Test
 //    public void testPurple() {
 //        feature9.player1.setTurn(false);
