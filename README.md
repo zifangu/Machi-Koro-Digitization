@@ -241,27 +241,6 @@ The current game state looks like the following:
     
     ******************************************
 
-It must start and end with a line of exactly 42 asterisks, followed by a line with the word "MARKET", followed by a line of exactly 42 hyphens. Then, each subsequent line should contain the following, each separated by a single space:
-* name of the establishment (taking up a width of exactly 18 characters, left-aligned and space-padded)
-* two characters representing the color and icon (as described in the *Phase 0* details)
-* the cost in parentheses (taking up a width of exactly 4 characters, left-aligned and space-padded)
-* the activation range in square brackets (taking up a width of exactly 7 characters, left-aligned and space padded)
-* the number available, starting with a single space and the hashtag/pound symbol
-
-So each market entry should be exactly 38 characters long. Also, the market entries should be sorted by activation value, where a single activation value should come before an activation that starts with the same value but has a larger upper bound. (For instance, the *Ranch* should come before the *Bakery* because it activates on 2 instead of 2-3.)
-
-The final market entry should be followed by a blank line, after which the player entries start.
-
-A player entry should begin with a line that contains "Player *N*" (where *N* is the player number), followed by a line of exactly 42 hyphens. The next line should contain the number of coins in parentheses. Then each subsequent line should be formatted just like those in the market, except the final value represents the number of establishments held by the player. The establishments should similarly be sorted by activation value.
-
-Once all establishments have been listed for a player, there should be a line of exactly 42 dots/periods. Then the landmarks should be listed as follows (sorted according to price), each separated by a single space:
-* name of the landmark (taking up a width of exactly 18 characters, left-aligned and space-padded)
-* two characters representing the color and icon (as described in the *Phase 0* details)
-* the cost in parentheses (taking up a width of exactly 4 characters, left-aligned and space-padded)
-* whether it has been constructed in square brackets (taking up a width of exactly 3 characters), where a space represents "not constructed" and an X represents "constructed"
-
-Each player entry is followed by a blank line before the next player entry begins. 
-
 ##### Roll
 A roll should be notified as follows: "Player *N* rolled [3] = 3." or "Player *N* rolled [1][4] = 5." Each die value should be put in its own square brackets, with the total roll following an equals sign. For a single die roll, the value in the brackets would be the same as the total.
 
