@@ -1,10 +1,17 @@
-# Machi WoCo
-This repository has been set up to get you started in completing your capstone project.
+# Machi Koro
+This repository shows the completion of my capstone project: digitization of Machi Koro.
+
+Product Owner:
+* Aaron Garrett
+
+Development team members: 
+* Bennett Joyce
+* Eric Craft
+* Zifan(Ivan) Gu
+
 
 ## Contents
   * [Project Overview](#project-overview)
-    + [Prioritized Features](#prioritized-features)
-    + [Grading Scheme](#grading-scheme)
   * [Project Details](#project-details)
     + [Prioritized Features](#prioritized-features-1)
     + [Definition of Done](#definition-of-done)
@@ -20,7 +27,6 @@ This repository has been set up to get you started in completing your capstone p
       - [Random AI](#random-ai)
       - [Strategic AI](#strategic-ai)
     + [Interfaces](#interfaces)
-      - [Console](#console)
         * [Start of Game](#start-of-game)
         * [Beginning of Turn](#beginning-of-turn)
         * [Current Game State](#current-game-state)
@@ -30,88 +36,22 @@ This repository has been set up to get you started in completing your capstone p
         * [End of Turn](#end-of-turn)
         * [End of Game](#end-of-game)
         * [Human Interface Menus/Queries](#human-interface-menus-queries)
-      - [Graphical Interface (GUI)](#graphical-interface--gui-)
-      - [Network Implementation](#network-implementation)
-  * [Technical Details](#technical-details)
-    + [Prerequisites](#prerequisites)
-    + [Building the Project](#building-the-project)
-    + [Directory Structure](#directory-structure)
-    + [IDE Setup](#ide-setup)
-      - [Intellij](#intellij)
-      - [Eclipse](#eclipse)
-  * [Full Console Playthrough](#full-console-playthrough)
+  * [Directory Structure](#directory-structure)
 
 
 ## Project Overview
 -------------------
-In this project, you will be creating an implementation of the board game [Machi Koro](https://boardgamegeek.com/boardgame/143884/machi-koro). The game itself is composed of a deck of cards, a pair of dice, and a set of coins. The cards come in two varieties, establishments and landmarks. Establishments are cards that activate depending on the result of the die/dice roll. Landmarks are cards that give constant benefits once they are constructed. Each player begins with specific starting cards---the *Wheat Field* and *Bakery* establishments, along with the four landmark cards (*Train Station* (4 coins), *Shopping Mall* (10 coins), *Amusement Park* (16 coins), and *Radio Tower* (22 coins)). The first player to construct all four landmarks wins the game. Consult the [detailed rules](https://www.dropbox.com/s/ehpxe4aa6n0ee98/P_MK_Rulebook_7418%20%281%29.pdf) or [the Watch It Played video](https://youtu.be/X6y02IGRE-U) to fully understand how to play.
+In this project, we created an implementation of the board game [Machi Koro](https://boardgamegeek.com/boardgame/143884/machi-koro). The game itself is composed of a deck of cards, a pair of dice, and a set of coins. The cards come in two varieties, establishments and landmarks. Establishments are cards that activate depending on the result of the die/dice roll. Landmarks are cards that give constant benefits once they are constructed. Each player begins with specific starting cards---the *Wheat Field* and *Bakery* establishments, along with the four landmark cards (*Train Station* (4 coins), *Shopping Mall* (10 coins), *Amusement Park* (16 coins), and *Radio Tower* (22 coins)). The first player to construct all four landmarks wins the game. Consult the [detailed rules](https://www.dropbox.com/s/ehpxe4aa6n0ee98/P_MK_Rulebook_7418%20%281%29.pdf) or [the Watch It Played video](https://youtu.be/X6y02IGRE-U) to fully understand how to play.
 
 The entire set of cards can be seen below:
 
 ![Machi Koro Cards](https://i.ibb.co/6JVfvBq/machikoro-cards.jpg)
 
-The contents of the deck is as follows, supporting a maximum of 4 players:
-* Wheat Field (6 + 4 starting)
-* Ranch (6)
-* Bakery (6 + 4 starting)
-* Cafe (6)
-* Convenience Store (6)
-* Forest (6)
-* Stadium (4)
-* TV Station (4)
-* Business Center (4)
-* Cheese Factory (6)
-* Furniture Factory (6)
-* Mine (6)
-* Family Restaurant (6)
-* Apple Orchard (6)
-* Farmers Market (6)
-* Train Station (4)
-* Shopping Mall (4)
-* Amusement Park (4)
-* Radio Tower (4)
-
-
-### Prioritized Features
-The core features for this project are as follows and will be explained in detail below:
-
-1. Display the detailed view of each card on the console (Phase 0).
-2. Play the Phase 1 console version of the game with 2 human players.
-3. Play the Phase 1 console version of the game with 1 human and 1 random AI player.
-4. Play the Phase 2 console version of the game with 1 human and 1 or 2 random AI players.
-5. Play the Phase 3 console version of the game with 1 human and 1 or 2 random AI players.
-6. Play the Phase 4 console version of the game with 1 human and 1, 2, or 3 random AI players.
-7. Play the Phase 5 console version of the game with 1 human and 1, 2, or 3 random AI players.
-8. Play the Phase 6 console version of the game with 1 human and 1, 2, or 3 random AI players.
-9. Play the Phase 6 console version of the game with 1 human, 1 strategic AI, and 0, 1, or 2 random AI players.
-10. Play the Phase 6 GUI version of the game with 1 human, 1 strategic AI, and 0, 1, or 2 random AI players.
-11. Play the Phase 6 console version of the game over the network with 2 human players.
-12. Play the Phase 6 version of the game (using both console and/or GUI clients) over the network with 2 human and 2 strategic AI players.
-
-### Grading Scheme
-This project is worth 50 points (50% of the total grade for the course). These points are awarded in two ways. First, each of the 4 sprints end in a sprint review, at which point I evaluate your team's work. Each sprint is worth a maximum of 10 points for each member of the team. (Except in highly unusual circumstances, all members receive the same grade for a sprint.) Second, the final 10 points are determined according to how many features you complete by the project's final deadline. That scale is as follows, determined by the final feature that your team completes:
-
-| Feature | Points |
-|---------|--------|
-| 1       | 0      |
-| 2       | 0      |
-| 3       | 0      |
-| 4       | 0      |
-| 5       | 1      |
-| 6       | 2      |
-| 7       | 4      |
-| 8       | 6      |
-| 9       | 8      |
-| 10      | 10     |
-| 11      | 13     |
-| 12      | 16     |
-
-Note that it is possible to receive more than 10 points for this component, with any additional points counting as "bonus" toward the final course grade.
-
-
 ## Project Details
 ------------------
 ### Prioritized Features
+This is the backlog items we pulled and will be explained in detail below:
+
 1. Display the detailed view of each card on the console (Phase 0).
 2. Play the Phase 1 console version of the game with 2 human players.
 3. Play the Phase 1 console version of the game with 1 human and 1 random AI player.
@@ -142,7 +82,9 @@ which would run the program in Phase 5 mode with 3 players (1 human and 2 AI). I
 
 
 #### Phase 0
-In Phase 0, there is no actual "game". Instead, the full view of the establishments (in order of activation) followed by landmarks is printed to the screen in the following format. Each line is exactly 25 characters wide. The value in angled brackets is the abbreviation for color of the card (**B**lue, **G**reen, **R**ed, **P**urple, or **N**one). The value in curly brackets is the abbreviation for the icon on the card (**W**heat, **B**read, **C**ow, **G**ear, **F**actory, Fruit **O**, Cup **U**, or **T**ower). The value in parentheses is the cost of the card. The value/range in the square brackets is the activation range of the card (if it's an establishment); otherwise, if it's a landmark, then the square brackets (bottom-right) either have a space (not constructed) or a capital X (constructed).
+In Phase 0, there is no actual "game". Instead, the full view of the establishments (in order of activation) followed by landmarks is printed to the screen in the following format. 
+
+Examples:
 
     .-----------------------.
     | <B>      [1]      {W} |
@@ -151,26 +93,6 @@ In Phase 0, there is no actual "game". Instead, the full view of the establishme
     |  Get 1 coin from the  |
     |         bank.         |
     |    (anyone's turn)    |
-    |                       |
-    | (1)                   |
-    |_______________________|
-    .-----------------------.
-    | <B>      [2]      {C} |
-    |         Ranch         |
-    |                       |
-    |  Get 1 coin from the  |
-    |         bank.         |
-    |    (anyone's turn)    |
-    |                       |
-    | (1)                   |
-    |_______________________|
-    .-----------------------.
-    | <G>     [2-3]     {B} |
-    |        Bakery         |
-    |                       |
-    |  Get 1 coin from the  |
-    |         bank.         |
-    |   (your turn only)    |
     |                       |
     | (1)                   |
     |_______________________|
@@ -185,46 +107,6 @@ In Phase 0, there is no actual "game". Instead, the full view of the establishme
     | (2)                   |
     |_______________________|
     .-----------------------.
-    | <G>      [4]      {B} |
-    |   Convenience Store   |
-    |                       |
-    | Get 3 coins from the  |
-    |         bank.         |
-    |   (your turn only)    |
-    |                       |
-    | (2)                   |
-    |_______________________|
-    .-----------------------.
-    | <B>      [5]      {G} |
-    |        Forest         |
-    |                       |
-    |  Get 1 coin from the  |
-    |         bank.         |
-    |    (anyone's turn)    |
-    |                       |
-    | (3)                   |
-    |_______________________|
-    .-----------------------.
-    | <P>      [6]      {T} |
-    |        Stadium        |
-    |                       |
-    |   Take 2 coins from   |
-    |    each opponent.     |
-    |   (your turn only)    |
-    |                       |
-    | (6)                   |
-    |_______________________|
-    .-----------------------.
-    | <P>      [6]      {T} |
-    |      TV Station       |
-    |                       |
-    | Take 5 coins from an  |
-    |       opponent.       |
-    |   (your turn only)    |
-    |                       |
-    | (7)                   |
-    |_______________________|
-    .-----------------------.
     | <P>      [6]      {T} |
     |   Business Complex    |
     |                       |
@@ -235,18 +117,6 @@ In Phase 0, there is no actual "game". Instead, the full view of the establishme
     |   (your turn only)    |
     |                       |
     | (8)                   |
-    |_______________________|
-    .-----------------------.
-    | <G>      [7]      {F} |
-    |    Cheese Factory     |
-    |                       |
-    | Get 3 coins from the  |
-    |   bank for each {C}   |
-    |   establishment you   |
-    |         own.          |
-    |   (your turn only)    |
-    |                       |
-    | (5)                   |
     |_______________________|
     .-----------------------.
     | <G>      [8]      {F} |
@@ -261,48 +131,6 @@ In Phase 0, there is no actual "game". Instead, the full view of the establishme
     | (3)                   |
     |_______________________|
     .-----------------------.
-    | <B>      [9]      {G} |
-    |         Mine          |
-    |                       |
-    | Get 5 coins from the  |
-    |         bank.         |
-    |    (anyone's turn)    |
-    |                       |
-    | (6)                   |
-    |_______________________|
-    .-----------------------.
-    | <R>    [9-10]     {U} |
-    |   Family Restaurant   |
-    |                       |
-    | Take 2 coins from the |
-    |    active player.     |
-    |   (opponent's turn)   |
-    |                       |
-    | (3)                   |
-    |_______________________|
-    .-----------------------.
-    | <B>     [10]      {W} |
-    |     Apple Orchard     |
-    |                       |
-    | Get 3 coins from the  |
-    |         bank.         |
-    |    (anyone's turn)    |
-    |                       |
-    | (3)                   |
-    |_______________________|
-    .-----------------------.
-    | <G>    [11-12]    {O} |
-    |    Farmers Market     |
-    |                       |
-    | Get 2 coins from the  |
-    |   bank for each {W}   |
-    |   establishment you   |
-    |         own.          |
-    |   (your turn only)    |
-    |                       |
-    | (2)                   |
-    |_______________________|
-    .-----------------------.
     | <N>   LANDMARK    {T} |
     |     Train Station     |
     |                       |
@@ -313,17 +141,6 @@ In Phase 0, there is no actual "game". Instead, the full view of the establishme
     |_______________________|
     .-----------------------.
     | <N>   LANDMARK    {T} |
-    |     Shopping Mall     |
-    |                       |
-    |   Your {U} and {B}    |
-    |  establishments earn  |
-    |     +1 coin when      |
-    |      activated.       |
-    |                       |
-    | (10)              [ ] |
-    |_______________________|
-    .-----------------------.
-    | <N>   LANDMARK    {T} |
     |    Amusement Park     |
     |                       |
     | If you roll doubles,  |
@@ -331,15 +148,6 @@ In Phase 0, there is no actual "game". Instead, the full view of the establishme
     |    after this one.    |
     |                       |
     | (16)              [ ] |
-    |_______________________|
-    .-----------------------.
-    | <N>   LANDMARK    {T} |
-    |      Radio Tower      |
-    |                       |
-    |  Once per turn, you   |
-    | may reroll the dice.  |
-    |                       |
-    | (22)              [ ] |
     |_______________________|
 
 
@@ -368,19 +176,10 @@ The Phase 6 version is identical to Phase 5, except that the market is handled a
 The random AI player always chooses uniformly randomly among its choices. For the decision to roll one or two dice, or to reroll the dice, it has a 50% chance of choosing either. For the decision of choosing an opponent (as a target, for the *TV Station* or *Business Complex*), it has a uniform/equal chance of choosing any available opponent. For the decision to choose a building (for the *Business Complex*), it has a uniform/equal chance of choosing any of the available building options.
 
 #### Strategic AI
-The strategic AI player should make prioritized decisions about what establishments to buy and landmarks to construct, as well as which players/establishments to target. It should also have a defined strategy for when to roll 2 dice or to reroll (if those options are available). The designer must clearly communicate in documentation what the strategy in each circumstance is.
+The strategic AI player makes prioritized decisions about what establishments to buy and landmarks to construct, as well as which players/establishments to target. The strategy in each circumstance is communicated in the [User Guide](https://github.com/zifangu/Machi-Koro-Digitization/blob/master/UserGuide.md)
 
 
 ### Interfaces
-#### Console
-The console interface should provide the following notifications:
-* the start of the game, including which player will go first
-* the beginning of a player's turn, including the player's number and the current game state
-* the roll generated by a player, including the die/dice rolled as well as the total
-* the activation of an establishment, including the owning player and the establishment name
-* the purchase of an establishment or the construction of a landmark, including the player and the property name
-* the end of a player's turn, including the player's number
-* the end of the game, including which player won
 
 ##### Start of Game 
 The game should start with the notification "The game has started. Player *N* will go    
@@ -390,7 +189,7 @@ first." (where *N* is the starting player number).
 A turn should start with the notification "Turn started for Player *N*." (where *N* is the player's number).
 
 ##### Current Game State
-The current game state **must** look like the following:
+The current game state looks like the following:
 
     ******************************************
                       MARKET                  
@@ -570,58 +369,6 @@ If a player owns the *Business Complex*, then its activation requires selecting 
 The establishments should be formatted as in the other menus and sorted by activation order. Only establishments that can be swapped (non-starting/non-purple) should be listed. It should never happen that such a menu is empty because that player should not have been an option as a target.
 
 
-#### Graphical Interface (GUI)
-The graphical interface must provide at least as much information as the console interface. It is left to the developer to determine the specifics and the layout.
-
-#### Network Implementation
-The network version of the game should allow human players to connect to a given IP (localhost in this case) and port (22020 in this case). Once two players have connected, the game begins for those players and two new players can connect to play a separate game. The game is maintained by the server, with the clients only being used to get information from the users (the menus/queries from the console version, for instance) and to get the current state/log of the game. The protocol for the communication between the clients and server is left to the designer, but it should be clearly documented as a part of the *definition of done*.
-
-
-## Technical Details
---------------------
-### Prerequisites
-This project assumes that you have already [installed Java 8+](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) on your system. 
-
-### Building the Project
-After you have cloned the repository, you should be able to navigate to the directory containing the **gradle.build** file. There, you can build the project by running the command
-
-`gradlew build`
-
-Then, you can run the unit test coverage report.
-
-`gradlew jacocoTestReport`
-
-Then, you can run the acceptance tests. 
-
-`gradlew cucumber`
-
-You can even do multiple things in one statement:
-
-`gradlew build jacocoTestReport cucumber`
-
-When you want to get rid of all of the temporary files (like compiled class files and such), you can say
-
-`gradlew clean`
-
-If you want to do a full build and reporting from a clean project, you can just string it all together:
-
-`gradlew clean build jacocoTestReport cucumber`
-
-If you want to create the generated documentation (based on your Javadoc comments), you can say
-
-`gradlew javadoc`
-
-And if you want to run the application you have created, you can say
-
-`gradlew run`
-
-Note that the application you are directed to create requires command-line arguments when it runs (e.g., the phase information). To pass those values when running through Gradle, you would say
-
-`gradlew run --args="phase1 2"`
-
-
-
-
 ### Directory Structure
 The directory structure that is assumed by Gradle (it can be changed if you want, but that requires changes to the Gradle build file) is as follows:
 
@@ -695,22 +442,6 @@ After you run `gradlew javadoc`, a **docs** directory will be created within the
 
 **build/docs/javadoc/index.html**
 : This file is the index to the generated documentation.
-
-
-### IDE Setup
-
-#### Intellij
-If you use Intellij, you can set up gradle for it as follows:
-
-`gradlew cleanIdea idea`
-
-
-#### Eclipse
-If you use Eclipse, you can set up gradle for it as follows:
-
-`gradlew cleanEclipse eclipse`
-
-
 
 ## Full Console Playthrough
 ---------------------------
