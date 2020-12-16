@@ -61,9 +61,6 @@ This is the backlog items we pulled and will be explained in detail below:
 7. Play the Phase 5 console version of the game with 1 human and 1, 2, or 3 random AI players.
 8. Play the Phase 6 console version of the game with 1 human and 1, 2, or 3 random AI players.
 9. Play the Phase 6 console version of the game with 1 human, 1 strategic AI, and 0, 1, or 2 random AI players.
-10. Play the Phase 6 GUI version of the game with 1 human, 1 strategic AI, and 0, 1, or 2 random AI players.
-11. Play the Phase 6 console version of the game over the network with 2 human players.
-12. Play the Phase 6 version of the game (using both console and/or GUI clients) over the network with 2 human and 2 strategic AI players.
 
 ### Definition of Done
 The *definition of done* for **any** feature is that it passes all automated acceptance tests, has a codebase that achieves at least 80% branch coverage from its unit tests, has a fully documented API, and has clear end-user documentation for using the software to play the game. This end-user documentation should be in the form of a Markdown file called "UserGuide.md".
